@@ -1,59 +1,66 @@
 -- Plantilla de la base de datos del programa
 
+CREATE TABLE hotel (
+    nombre varchar(50) not null,
+    hab number(10) not null,
+    pisos number(10) not null,
+    capac number(10) not null
+);
+
 CREATE TABLE cochera (
-    codCochera INT PRIMARY KEY,
-    piso INT NOT NULL,
-    estado VARCHAR(50) NOT NULL
+    codcochera int primary key,
+    piso int not null,
+    estado varchar(50) not null
 );
 
 CREATE TABLE empleado (
-    codEmpl INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    dni VARCHAR(20) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    telefono VARCHAR(20) NOT NULL,
-    puesto VARCHAR(100) NOT NULL
+    codempl int primary key,
+    nombre varchar(100) not null,
+    dni varchar(20) not null,
+    email varchar(100) not null,
+    telefono varchar(20) not null,
+    puesto varchar(100) not null
 );
 
 CREATE TABLE cliente (
-    codCliente INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    dni VARCHAR(20) NOT NULL,
-    email VARCHAR(100),
-    descr VARCHAR(255)
+    codcliente int primary key,
+    nombre varchar(100) not null,
+    dni varchar(20) not null,
+    email varchar(100),
+    descr varchar(255)
 );
 
 CREATE TABLE habitacion (
-    codHab INT PRIMARY KEY,
-    piso INT NOT NULL,
-    cant INT NOT NULL,
-    estado VARCHAR(50) NOT NULL,
-    descr VARCHAR(255),
-    costo DECIMAL(10, 2)
+    codhab int primary key,
+    piso int not null,
+    cant int not null,
+    estado varchar(50) not null,
+    descr varchar(255),
+    costo decimal(10, 2)
 );
 
 CREATE TABLE reserva (
-    codReserva INT PRIMARY KEY,
-    codHab INT NOT NULL,
-    codCliente INT NOT NULL,
-    codEmpleado INT NOT NULL,
-    codCochera INT,
-    cantidad INT NOT NULL,
-    fechaIngreso DATE NOT NULL,
-    fechaEgreso DATE NOT NULL,
-    costoAdicional DECIMAL(10, 2),
-    descr VARCHAR(255),
-    FOREIGN KEY (codHab) REFERENCES habitacion(codHab),
-    FOREIGN KEY (codCliente) REFERENCES cliente(codCliente),
-    FOREIGN KEY (codEmpleado) REFERENCES empleado(codEmpl),
-    FOREIGN KEY (codCochera) REFERENCES cochera(codCochera)
+    codreserva int primary key,
+    codhab int not null,
+    codcliente int not null,
+    codempleado int not null,
+    codcochera int,
+    cantidad int not null,
+    fechaingreso date not null,
+    fechaegreso date not null,
+    costoadicional decimal(10, 2),
+    descr varchar(255),
+    foreign key (codhab) references habitacion(codhab),
+    foreign key (codcliente) references cliente(codcliente),
+    foreign key (codempleado) references empleado(codempl),
+    foreign key (codcochera) references cochera(codcochera)
 );
 
 CREATE TABLE historial (
-    codHistorial INT PRIMARY KEY,
-    codReserva INT NOT NULL,
-    codEmpleado INT NOT NULL,
-    descr VARCHAR(255),
-    FOREIGN KEY (codReserva) REFERENCES reserva(codReserva),
-    FOREIGN KEY (codEmpleado) REFERENCES empleado(codEmpl)
+    codhistorial int primary key,
+    codreserva int not null,
+    codempleado int not null,
+    descr varchar(255),
+    foreign key (codreserva) references reserva(codreserva),
+    foreign key (codempleado) references empleado(codempl)
 );
