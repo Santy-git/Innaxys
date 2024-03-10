@@ -1,19 +1,19 @@
 -- Plantilla de la base de datos del programa
 
-CREATE TABLE hotel (
+CREATE TABLE IF NOT EXIST hotel (
     nombre varchar(50) not null,
     hab number(10) not null,
     pisos number(10) not null,
     capac number(10) not null
 );
 
-CREATE TABLE cochera (
+CREATE TABLE IF NOT EXIST cochera (
     codcochera int primary key,
     piso int not null,
     estado varchar(50) not null
 );
 
-CREATE TABLE empleado (
+CREATE TABLE IF NOT EXIST empleado (
     codempl int primary key,
     nombre varchar(100) not null,
     dni varchar(20) not null,
@@ -22,7 +22,7 @@ CREATE TABLE empleado (
     puesto varchar(100) not null
 );
 
-CREATE TABLE cliente (
+CREATE TABLE IF NOT EXIST cliente (
     codcliente int primary key,
     nombre varchar(100) not null,
     dni varchar(20) not null,
@@ -30,7 +30,7 @@ CREATE TABLE cliente (
     descr varchar(255)
 );
 
-CREATE TABLE habitacion (
+CREATE TABLE IF NOT EXIST habitacion (
     codhab int primary key,
     piso int not null,
     cant int not null,
@@ -39,7 +39,7 @@ CREATE TABLE habitacion (
     costo decimal(10, 2)
 );
 
-CREATE TABLE reserva (
+CREATE TABLE IF NOT EXIST reserva (
     codreserva int primary key,
     codhab int not null,
     codcliente int not null,
@@ -56,7 +56,7 @@ CREATE TABLE reserva (
     foreign key (codcochera) references cochera(codcochera)
 );
 
-CREATE TABLE historial (
+CREATE TABLE IF NOT EXIST historial (
     codhistorial int primary key,
     codreserva int not null,
     codempleado int not null,
