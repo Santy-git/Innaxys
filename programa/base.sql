@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS login(
     nivel varchar(20) not null
 );
 
-CREATE TABLE IF NOT EXIST empleado (
+CREATE TABLE IF NOT EXISTS empleado (
     codEmpleado int primary key,
     nombre varchar(100) not null,
     dni varchar(20) not null,
@@ -86,5 +86,4 @@ CREATE TABLE IF NOT EXISTS resHab(
     codCochera int not null,
     foreign key (codCochera) references cochera(codCochera),
     foreign key (codReserva) references reserva(codReserva)
-
 );
