@@ -35,7 +35,59 @@ tablas = [
         dni varchar(20) not null,
         email varchar(100),
         descr varchar(255)
-    );''']
+    );''',
+
+    '''CREATE TABLE IF NOT EXISTS habitacion (
+        codHab int primary key,
+        piso number(10) not null,
+        camaMatr number(10) not null,
+        camaInd number(10) not null
+    );''',
+    '''CREATE TABLE IF NOT EXISTS historial (
+        codHistorial int primary key,
+        codReserva int not null,
+        codEmpleado int not null,
+        descr varchar(255),
+        foreign key (codReserva) references reserva(codReserva),
+        foreign key (codEmpleado) references empleado(codEmpleado)
+    );''',
+
+    '''CREATE TABLE IF NOT EXISTS resHab(
+        codReshab int primary key,
+        codHab int not null,
+        codReserva int not null,
+        camaMatr number(10) not null,
+        camaInd number(10) not null,
+        costoHab decimal(10,2) not null,
+        foreign key (codHab) references habitacion(codHab),
+        foreign key (codReserva) references reserva(codReserva)
+    );''',
+
+    '''CREATE TABLE IF NOT EXISTS resCoch(
+        codRescoch int primary key,
+        codReserva int not null,
+        codCochera int not null,
+        foreign key (codCochera) references cochera(codCochera),
+        foreign key (codReserva) references reserva(codReserva)
+    );''',
+
+    '''CREATE TABLE IF NOT EXISTS reserva (
+        codReserva int primary key,
+        codReshab int not null,
+        codCliente int not null,
+        codEmpleado int not null,
+        codRescoch int,
+        cantidad int not null,
+        fechaIngreso date not null,
+        fechaEgreso date not null,
+        fechaReserva date not null,
+        descr varchar(255),
+        foreign key (codReshab) references habitacion(codReshab),
+        foreign key (codCliente) references cliente(codCliente),
+        foreign key (codEmpleado) references empleado(codEmpleado),
+        foreign key (codRescoch) references cochera(codRescoch)
+    );'''
+]
 
 # me conecto a la base de datos
 con = s.connect("GestionHotel.db")
