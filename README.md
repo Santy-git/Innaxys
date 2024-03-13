@@ -2,7 +2,7 @@
 ### Gestion hotelera 
 #
 
-Intengers:
+Member:
 *  Joaquin Garayzabal
 *  Santiago Tomas
 *  Camilo Sanchez
