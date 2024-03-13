@@ -63,6 +63,9 @@ def creardb():
         camaMatr number(10) not null,
         camaInd number(10) not null,
         costoHab decimal(10,2) not null,
+        fechaIngreso date not null,
+        fechaEgreso date not null
+
         foreign key (codHab) references habitacion(codHab),
         foreign key (codReserva) references reserva(codReserva)
     );''',
@@ -82,8 +85,6 @@ def creardb():
         codEmpleado int not null,
         codRescoch int,
         cantidad int not null,
-        fechaIngreso date not null,
-        fechaEgreso date not null,
         fechaReserva date not null,
         descr varchar(255),
         foreign key (codReshab) references habitacion(codReshab),

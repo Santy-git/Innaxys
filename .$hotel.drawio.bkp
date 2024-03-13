@@ -1,13 +1,13 @@
-<mxfile host="Electron" modified="2024-03-13T16:39:08.562Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="0aB4M_tzX_Ut5BxkMF7P" version="21.6.5" type="device">
+<mxfile host="Electron" modified="2024-03-12T21:18:59.698Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="FcNrPRdIj_RctpEIsk3P" version="21.6.5" type="device">
   <diagram name="Página-1" id="g2Np5_hUV5JFOw5ff4q-">
-    <mxGraphModel dx="1229" dy="1806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="744" dy="2113" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="d3SKRms_41stb-vJ69zK-1" value="reserva" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fontFamily=Ubuntu Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DUbuntu%2BMono;" parent="1" vertex="1">
           <mxGeometry x="940" y="-160" width="190" height="220" as="geometry" />
         </mxCell>
-        <mxCell id="d3SKRms_41stb-vJ69zK-2" value="PK codReserva&lt;div&gt;FK codReshab&lt;/div&gt;&lt;div&gt;FK codCliente&lt;/div&gt;&lt;div&gt;FK codEmpleado&lt;/div&gt;&lt;div&gt;Fk codRescochera&lt;/div&gt;&lt;div&gt;* cantidad&lt;/div&gt;&lt;div&gt;* fechaIngreso&lt;/div&gt;&lt;div&gt;° descr&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;fontFamily=Ubuntu Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DUbuntu%2BMono;" parent="d3SKRms_41stb-vJ69zK-1" vertex="1">
+        <mxCell id="d3SKRms_41stb-vJ69zK-2" value="PK codReserva&lt;div&gt;FK codReshab&lt;/div&gt;&lt;div&gt;FK codCliente&lt;/div&gt;&lt;div&gt;FK codEmpleado&lt;/div&gt;&lt;div&gt;Fk codRescochera&lt;/div&gt;&lt;div&gt;* cantidad&lt;/div&gt;&lt;div&gt;* fechaIngreso&lt;/div&gt;&lt;div&gt;* fechaEgreso&lt;/div&gt;&lt;div&gt;* fechaReserva&lt;/div&gt;&lt;div&gt;° descr&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;fontFamily=Ubuntu Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DUbuntu%2BMono;" parent="d3SKRms_41stb-vJ69zK-1" vertex="1">
           <mxGeometry y="50" width="190" height="170" as="geometry" />
         </mxCell>
         <mxCell id="d3SKRms_41stb-vJ69zK-3" value="historial" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fontFamily=Ubuntu Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DUbuntu%2BMono;" parent="1" vertex="1">
@@ -71,10 +71,10 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="d3SKRms_41stb-vJ69zK-23" value="resHab" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fontFamily=Ubuntu Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DUbuntu%2BMono;" parent="1" vertex="1">
-          <mxGeometry x="676" y="-180" width="190" height="180" as="geometry" />
+          <mxGeometry x="676" y="-170" width="190" height="170" as="geometry" />
         </mxCell>
-        <mxCell id="d3SKRms_41stb-vJ69zK-24" value="PK codReshab&lt;br&gt;FK codHab&lt;br&gt;FK codReserva&lt;br&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;* camaMatr&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;* camaInd&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;* costoHab&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;* fechaEgreso&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;* fechaReserva&lt;/div&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;fontFamily=Ubuntu Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DUbuntu%2BMono;" parent="d3SKRms_41stb-vJ69zK-23" vertex="1">
-          <mxGeometry y="50" width="190" height="130" as="geometry" />
+        <mxCell id="d3SKRms_41stb-vJ69zK-24" value="PK codReshab&lt;br&gt;FK codHab&lt;br&gt;FK codReserva&lt;br&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;* camaMatr&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;* camaInd&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;* costoHab&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;fontFamily=Ubuntu Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DUbuntu%2BMono;" parent="d3SKRms_41stb-vJ69zK-23" vertex="1">
+          <mxGeometry y="50" width="190" height="120" as="geometry" />
         </mxCell>
         <mxCell id="d3SKRms_41stb-vJ69zK-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERzeroToMany;endFill=0;startArrow=ERmandOne;startFill=0;" parent="1" source="d3SKRms_41stb-vJ69zK-6" target="d3SKRms_41stb-vJ69zK-24" edge="1">
           <mxGeometry relative="1" as="geometry" />
