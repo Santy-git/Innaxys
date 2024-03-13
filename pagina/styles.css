@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+html {
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header .logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+    
+header .titulo {
+    position: fixed;
+    top: 20px;
+    left: 620px;
+}
+
+header .contactos {
+    position: fixed;
+    top: 20px;
+    left: 1240px;
+}
