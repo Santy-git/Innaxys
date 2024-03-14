@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
 :root{
-    --bg-barra:rgb(130, 189, 105, 0.5);
+    /* Es el color de la barra de arriba y los botones */
+    --bg-barra:rgb(214, 211, 209, .8);
 }
 
 html {
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
+    scrollbar-width: none;
 }
 
 * {
@@ -15,8 +17,11 @@ html {
     box-sizing: border-box;
 }
 
-.barra {
+.containerPrincipio{
     background-color: var(--bg-barra);
+}
+
+.barra {
     margin: 0;
 }
 
@@ -34,7 +39,7 @@ nav {
 
 .titulo {
     display: flex;
-    height: 3.5rem;
+    height: 4rem;
 }
 
 .contactos {
@@ -59,11 +64,12 @@ nav {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute; /* Posiciona este contenedor de manera absoluta dentro de su contenedor relativo */
-    top: 35%; /* Coloca el contenedor de subtítulos en la mitad superior de la imagen */
-    left: 50%; /* Centra el contenedor de subtítulos horizontalmente */
-    transform: translate(-50%, -50%); /* Centra el contenedor de subtítulos verticalmente */
-    text-align: center; /* Centra el texto dentro del contenedor */
+    position: absolute;
+    top: 35%; 
+    left: 50%; 
+    /* Centra el contenedor de subtítulos verticalmente */
+    transform: translate(-50%, -50%); 
+    text-align: center; 
 }
 
 .subtitulo {
@@ -74,9 +80,50 @@ nav {
     font-size: 2rem;
 }
 
-.containerScroll{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
+.container{
+    display: flexbox;
+    margin-left: 25%;
+    max-width: 50%;
+    justify-self: center;
 }
+
+.containerButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5rem 0;
+}
+  
+  .somos,
+  .ofrecemos,
+  .beneficios,
+  .compatibilidad {
+    position: relative; 
+    font-size: 1.7rem;
+  }
+  
+  .somos::before,
+  .ofrecemos::before,
+  .beneficios::before,
+  .compatibilidad::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    border-radius: 50%; 
+    width: 3rem; 
+    height: 3rem; 
+    border: 2px solid #000; 
+    transition: all 0.35s ease; 
+    cursor: pointer;
+}
+  
+  .somos:hover::before,
+  .ofrecemos:hover::before,
+  .beneficios:hover::before,
+  .compatibilidad:hover::before {
+    width: 3.2rem; 
+    height: 3.2rem; 
+  }
+  
