@@ -10,6 +10,9 @@
 
     /* El color de fondo del apartado "Quienes somos" */
     --bg-quienesSomos:rgb(214, 211, 209, 1);
+
+    /* El color de fondo del apartado "Qué ofrecemos" */
+    --bg-ofrecemos:rgb(214, 211, 209, 1);
 }
 
 html {
@@ -105,7 +108,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5rem 0;
+    padding: 5rem 5rem;
 }
 
 /* los botones */
@@ -144,14 +147,16 @@ nav {
     height: 3.2rem; 
   }
   
+  /* la parte del quienes somos */
 .containerPrimerItem{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 5rem;
+    padding: 5rem 2rem 5rem 2rem;
     background: var(--bg-quienesSomos);
     border-top: rgba(123, 118, 118, 0.4) 2px solid;
     border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
+    height: 30rem;
 }
 
 .containerSomos{
@@ -169,4 +174,28 @@ nav {
 
 #textoSomos {
     margin-top: 2rem;
+}
+
+/* la parte de que ofrecemos */
+.containerSegundoItem{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5rem 2rem 5rem 2rem;
+    background-color: var(--bg-ofrecemos);
+    border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
+    height: 30rem;
+}
+
+.contenedorItems{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    max-width: 33%;
+}
+
+.contenedorItems img{
+    max-width: 40%;
+    border-radius: .7rem;
 }
