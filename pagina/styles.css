@@ -4,8 +4,12 @@
 
     /* Es el color de la barra de arriba y los botones */
     --bg-barra:rgb(214, 211, 209, .8);
+
     /* el color del titulo arriba de la imagen */
     --fg-header:rgb(0,0,0,1);
+
+    /* El color de fondo del apartado "Quienes somos" */
+    --bg-quienesSomos:rgb(214, 211, 209, 1);
 }
 
 html {
@@ -140,3 +144,29 @@ nav {
     height: 3.2rem; 
   }
   
+.containerPrimerItem{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 5rem;
+    background: var(--bg-quienesSomos);
+    border-top: rgba(123, 118, 118, 0.4) 2px solid;
+    border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
+}
+
+.containerSomos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 50%;
+}
+
+.containerSomos h2{
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+#textoSomos {
+    margin-top: 2rem;
+}
