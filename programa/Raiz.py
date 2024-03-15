@@ -1,5 +1,6 @@
 import flet as ft
 
+
 def raiz(page: ft.Page):
     page.window_resizable = False
     page.window_width = 600
@@ -9,8 +10,7 @@ def raiz(page: ft.Page):
         page.update()
 
     page.appbar = ft.AppBar(
-        leading = ft.Image(src="logoMini.svg", width=100, height=100),
-        title = ft.Text("Axys"),
+        title = ft.Text("Axys",Texfont_family="Consola"),
         center_title=True,
         bgcolor=ft.colors.SURFACE_VARIANT,
         actions=[
