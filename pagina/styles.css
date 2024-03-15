@@ -1,12 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
 :root{
-    --bg-barra:rgb(130, 189, 105, 0.5);
+
+    /* Es el color de la barra de arriba y los botones */
+    --bg-barra:rgb(214, 211, 209, .8);
+
+    /* el color del titulo arriba de la imagen */
+    --fg-header:rgb(0,0,0,1);
+
+    /* El color de fondo del apartado "Quienes somos" */
+    --bg-quienesSomos:rgb(214, 211, 209, 1);
+
+    /* El color de fondo del apartado "Qué ofrecemos" */
+    --bg-ofrecemos:rgb(214, 211, 209, 1);
 }
 
 html {
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
+    scrollbar-width: none;
 }
 
 * {
@@ -15,8 +27,11 @@ html {
     box-sizing: border-box;
 }
 
-.barra {
+.containerPrincipio{
     background-color: var(--bg-barra);
+}
+
+.barra {
     margin: 0;
 }
 
@@ -34,24 +49,30 @@ nav {
 
 .titulo {
     display: flex;
-    height: 3.5rem;
+    height: 4rem;
 }
 
 .contactos {
     display: flex;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    transition: all ease .1s;
+}
+
+.contactos:hover{
+    cursor: pointer;
+    scale: 1.1;
 }
 
 .containerImagen{
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Asegura que los elementos hijos posicionados dentro de este contenedor se posicionen en relación con él */
-    width: 100%; /* O el ancho deseado */
+    position: relative;
+    width: 100%; 
 }
 
 .imagenHotel {
-    width: 100%; /* Establece el ancho al 100% del contenedor padre */
+    width: 100%; 
 }
 
 .containerSubtitulo {
@@ -59,24 +80,122 @@ nav {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute; /* Posiciona este contenedor de manera absoluta dentro de su contenedor relativo */
-    top: 35%; /* Coloca el contenedor de subtítulos en la mitad superior de la imagen */
-    left: 50%; /* Centra el contenedor de subtítulos horizontalmente */
-    transform: translate(-50%, -50%); /* Centra el contenedor de subtítulos verticalmente */
-    text-align: center; /* Centra el texto dentro del contenedor */
+    position: absolute;
+    top: 35%; 
+    left: 50%; 
+    /* Centra el contenedor de subtítulos verticalmente */
+    transform: translate(-50%, -50%); 
+    text-align: center; 
 }
 
 .subtitulo {
     font-size: 5rem;
+    color: var(--fg-header);
 }
 
 .frase {
     font-size: 2rem;
 }
 
-.containerScroll{
+.container{
+    display: flexbox;
+    margin-left: 25%;
+    max-width: 50%;
+    justify-self: center;
+}
+
+.containerButtons {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 5rem 5rem;
+}
+
+/* los botones */
+  .somos,
+  .ofrecemos,
+  .beneficios,
+  .compatibilidad {
+    position: relative; 
+    font-size: 1.7rem;
+  }
+  
+  /* para hacer los circulos  */
+  .somos::before,
+  .ofrecemos::before,
+  .beneficios::before,
+  .compatibilidad::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    border-radius: 50%; 
+    width: 3rem; 
+    height: 3rem; 
+    border: 2px solid #000; 
+    transition: all 0.35s ease; 
+    cursor: pointer;
+}
+  
+/* para que haga la transision de tamaño en los botones */
+  .somos:hover::before,
+  .ofrecemos:hover::before,
+  .beneficios:hover::before,
+  .compatibilidad:hover::before {
+    width: 3.2rem; 
+    height: 3.2rem; 
+  }
+  
+  /* la parte del quienes somos */
+.containerPrimerItem{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5rem 2rem 5rem 2rem;
+    background: var(--bg-quienesSomos);
+    border-top: rgba(123, 118, 118, 0.4) 2px solid;
+    border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
+    height: 30rem;
+}
+
+.containerSomos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 50%;
+}
+
+.containerSomos h2{
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+#textoSomos {
     margin-top: 2rem;
+}
+
+/* la parte de que ofrecemos */
+.containerSegundoItem{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5rem 2rem 5rem 2rem;
+    background-color: var(--bg-ofrecemos);
+    border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
+    height: 30rem;
+}
+
+.contenedorItems{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    max-width: 33%;
+}
+
+.contenedorItems img{
+    max-width: 40%;
+    border-radius: .7rem;
 }
