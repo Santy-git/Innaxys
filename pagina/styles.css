@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
 :root{
+
     /* Es el color de la barra de arriba y los botones */
     --bg-barra:rgb(214, 211, 209, .8);
+    /* el color del titulo arriba de la imagen */
+    --fg-header:rgb(0,0,0,1);
 }
 
 html {
@@ -44,19 +47,25 @@ nav {
 
 .contactos {
     display: flex;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    transition: all ease .1s;
+}
+
+.contactos:hover{
+    cursor: pointer;
+    scale: 1.1;
 }
 
 .containerImagen{
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Asegura que los elementos hijos posicionados dentro de este contenedor se posicionen en relación con él */
-    width: 100%; /* O el ancho deseado */
+    position: relative;
+    width: 100%; 
 }
 
 .imagenHotel {
-    width: 100%; /* Establece el ancho al 100% del contenedor padre */
+    width: 100%; 
 }
 
 .containerSubtitulo {
@@ -74,6 +83,7 @@ nav {
 
 .subtitulo {
     font-size: 5rem;
+    color: var(--fg-header);
 }
 
 .frase {
@@ -93,7 +103,8 @@ nav {
     align-items: center;
     padding: 5rem 0;
 }
-  
+
+/* los botones */
   .somos,
   .ofrecemos,
   .beneficios,
@@ -102,6 +113,7 @@ nav {
     font-size: 1.7rem;
   }
   
+  /* para hacer los circulos  */
   .somos::before,
   .ofrecemos::before,
   .beneficios::before,
@@ -119,6 +131,7 @@ nav {
     cursor: pointer;
 }
   
+/* para que haga la transision de tamaño en los botones */
   .somos:hover::before,
   .ofrecemos:hover::before,
   .beneficios:hover::before,
