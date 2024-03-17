@@ -98,16 +98,17 @@ nav {
 }
 
 .container{
-    display: flex;
-    align-items: center;
+    display: flexbox;
+    margin-left: 25%;
+    max-width: 50%;
+    justify-self: center;
 }
 
 .containerButtons {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5rem 25% 5rem 25%;
-    min-width: 100%;
+    padding: 5rem 5rem;
 }
 
 /* los botones */
@@ -151,11 +152,11 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5rem 5% 5rem 5%;
+    padding: 5rem 2rem 5rem 2rem;
     background: var(--bg-quienesSomos);
     border-top: rgba(123, 118, 118, 0.4) 2px solid;
     border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
-    height: auto;
+    height: 30rem;
 }
 
 .containerSomos{
@@ -178,34 +179,23 @@ nav {
 /* la parte de que ofrecemos */
 .containerSegundoItem{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 5rem 0 5rem 0;
+    padding: 5rem 2rem 5rem 2rem;
     background-color: var(--bg-ofrecemos);
     border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
-    height: auto;
-    gap: 2rem;
-}
-
-.items{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5rem;
+    height: 30rem;
 }
 
 .contenedorItems{
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
-    max-width: 100%;
+    gap: .5rem;
+    max-width: 33%;
 }
 
 .contenedorItems img{
-    max-width: 50%;
-    height: auto;
+    max-width: 40%;
     border-radius: .7rem;
 }
