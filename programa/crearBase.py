@@ -2,6 +2,7 @@ import sqlite3 as s
 
 # una funcion que me crea la base de datos
 
+
 def creardb():
     tablas = [
         '''CREATE TABLE IF NOT EXISTS hotel (
