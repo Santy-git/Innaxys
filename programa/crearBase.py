@@ -47,6 +47,7 @@ def creardb():
         camaMatr number(10) not null,
         camaInd number(10) not null
     );''',
+
         '''CREATE TABLE IF NOT EXISTS historial (
         codHistorial int primary key,
         codReserva int not null,
@@ -54,6 +55,21 @@ def creardb():
         descr varchar(255),
         foreign key (codReserva) references reserva(codReserva),
         foreign key (codEmpleado) references empleado(codEmpleado)
+    );''',
+
+        '''CREATE TABLE IF NOT EXISTS reserva (
+        codReserva int primary key,
+        codReshab int not null,
+        codCliente int not null,
+        codEmpleado int not null,
+        codRescoch int,
+        cantidad int not null,
+        fechaReserva date not null,
+        descr varchar(255),
+        foreign key (codReshab) references habitacion(codReshab),
+        foreign key (codCliente) references cliente(codCliente),
+        foreign key (codEmpleado) references empleado(codEmpleado),
+        foreign key (codRescoch) references cochera(codRescoch)
     );''',
 
         '''CREATE TABLE IF NOT EXISTS resHab(
@@ -76,21 +92,6 @@ def creardb():
         codCochera int not null,
         foreign key (codCochera) references cochera(codCochera),
         foreign key (codReserva) references reserva(codReserva)
-    );''',
-
-        '''CREATE TABLE IF NOT EXISTS reserva (
-        codReserva int primary key,
-        codReshab int not null,
-        codCliente int not null,
-        codEmpleado int not null,
-        codRescoch int,
-        cantidad int not null,
-        fechaReserva date not null,
-        descr varchar(255),
-        foreign key (codReshab) references habitacion(codReshab),
-        foreign key (codCliente) references cliente(codCliente),
-        foreign key (codEmpleado) references empleado(codEmpleado),
-        foreign key (codRescoch) references cochera(codRescoch)
     );'''
     ]
 
@@ -98,11 +99,11 @@ def creardb():
     con = s.connect("GestionHotel.db")
 
     # creo el cursor
-    cursor = con.cursor()
+    cur = con.cursor()
 
     # ejecuto para hacer las tablas
     for query in tablas:
-        cursor.execute(query)
+        cur.execute(query)
 
     # realizo los cambios
     con.commit()
