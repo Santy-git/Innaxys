@@ -1,3 +1,6 @@
+
+# ____________________________________________PALETA_DE_COLORES____________________________________________
+
 colores=[
 '#f3f6f4',
 '#e1eae1',
@@ -24,11 +27,23 @@ colores2 = [
  '#1e362d',
  '#101e19']
 
+# ____________________________________________PALETA_DE_COLORES____________________________________________
+
+
+# Lista auxiliar
 tetas= []
+
+
+# ____________________________________________LIBRERIAS____________________________________________
 
 import flet as ft
 from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
 from flet_core.control_event import ControlEvent
+
+# ____________________________________________LIBRERIAS____________________________________________
+
+
+
 def main(raiz: ft.Page):
     raiz.window_prevent_close = True 
     def OFF(e):    
@@ -48,8 +63,15 @@ def main(raiz: ft.Page):
         tetas.append(User.value)
         print(tetas)
 
+    def theme(e:ControlEvent) -> None:
+        if raiz.theme_mode == ft.ThemeMode.LIGHT:
+            raiz.theme_mode = ft.ThemeMode.DARK
+        else:
+            raiz.theme_mode = ft.ThemeMode.LIGHT
 
-    nombre=ft.Container(content=Text("Axys",color=colores[9],),bgcolor=colores[0],width=200,height=40,border_radius=ft.border_radius.all(10))
+        raiz.update()
+
+    nombre=ft.Container(content=Text("Axys",color=colores[9],),bgcolor="BLACK",width=200,height=40,border_radius=ft.border_radius.all(10))
     nombre.alignment = ft.alignment.center
     raiz.appbar = ft.AppBar(        
         title=nombre,
@@ -57,7 +79,7 @@ def main(raiz: ft.Page):
         bgcolor=colores2[8],
         actions=[
             ft.CupertinoSwitch(active_color=colores[1],track_color=colores[9],
-            value=True),
+            value=True,on_change=theme),
             ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED, on_click=OFF,icon_size=35),
         ],
     )
@@ -96,7 +118,6 @@ def main(raiz: ft.Page):
                 [
                     User,
                     Password,
-                    checkbox,
                     Button]
             )
         ],
@@ -104,11 +125,9 @@ def main(raiz: ft.Page):
         )
     
 
-    contenedor_login = ft.Container(content=Filas_login,height=623,width=500,bgcolor=colores[3],border_radius=ft.border_radius.all(10),padding=ft.padding.only(top=70))
+    contenedor_login = ft.Container(content=Filas_login,height=623,width=500,bgcolor="BLACK",border_radius=ft.border_radius.all(10),padding=ft.padding.only(top=70))
     raiz.add(contenedor_login)
     
-
-        
 
 ft.app(target=main)
 
