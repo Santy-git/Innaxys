@@ -1,5 +1,5 @@
 import sqlite3 as s
-
+from crearBase import * 
 # una funcion que me crea la base de datos
 
 

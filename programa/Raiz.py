@@ -62,6 +62,7 @@ def main(raiz: ft.Page):
 
     def logear(e):
         login(User.value,Password.value)
+        Menu()
         
     # -------------------------------------
     #----------------Appbar---------------------
@@ -118,7 +119,10 @@ def main(raiz: ft.Page):
 
     raiz.add(contenedor_login)
     #----------------------
-    
+    def Menu():
+        raiz.window_width = 1000
+        raiz.controls.pop()
+        raiz.add()
 
 
 
