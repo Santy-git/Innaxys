@@ -7,7 +7,7 @@
     --bg-barra:rgb(214, 211, 209, .8);
 
     /* el color del titulo arriba de la imagen */
-    --fg-header:rgb(0,0,0,1);
+    --fg-header:rgb(218, 207, 207);
 
     /* El color de fondo del apartado "Quienes somos" */
     --bg-quienesSomos:rgb(214, 211, 209, 1);
@@ -28,8 +28,6 @@ html {
     box-sizing: border-box;
 }
 
-
-
 .containerPrincipio{
     background-color: var(--bg-barra);
 }
@@ -42,17 +40,12 @@ nav {
     justify-content: space-between;
     align-items: center;
     display: flex;  
-    padding: .7rem .7rem;
+    padding: .2rem .7rem;
 }
 
 .logo {
     display: flex;
     height: 3rem;
-}
-
-.titulo {
-    display: flex;
-    height: 4rem;
 }
 
 .contactos {
@@ -66,7 +59,7 @@ nav {
     scale: 1.1;
 }
 
-.containerImagen{
+.containerImagen {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,29 +69,41 @@ nav {
 
 .imagenHotel {
     width: 100%; 
+    height: 70vh; /* Ajusta la altura a un valor específico o porcentaje */
+    object-fit: cover;
 }
 
-.containerSubtitulo {
-    display: flex;
-    flex-direction: column;
+.imagenSuperpuesta {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 100%; 
+    height: auto;  
+    display: flex; 
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 35%; 
-    left: 50%; 
-    /* Centra el contenedor de subtítulos verticalmente */
-    transform: translate(-50%, -50%); 
-    text-align: center;    
 }
 
-.subtitulo {
-    font-size: 10rem;
+.imagenSuperpuesta img{
+    width: 15rem;
+}
+
+.texto p {
+    position: relative;
+    top: 100%; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    text-align: center;
+    font-size: 2rem;
     color: var(--fg-header);
     font-family: 'Ephesis', cursive;
 }
 
 .frase {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    color: var(--fg-header);
 }
 
 .container{
