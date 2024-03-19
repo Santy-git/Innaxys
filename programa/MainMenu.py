@@ -28,6 +28,7 @@ def main(page:f.Page) -> None:
     page.theme_mode = f.ThemeMode.DARK
     page.window_full_screen
     page.window_resizable = False
+    
 
     rail = f.NavigationRail(
         selected_index=0,
@@ -53,17 +54,15 @@ def main(page:f.Page) -> None:
         ],
         on_change=lambda e: print("Selected destination:", e.control.selected_index),
     )
-
-    return f.Row(
+    page.add(f.Row(
             [
                 rail,
                 f.VerticalDivider(width=1),
                 f.Column([ f.Text("Body!")], alignment=f.MainAxisAlignment.START, expand=True),
             ],
-            width=400,
-            height=400
+            expand=True,
         )
-
+    )
 # _________________________________________VentanaPrincipal_________________________________________
 
     # RailMenu = f.NavigationBar(
@@ -80,6 +79,5 @@ def main(page:f.Page) -> None:
 
     # )
 
-if __name__ == '__main__':
-    f.app(target=main)
+f.app(target=main)
 # _________________________________________FLET_________________________________________
