@@ -1,6 +1,6 @@
 # ____________________________________________LIBRERIAS____________________________________________
 
-from crearBase import creardb
+from crearBase import creardb as db
 import flet as ft
 from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
 from flet_core.control_event import ControlEvent
@@ -34,10 +34,6 @@ colores2 = [
     '#244135',
     '#1e362d',
     '#101e19']
-
-# ____________________________________________PALETA_DE_COLORES____________________________________________
-# crear base
-creardb()
 
 # ____________________________________________Lista auxiliar_____________________
 tetas = []
