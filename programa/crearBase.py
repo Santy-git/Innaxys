@@ -101,7 +101,7 @@ def creardb():
     cursor = con.cursor()
 
     # ejecuto para hacer las tablas
-    for query in len(range(tablas)):
+    for query in tablas:
         cursor.execute(query)
 
     # realizo los cambios
