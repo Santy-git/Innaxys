@@ -4,10 +4,13 @@
 :root{
 
     /* Es el color de la barra de arriba y los botones */
-    --bg-barra:#121C14;
+    --bg-barra:#121c14;
+
+    /* Es el color de los botones */
+    --bg-botones:#c5d5c6;
 
     /* el color del titulo arriba de la imagen */
-    --fg-header:rgb(218, 207, 207);
+    --fg-header:rgb(255, 255, 255);
 
     /* El color de fondo del apartado "Quienes somos" */
     --bg-quienesSomos:rgb(214, 211, 209, 1);
@@ -28,12 +31,9 @@ html {
     box-sizing: border-box;
 }
 
-.containerPrincipio{
-    background-color: var(--bg-barra);
-}
-
 .barra {
     margin: 0;
+    background-color: var(--bg-barra);
 }
 
 nav {
@@ -71,9 +71,9 @@ nav {
 
 .imagenHotel {
     width: 100%; 
-    height: 69vh; /* Ajusta la altura a un valor específico o porcentaje */
+    height: 70vh; /* Ajusta la altura a un valor específico o porcentaje */
     object-fit: cover;
-    filter: brightness(50%);
+    filter: brightness(70%);
 }
 
 .imagenSuperpuesta {
@@ -92,6 +92,7 @@ nav {
 .imagenSuperpuesta img{
     width: 15rem;
     filter: brightness(100%);
+    margin-bottom: 3rem;
 }
 
 .texto p {
@@ -112,6 +113,7 @@ nav {
 .container{
     display: flex;
     align-items: center;
+    background-color: var(--bg-botones);
 }
 
 .containerButtons {
@@ -120,7 +122,7 @@ nav {
     align-items: center;
     padding: 2rem 10rem;
     min-width: 100%;
-    color: white;
+    color: black;
 }
 
 .contBotonTexto {
@@ -155,7 +157,7 @@ nav {
     border-radius: 50%; 
     width: 3rem; 
     height: 3rem; 
-    border: 2px solid #ffffff; 
+    border: 2px solid black; 
     transition: all 0.35s ease; 
     cursor: pointer;
 }
