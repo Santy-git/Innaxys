@@ -69,10 +69,8 @@ nav {
 
 .imagenHotel {
     width: 100%; 
-    height: 60vh; /* Ajusta la altura a un valor específico o porcentaje */
-    background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
-    background-position: center; /* Centra la imagen en el contenedor */
-    filter: blur(1px);
+    height: 70vh; /* Ajusta la altura a un valor específico o porcentaje */
+    object-fit: cover;
 }
 
 .imagenSuperpuesta {
