@@ -102,7 +102,7 @@ def creardb():
 
     # ejecuto para hacer las tablas
     for query in tablas:
-        print(query)
+        cursor.execute(query)
 
     # realizo los cambios
     con.commit()
