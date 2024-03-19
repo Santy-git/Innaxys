@@ -59,17 +59,13 @@ def creardb():
 
         '''CREATE TABLE IF NOT EXISTS reserva (
         codReserva int primary key,
-        codReshab int not null,
         codCliente int not null,
         codEmpleado int not null,
-        codRescoch int,
         cantidad int not null,
         fechaReserva date not null,
         descr varchar(255),
-        foreign key (codReshab) references habitacion(codReshab),
         foreign key (codCliente) references cliente(codCliente),
-        foreign key (codEmpleado) references empleado(codEmpleado),
-        foreign key (codRescoch) references cochera(codRescoch)
+        foreign key (codEmpleado) references empleado(codEmpleado)
     );''',
 
         '''CREATE TABLE IF NOT EXISTS resHab(
@@ -80,8 +76,7 @@ def creardb():
         camaInd number(10) not null,
         costoHab decimal(10,2) not null,
         fechaIngreso date not null,
-        fechaEgreso date not null
-
+        fechaEgreso date not null,
         foreign key (codHab) references habitacion(codHab),
         foreign key (codReserva) references reserva(codReserva)
     );''',

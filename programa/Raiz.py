@@ -1,6 +1,6 @@
 # ____________________________________________LIBRERIAS____________________________________________
 
-from crearBase import creardb as db
+from crearBase import creardb 
 import flet as ft
 from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
 from flet_core.control_event import ControlEvent
@@ -35,10 +35,13 @@ colores2 = [
     '#1e362d',
     '#101e19']
 
+# ____________________________________________PALETA_DE_COLORES____________________________________________
+#crear base
+
 # ____________________________________________Lista auxiliar_____________________
 tetas = []
 
-db()
+creardb()
 
 
 # ________________________________________Comienzo de codigo _______________________________
@@ -54,20 +57,20 @@ def main(raiz: ft.Page):
     raiz.window_resizable = False
     raiz.padding = 10
     # -------------------------------------
-    #
+    def OFF(e):    
+        raiz.window_destroy()
 
     def logear(e):
         tetas.append(User.value)
         tetas.append(Password.value)
         print(tetas)
     # -------------------------------------
-
-    # Appbar
-    # Elementos
+    #----------------Appbar---------------------
+        
     nombre = ft.Container(content=Text(
-        "Axys", color=colores[9],), bgcolor="BLACK", width=200, height=40, border_radius=ft.border_radius.all(10))
+        "Axys", color=colores[9],), bgcolor=colores[3], width=200, height=40, border_radius=ft.border_radius.all(10))
     nombre.alignment = ft.alignment.center
-    # ------------------------
+
     raiz.appbar = ft.AppBar(
         title=nombre,
         center_title=True,
@@ -79,10 +82,7 @@ def main(raiz: ft.Page):
                           on_click=OFF, icon_size=35),
         ],
     )
-    # ------------------------
-
-    # LOGIN
-    # def
+    # ------------CONTENEDOR------------
     def validate(e: ControlEvent) -> None:
         if all([User.value, Password.value]):
             Button.disabled = False
@@ -91,25 +91,17 @@ def main(raiz: ft.Page):
 
         raiz.update()
 
-    def sudmit(e: ControlEvent) -> None:
-
-        raiz.clean()
-        raiz.add(
-            Row(
-                controls=[Text(value=f'Welcome: {User.value}', size=20)],
-                alignment=ft.MainAxisAlignment.CENTER
-            )
-        )
+    User: TextField = TextField(label="User", text_align=ft.TextAlign.LEFT, width= 200)
+    Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width= 200, password = True, can_reveal_password=True)
+    Button: ElevatedButton = ElevatedButton(text="Sign Up",on_click=logear)
+    
     User.on_change = validate
     Password.on_change = validate
-    Button.on_change = sudmit
-    # -------
-    # elementos
-    User: TextField = TextField(
-        label="User", text_align=ft.TextAlign.LEFT, width=200)
-    Password: TextField = TextField(
-        label="Password", text_align=ft.TextAlign.LEFT, width=200, password=True, can_reveal_password=True)
+
+    User: TextField = TextField(label="User", text_align=ft.TextAlign.LEFT, width=200)
+    Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width=200, password=True, can_reveal_password=True)
     Button: ElevatedButton = ElevatedButton(text="Sign Up", on_click=logear)
+    
 
     Filas_login = Row(
         controls=[
@@ -123,11 +115,16 @@ def main(raiz: ft.Page):
         alignment=ft.MainAxisAlignment.CENTER,
     )
 
-    contenedor_login = ft.Container(content=Filas_login, height=623, width=500, bgcolor="BLACK",
-                                    border_radius=ft.border_radius.all(10), padding=ft.padding.only(top=70))
+    contenedor_login = ft.Container(content=Filas_login, height=623, width=500, bgcolor=colores[3], border_radius=ft.border_radius.all(10), padding=ft.padding.only(top=70))
 
     raiz.add(contenedor_login)
     # ----------------------
 
 
+    #----------------------
+    
+
+
+
+        
 ft.app(target=main)
