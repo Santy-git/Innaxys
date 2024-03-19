@@ -78,8 +78,7 @@ def main(raiz: ft.Page):
         actions=[
             ft.CupertinoSwitch(active_color=colores[1], track_color=colores[9],
                                value=True),
-            ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,
-                          on_click=OFF, icon_size=35),
+            ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,on_click=OFF, icon_size=35),
         ],
     )
     # ------------CONTENEDOR------------
