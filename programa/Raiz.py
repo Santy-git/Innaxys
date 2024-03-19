@@ -24,6 +24,8 @@ colores2 = [
  '#1e362d',
  '#101e19']
 
+tetas= []
+
 import flet as ft
 from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
 from flet_core.control_event import ControlEvent
@@ -33,80 +35,78 @@ def main(raiz: ft.Page):
         raiz.window_destroy()
           
     raiz.window_height = 700
-    raiz.window_width = 1000
+    raiz.window_width = 500
     raiz.window_bgcolor = colores2[0]
     raiz.bgcolor = ft.colors.TRANSPARENT
     raiz.window_title_bar_hidden = True
     raiz.window_frameless = True
     raiz.window_resizable = False
-    raiz.padding = 50
+    raiz.padding = 10
+    
 
-    raiz.appbar = ft.AppBar(
-        title=ft.Text("Axys"),
+    def logear(e):
+        tetas.append(User.value)
+        print(tetas)
+
+
+    nombre=ft.Container(content=Text("Axys",color=colores[9],),bgcolor=colores[0],width=200,height=40,border_radius=ft.border_radius.all(10))
+    nombre.alignment = ft.alignment.center
+    raiz.appbar = ft.AppBar(        
+        title=nombre,
         center_title=True,
         bgcolor=colores2[8],
         actions=[
-            ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED, on_click=OFF),
-            #aca boton
+            ft.CupertinoSwitch(active_color=colores[1],track_color=colores[9],
+            value=True),
+            ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED, on_click=OFF,icon_size=35),
         ],
     )
-    raiz.add()
-    login = ft.Container(
-        bgcolor = colores[5],
-        width=900,
-        height=600,
-        alignment = (0, 0))
-        """content=Row(
-            controls=[Column(
-                    usuario = TextField(label="User", text_align=ft.TextAlign.LEFT, width= 200),
-                    contraseña = TextField(label="Password", text_align=ft.TextAlign.LEFT, width= 200, password = True),
-                    derechos = Checkbox(label="I agree to stuff",value = False),
-                    boton = ElevatedButton(text="Sign Up"))],
-        ))"""
-    raiz.add(login)
-    """def validate(e: ControlEvent) -> None:
-        if all([Usuario.value,contraseña.value,derechos.value]):
+
+    User: TextField = TextField(label="User", text_align=ft.TextAlign.LEFT, width= 200)
+    Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width= 200, password = True)
+    checkbox: Checkbox = Checkbox(label="I agree to stuff",value = False)
+    Button: ElevatedButton = ElevatedButton(text="Sign Up",on_click=logear)
+
+    def validate(e: ControlEvent) -> None:
+        if all([User.value,Password.value,checkbox.value]):
             Button.disabled = False
         else:
             Button.disabled = True
 
-        raiz.update()"""
-
-    """def sudmit(e: ControlEvent) -> None:
-        print("User:",usuario.value)
+        raiz.update()
+    
+    def sudmit(e: ControlEvent) -> None:
 
         raiz.clean()
         raiz.add(
             Row(
                 controls=[Text(value=f'Welcome: {User.value}',size = 20)],
-                alignment = f.MainAxisAlignment.CENTER
-            )
-        )
-        
-        Theme.on_change = theme
-        checkbox.on_change = validate
-        User.on_change = validate
-        Password.on_change = validate
-        Button.on_change = sudmit
-
-        
-
-        #Render bonito de la pagina skeree
-       raiz.add(
-            Row(
-                controls=[
-                    Column(
-                        [
-                        Usuario,
-                        contraseña,
-                        checkbox,
-                        Button]
-                    )
-                ],
                 alignment = ft.MainAxisAlignment.CENTER
             )
-        )"""
-        
+        )
+
+    checkbox.on_change = validate
+    User.on_change = validate
+    Password.on_change = validate
+    Button.on_change = sudmit
+
+    Filas_login = Row(
+        controls=[
+            Column(
+                [
+                    User,
+                    Password,
+                    checkbox,
+                    Button]
+            )
+        ],
+        alignment = ft.MainAxisAlignment.CENTER,
+        )
+    
+
+    contenedor_login = ft.Container(content=Filas_login,height=623,width=500,bgcolor=colores[3],border_radius=ft.border_radius.all(10),padding=ft.padding.only(top=70))
+    raiz.add(contenedor_login)
+    
 
         
 
