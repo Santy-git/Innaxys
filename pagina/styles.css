@@ -4,7 +4,7 @@
 :root{
 
     /* Es el color de la barra de arriba y los botones */
-    --bg-barra:#121C14;
+    --bg-barra:#293c2e;
 
     /* el color del titulo arriba de la imagen */
     --fg-header:rgb(218, 207, 207);
@@ -71,9 +71,9 @@ nav {
 
 .imagenHotel {
     width: 100%; 
-    height: 69vh; /* Ajusta la altura a un valor específico o porcentaje */
+    height: 70vh; /* Ajusta la altura a un valor específico o porcentaje */
     object-fit: cover;
-    filter: brightness(50%);
+    filter: brightness(70%);
 }
 
 .imagenSuperpuesta {
