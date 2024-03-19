@@ -28,8 +28,6 @@ html {
     box-sizing: border-box;
 }
 
-
-
 .containerPrincipio{
     background-color: var(--bg-barra);
 }
@@ -76,6 +74,7 @@ nav {
 
 .imagenHotel {
     width: 100%; 
+    height: 23rem;
 }
 
 .containerSubtitulo {
@@ -92,13 +91,13 @@ nav {
 }
 
 .subtitulo {
-    font-size: 10rem;
+    font-size: 7rem;
     color: var(--fg-header);
     font-family: 'Ephesis', cursive;
 }
 
 .frase {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .container{
