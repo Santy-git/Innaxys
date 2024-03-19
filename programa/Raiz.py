@@ -1,6 +1,6 @@
 # ____________________________________________LIBRERIAS____________________________________________
 
-from crearBase import creardb 
+from crearBase import * 
 import flet as ft
 from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
 from flet_core.control_event import ControlEvent
@@ -61,9 +61,8 @@ def main(raiz: ft.Page):
         raiz.window_destroy()
 
     def logear(e):
-        tetas.append(User.value)
-        tetas.append(Password.value)
-        print(tetas)
+        login(User.value,Password.value)
+        
     # -------------------------------------
     #----------------Appbar---------------------
         
@@ -89,6 +88,7 @@ def main(raiz: ft.Page):
             Button.disabled = True
 
         raiz.update()
+    
 
     User: TextField = TextField(label="User", text_align=ft.TextAlign.LEFT, width= 200)
     Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width= 200, password = True, can_reveal_password=True)
@@ -117,9 +117,6 @@ def main(raiz: ft.Page):
     contenedor_login = ft.Container(content=Filas_login, height=623, width=500, bgcolor=colores[3], border_radius=ft.border_radius.all(10), padding=ft.padding.only(top=70))
 
     raiz.add(contenedor_login)
-    # ----------------------
-
-
     #----------------------
     
 

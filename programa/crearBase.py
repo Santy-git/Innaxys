@@ -19,6 +19,7 @@ def creardb():
 
         '''CREATE TABLE IF NOT EXISTS login(
         codLog int primary key,
+        password varchar(30) not null,
         nivel varchar(20) not null
     );''',
 
@@ -102,3 +103,22 @@ def creardb():
 
     # realizo los cambios
     con.commit()
+    try:
+        sql = "INSERT INTO login (codLog, password, nivel) VALUES (0,'innaxys',5)"
+        con.execute(sql)
+        con.commit()
+    except s.IntegrityError:
+        pass
+        
+    con.close()
+
+def login(usuario, contraseña):
+    print("hola")
+    con = s.connect("GestionHotel.db")
+
+    # creo el cursor
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM login")
+    result=cur.fetchall()
+    print(result)
