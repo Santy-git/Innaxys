@@ -98,11 +98,11 @@ def creardb():
     con = s.connect("GestionHotel.db")
 
     # creo el cursor
-    c = con.cursor()
+    cursor = con.cursor()
 
     # ejecuto para hacer las tablas
-    for query in tablas:
-        c.execute(query)
+    for query in len(range(tablas)):
+        cursor.execute(query)
 
     # realizo los cambios
     con.commit()

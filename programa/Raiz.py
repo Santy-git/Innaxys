@@ -1,3 +1,4 @@
+from crearBase import creardb as db
 colores=[
 '#f3f6f4',
 '#e1eae1',
@@ -29,6 +30,9 @@ tetas= []
 import flet as ft
 from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
 from flet_core.control_event import ControlEvent
+
+
+
 def main(raiz: ft.Page):
     raiz.window_prevent_close = True 
     def OFF(e):    
@@ -46,7 +50,11 @@ def main(raiz: ft.Page):
 
     def logear(e):
         tetas.append(User.value)
+        tetas.append(Password.value)
         print(tetas)
+
+
+    Tema = Checkbox(label="Modo")
 
 
     nombre=ft.Container(content=Text("Axys",color=colores[9],),bgcolor=colores[0],width=200,height=40,border_radius=ft.border_radius.all(10))
@@ -63,12 +71,11 @@ def main(raiz: ft.Page):
     )
 
     User: TextField = TextField(label="User", text_align=ft.TextAlign.LEFT, width= 200)
-    Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width= 200, password = True)
-    checkbox: Checkbox = Checkbox(label="I agree to stuff",value = False)
+    Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width= 200, password = True, can_reveal_password=True)
     Button: ElevatedButton = ElevatedButton(text="Sign Up",on_click=logear)
 
     def validate(e: ControlEvent) -> None:
-        if all([User.value,Password.value,checkbox.value]):
+        if all([User.value,Password.value]):
             Button.disabled = False
         else:
             Button.disabled = True
@@ -85,7 +92,6 @@ def main(raiz: ft.Page):
             )
         )
 
-    checkbox.on_change = validate
     User.on_change = validate
     Password.on_change = validate
     Button.on_change = sudmit
@@ -96,7 +102,6 @@ def main(raiz: ft.Page):
                 [
                     User,
                     Password,
-                    checkbox,
                     Button]
             )
         ],
