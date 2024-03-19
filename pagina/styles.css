@@ -98,7 +98,6 @@ nav {
     text-align: center;
     font-size: 2rem;
     color: var(--fg-header);
-    font-family: 'Ephesis', cursive;
 }
 
 .frase {
@@ -115,8 +114,14 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5rem 25% 5rem 25%;
+    padding: 3rem 10rem;
     min-width: 100%;
+}
+
+.contBotonTexto {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 /* los botones */
@@ -124,8 +129,12 @@ nav {
   .ofrecemos,
   .beneficios,
   .compatibilidad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative; 
     font-size: 1.7rem;
+    flex: 1;
   }
   
   /* para hacer los circulos  */
