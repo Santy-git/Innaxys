@@ -1,6 +1,6 @@
 # ____________________________________________LIBRERIAS____________________________________________
 
-from crearBase import creardb as db
+from crearBase import creardb
 import flet as ft
 from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
 from flet_core.control_event import ControlEvent
@@ -36,7 +36,8 @@ colores2 = [
     '#101e19']
 
 # ____________________________________________PALETA_DE_COLORES____________________________________________
-
+# crear base
+creardb()
 
 # ____________________________________________Lista auxiliar_____________________
 tetas = []
@@ -63,6 +64,7 @@ def main(raiz: ft.Page):
         tetas.append(User.value)
         tetas.append(Password.value)
         print(tetas)
+    # -------------------------------------
 
     # Appbar
     # Elementos
