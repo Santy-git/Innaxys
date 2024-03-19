@@ -40,17 +40,12 @@ nav {
     justify-content: space-between;
     align-items: center;
     display: flex;  
-    padding: .7rem .7rem;
+    padding: .2rem .7rem;
 }
 
 .logo {
     display: flex;
     height: 3rem;
-}
-
-.titulo {
-    display: flex;
-    height: 4rem;
 }
 
 .contactos {
@@ -68,14 +63,15 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Asegura que .imagenSuperpuesta se posicione en relación a este contenedor */
+    position: relative;
     width: 100%; 
 }
 
 .imagenHotel {
     width: 100%; 
-    height: auto;
-    object-fit: cover;
+    height: 60vh; /* Ajusta la altura a un valor específico o porcentaje */
+    background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
+    background-position: center; /* Centra la imagen en el contenedor */
     filter: blur(1px);
 }
 
@@ -84,19 +80,23 @@ nav {
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
-    width: 100%; /* Ajusta el ancho para que cubra todo el contenedor */
+    width: 100%; 
     height: auto;  
-    display: flex; /* Añade display flex para alinear el logo y el texto horizontalmente */
-    flex-direction: column; /* Alinea los elementos en una columna */
-    align-items: center; /* Centra los elementos horizontalmente */
-    justify-content: center; /* Centra los elementos verticalmente */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+}
+
+.imagenSuperpuesta img{
+    width: 15rem;
 }
 
 .texto p {
-    position: relative; /* Cambia a relative para que se posicione en relación al contenedor .imagenSuperpuesta */
-    top: 100%; /* Asegura que el texto comience justo debajo del logo */
+    position: relative;
+    top: 100%; 
     left: 50%; 
-    transform: translateX(-50%); /* Ajusta el texto al centro horizontalmente */
+    transform: translateX(-50%); 
     text-align: center;
     font-size: 2rem;
     color: var(--fg-header);
