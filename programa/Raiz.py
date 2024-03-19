@@ -61,8 +61,11 @@ def main(raiz: ft.Page):
         raiz.window_destroy()
 
     def logear(e):
-        login(User.value,Password.value)
-        Menu()
+        z =  login(User.value,Password.value)
+        if z:
+            Menu()
+        else:
+            print("nao nao")
         
     # -------------------------------------
     #----------------Appbar---------------------

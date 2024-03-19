@@ -121,4 +121,11 @@ def login(usuario, contraseña):
 
     cur.execute("SELECT * FROM login")
     result=cur.fetchall()
+
+    for i in range(len(result)):
+        print(result[i][0])
+        print(result[i][1])
+        if str(usuario) == str(result[i][0]) and str(contraseña) == str(result[i][1]):
+            return True
     print(result)
+    
