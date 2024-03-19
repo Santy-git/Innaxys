@@ -7,7 +7,7 @@
     --bg-barra:rgb(214, 211, 209, .8);
 
     /* el color del titulo arriba de la imagen */
-    --fg-header:rgb(0,0,0,1);
+    --fg-header:rgb(218, 207, 207);
 
     /* El color de fondo del apartado "Quienes somos" */
     --bg-quienesSomos:rgb(214, 211, 209, 1);
@@ -64,43 +64,48 @@ nav {
     scale: 1.1;
 }
 
-.containerImagen{
+.containerImagen {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    position: relative; /* Asegura que .imagenSuperpuesta se posicione en relación a este contenedor */
     width: 100%; 
 }
 
 .imagenHotel {
     width: 100%; 
-    height: 23rem;
+    height: auto;
     object-fit: cover;
-    filter: blur(.2rem);
-    
+    filter: blur(1px);
 }
 
-.containerSubtitulo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.imagenSuperpuesta {
     position: absolute;
-    top: 35%; 
+    top: 50%; 
     left: 50%; 
-    /* Centra el contenedor de subtítulos verticalmente */
     transform: translate(-50%, -50%); 
-    text-align: center;    
+    width: 100%; /* Ajusta el ancho para que cubra todo el contenedor */
+    height: auto;  
+    display: flex; /* Añade display flex para alinear el logo y el texto horizontalmente */
+    flex-direction: column; /* Alinea los elementos en una columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos verticalmente */
 }
 
-.subtitulo {
-    font-size: 7rem;
+.texto p {
+    position: relative; /* Cambia a relative para que se posicione en relación al contenedor .imagenSuperpuesta */
+    top: 100%; /* Asegura que el texto comience justo debajo del logo */
+    left: 50%; 
+    transform: translateX(-50%); /* Ajusta el texto al centro horizontalmente */
+    text-align: center;
+    font-size: 2rem;
     color: var(--fg-header);
     font-family: 'Ephesis', cursive;
 }
 
 .frase {
     font-size: 1.5rem;
+    color: var(--fg-header);
 }
 
 .container{
