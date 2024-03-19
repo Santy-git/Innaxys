@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap');
 
 :root{
 
@@ -26,6 +27,8 @@ html {
     padding: 0;
     box-sizing: border-box;
 }
+
+
 
 .containerPrincipio{
     background-color: var(--bg-barra);
@@ -85,12 +88,13 @@ nav {
     left: 50%; 
     /* Centra el contenedor de subtítulos verticalmente */
     transform: translate(-50%, -50%); 
-    text-align: center; 
+    text-align: center;    
 }
 
 .subtitulo {
-    font-size: 5rem;
+    font-size: 10rem;
     color: var(--fg-header);
+    font-family: 'Ephesis', cursive;
 }
 
 .frase {
@@ -98,17 +102,16 @@ nav {
 }
 
 .container{
-    display: flexbox;
-    margin-left: 25%;
-    max-width: 50%;
-    justify-self: center;
+    display: flex;
+    align-items: center;
 }
 
 .containerButtons {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5rem 5rem;
+    padding: 5rem 25% 5rem 25%;
+    min-width: 100%;
 }
 
 /* los botones */
@@ -152,11 +155,11 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5rem 2rem 5rem 2rem;
+    padding: 5rem 5% 5rem 5%;
     background: var(--bg-quienesSomos);
     border-top: rgba(123, 118, 118, 0.4) 2px solid;
     border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
-    height: 30rem;
+    height: auto;
 }
 
 .containerSomos{
@@ -179,23 +182,34 @@ nav {
 /* la parte de que ofrecemos */
 .containerSegundoItem{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 5rem 2rem 5rem 2rem;
+    padding: 5rem 0 5rem 0;
     background-color: var(--bg-ofrecemos);
     border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
-    height: 30rem;
+    height: auto;
+    gap: 2rem;
+}
+
+.items{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
 }
 
 .contenedorItems{
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: .5rem;
-    max-width: 33%;
+    gap: 2rem;
+    max-width: 100%;
 }
 
 .contenedorItems img{
-    max-width: 40%;
+    max-width: 50%;
+    height: auto;
     border-radius: .7rem;
 }
