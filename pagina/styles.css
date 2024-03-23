@@ -1,5 +1,9 @@
+/* poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap');
+/* nunito */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+/* epilogue */
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
 
@@ -29,6 +33,16 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    line-height: 1.5;
+}
+
+p {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
 .containerPrincipio {
@@ -283,6 +297,7 @@ transform: rotate(180deg);
     justify-content: center;
     gap: 2rem;
     max-width: 100%;
+    padding: 0 5%;
 }
 
 .contenedorItems img{
