@@ -31,35 +31,91 @@ html {
     box-sizing: border-box;
 }
 
+.containerPrincipio {
+    height: 100vh;
+}
+
 .barra {
     margin: 0;
     background-color: var(--bg-barra);
+    height: 8vh;
 }
 
 nav {
     justify-content: space-between;
     align-items: center;
     display: flex;  
-    padding: .2rem .7rem;
+    padding: .3rem 2rem;
 }
 
+/* TODO: cambiar lo del filtro de brillo */
 .logo {
     display: flex;
     height: 3rem;
     filter: brightness(100);
 }
 
-.contactos {
-    display: flex;
-    font-size: 1.5rem;
-    transition: all ease .1s;
-    color: white;
+/* contactos */
+#checkbox {
+    display: none;
+  }
+  
+.toggle {
+position: relative;
+width: 1.5rem;
+height: 1.5rem;
+cursor: pointer;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 10px;
+transition-duration: .5s;
 }
 
-.contactos:hover{
-    cursor: pointer;
-    scale: 1.1;
+.bars {
+width: 100%;
+height: 4px;
+background-color: rgb(255, 255, 255);
+border-radius: 4px;
 }
+
+#bar2 {
+transition-duration: .8s;
+}
+
+#bar1,#bar3 {
+width: 70%;
+}
+
+#checkbox:checked + .toggle .bars {
+position: absolute;
+transition-duration: .5s;
+}
+
+#checkbox:checked + .toggle #bar2 {
+transform: scaleX(0);
+transition-duration: .5s;
+}
+
+#checkbox:checked + .toggle #bar1 {
+width: 100%;
+transform: rotate(45deg);
+transition-duration: .5s;
+}
+
+#checkbox:checked + .toggle #bar3 {
+width: 100%;
+transform: rotate(-45deg);
+transition-duration: .5s;
+}
+
+#checkbox:checked + .toggle {
+transition-duration: .5s;
+transform: rotate(180deg);
+}
+
+  /* --------------------- */
 
 .containerImagen {
     display: flex;
@@ -91,7 +147,6 @@ nav {
 
 .imagenSuperpuesta img{
     width: 15rem;
-    filter: brightness(100%);
     margin-bottom: 3rem;
 }
 
@@ -114,6 +169,7 @@ nav {
     display: flex;
     align-items: center;
     background-color: var(--bg-botones);
+    height: 22vh;
 }
 
 .containerButtons {
