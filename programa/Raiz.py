@@ -5,7 +5,6 @@ import flet as ft
 from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
 from flet_core.control_event import ControlEvent
 
-# ____________________________________________LIBRERIAS____________________________________________
 
 # ____________________________________________PALETA_DE_COLORES____________________________________________
 
@@ -35,144 +34,306 @@ colores2 = [
     '#1e362d',
     '#101e19']
 
-# ____________________________________________PALETA_DE_COLORES____________________________________________
-#crear base
-
-# ____________________________________________Lista auxiliar_____________________
-tetas = []
-
 creardb()
+e = 0
+d = 0
+#_____________________________________________IDIOMA___________________________________________
+cual = 0
+class Maestro:
+    def __init__(self):
+        pass
+    def Ingles(e):
 
-
-# ________________________________________Comienzo de codigo _______________________________
-def main(raiz: ft.Page):
-    # seteo de la pagina
-    raiz.window_prevent_close = True
-    raiz.window_height = 700
-    raiz.window_width = 500
-    raiz.window_bgcolor = colores2[0]
-    raiz.bgcolor = ft.colors.TRANSPARENT
-    raiz.window_title_bar_hidden = True
-    raiz.window_frameless = True
-    raiz.window_resizable = False
-    raiz.padding = 10
-    # -------------------------------------
-    def OFF(e):    
-        raiz.window_destroy()
-
-    def logear(e):
-        z =  login(User.value,Password.value)
-        if z:
-            Menu()
-        else:
-            print("nao nao")
+        def main(raiz: ft.Page):
         
-    # -------------------------------------
-    #----------------Appbar---------------------
+            # seteo de la pagina
+            raiz.window_prevent_close = True
+            raiz.window_height = 700
+            raiz.window_width = 500
+            raiz.window_bgcolor = colores2[0]
+            raiz.bgcolor = ft.colors.TRANSPARENT
+            raiz.window_title_bar_hidden = True
+            raiz.window_frameless = True
+            raiz.window_resizable = False
+            raiz.padding = 10
+            # -------------------------------------
+            def OFF(e):    
+                global cual    
+                raiz.window_destroy()
+                cual = 2
         
-    nombre = ft.Container(content=Text(
-        "Axys", color=colores[9],), bgcolor=colores[3], width=200, height=40, border_radius=ft.border_radius.all(10))
-    nombre.alignment = ft.alignment.center
+            def logear(e):
+                z =  login(User.value,Password.value)
+                if z:
+                    Menu()
+                else:
+                    dlg = ft.AlertDialog(
+                    title=ft.Text("Usuario Incorrecto"), on_dismiss=lambda e: print("Dialog dismissed!")
+                    )
+                    def open_dlg(e):
+                        raiz.dialog = dlg
+                        dlg.open = True
+                        raiz.update()
+                    open_dlg(e)
 
-    def theme(e:ControlEvent) -> None:
-            if raiz.theme_mode == ft.ThemeMode.LIGHT:
-                raiz.theme_mode = ft.ThemeMode.DARK
-            else:
+            def EnEs(e):
+                global cual
+                raiz.window_destroy()
+                cual = 1
+            # -------------------------------------
+            #----------------Appbar---------------------
+            
+            nombre = ft.Container(content=Text(
+                "Axys", color=colores[9],), bgcolor=colores[3], width=200, height=40, border_radius=ft.border_radius.all(10))
+            nombre.alignment = ft.alignment.center
+
+            def theme(e:ControlEvent) -> None:
+                    if raiz.theme_mode == ft.ThemeMode.LIGHT:
+                        raiz.theme_mode = ft.ThemeMode.DARK
+                    else:
+                        raiz.theme_mode = ft.ThemeMode.LIGHT
+
+                    raiz.update()
+
+            raiz.appbar = ft.AppBar(
+                title=nombre,
+                center_title=True,
+                bgcolor=colores2[8],
+                actions=[
+                    ft.IconButton(ft.icons.LANGUAGE,on_click=EnEs, icon_size=35,bgcolor=ft.colors.RED),
+                    ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,on_click=OFF, icon_size=35,),
+                ]
+
+            )
+
+
+            # ------------CONTENEDOR------------
+            def validate(e: ControlEvent) -> None:
+                if all([User.value, Password.value]):
+                    Button.disabled = False
+                else:
+                    Button.disabled = True
+
+                raiz.update()
+            
+
+            User: TextField = TextField(label="User", text_align=ft.TextAlign.LEFT, width= 200)
+            Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width= 200, password = True, can_reveal_password=True)
+            Button: ElevatedButton = ElevatedButton(text="Sign Up",on_click=logear)
+            
+            User.on_change = validate
+            Password.on_change = validate
+            
+
+            Filas_login = Row(
+                controls=[
+                    Column(
+                        [
+                            User,
+                            Password,
+                            Button]
+                    )
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+            )
+
+            contenedor_login = ft.Container(content=Filas_login, height=623, width=500, bgcolor=colores[3], border_radius=ft.border_radius.all(10), padding=ft.padding.only(top=70))
+
+            raiz.add(contenedor_login)
+            # __________________________________________________________________________
+            def Menu():
+                raiz.window_width = 1000
+                raiz.controls.pop()
                 raiz.theme_mode = ft.ThemeMode.LIGHT
 
-            raiz.update()
 
-    raiz.appbar = ft.AppBar(
-        title=nombre,
-        center_title=True,
-        bgcolor=colores2[8],
-        actions=[
-            ft.CupertinoSwitch(active_color=colores[1], track_color=colores[9],
-                               value=True,on_change=theme),
-            ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,on_click=OFF, icon_size=35,),
-        ]
+                rail = ft.NavigationRail(
+                    selected_index=0,
+                    label_type=ft.NavigationRailLabelType.ALL,
+                    min_width=100,
+                    min_extended_width=400,
+                    group_alignment=-0.9,
+                    destinations=[
+                        ft.NavigationRailDestination(
+                            icon=ft.icons.FAVORITE_BORDER, selected_icon=ft.icons.PEOPLE, label="First"
+                        ),
+                        ft.NavigationRailDestination(
+                            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER),
+                            selected_icon_content=ft.Icon(ft.icons.BOOKMARK),
+                            label="Second",
+                        ),
+                        ft.NavigationRailDestination(
+                            icon=ft.icons.SETTINGS_OUTLINED,
+                            selected_icon_content=ft.Icon(ft.icons.SETTINGS),
+                            label_content=ft.Text("Settings"),
+                        ),
+                    ],
+                    on_change=lambda e: print("Selected destination:", e.control.selected_index),
+                )
+                raiz.add(ft.Row(
+                        [
+                            rail,
+                            ft.VerticalDivider(width=1),
+                            ft.Column([ ft.Text("Body!")], alignment=ft.MainAxisAlignment.START, expand=True),
+                        ],
+                        expand=True,
+                    )
+                )
 
-    )
+        ft.app(target=main)
+
+    def Español(e):    
+
+        def main(raizes: ft.Page):
+
+            # seteo de la pagina
+            raizes.window_prevent_close = True
+            raizes.window_height = 700
+            raizes.window_width = 500
+            raizes.window_bgcolor = colores2[0]
+            raizes.bgcolor = ft.colors.TRANSPARENT
+            raizes.window_title_bar_hidden = True
+            raizes.window_frameless = True
+            raizes.window_resizable = False
+            raizes.padding = 10
+            # -------------------------------------
+            def OFF(e):
+                global cual    
+                raizes.window_destroy()
+                cual = 2
 
 
-    # ------------CONTENEDOR------------
-    def validate(e: ControlEvent) -> None:
-        if all([User.value, Password.value]):
-            Button.disabled = False
-        else:
-            Button.disabled = True
 
-        raiz.update()
-    
+                
+            apagado_boton = ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,on_click=OFF, icon_size=35,)
 
-    User: TextField = TextField(label="User", text_align=ft.TextAlign.LEFT, width= 200)
-    Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width= 200, password = True, can_reveal_password=True)
-    Button: ElevatedButton = ElevatedButton(text="Sign Up",on_click=logear)
-    
-    User.on_change = validate
-    Password.on_change = validate
+            def logear(e):
+                z =  login(User.value,Password.value)
+                if z:
+                    Menu()
+                else:
+                    dlg = ft.AlertDialog(
+                    title=ft.Text("Usuario Incorrecto"), on_dismiss=lambda e: print("Dialog dismissed!")
+                    )
+                    def open_dlg(e):
+                        raizes.dialog = dlg
+                        dlg.open = True
+                        raizes.update()
+                    open_dlg(e)
 
-    User: TextField = TextField(label="User", text_align=ft.TextAlign.LEFT, width=200)
-    Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width=200, password=True, can_reveal_password=True)
-    Button: ElevatedButton = ElevatedButton(text="Sign Up", on_click=logear)
-    
+            def EsEn(e):
+                global cual
+                raizes.window_destroy()
+                cual = 0
 
-    Filas_login = Row(
-        controls=[
-            Column(
-                [
-                    User,
-                    Password,
-                    Button]
+
+                
+            # -------------------------------------
+            #----------------Appbar---------------------
+                
+            nombre = ft.Container(content=Text(
+                "Axys", color=colores[9],), bgcolor=colores[3], width=200, height=40, border_radius=ft.border_radius.all(10))
+            nombre.alignment = ft.alignment.center
+
+            def theme(e:ControlEvent) -> None:
+                    if raizes.theme_mode == ft.ThemeMode.LIGHT:
+                        raizes.theme_mode = ft.ThemeMode.DARK
+                    else:
+                        raizes.theme_mode = ft.ThemeMode.LIGHT
+
+                    raizes.update()
+
+            raizes.appbar = ft.AppBar(
+                title=nombre,
+                center_title=True,
+                bgcolor=colores2[8],
+                actions=[
+                    ft.IconButton(ft.icons.LANGUAGE,on_click=EsEn, icon_size=35,bgcolor=ft.colors.AMBER_200),
+                    apagado_boton,
+                ]
+
             )
-        ],
-        alignment=ft.MainAxisAlignment.CENTER,
-    )
-
-    contenedor_login = ft.Container(content=Filas_login, height=623, width=500, bgcolor=colores[3], border_radius=ft.border_radius.all(10), padding=ft.padding.only(top=70))
-
-    raiz.add(contenedor_login)
-    # __________________________________________________________________________
-    def Menu():
-        raiz.window_width = 1000
-        raiz.controls.pop()
-        raiz.theme_mode = ft.ThemeMode.LIGHT
 
 
-        rail = ft.NavigationRail(
-            selected_index=0,
-            label_type=ft.NavigationRailLabelType.ALL,
-            min_width=100,
-            min_extended_width=400,
-            leading=ft.FloatingActionButton(icon=ft.icons.CREATE, text="Add"),
-            group_alignment=-0.9,
-            destinations=[
-                ft.NavigationRailDestination(
-                    icon=ft.icons.FAVORITE_BORDER, selected_icon=ft.icons.FAVORITE, label="First"
-                ),
-                ft.NavigationRailDestination(
-                    icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER),
-                    selected_icon_content=ft.Icon(ft.icons.BOOKMARK),
-                    label="Second",
-                ),
-                ft.NavigationRailDestination(
-                    icon=ft.icons.SETTINGS_OUTLINED,
-                    selected_icon_content=ft.Icon(ft.icons.SETTINGS),
-                    label_content=ft.Text("Settings"),
-                ),
-            ],
-            on_change=lambda e: print("Selected destination:", e.control.selected_index),
-        )
-        raiz.add(ft.Row(
-                [
-                    rail,
-                    ft.VerticalDivider(width=1),
-                    ft.Column([ ft.Text("Body!")], alignment=ft.MainAxisAlignment.START, expand=True),
+            # ------------CONTENEDOR------------
+            def validate(e: ControlEvent) -> None:
+                if all([User.value, Password.value]):
+                    Button.disabled = False
+                else:
+                    Button.disabled = True
+
+                raizes.update()
+            
+
+            User: TextField = TextField(label="User", text_align=ft.TextAlign.LEFT, width= 200)
+            Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width= 200, password = True, can_reveal_password=True)
+            Button: ElevatedButton = ElevatedButton(text="Sign Up",on_click=logear)
+            
+            User.on_change = validate
+            Password.on_change = validate
+            
+
+            Filas_login = Row(
+                controls=[
+                    Column(
+                        [
+                            User,
+                            Password,
+                            Button]
+                    )
                 ],
-                expand=True,
+                alignment=ft.MainAxisAlignment.CENTER,
             )
-        )
+
+            contenedor_login = ft.Container(content=Filas_login, height=623, width=500, bgcolor=colores[3], border_radius=ft.border_radius.all(10), padding=ft.padding.only(top=70))
+
+            raizes.add(contenedor_login)
+            # __________________________________________________________________________
+            def Menu():
+                raizes.window_width = 1000
+                raizes.controls.pop()
+                raizes.theme_mode = ft.ThemeMode.LIGHT
 
 
-        
-ft.app(target=main)
+                rail = ft.NavigationRail(
+                    selected_index=0,
+                    label_type=ft.NavigationRailLabelType.ALL,
+                    min_width=100,
+                    min_extended_width=400,
+                    group_alignment=-0.9,
+                    destinations=[
+                        ft.NavigationRailDestination(
+                            icon=ft.icons.FAVORITE_BORDER, selected_icon=ft.icons.PEOPLE, label="First"
+                        ),
+                        ft.NavigationRailDestination(
+                            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER),
+                            selected_icon_content=ft.Icon(ft.icons.BOOKMARK),
+                            label="Second",
+                        ),
+                        ft.NavigationRailDestination(
+                            icon=ft.icons.SETTINGS_OUTLINED,
+                            selected_icon_content=ft.Icon(ft.icons.SETTINGS),
+                            label_content=ft.Text("Settings"),
+                        ),
+                    ],
+                    on_change=lambda e: print("Selected destination:", e.control.selected_index),
+                )
+                raizes.add(ft.Row(
+                        [
+                            rail,
+                            ft.VerticalDivider(width=1),
+                            ft.Column([ ft.Text("Body!")], alignment=ft.MainAxisAlignment.START, expand=True),
+                        ],
+                        expand=True,
+                    )
+                )
+        ft.app(target=main)
+
+Controlador = Maestro()
+while True:
+    if cual == 0:
+        Controlador.Ingles()
+    if cual == 1:
+        Controlador.Español()
+    if cual == 2:
+        break
