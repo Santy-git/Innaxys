@@ -57,6 +57,7 @@ class Maestro:
             raiz.window_resizable = False
             raiz.padding = 10
             # -------------------------------------
+            
             def OFF(e):    
                 global cual    
                 raiz.window_destroy()
@@ -67,14 +68,15 @@ class Maestro:
                 if z:
                     Menu()
                 else:
-                    dlg = ft.AlertDialog(
+                    Menu()
+                    """dlg = ft.AlertDialog(
                     title=ft.Text("Usuario Incorrecto"), on_dismiss=lambda e: print("Dialog dismissed!")
                     )
                     def open_dlg(e):
                         raiz.dialog = dlg
                         dlg.open = True
                         raiz.update()
-                    open_dlg(e)
+                    open_dlg(e)"""
 
             def EnEs(e):
                 global cual
@@ -86,14 +88,6 @@ class Maestro:
             nombre = ft.Container(content=Text(
                 "Axys", color=colores[9],), bgcolor=colores[3], width=200, height=40, border_radius=ft.border_radius.all(10))
             nombre.alignment = ft.alignment.center
-
-            def theme(e:ControlEvent) -> None:
-                    if raiz.theme_mode == ft.ThemeMode.LIGHT:
-                        raiz.theme_mode = ft.ThemeMode.DARK
-                    else:
-                        raiz.theme_mode = ft.ThemeMode.LIGHT
-
-                    raiz.update()
 
             raiz.appbar = ft.AppBar(
                 title=nombre,
@@ -140,12 +134,28 @@ class Maestro:
             contenedor_login = ft.Container(content=Filas_login, height=623, width=500, bgcolor=colores[3], border_radius=ft.border_radius.all(10), padding=ft.padding.only(top=70))
 
             raiz.add(contenedor_login)
-            # __________________________________________________________________________
+
+            #_______________________________SUB MENUS______________________________________
+            def Menu0():
+                print("Menu0")
+            def Menu1():
+                print("Menu1")
+            def Menu2():
+                print("Menu2")
+            def Menu3():
+                print("Menu3")
+            def Menu4():
+                print("Menu4")
+            
+            def Selector(a):
+
+                Indices_menus = {0:Menu0,1:Menu1,2:Menu2,3:Menu3,4:Menu4}
+                Indices_menus[a]()
+            # ________________________________MENU__________________________________________
             def Menu():
                 raiz.window_width = 1000
                 raiz.controls.pop()
-                raiz.theme_mode = ft.ThemeMode.LIGHT
-
+                raiz.bgcolor = colores[1]
 
                 rail = ft.NavigationRail(
                     selected_index=0,
@@ -153,28 +163,33 @@ class Maestro:
                     min_width=100,
                     min_extended_width=400,
                     group_alignment=-0.9,
+                    bgcolor=colores[1],
+                    
                     destinations=[
                         ft.NavigationRailDestination(
-                            icon=ft.icons.FAVORITE_BORDER, selected_icon=ft.icons.PEOPLE, label="First"
+                            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+                            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+                            label_content=ft.Text("peras",color=ft.colors.BLACK)
                         ),
                         ft.NavigationRailDestination(
-                            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER),
-                            selected_icon_content=ft.Icon(ft.icons.BOOKMARK),
-                            label="Second",
+                            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+                            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+                            label_content=ft.Text("nose",color=ft.colors.BLACK)
                         ),
                         ft.NavigationRailDestination(
-                            icon=ft.icons.SETTINGS_OUTLINED,
-                            selected_icon_content=ft.Icon(ft.icons.SETTINGS),
-                            label_content=ft.Text("Settings"),
+                            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+                            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+                            label_content=ft.Text("Settings",color=ft.colors.BLACK),
                         ),
                     ],
-                    on_change=lambda e: print("Selected destination:", e.control.selected_index),
+                    on_change=lambda e:Selector(e.control.selected_index),
+                    
                 )
+     
                 raiz.add(ft.Row(
                         [
                             rail,
                             ft.VerticalDivider(width=1),
-                            ft.Column([ ft.Text("Body!")], alignment=ft.MainAxisAlignment.START, expand=True),
                         ],
                         expand=True,
                     )
