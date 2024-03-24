@@ -64,19 +64,22 @@ class Maestro:
                 cual = 2
         
             def logear(e):
+                global Nivel
                 z =  login(User.value,Password.value)
-                if z:
-                    Menu()
-                else:
-                    Menu()
-                    """dlg = ft.AlertDialog(
+                print(z)
+                try:
+                    if z[0]:
+                        Nivel = int(z[1])
+                        Menu()
+                except TypeError: 
+                    dlg = ft.AlertDialog(
                     title=ft.Text("Usuario Incorrecto"), on_dismiss=lambda e: print("Dialog dismissed!")
                     )
                     def open_dlg(e):
                         raiz.dialog = dlg
                         dlg.open = True
                         raiz.update()
-                    open_dlg(e)"""
+                    open_dlg(e)
 
             def EnEs(e):
                 global cual
@@ -148,11 +151,45 @@ class Maestro:
                 print("Menu4")
             
             def Selector(a):
-
                 Indices_menus = {0:Menu0,1:Menu1,2:Menu2,3:Menu3,4:Menu4}
                 Indices_menus[a]()
+            #_____________________________formatos de los sub menus_________________________
+                
             # ________________________________MENU__________________________________________
             def Menu():
+                formatsubmenus=[]
+                listofsubmenus=[
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+                    label_content=ft.Text("1",color=ft.colors.BLACK)
+                ),
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+                    label_content=ft.Text("2",color=ft.colors.BLACK)
+                ),
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+                    label_content=ft.Text("3",color=ft.colors.BLACK),
+                ),
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+                    label_content=ft.Text("4",color=ft.colors.BLACK),
+                ),
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+                    label_content=ft.Text("5",color=ft.colors.BLACK),
+                )]
+
+                for i in range(Nivel):
+
+                    formatsubmenus.append(listofsubmenus[i])
+
+
                 raiz.window_width = 1000
                 raiz.controls.pop()
                 raiz.bgcolor = colores[1]
@@ -164,24 +201,7 @@ class Maestro:
                     min_extended_width=400,
                     group_alignment=-0.9,
                     bgcolor=colores[1],
-                    
-                    destinations=[
-                        ft.NavigationRailDestination(
-                            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
-                            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
-                            label_content=ft.Text("peras",color=ft.colors.BLACK)
-                        ),
-                        ft.NavigationRailDestination(
-                            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
-                            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
-                            label_content=ft.Text("nose",color=ft.colors.BLACK)
-                        ),
-                        ft.NavigationRailDestination(
-                            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
-                            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
-                            label_content=ft.Text("Settings",color=ft.colors.BLACK),
-                        ),
-                    ],
+                    destinations=formatsubmenus,                   
                     on_change=lambda e:Selector(e.control.selected_index),
                     
                 )

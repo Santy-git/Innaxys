@@ -113,7 +113,6 @@ def creardb():
     con.close()
 
 def login(usuario, contraseña):
-    print("hola")
     con = s.connect("GestionHotel.db")
 
     # creo el cursor
@@ -126,6 +125,7 @@ def login(usuario, contraseña):
         print(result[i][0])
         print(result[i][1])
         if str(usuario) == str(result[i][0]) and str(contraseña) == str(result[i][1]):
-            return True
+            return True ,result[i][2]
     print(result)
+
     
