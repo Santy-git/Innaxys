@@ -11,16 +11,13 @@
     --bg-barra:#121c14;
 
     /* Es el color de los botones */
-    --bg-botones:#c5d5c6;
+    --bg-botones:rgb(157, 184, 160);
 
     /* el color del titulo arriba de la imagen */
     --fg-header:rgb(255, 255, 255);
 
     /* El color de fondo del apartado "Quienes somos" */
-    --bg-quienesSomos:rgb(214, 211, 209, 1);
-
-    /* El color de fondo del apartado "Qué ofrecemos" */
-    --bg-ofrecemos:rgb(214, 211, 209, 1);
+    --bg-section:248, 249, 250;
 }
 
 html {
@@ -43,6 +40,12 @@ p {
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-style: normal;
+}
+
+h2{
+    font-family: "Epilogue", sans-serif;
+    font-weight: bolder;
+    font-size: 2rem;
 }
 
 .containerPrincipio {
@@ -247,7 +250,7 @@ transform: rotate(180deg);
     align-items: center;
     justify-content: space-between;
     padding: 5rem 5% 5rem 5%;
-    background: var(--bg-quienesSomos);
+    background: var(--bg-section);
     border-top: rgba(123, 118, 118, 0.4) 2px solid;
     border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
     height: auto;
@@ -261,11 +264,6 @@ transform: rotate(180deg);
     max-width: 50%;
 }
 
-.containerSomos h2{
-    font-weight: bolder;
-    font-size: 2rem;
-}
-
 #textoSomos {
     margin-top: 2rem;
 }
@@ -277,7 +275,7 @@ transform: rotate(180deg);
     align-items: center;
     justify-content: space-between;
     padding: 5rem 0 5rem 0;
-    background-color: var(--bg-ofrecemos);
+    background-color: var(--bg-section);
     border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
     height: auto;
     gap: 2rem;
@@ -305,3 +303,70 @@ transform: rotate(180deg);
     height: auto;
     border-radius: .7rem;
 }
+
+/* beneficios */
+
+.containerTercerItem {
+    padding: 2rem;
+    background-color: var(--bg-section);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+   }
+   
+   .containerTercerItem h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+   }
+   
+   .benefits-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+   }
+   
+   .benefits-list li {
+    font-family: 'Nunito';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-botones);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    max-width: fit-content;
+   }
+   
+   .benefit-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   }
+   
+   .benefit-title {
+    font-family: 'epilogue';
+    font-weight: bold;
+    margin-bottom: .5rem;
+
+   }
+   
+   .benefit-description {
+    display: none;
+    margin-top: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+   }
+   
+   .benefit-description.active {
+    display: block;
+    opacity: 1;
+   }
+   
