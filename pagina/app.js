@@ -13,3 +13,9 @@ document.querySelectorAll(".benefits-list li").forEach(function (item) {
     this.querySelector(".benefit-description").style.opacity = "1";
   });
 });
+
+function scrollToSection(sectionId) {
+  document.getElementById(sectionId).scrollIntoView({
+    behavior: "smooth",
+  });
+}

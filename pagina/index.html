@@ -48,27 +48,28 @@
       <div class="container">
         <div class="containerButtons">
           <div class="contBotonTexto">
-            <div class="somos">
+            <div class="somos" onclick="scrollToSection('quienes-somos')">
               <i class="fa-solid fa-user"></i>
             </div>
             <p>¿Quienes somos?</p>
           </div>
+
           <div class="contBotonTexto">
-            <div class="ofrecemos">
+            <div class="ofrecemos" onclick="scrollToSection('que-ofrecemos')">
               <i class="fa-solid fa-handshake"></i>
             </div>
             <p>¿Qué ofrecemos?</p>
           </div>
 
           <div class="contBotonTexto">
-            <div class="beneficios">
+            <div class="beneficios" onclick="scrollToSection('beneficios')">
               <i class="fa-solid fa-list-ul"></i>
             </div>
             <p>Beneficios</p>
           </div>
 
           <div class="contBotonTexto">
-            <div class="compatibilidad">
+            <div class="compatibilidad" onclick="scrollToSection('')">
               <i class="fa-solid fa-display"></i>
             </div>
             <p>Compatibilidad</p>
@@ -77,8 +78,8 @@
       </div>
     </div>
     <!-- Quienes somos -->
-    <section class="containerPrimerItem">
-      <div class="imagenSomos"> 
+    <section class="containerPrimerItem" id="quienes-somos">
+      <div class="imagenSomos">
         <img src="rsc/axys.png" alt="imagen de quienes somos" />
       </div>
       <div class="containerSomos">
@@ -97,7 +98,7 @@
       </div>
     </section>
     <!-- Que ofrecemos -->
-    <section class="containerSegundoItem">
+    <section class="containerSegundoItem" id="que-ofrecemos">
       <!-- un div para cada item que pongamos -->
       <div class="tituloOfrecemos">
         <h2>¿Qué ofrecemos?</h2>
@@ -128,7 +129,7 @@
       </div>
     </section>
     <!-- Beneficios -->
-    <section class="containerTercerItem">
+    <section class="containerTercerItem" id="beneficios">
       <div>
         <h2>Beneficios</h2>
       </div>

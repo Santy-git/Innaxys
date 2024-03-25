@@ -24,6 +24,7 @@ html {
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
     scrollbar-width: none;
+    scroll-behavior: smooth;
 }
 
 * {
@@ -202,6 +203,10 @@ transform: rotate(180deg);
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+.contBotonTexto a{
+    text-decoration: none;
 }
 
 /* los botones */
