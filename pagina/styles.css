@@ -49,13 +49,13 @@ h2{
 }
 
 .containerPrincipio {
-    height: 100vh;
+    height: 100svh;
 }
 
 .barra {
     margin: 0;
     background-color: var(--bg-barra);
-    height: 8vh;
+    height: 10svh;
 }
 
 nav {
@@ -144,7 +144,7 @@ transform: rotate(180deg);
 
 .imagenHotel {
     width: 100%; 
-    height: 70vh; /* Ajusta la altura a un valor específico o porcentaje */
+    height: 68svh; /* Ajusta la altura a un valor específico o porcentaje */
     object-fit: cover;
     filter: brightness(70%);
 }
@@ -186,7 +186,7 @@ transform: rotate(180deg);
     display: flex;
     align-items: center;
     background-color: var(--bg-botones);
-    height: 22vh;
+    height: 22svh;
 }
 
 .containerButtons {
@@ -201,7 +201,7 @@ transform: rotate(180deg);
 .contBotonTexto {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 /* los botones */
@@ -253,7 +253,7 @@ transform: rotate(180deg);
     background: var(--bg-section);
     border-top: rgba(123, 118, 118, 0.4) 2px solid;
     border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
-    height: auto;
+    min-height: 100svh;
 }
 
 .containerSomos{
@@ -264,9 +264,22 @@ transform: rotate(180deg);
     max-width: 50%;
 }
 
+.imagenSomos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    max-width: 50%;
+}
+
+.imagenSomos img{
+    max-width: 100%;
+    height: auto;
+}
 #textoSomos {
     margin-top: 2rem;
 }
+
 
 /* la parte de que ofrecemos */
 .containerSegundoItem{
