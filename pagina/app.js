@@ -1,16 +1,17 @@
-document.querySelectorAll(".benefits-list li").forEach(function (item) {
-  item.addEventListener("click", function () {
-    // cierra la descripción cuando se clickea otro
-    document.querySelectorAll(".benefit-description").forEach(function (desc) {
-      if (desc.style.display === "block") {
-        desc.style.display = "none";
-        desc.style.opacity = "0";
-      }
+const benefitDescriptions = document.querySelectorAll(".benefit-description");
+
+document.querySelectorAll(".benefits-list li").forEach((item) => {
+  item.addEventListener("click", () => {
+    // Oculta las descripcion
+    benefitDescriptions.forEach((desc) => {
+      desc.style.display = "none";
+      desc.style.opacity = "0";
     });
 
-    // muestra la descripción cuando se clickea
-    this.querySelector(".benefit-description").style.display = "block";
-    this.querySelector(".benefit-description").style.opacity = "1";
+    //Muestra la descripción
+    const description = item.querySelector(".benefit-description");
+    description.style.display = "block";
+    description.style.opacity = "1";
   });
 });
 
