@@ -73,14 +73,15 @@ h3 {
 .barra {
     margin: 0;
     background-color: var(--bg-barra);
-    height: 10svh;
+    min-height: 10svh;
+    padding: 1rem;
 }
 
 nav {
+    display: flex;  
     justify-content: space-between;
     align-items: center;
-    display: flex;  
-    padding: .3rem 2rem;
+    padding: 0 2rem;
 }
 
 /* TODO: cambiar lo del filtro de brillo */
@@ -273,8 +274,6 @@ transform: rotate(180deg);
     justify-content: space-between;
     padding: 5rem 5% 5rem 5%;
     background: var(--bg-section);
-    border-top: rgba(123, 118, 118, 0.4) 2px solid;
-    border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
     min-height: 100svh;
 }
 
@@ -311,7 +310,6 @@ transform: rotate(180deg);
     justify-content: space-between;
     padding: 5rem 0 5rem 0;
     background-color: var(--bg-section);
-    border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
     height: auto;
     gap: 2rem;
 }
@@ -321,7 +319,6 @@ transform: rotate(180deg);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5rem;
 }
 
 .contenedorItems{
@@ -336,7 +333,7 @@ transform: rotate(180deg);
 .contenedorItems img{
     max-width: 50%;
     height: auto;
-    border-radius: .7rem;
+    border-radius: .3rem;
 }
 
 /* beneficios */
@@ -346,14 +343,13 @@ transform: rotate(180deg);
     align-items: center;
     padding: 5rem 0 5rem 0;
     background-color: var(--bg-section);
-    border-bottom: rgb(123, 118, 118, 0.4) 2px solid;
     gap: 5rem;
 }
 
 .containerBeneficios {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Creates 2 columns of equal width */
-    grid-template-rows: repeat(2, 1fr); /* Creates 2 rows of equal height */
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, 1fr);
     gap: 5rem 0rem;
     align-items: start;
 }
@@ -370,7 +366,7 @@ transform: rotate(180deg);
 .benefitItem img {
     max-width: 50%;
     height: auto;
-    border-radius: .7rem;;
+    border-radius: .3rem;;
 }
 
 .contTexto {
@@ -391,4 +387,11 @@ transform: rotate(180deg);
     text-align: center;
     font-size: .85rem;
     line-height: 1.35rem;
+}
+
+/* compatibilida */
+.containerCuartoItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
