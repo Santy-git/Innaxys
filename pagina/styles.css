@@ -364,7 +364,7 @@ background-color: #f1f1f1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5rem 0 5rem 0;
+    padding: 5rem 5% 5rem 5%;
     background-color: var(--bg-section);
     gap: 5rem;
 }
@@ -418,7 +418,7 @@ background-color: #f1f1f1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 5rem 0 5rem 0;
+    padding: 5rem 5% 5rem 5%;
 }
 
 .sistemasCompatibles {
@@ -432,3 +432,69 @@ background-color: #f1f1f1;
 }
 
 /* compra el software */
+.containerCompra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: solid var(--bg-botones);
+    padding: 5rem 5% 5rem 5%;
+}
+
+.compra{
+    max-width: 30rem;
+    margin: 3rem auto;
+    padding: 3rem;
+    background-color: var(--bg-botones);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+
+label {
+    display: block;
+    margin-bottom: .3rem;
+    font-family: var(--font-p);
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: .7rem;
+    border: 1px solid #ccc;
+    border-radius: .3rem;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: .3rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* copyright */
+.disclaimer {
+    background-color: #f4f4f4;
+    text-align: center;
+    margin-top: 1rem;
+    padding: 1rem 0;
+    font-size: .7rem;
+}
+

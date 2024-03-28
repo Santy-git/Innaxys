@@ -203,6 +203,32 @@
       </div>
       <p>Nuestro sistema es compatible con todos los dispositivos</p>
     </section>
-  </body>
+    <!-- Comprar el software -->
+    <section class="containerCompra">
+      <h2>Compra Innaxys</h2>
+      <div class="compra">
+        <h3>Solicitar mas información</h3>
+        <form id="compraForm">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" rows="4" cols="50" placeholder="Escribe aquí tu mensaje..."></textarea>
+            </div>
+            <button type="submit id="buyNow" onclick="redirectToBuyPage()">Enviar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="disclaimer">
+      <p>Copyright &copy; 2024 Innaxys. Todos los derechos reservados. | Powered by Innaxys</p>
+    </section>
   <script src="app.js"></script>
 </html>
