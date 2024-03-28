@@ -22,21 +22,21 @@
           </div>
 
           <!-- contactos -->
-          <input type="checkbox" id="checkbox" />
+          <input type="checkbox" id="checkbox" onclick="toggleContactMenu()" />
           <label for="checkbox" class="toggle">
             <div class="bars" id="bar1"></div>
             <div class="bars" id="bar2"></div>
             <div class="bars" id="bar3"></div>
           </label>
-          <div class="overlay" id="overlay"></div> <!-- Div para el fondo oscuro -->
-          <div class="contact-bar" id="contactBar">
-            <p>Contacto:</p>
-            <p>3541-55 8609</p>
-            <p>Email:</p>
-            <p>info.innaxys@gmail.com</p>
+
+          <div id="contact-menu" style="display: none">
+            <a href="#">Email</a>
+            <a href="#">Telefono</a>
+            <a href="#">Otra cosa aaa</a>
           </div>
         </nav>
       </div>
+
       <!-- Imagen con la frase de la empresa -->
       <div class="containerImagen">
         <img
@@ -195,6 +195,13 @@
       <div>
         <h2>Compatibilidad</h2>
       </div>
+      <div class="sistemasCompatibles">
+        <i class="fa-solid fa-laptop" title="Laptop"></i>
+        <i class="fa-solid fa-desktop" title="Computadora"></i>
+        <i class="fa-brands fa-android" title="Android"></i>
+        <i class="fa-brands fa-apple" title="Apple"></i>
+      </div>
+      <p>Nuestro sistema es compatible con todos los dispositivos</p>
     </section>
   </body>
   <script src="app.js"></script>
