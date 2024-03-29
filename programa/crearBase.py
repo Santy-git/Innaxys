@@ -43,7 +43,7 @@ def creardb():
     );''',
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS reserva (
-        codReserva int primary key,
+        codReserva INTEGER PRIMARY KEY AUTOINCREMENT,
         codCliente int not null,
         codEmpleado int not null,
         cant_hab int not null,
@@ -102,7 +102,7 @@ def creardb():
     # realizo los cambios
     con.commit()
     try:
-        sql = "INSERT INTO login (codLog, password, nivel) VALUES (0,'innaxys',5)"
+        sql = "INSERT INTO login (codLog, password, nivel) VALUES (0,'0',5)"
         con.execute(sql)
         con.commit()
     except s.IntegrityError:
@@ -120,10 +120,17 @@ def login(usuario, contraseña):
     result=cur.fetchall()
 
     for i in range(len(result)):
-        print(result[i][0])
-        print(result[i][1])
         if str(usuario) == str(result[i][0]) and str(contraseña) == str(result[i][1]):
             return True ,result[i][2]
     print(result)
     con.close()
+
+
+def Reservar(dni,dni_emp,hab,coch,fecha,desc):
+    con = s.connect("GestionHotel.db")
+    cur = con.cursor()
+    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, cant_hab, cant_cochera, fechaReserva, descr) VALUES (?,?,?,?,?,?)",(dni,dni_emp,hab,coch,fecha,desc))
+    con.commit()
+    con.close()
+    return True
 

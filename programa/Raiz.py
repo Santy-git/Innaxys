@@ -4,6 +4,7 @@ from crearBase import *
 import flet as ft
 from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
 from flet_core.control_event import ControlEvent
+from datetime import datetime
 
 # ____________________________________________PALETA_DE_COLORES____________________________________________
 
@@ -63,6 +64,7 @@ class Maestro:
         
             def logear(e):
                 global Nivel
+                global z
                 z =  login(User.value,Password.value)
                 try:
                     if z[0]:
@@ -138,15 +140,41 @@ class Maestro:
 
             #_______________________________SUB MENUS______________________________________
             def Menu0():
-                #
-                cod_cliente = ft.TextField(label="Codigo de cliente",width=300)
-                cantidad = ft.TextField(label="Cantidad de habitaciones",width=300)
+                def Reservar_Aux(a,b,c,d,e,f):
+                    Verificar = Reservar(a,b,c,d,e,f)
+                    if Verificar:
+                        dlg = ft.AlertDialog(
+                        title=ft.Text("Datos Ingresados")
+                        )
+                        def open_dlg(e):
+                            raiz.dialog = dlg
+                            dlg.open = True
+                            raiz.update()
+                        open_dlg(e)
+                        Container_menus.clean()
+                        Menu0()
 
-                Container_menus.alignment = ft.alignment.center
-                Container_menus.alignment = ft.alignment.bottom_left
-                Container_menus.update()
-
+                cod_cliente = ft.TextField(label="Dni de cliente",width=300)
+                cantidad_hab = ft.TextField(label="Cantidad de habitaciones",width=300)
+                cantidad_coch = ft.TextField(label="Cantidad de cocheras",width=300)
+                fecha_res = datetime.now().date()
+                desc = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
+                subir = ft.CupertinoButton(
+                    content=ft.Text("Subir", color=ft.colors.BLACK),
+                    bgcolor=colores[1],
+                    border_radius=ft.border_radius.all(15),
+                    on_click=lambda _:Reservar_Aux(cod_cliente.value,z[0],cantidad_hab.value,cantidad_coch.value,fecha_res,desc.value))
                 
+                Container_menus.content = ft.Column (
+                    [cod_cliente,
+                    cantidad_hab,
+                    cantidad_coch,
+                    desc,
+                    subir],
+                    expand= True
+                )
+                Container_menus.alignment = ft.alignment.center
+                Container_menus.update()
 
             def Menu1():
                 pass
@@ -204,7 +232,6 @@ class Maestro:
                 )]
 
                 for i in range(Nivel):
-
                     formatsubmenus.append(formatsubmenusAux[i])
 
             #______________________Menu__________________________________
