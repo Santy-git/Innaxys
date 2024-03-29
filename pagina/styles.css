@@ -153,22 +153,21 @@ transform: rotate(180deg);
 
 .contact-bar {
 position: fixed;
-top: 100;
-right: -300px; /* Inicialmente fuera de la pantalla */
-width: 300px; /* Ancho de la barra de contactos */
-height: 22%;
-background-color: white;
-z-index: 100;
+top: 0;
+right: -700px; /* Inicialmente fuera de la pantalla */
+width: 700px; /* Ancho de la barra de contactos */
+height: 11%;
+background-color: hsla(0, 0%, 100%, 0);
 transition: right 0.5s ease-in-out; /* Transición para el desplazamiento lateral */
 overflow: hidden;
-padding: 20px;
+padding: 32px;
 }
 
 .contact-bar p {
-margin-bottom: 10px;
+color: white;
 }
 
-  /* --------------------- */
+/* --------------------- */
 
 .containerImagen {
 display: flex;
