@@ -46,8 +46,7 @@ def creardb():
         codReserva INTEGER PRIMARY KEY AUTOINCREMENT,
         codCliente int not null,
         codEmpleado int not null,
-        cant_hab int not null,
-        cant_cochera int not null,
+        cant_per int not null,
         fechaReserva date not null,
         descr varchar(255),
         foreign key (codCliente) references cliente(dni_cli),
@@ -126,10 +125,18 @@ def login(usuario, contraseña):
     con.close()
 
 
-def Reservar(dni,dni_emp,hab,coch,fecha,desc):
+def Reservar(dni,dni_emp,per,fecha,desc):
     con = s.connect("GestionHotel.db")
     cur = con.cursor()
-    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, cant_hab, cant_cochera, fechaReserva, descr) VALUES (?,?,?,?,?,?)",(dni,dni_emp,hab,coch,fecha,desc))
+    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, cant_per, fechaReserva, descr) VALUES (?,?,?,?,?)",(dni,dni_emp,per,fecha,desc))
+    con.commit()
+    con.close()
+    return True
+
+def Cli_add(a,b,c,d):
+    con = s.connect("GestionHotel.db")
+    cur = con.cursor()
+    cur.execute("INSERT INTO cliente (dni_cli, nombre, email, descr) VALUES (?,?,?,?)",(a,b,c,d))
     con.commit()
     con.close()
     return True

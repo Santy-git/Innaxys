@@ -140,8 +140,52 @@ class Maestro:
 
             #_______________________________SUB MENUS______________________________________
             def Menu0():
-                def Reservar_Aux(a,b,c,d,e,f):
-                    Verificar = Reservar(a,b,c,d,e,f)
+                def Reservar_Aux(a,b,c,d,e):
+                    Verificar = Reservar(a,b,c,d,e)
+                    if Verificar:
+                        dlg = ft.AlertDialog(
+                        title=ft.Text("Datos Ingresados")
+                        )
+                        def open_dlg(e):
+                            raiz.dialog = dlg
+                            dlg.open = True
+                            raiz.update()
+                        open_dlg(e)
+                
+                    Container_menus.clean()
+                    Ingreso_Res = ft.TextField(label="Ingreso (dd/mm/aaaa)")
+                    Egreso_Res = ft.TextField(label="Egreso (dd/mm/aaaa)")
+                    Container_menus.content = ft.Row([Ingreso_Res,Egreso_Res])
+                    Container_menus.alignment = ft.alignment.top_center
+                    Container_menus.update()
+
+                        
+                        #aca
+
+                cod_cliente = ft.TextField(label="Dni de cliente",width=300)
+                cantidad_per = ft.TextField(label="Cantidad de personas",width=300)
+                fecha_res = datetime.now().date()
+                desc = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
+                subir = ft.CupertinoButton(
+                    content=ft.Text("Subir", color=ft.colors.BLACK),
+                    bgcolor=colores[1],
+                    border_radius=ft.border_radius.all(15),
+                    on_click=lambda _:Reservar_Aux(cod_cliente.value,z[0],cantidad_per.value,fecha_res,desc.value))
+                
+                Container_menus.content = ft.Column (
+                    [cod_cliente,
+                    cantidad_per,
+                    desc,
+                    subir],
+                    expand= True
+                )
+                Container_menus.alignment = ft.alignment.center
+                Container_menus.update()
+
+            def Menu1():
+                #Ingresar cliente
+                def Cli_Aux(a,b,c,d):
+                    Verificar = Cli_add(a,b,c,d)
                     if Verificar:
                         dlg = ft.AlertDialog(
                         title=ft.Text("Datos Ingresados")
@@ -152,33 +196,28 @@ class Maestro:
                             raiz.update()
                         open_dlg(e)
                         Container_menus.clean()
-                        Menu0()
+                        Menu1()
 
                 cod_cliente = ft.TextField(label="Dni de cliente",width=300)
-                cantidad_hab = ft.TextField(label="Cantidad de habitaciones",width=300)
-                cantidad_coch = ft.TextField(label="Cantidad de cocheras",width=300)
-                fecha_res = datetime.now().date()
-                desc = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
-                subir = ft.CupertinoButton(
+                nom_cli = ft.TextField(label="Nombre",width=300)
+                email_cli = ft.TextField(label="Email",width=300)
+                desc_cli = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
+                subir_cli = ft.CupertinoButton(
                     content=ft.Text("Subir", color=ft.colors.BLACK),
                     bgcolor=colores[1],
                     border_radius=ft.border_radius.all(15),
-                    on_click=lambda _:Reservar_Aux(cod_cliente.value,z[0],cantidad_hab.value,cantidad_coch.value,fecha_res,desc.value))
+                    on_click=lambda _:Cli_Aux(cod_cliente.value,nom_cli.value,email_cli.value,desc_cli.value))
                 
                 Container_menus.content = ft.Column (
                     [cod_cliente,
-                    cantidad_hab,
-                    cantidad_coch,
-                    desc,
-                    subir],
+                    nom_cli,
+                    email_cli,
+                    desc_cli,
+                    subir_cli],
                     expand= True
                 )
                 Container_menus.alignment = ft.alignment.center
                 Container_menus.update()
-
-            def Menu1():
-                pass
-
                 
             def Menu2():
                 print("Menu2")
