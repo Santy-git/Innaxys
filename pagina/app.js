@@ -4,28 +4,12 @@ function scrollToSection(sectionId) {
   });
 }
 
-function toggleContactMenu() {
-  var menu = document.getElementById("contact-menu");
-  if (menu.style.display === "none") {
-    menu.style.display = "block";
+document.getElementById("checkbox").addEventListener("change", function() {
+  var contactBar = document.getElementById("contactBar");
+  var overlay = document.getElementById("overlay");
+  if (this.checked) {
+    contactBar.style.right = "0"; // Desplazar la barra hacia la izquierda
   } else {
-    menu.style.display = "none";
+    contactBar.style.right = "-300px"; // Ocultar la barra hacia la derecha
   }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  document
-    .getElementById("formularioCompra")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-      alert(
-        "¡Gracias por su interés en Innaxys! Nos pondremos en contacto con usted pronto."
-      );
-      this.reset();
-    });
 });
-
-function redirectToBuyPage() {
-  // Redirige al usuario a la página de compra
-  window.location.href = "https://www.example.com/buy";
-}
