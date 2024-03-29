@@ -64,7 +64,6 @@ class Maestro:
             def logear(e):
                 global Nivel
                 z =  login(User.value,Password.value)
-                print(z)
                 try:
                     if z[0]:
                         Nivel = int(z[1])
@@ -177,7 +176,7 @@ class Maestro:
                 ])
 
                 formatsubmenus=[]
-                listofsubmenus=[
+                formatsubmenusAux=[
                 ft.NavigationRailDestination(
                     icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
                     selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
@@ -206,9 +205,9 @@ class Maestro:
 
                 for i in range(Nivel):
 
-                    formatsubmenus.append(listofsubmenus[i])
+                    formatsubmenus.append(formatsubmenusAux[i])
 
-
+            #______________________Menu__________________________________
                 raiz.window_width = 1000
                 raiz.controls.pop()
                 raiz.bgcolor = colores[1]
