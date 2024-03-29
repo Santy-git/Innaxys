@@ -55,8 +55,7 @@ class Maestro:
             raiz.window_frameless = True
             raiz.window_resizable = False
             raiz.padding = 10
-            # -------------------------------------
-            
+            # -------------------------------------            
             def OFF(e):    
                 global cual    
                 raiz.window_destroy()
@@ -70,6 +69,7 @@ class Maestro:
                     if z[0]:
                         Nivel = int(z[1])
                         Menu()
+                        Menu0()
                 except TypeError: 
                     dlg = ft.AlertDialog(
                     title=ft.Text("Usuario Incorrecto"), on_dismiss=lambda e: print("Dialog dismissed!")
@@ -139,9 +139,23 @@ class Maestro:
 
             #_______________________________SUB MENUS______________________________________
             def Menu0():
-                print("Menu0")
+
+                tb = ft.TextField(
+                    label="test",
+                    width=300
+                )
+
+                Container_menus.content = tb
+                Container_menus.alignment = ft.alignment.center
+                Container_menus.alignment = ft.alignment.bottom_left
+                Container_menus.update()
+
+                
+
             def Menu1():
-                print("Menu1")
+                pass
+
+                
             def Menu2():
                 print("Menu2")
             def Menu3():
@@ -156,6 +170,15 @@ class Maestro:
                 
             # ________________________________MENU__________________________________________
             def Menu():
+                global Container_menus
+                raiz.appbar = ft.AppBar(
+                title=nombre,
+                center_title=True,
+                bgcolor=colores2[8],
+                actions=[
+                    ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,on_click=OFF, icon_size=35,),
+                ])
+
                 formatsubmenus=[]
                 listofsubmenus=[
                 ft.NavigationRailDestination(
@@ -204,15 +227,18 @@ class Maestro:
                     on_change=lambda e:Selector(e.control.selected_index),
                     
                 )
+                Container_menus = ft.Container(width=850,height=650,bgcolor=colores[3])
      
                 raiz.add(ft.Row(
                         [
                             rail,
                             ft.VerticalDivider(width=1),
+                            Container_menus
                         ],
                         expand=True,
                     )
                 )
+                
 
         ft.app(target=main)
 
