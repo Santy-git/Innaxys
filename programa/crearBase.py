@@ -5,71 +5,65 @@ import sqlite3 as s
 
 def creardb():
     tablas = [
-        '''CREATE TABLE IF NOT EXISTS hotel (
-        nombre varchar(50) not null,
-        hab number(10) not null,
-        pisos number(10) not null,
-        capac number(10) not null
-    );''',
-
-        '''CREATE TABLE IF NOT EXISTS cochera (
-        codCochera int primary key,
-        estado varchar(50) not null
-    );''',
-
         '''CREATE TABLE IF NOT EXISTS login(
         codLog int primary key,
         password varchar(30) not null,
         nivel varchar(20) not null
     );''',
-
-        '''CREATE TABLE IF NOT EXISTS empleado (
-        codEmpleado int primary key,
+#_____________________________________________________________________
+    '''CREATE TABLE IF NOT EXISTS empleado (
+        dni_emp int primary key,
         nombre varchar(100) not null,
-        dni varchar(20) not null,
         email varchar(100) not null,
         telefono varchar(20) not null,
         puesto varchar(100) not null,
         codLog int not null,
         foreign key (codLog) references login(codLog)
     );''',
-
-        '''CREATE TABLE IF NOT EXISTS cliente (
-        codCliente int primary key,
-        nombre varchar(100) not null,
-        dni varchar(20) not null,
-        email varchar(100),
-        descr varchar(255)
+#_____________________________________________________________________
+    '''CREATE TABLE IF NOT EXISTS cochera (
+        codCochera int primary key,
+        estado varchar(50) not null
     );''',
-
-        '''CREATE TABLE IF NOT EXISTS habitacion (
+#_____________________________________________________________________
+    '''CREATE TABLE IF NOT EXISTS habitacion (
         codHab int primary key,
         piso number(10) not null,
         camaMatr number(10) not null,
-        camaInd number(10) not null
+        camaInd number(10) not null,
+        costo number(30) not null,
+        estado varchar(50) not null
     );''',
-
-        '''CREATE TABLE IF NOT EXISTS historial (
+#_____________________________________________________________________
+        '''CREATE TABLE IF NOT EXISTS cliente (
+        dni_cli int primary key,
+        nombre varchar(100) not null,
+        email varchar(100),
+        descr varchar(255)
+    );''',
+#_____________________________________________________________________
+    '''CREATE TABLE IF NOT EXISTS reserva (
+        codReserva int primary key,
+        codCliente int not null,
+        codEmpleado int not null,
+        cant_hab int not null,
+        cant_cochera int not null,
+        fechaReserva date not null,
+        descr varchar(255),
+        foreign key (codCliente) references cliente(dni_cli),
+        foreign key (codEmpleado) references empleado(dni_emp)
+    );''',
+#_____________________________________________________________________
+    '''CREATE TABLE IF NOT EXISTS historial (
         codHistorial int primary key,
         codReserva int not null,
         codEmpleado int not null,
         descr varchar(255),
         foreign key (codReserva) references reserva(codReserva),
-        foreign key (codEmpleado) references empleado(codEmpleado)
+        foreign key (codEmpleado) references empleado(dni_emp)
     );''',
-
-        '''CREATE TABLE IF NOT EXISTS reserva (
-        codReserva int primary key,
-        codCliente int not null,
-        codEmpleado int not null,
-        cantidad int not null,
-        fechaReserva date not null,
-        descr varchar(255),
-        foreign key (codCliente) references cliente(codCliente),
-        foreign key (codEmpleado) references empleado(codEmpleado)
-    );''',
-
-        '''CREATE TABLE IF NOT EXISTS resHab(
+#_____________________________________________________________________
+    '''CREATE TABLE IF NOT EXISTS resHab(
         codReshab int primary key,
         codHab int not null,
         codReserva int not null,
@@ -81,15 +75,19 @@ def creardb():
         foreign key (codHab) references habitacion(codHab),
         foreign key (codReserva) references reserva(codReserva)
     );''',
-
+#_____________________________________________________________________
         '''CREATE TABLE IF NOT EXISTS resCoch(
         codRescoch int primary key,
         codReserva int not null,
         codCochera int not null,
+        fechaIngreso date not null,
+        fechaEgreso date not null,
         foreign key (codCochera) references cochera(codCochera),
         foreign key (codReserva) references reserva(codReserva)
     );'''
     ]
+#_____________________________________________________________________
+
 
     # me conecto a la base de datos
     con = s.connect("GestionHotel.db")
@@ -127,5 +125,5 @@ def login(usuario, contraseña):
         if str(usuario) == str(result[i][0]) and str(contraseña) == str(result[i][1]):
             return True ,result[i][2]
     print(result)
+    con.close()
 
-    

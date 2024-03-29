@@ -139,13 +139,10 @@ class Maestro:
 
             #_______________________________SUB MENUS______________________________________
             def Menu0():
+                #
+                cod_cliente = ft.TextField(label="Codigo de cliente",width=300)
+                cantidad = ft.TextField(label="Cantidad de habitaciones",width=300)
 
-                tb = ft.TextField(
-                    label="test",
-                    width=300
-                )
-
-                Container_menus.content = tb
                 Container_menus.alignment = ft.alignment.center
                 Container_menus.alignment = ft.alignment.bottom_left
                 Container_menus.update()
