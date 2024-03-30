@@ -153,13 +153,20 @@ class Maestro:
                         open_dlg(e)
                 
                     Container_menus.clean()
-                    Ingreso_Res = ft.TextField(label="Ingreso (dd/mm/aaaa)")
-                    Egreso_Res = ft.TextField(label="Egreso (dd/mm/aaaa)")
-                    Container_menus.content = ft.Row([Ingreso_Res,Egreso_Res])
+                    Ingreso_Res = ft.TextField(label="Ingreso (dd-mm-aaaa)")
+                    Egreso_Res = ft.TextField(label="Egreso (dd-mm-aaaa)")
+                    persona = ft.TextField(label="Cantidad de personas",value=0)
+                    habitacion = ft.TextField(label="Cantidad de hab",value=0)
+                    enviar = ft.TextButton(text="Comprobar",on_click=lambda _:Consulta_hab(Ingreso_Res.value,Egreso_Res.value,persona.value,habitacion.value))
+                    
+                    a=ft.Row([Ingreso_Res,Egreso_Res])
+                    b=ft.Row([persona,habitacion,enviar])
+                    Container_menus.content = ft.Column([a,b])
+                    
                     Container_menus.alignment = ft.alignment.top_center
+                    
                     Container_menus.update()
-
-                        
+                    
                         #aca
 
                 cod_cliente = ft.TextField(label="Dni de cliente",width=300)
@@ -218,14 +225,32 @@ class Maestro:
                 )
                 Container_menus.alignment = ft.alignment.center
                 Container_menus.update()
-                
+
+
+
+
+
+
+
+
+
+
             def Menu2():
                 print("Menu2")
             def Menu3():
                 print("Menu3")
             def Menu4():
-                print("Menu4")
+                pass
             
+
+
+
+
+
+
+
+
+
             def Selector(a):
                 Indices_menus = {0:Menu0,1:Menu1,2:Menu2,3:Menu3,4:Menu4}
                 Indices_menus[a]()
