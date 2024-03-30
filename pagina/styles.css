@@ -152,7 +152,7 @@ transform: rotate(180deg);
 }
 
 .contact-bar {
-position: fixed;
+position: absolute;
 top: 0;
 right: -700px; /* Inicialmente fuera de la pantalla */
 width: 700px; /* Ancho de la barra de contactos */
@@ -161,11 +161,36 @@ background-color: hsla(0, 0%, 100%, 0);
 transition: right 0.5s ease-in-out; /* Transición para el desplazamiento lateral */
 overflow: hidden;
 padding: 32px;
+display: flex;
+gap: 4rem;
 }
 
 .contact-bar p {
 color: white;
 }
+
+.color-phone {
+color: white;
+display: flex;
+gap: 1rem;
+align-items: center;
+}
+
+.color-phone i {
+font-size: 20px;
+}
+
+.color-email {
+color: white;
+display: flex;
+gap: 1rem;
+align-items: center;
+}
+
+.color-email i {
+font-size: 25px;
+}
+
 
 /* --------------------- */
 
