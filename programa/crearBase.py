@@ -22,12 +22,12 @@ def creardb():
     );''',
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS cochera (
-        codCochera int primary key,
+        codCochera INTEGER PRIMARY KEY AUTOINCREMENT,
         estado varchar(50) not null
     );''',
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS habitacion (
-        codHab int primary key,
+        codHab INTEGER PRIMARY KEY AUTOINCREMENT,
         piso number(10) not null,
         camaMatr number(10) not null,
         camaInd number(10) not null,
@@ -54,7 +54,7 @@ def creardb():
     );''',
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS historial (
-        codHistorial int primary key,
+        codHistorial INTEGER PRIMARY KEY AUTOINCREMENT,
         codReserva int not null,
         codEmpleado int not null,
         descr varchar(255),
@@ -141,3 +141,12 @@ def Cli_add(a,b,c,d):
     con.close()
     return True
 
+
+def Consulta_hab(ing,eng,hab,per):
+    print(ing,eng,hab,per)
+    con = s.connect("GestionHotel.db")
+    cur = con.cursor()
+    cur.execute("SELECT * FROM resHab WHERE '"+str(ing)+"' >= fechaIngreso and '"+str(eng)+"' <= fechaEgreso")
+
+    z = cur.fetchall()
+    print(z)
