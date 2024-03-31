@@ -23,7 +23,7 @@ def creardb():
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS cochera (
         codCochera INTEGER PRIMARY KEY AUTOINCREMENT,
-        estado varchar(50) not null
+        piso number(10) not null
     );''',
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS habitacion (
@@ -158,14 +158,13 @@ def crear_hab(piso,camamatr,camaind,costo):
     con.close()
     return True
 
-
-
-    cur.execute('''
-                SELECT * FROM habitacion 
-                WHERE codHab NOT IN (
-                SELECT codHab FROM resHab 
-                where fechaIngreso between (10-1-2000 and 30-1-2000) and fechaEgreso not between 22-1-2000 and 23-1-2000)''')
-    
+def crear_coch(piso):
+    con = s.connect("GestionHotel.db")
+    cur = con.cursor()
+    cur.execute("INSERT INTO cochera (piso) VALUES (?)",(piso))
+    con.commit()
+    con.close()
+    return True
 
 
 

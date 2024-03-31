@@ -139,9 +139,9 @@ class Maestro:
 
             #_______________________________SUB MENUS______________________________________
             """
-            Menu 4 Control de empleado
-            
-
+            Menu 0 generar una reserva
+            menu 1 ingresar cliente
+            Menu 4 registro de empleado
             """
 
 
@@ -234,35 +234,73 @@ class Maestro:
                 Container_menus.update()
 
             def Menu2():
-                print("Menu2")
-
+                pass
             def Menu3():
-                print("Menu3")
-                print("entro")
-                #crear habitaciones
-                def crear_hab_aux(a,b,c,d):
-                    validacion = crear_hab(a,b,c,d)
-                    if validacion:
-                        Container_menus.clean()
-                        Menu4()
+                def cochera():
+                    def crear_coch_aux(piso):
+                        validacion = crear_coch(piso)
+                        if validacion:
+                            dlg = ft.AlertDialog(
+                            title=ft.Text("cochera registrada")
+                            )
+                            def open_dlg(e):
+                                raiz.dialog = dlg
+                                dlg.open = True
+                                raiz.update()
+                            open_dlg(e)
+                            Container_menus.clean()
+                            Menu3()
+                    piso_coch = ft.TextField(label="piso")
+                    subir_coch = ft.CupertinoButton(
+                        content=ft.Text("Subir", color=ft.colors.BLACK),
+                        bgcolor=colores[1],
+                        border_radius=ft.border_radius.all(15),
+                        on_click=lambda _:crear_coch_aux(piso_coch.value))
+                    Container_menus.content = ft.Column (
+                        [piso_coch,subir_coch
+                        ],
+                        expand= True
+                    )
+                    Container_menus.update()
 
-                piso = ft.TextField(label="Piso",width=300)
-                camamatr = ft.TextField(label="camas matrimoniales",width=300)
-                camaind = ft.TextField(label="camas individuales",width=300)
-                costo = ft.TextField(label="costo",width=300)
-                subir_cli = ft.CupertinoButton(
-                    content=ft.Text("Subir", color=ft.colors.BLACK),
-                    bgcolor=colores[1],
-                    border_radius=ft.border_radius.all(15),
-                    on_click=lambda _:crear_hab_aux(piso.value,camamatr.value,camaind.value,costo.value))
-                Container_menus.content = ft.Column (
-                    [piso,
-                    camamatr,
-                    camaind,
-                    costo,
-                    subir_cli],
-                    expand= True
-                )
+                def habitacion():
+                    #crear habitaciones
+                    def crear_hab_aux(a,b,c,d):
+                        validacion = crear_hab(a,b,c,d)
+                        if validacion:
+                            dlg = ft.AlertDialog(
+                            title=ft.Text("Habitacion registrada")
+                            )
+                            def open_dlg(e):
+                                raiz.dialog = dlg
+                                dlg.open = True
+                                raiz.update()
+                            open_dlg(e)
+                            Container_menus.clean()
+                            Menu3()
+
+                    piso = ft.TextField(label="Piso",width=300)
+                    camamatr = ft.TextField(label="camas matrimoniales",width=300)
+                    camaind = ft.TextField(label="camas individuales",width=300)
+                    costo = ft.TextField(label="costo",width=300)
+                    subir_cli = ft.CupertinoButton(
+                        content=ft.Text("Subir", color=ft.colors.BLACK),
+                        bgcolor=colores[1],
+                        border_radius=ft.border_radius.all(15),
+                        on_click=lambda _:crear_hab_aux(piso.value,camamatr.value,camaind.value,costo.value))
+                    Container_menus.content = ft.Column (
+                        [piso,
+                        camamatr,
+                        camaind,
+                        costo,
+                        subir_cli],
+                        expand= True
+                    )
+                    Container_menus.update()
+                cocherav = ft.CupertinoButton(text="cochera",width=300,on_click=lambda _:cochera(),bgcolor=colores[5])
+                habitacionv = ft.CupertinoButton(text="habitacion",width=300,on_click=lambda _:habitacion(),bgcolor=colores[5])
+                Container_menus.content = ft.Row([cocherav,habitacionv])
+                Container_menus.alignment = ft.alignment.center
                 Container_menus.update()
             
             def Menu4():
