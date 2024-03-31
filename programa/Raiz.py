@@ -141,54 +141,52 @@ class Maestro:
             """
             Menu 0 generar una reserva
             menu 1 ingresar cliente
+            Menu 3 crear Habitacion y cochera
             Menu 4 registro de empleado
             """
 
 
 
             def Menu0():
-                def Reservar_Aux(a,b,c,d,e):
-                    Verificar = Reservar(a,b,c,d,e)
-                    if Verificar:
-                        dlg = ft.AlertDialog(
-                        title=ft.Text("Datos Ingresados")
-                        )
-                        def open_dlg(e):
-                            raiz.dialog = dlg
-                            dlg.open = True
-                            raiz.update()
-                        open_dlg(e)
-                
-                    Container_menus.clean()
-                    Ingreso_Res = ft.TextField(label="Ingreso (dd-mm-aaaa)")
-                    Egreso_Res = ft.TextField(label="Egreso (dd-mm-aaaa)")
-                    persona = ft.TextField(label="Cantidad de personas",value=0)
-                    habitacion = ft.TextField(label="Cantidad de hab",value=0)
-                    enviar = ft.TextButton(text="Comprobar",on_click=lambda _:Consulta_hab(Ingreso_Res.value,Egreso_Res.value,persona.value,habitacion.value))
-                    
-                    a=ft.Row([Ingreso_Res,Egreso_Res])
-                    b=ft.Row([persona,habitacion,enviar])
-                    Container_menus.content = ft.Column([a,b])
-                    
-                    Container_menus.alignment = ft.alignment.top_center
-                    
-                    Container_menus.update()
-                    
-                    
 
+                def Reservar_Aux(cli,emp,fecha,desc):
+                    Container_menus.clean()
+                    print("hola")
+                    Verificar = Reservar(cli,emp,fecha,desc)
+                    print(Verificar)
+
+                    if Verificar == 1:
+
+                        Container_menus.clean()
+                        Ingreso_Res = ft.TextField(label="Ingreso (dd-mm-aaaa)")
+                        Egreso_Res = ft.TextField(label="Egreso (dd-mm-aaaa)")
+                        consultar = ft.TextButton(text="Consultar",on_click=lambda _:Consulta(Ingreso_Res.value,Egreso_Res.value))
+                        
+                        a=ft.Row([Ingreso_Res,Egreso_Res])
+                        b=ft.Row([consultar])
+                        Container_menus.content = ft.Column([a,b])
+                        Container_menus.alignment = ft.alignment.top_center
+                        
+                        Container_menus.update()
+
+
+                    if Verificar == 2:
+                        #aca poner que el cliente no existe
+                        pass
+                    
+                
+                            
                 cod_cliente = ft.TextField(label="Dni de cliente",width=300)
-                cantidad_per = ft.TextField(label="Cantidad de personas",width=300)
                 fecha_res = datetime.now().date()
                 desc = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
                 subir = ft.CupertinoButton(
                     content=ft.Text("Subir", color=ft.colors.BLACK),
                     bgcolor=colores[1],
                     border_radius=ft.border_radius.all(15),
-                    on_click=lambda _:Reservar_Aux(cod_cliente.value,z[0],cantidad_per.value,fecha_res,desc.value))
+                    on_click=lambda _:Reservar_Aux(cod_cliente.value,z[0],fecha_res,desc.value))
                 
                 Container_menus.content = ft.Column (
                     [cod_cliente,
-                    cantidad_per,
                     desc,
                     subir],
                     expand= True

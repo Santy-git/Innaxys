@@ -45,7 +45,6 @@ def creardb():
         codReserva INTEGER PRIMARY KEY AUTOINCREMENT,
         codCliente int not null,
         codEmpleado int not null,
-        cant_per int not null,
         fechaReserva date not null,
         descr varchar(255),
         foreign key (codCliente) references cliente(dni_cli),
@@ -123,14 +122,38 @@ def login(usuario, contraseña):
     print(result)
     con.close()
 
-
-def Reservar(dni,dni_emp,per,fecha,desc):
+#..........................menu 0.................................
+def Reservar(dni_cli,dni_emp,fecha,desc):
+    val = 0
     con = s.connect("GestionHotel.db")
     cur = con.cursor()
-    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, cant_per, fechaReserva, descr) VALUES (?,?,?,?,?)",(dni,dni_emp,per,fecha,desc))
-    con.commit()
+    cur.execute("SELECT dni_cli from cliente")
+    z = cur.fetchall()
+
+    for i in range(len(z)):
+        if int(dni_cli) == z[i][0]:
+            val = 1
+    if val == 1:
+        cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(dni_cli,dni_emp,fecha,desc))
+        con.commit()
+        con.close()
+        return 1
+    else:
+        return 2
+
+
+def Consulta(ing,eng):
+    val = 0
+    con = s.connect("GestionHotel.db")
+    cur = con.cursor()
+    cur.execute("SELECT * FROM habitacion WHERE codHab NOT IN (SELECT codHab FROM resHab where fechaIngreso between ("+ing+" and "+eng+") and fechaEgreso not between "+ing+" and "+eng+")")
+    z = cur.fetchall()
+    print(z)
     con.close()
-    return True
+    
+#..................................................................
+
+
 
 def Cli_add(a,b,c,d):
     con = s.connect("GestionHotel.db")
@@ -141,14 +164,8 @@ def Cli_add(a,b,c,d):
     return True
 
 
-def Consulta_hab(ing,eng,hab,per):
-    
-    con = s.connect("GestionHotel.db")
-    cur = con.cursor()
-    cur.execute("SELECT * FROM habitacion WHERE codHab NOT IN (SELECT codHab FROM resHab where fechaIngreso between ("+ing+" and "+eng+") and fechaEgreso not between "+ing+" and "+eng+")")
-    z = cur.fetchall()
-    print(z)
-    con.close()
+
+
 
 def crear_hab(piso,camamatr,camaind,costo):
     con = s.connect("GestionHotel.db")
