@@ -1,4 +1,4 @@
-
+"""
 import flet as ft
 
 def main(page: ft.Page):
@@ -21,3 +21,8 @@ def main(page: ft.Page):
 ft.app(target=main)
 
 
+"""
+from datetime import datetime
+
+fecha_res = datetime.now().date()
+print(fecha_res)

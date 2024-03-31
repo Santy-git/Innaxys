@@ -146,7 +146,7 @@ def Consulta(ing,eng):
     val = 0
     con = s.connect("GestionHotel.db")
     cur = con.cursor()
-    cur.execute("SELECT * FROM habitacion WHERE codHab NOT IN (SELECT codHab FROM resHab where fechaIngreso between ("+ing+" and "+eng+") and fechaEgreso not between "+ing+" and "+eng+")")
+    cur.execute("SELECT * FROM habitacion WHERE codHab NOT IN (SELECT codHab FROM resHab WHERE fechaIngreso <= '"+ing+"' AND fechaEgreso >= '"+eng+"')")
     z = cur.fetchall()
     con.close()
     return z
