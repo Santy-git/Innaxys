@@ -148,8 +148,8 @@ def Consulta(ing,eng):
     cur = con.cursor()
     cur.execute("SELECT * FROM habitacion WHERE codHab NOT IN (SELECT codHab FROM resHab where fechaIngreso between ("+ing+" and "+eng+") and fechaEgreso not between "+ing+" and "+eng+")")
     z = cur.fetchall()
-    print(z)
     con.close()
+    return z
     
 #..................................................................
 

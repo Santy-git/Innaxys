@@ -156,11 +156,32 @@ class Maestro:
                     print(Verificar)
 
                     if Verificar == 1:
+                        def Consulta_aux(Ingreso_Res,Egreso_Res):
+                            variable = Consulta(Ingreso_Res,Egreso_Res)
+                            def valor(z):
+                                pera = ft.TextField(value=variable[z],width=300)
+                                a = ft.Container(content=ft.Row(spacing=10,controls=[pera,ft.TextButton(text="+",on_click=lambda _:print(pera.value))]))
+                                return a
+                            images = ft.GridView(
+                                height=400,
+                                width=800,
+                                runs_count=5,
+                                max_extent=500,
+                                child_aspect_ratio=1.0,
+                                spacing=20,
+                                run_spacing=5,
+                            )
+                            for i in range(len(variable)):
+                                images.controls.append(valor(i))
+                            Container_menus.content = ft.Column([a,b,images])
+                            Container_menus.alignment = ft.alignment.top_center                                                   
+                            Container_menus.update()
+
 
                         Container_menus.clean()
                         Ingreso_Res = ft.TextField(label="Ingreso (dd-mm-aaaa)")
                         Egreso_Res = ft.TextField(label="Egreso (dd-mm-aaaa)")
-                        consultar = ft.TextButton(text="Consultar",on_click=lambda _:Consulta(Ingreso_Res.value,Egreso_Res.value))
+                        consultar = ft.TextButton(text="Consultar",on_click=lambda _:Consulta_aux(Ingreso_Res.value,Egreso_Res.value))
                         
                         a=ft.Row([Ingreso_Res,Egreso_Res])
                         b=ft.Row([consultar])
