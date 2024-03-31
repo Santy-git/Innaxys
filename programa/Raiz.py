@@ -240,7 +240,33 @@ class Maestro:
             def Menu3():
                 print("Menu3")
             def Menu4():
-                pass
+                print("entro")
+                #crear habitaciones
+                def crear_hab_aux(a,b,c,d):
+                    validacion = crear_hab(a,b,c,d)
+                    if validacion:
+                        Container_menus.clean()
+                        Menu4()
+
+                piso = ft.TextField(label="Piso",width=300)
+                camamatr = ft.TextField(label="camas matrimoniales",width=300)
+                camaind = ft.TextField(label="camas individuales",width=300)
+                costo = ft.TextField(label="costo",width=300)
+                subir_cli = ft.CupertinoButton(
+                    content=ft.Text("Subir", color=ft.colors.BLACK),
+                    bgcolor=colores[1],
+                    border_radius=ft.border_radius.all(15),
+                    on_click=lambda _:crear_hab_aux(piso.value,camamatr.value,camaind.value,costo.value))
+                Container_menus.content = ft.Column (
+                    [piso,
+                    camamatr,
+                    camaind,
+                    costo,
+                    subir_cli],
+                    expand= True
+                )
+                Container_menus.update()
+                
             
 
 

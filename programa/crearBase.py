@@ -31,8 +31,7 @@ def creardb():
         piso number(10) not null,
         camaMatr number(10) not null,
         camaInd number(10) not null,
-        costo number(30) not null,
-        estado varchar(50) not null
+        costo number(30) not null
     );''',
 #_____________________________________________________________________
         '''CREATE TABLE IF NOT EXISTS cliente (
@@ -150,3 +149,12 @@ def Consulta_hab(ing,eng,hab,per):
 
     z = cur.fetchall()
     print(z)
+    con.close()
+
+def crear_hab(piso,camamatr,camaind,costo):
+    con = s.connect("GestionHotel.db")
+    cur = con.cursor()
+    cur.execute("INSERT INTO habitacion (piso,camaMatr,camaInd,costo) VALUES (?,?,?,?)",(piso,camamatr,camaind,costo))
+    con.commit()
+    con.close()
+    return True
