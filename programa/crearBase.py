@@ -6,7 +6,7 @@ import sqlite3 as s
 def creardb():
     tablas = [
         '''CREATE TABLE IF NOT EXISTS login(
-        codLog int primary key,
+        codLog varchar(30) primary key,
         password varchar(30) not null,
         nivel varchar(20) not null
     );''',
@@ -17,13 +17,13 @@ def creardb():
         email varchar(100) not null,
         telefono varchar(20) not null,
         puesto varchar(100) not null,
-        codLog int not null,
+        codLog varchar(30) not null,
         foreign key (codLog) references login(codLog)
     );''',
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS cochera (
         codCochera INTEGER PRIMARY KEY AUTOINCREMENT,
-        estado varchar(50) not null
+        piso number(10) not null
     );''',
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS habitacion (
@@ -31,8 +31,7 @@ def creardb():
         piso number(10) not null,
         camaMatr number(10) not null,
         camaInd number(10) not null,
-        costo number(30) not null,
-        estado varchar(50) not null
+        costo number(30) not null
     );''',
 #_____________________________________________________________________
         '''CREATE TABLE IF NOT EXISTS cliente (
@@ -46,7 +45,6 @@ def creardb():
         codReserva INTEGER PRIMARY KEY AUTOINCREMENT,
         codCliente int not null,
         codEmpleado int not null,
-        cant_per int not null,
         fechaReserva date not null,
         descr varchar(255),
         foreign key (codCliente) references cliente(dni_cli),
@@ -101,7 +99,7 @@ def creardb():
     # realizo los cambios
     con.commit()
     try:
-        sql = "INSERT INTO login (codLog, password, nivel) VALUES (0,'0',5)"
+        sql = "INSERT INTO login (codLog, password, nivel) VALUES ('0','0',5)"
         con.execute(sql)
         con.commit()
     except s.IntegrityError:
@@ -124,14 +122,38 @@ def login(usuario, contraseña):
     print(result)
     con.close()
 
-
-def Reservar(dni,dni_emp,per,fecha,desc):
+#..........................menu 0.................................
+def Reservar(dni_cli,dni_emp,fecha,desc):
+    val = 0
     con = s.connect("GestionHotel.db")
     cur = con.cursor()
-    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, cant_per, fechaReserva, descr) VALUES (?,?,?,?,?)",(dni,dni_emp,per,fecha,desc))
-    con.commit()
+    cur.execute("SELECT dni_cli from cliente")
+    z = cur.fetchall()
+
+    for i in range(len(z)):
+        if int(dni_cli) == z[i][0]:
+            val = 1
+    if val == 1:
+        cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(dni_cli,dni_emp,fecha,desc))
+        con.commit()
+        con.close()
+        return 1
+    else:
+        return 2
+
+
+def Consulta(ing,eng):
+    val = 0
+    con = s.connect("GestionHotel.db")
+    cur = con.cursor()
+    cur.execute("SELECT * FROM habitacion WHERE codHab NOT IN (SELECT codHab FROM resHab WHERE fechaIngreso <= '"+ing+"' AND fechaEgreso >= '"+eng+"')")
+    z = cur.fetchall()
     con.close()
-    return True
+    return z
+    
+#..................................................................
+
+
 
 def Cli_add(a,b,c,d):
     con = s.connect("GestionHotel.db")
@@ -142,11 +164,59 @@ def Cli_add(a,b,c,d):
     return True
 
 
-def Consulta_hab(ing,eng,hab,per):
-    print(ing,eng,hab,per)
+
+
+
+def crear_hab(piso,camamatr,camaind,costo):
     con = s.connect("GestionHotel.db")
     cur = con.cursor()
-    cur.execute("SELECT * FROM resHab WHERE '"+str(ing)+"' >= fechaIngreso and '"+str(eng)+"' <= fechaEgreso")
+    cur.execute("INSERT INTO habitacion (piso,camaMatr,camaInd,costo) VALUES (?,?,?,?)",(piso,camamatr,camaind,costo))
+    con.commit()
+    con.close()
+    return True
 
-    z = cur.fetchall()
-    print(z)
+def crear_coch(piso):
+    con = s.connect("GestionHotel.db")
+    cur = con.cursor()
+    cur.execute("INSERT INTO cochera (piso) VALUES (?)",(piso))
+    con.commit()
+    con.close()
+    return True
+
+
+
+
+#..........................Menu 4.......................
+def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
+    i = 0
+    con = s.connect("GestionHotel.db")
+    cur = con.cursor()
+
+    cur.execute("SELECT codLog FROM login")
+    var = cur.fetchall()
+    for i in range(len(var)):
+        if var[i][0] == usuario:
+            i = 1
+    print(i)
+    if i == 0:
+        cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
+        con.commit()
+        cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,codLog) VALUES (?,?,?,?,?,?)",(dni_emp,nombre_emp,email,telefono,puesto,usuario))
+        con.commit()
+        con.close()
+        return True
+    else:
+        con.close()
+        return False
+    
+    
+
+def otra():  
+    con = s.connect("GestionHotel.db")
+    cur = con.cursor() 
+    #cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
+    con.commit()
+   # cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,usuario) VALUES (?,?,?,?,?,?)",(dni_emp,nombre_emp,email,telefono,puesto,usuario))
+    con.commit()
+    
+    return True
