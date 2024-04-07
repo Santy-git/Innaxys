@@ -87,7 +87,7 @@ def creardb():
 
 
     # me conecto a la base de datos
-    con = s.connect("GestionHotel.db")
+    con = s.connect("GestionHotel.sqlite3")
 
     # creo el cursor
     cur = con.cursor()
