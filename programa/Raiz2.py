@@ -10,7 +10,8 @@ niveles = (("CS", "Camilo Sanchez", "Administrador"),("JL", "Josefina Lopez", "E
 
 # Sidebar Class
 class ModernNavBar(UserControl):
-    def __init__(self):
+    def __init__(self, func ):
+        self.func = func
         super().__init__()
 
     # Destacamos la columna en la que pasamos por encima
@@ -128,11 +129,27 @@ class ModernNavBar(UserControl):
             padding=padding.only(top=10),
             alignment=alignment.center,
             content = Column(
+
+                alignment=alignment.center,
+                horizontal_alignment="center",
+
                 controls =[
                     # Los iconos del SideBar aca
 
                     # Nivel y informacion del usuario(3 Niveles , Administrador ,empleado, cliente)
                     self.UserData(niveles[x-1][0],niveles[x-1][1], niveles[x-1][2]),
+
+
+                    # Boton para redimensionar 
+
+                    Container(
+                        width= 24,
+                        height=24,
+                        bgcolor= "bluegrey800",
+                        border_radius= 8,
+                        on_click=partial(self.func),
+                        # Func es la animacion para minimizar y maximizar
+                    ),
 
                     # Divisor
                     Divider(height=2 , color='transparent'),
@@ -154,11 +171,76 @@ class ModernNavBar(UserControl):
 # Ventana principal
 def main(page: Page):
     # Titulo 
-    page.title = "FleteSideBar"
+    page.title = "Innaxys"
 
     # Centralizado
     page.horizontal_alignment='center'
     page.vertical_alignment='center'
+
+
+    # Animated sidebar
+    def AnimatedSidebar(e):
+        # Pasos para animar el sidebar
+
+        #page.controls[0] es la clase a la que llamamos,  y en base a las caracteristicas del ancho de la clase
+        # vamos a modificar esto 
+        if page.controls[0].width != 62:
+            #
+
+            #Iteracion a traves de las filas 
+
+            # Se reduce la opacidad de el titulo del texto
+            for item in(
+                page.controls[0]
+                # Ingresamos a content(Contenido) del contenedor
+                .content.controls[0]
+                # Ingresamos a las filas de content(Contenedor) 
+                .content.controls[0]
+
+                # Otra layer aca(!)
+                .content.controls[1]
+
+                # : Indica la lista entera de controles
+                .controls[:]
+            ):
+                item.opacity = (
+                    0 #  Cada item ahora se refiere a los Text() control in the sidebar
+                )
+                item.update()
+
+            # Reduccion de la opacidad del sidebar de los items del menu
+            for items in page.controls[0].content.controls[0].content.controls[3:]:
+                if isinstance(items, Container):
+                    items.content.controls[1].opacity = 0
+                    items.content.update()
+
+            time.sleep(0.2)
+
+            # Maximizamos la ventana
+            page.controls[0].width = 62
+            page.controls[0].update()
+
+            time.sleep(0.2)
+
+
+        else:
+                page.controls[0].width = 200
+                page.controls[0].update()
+                for item in(
+                    page.controls[0]
+                    .content.controls[0]
+                    .content.controls[0]
+                    .content.controls[1]
+                    .controls[:]
+                ):
+                    item.opacity = 1 
+                    item.update()
+
+                for items in page.controls[0].content.controls[0].content.controls[3:]:
+                    if isinstance(items, Container):
+                        items.content.controls[1].opacity = 1
+                        items.content.update()
+
 
     # Agregamos la clase a la pagina
     page.add(
@@ -170,7 +252,7 @@ def main(page: Page):
             animate= animation.Animation(500,'decelerate'), #Animacion del SideBar
             alignment=alignment.center,
             padding=10,
-            content=ModernNavBar()
+            content=ModernNavBar(AnimatedSidebar)
         )
     )
 
