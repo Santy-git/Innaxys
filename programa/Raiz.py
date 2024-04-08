@@ -173,7 +173,7 @@ class Maestro:
                                 spacing=20,
                                 run_spacing=5,
                             )
-
+                            #aca
                             for i in range(len(variable)):
                                 images.controls.append(valor(i))
                             Container_menus.clean()

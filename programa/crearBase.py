@@ -211,12 +211,3 @@ def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
     
     
 
-def otra():  
-    con = s.connect("GestionHotel.db")
-    cur = con.cursor() 
-    #cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
-    con.commit()
-   # cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,usuario) VALUES (?,?,?,?,?,?)",(dni_emp,nombre_emp,email,telefono,puesto,usuario))
-    con.commit()
-    
-    return True
