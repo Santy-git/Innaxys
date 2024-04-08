@@ -53,10 +53,10 @@ class Maestro:
             raiz.window_width = 500
             raiz.window_bgcolor = colores2[0]
             raiz.bgcolor = ft.colors.TRANSPARENT
-            raiz.window_title_bar_hidden = True
             raiz.window_frameless = True
             raiz.window_resizable = False
             raiz.padding = 10
+            raiz.window_center()
             # ------------------------------------- 
             
             #---------------Funciones de contenedor-------------------------------       
