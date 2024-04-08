@@ -152,46 +152,65 @@ class Maestro:
 
                 def Reservar_Aux(cli,emp,fecha,desc):
                     Container_menus.clean()
-                    print("hola")
                     Verificar = Reservar(cli,emp,fecha,desc)
-                    print(Verificar)
 
                     if Verificar == 1:
                         def Consulta_aux(Ingreso_Res,Egreso_Res):
+                            global hres
+                            hres = []
+                            def pedidos(var):
+                                hres.append(variable[var])
+                                images.controls.pop(var)
+                                images.update()
+                                variable.pop(var)
+                                print(hres)
+                                #sigo por aca
+                                disponibles()
+
+                            def disponibles():
+                                global images
+                                def valor(z):
+                                    indice = z
+                                    info = variable[z]                                
+                                    infoH=ft.Row([
+                                        ft.Text(value=variable[z][0]),
+                                        ft.Text(value=variable[z][1]),
+                                        ft.Text(value=variable[z][2]),
+                                        ft.Text(value=variable[z][3]),
+                                        ft.Text(value=variable[z][4])            
+                                    ])                         
+                                    contener = ft.Container(width=60,height=60,bgcolor=colores[9],content=ft.Column([infoH,ft.TextButton(text="+",on_click=lambda _:pedidos(indice))]))  
+                                    return contener
+                                
+                                images = ft.GridView(
+                                    runs_count=5,
+                                    max_extent=300,
+                                    child_aspect_ratio=1.0,
+                                    spacing=20,
+                                    run_spacing=5,
+                                    expand=1,
+                                )
+                                
+                                for i in range(len(variable)):
+                                    images.controls.append(valor(i))                      
+                                Departamentos.clean()
+                                Departamentos.content = ft.Column([images])
+                                
+                                                                            
+                                Container_menus.update()
                             
                             variable = Consulta(Ingreso_Res,Egreso_Res)
-
-                            def valor(z):
-                                pera = ft.TextField(value=variable[z],width=300)
-                                a = ft.Container(content=ft.Row(spacing=10,controls=[pera,ft.TextButton(text="+",on_click=lambda _:print(pera.value))]))
-                                return a
-                            images = ft.GridView(
-                                height=400,
-                                width=800,
-                                runs_count=5,
-                                max_extent=500,
-                                child_aspect_ratio=1.0,
-                                spacing=20,
-                                run_spacing=5,
-                            )
-                            #aca
-                            for i in range(len(variable)):
-                                images.controls.append(valor(i))
-                            Container_menus.clean()
-                            Container_menus.content = ft.Column([a,b,images])
-                            Container_menus.alignment = ft.alignment.top_center
-                                                                           
-                            Container_menus.update()
-
+                            disponibles()
 
                         Container_menus.clean()
                         Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
                         Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
                         consultar = ft.TextButton(text="Consultar",on_click=lambda _:Consulta_aux(Ingreso_Res.value,Egreso_Res.value))
-                        
+                        Departamentos = ft.Container(width=830,height=500,bgcolor=colores[2],margin=10)
                         a=ft.Row([Ingreso_Res,Egreso_Res])
                         b=ft.Row([consultar])
-                        Container_menus.content = ft.Column([a,b])
+                        c=ft.Row([Departamentos])
+                        Container_menus.content = ft.Column([a,b,c])
                         Container_menus.alignment = ft.alignment.top_center
                         
                         Container_menus.update()

@@ -108,7 +108,7 @@ def creardb():
     con.close()
 
 def login(usuario, contraseña):
-    con = s.connect("GestionHotel.db")
+    con = s.connect("GestionHotel.sqlite3")
 
     # creo el cursor
     cur = con.cursor()
@@ -125,7 +125,7 @@ def login(usuario, contraseña):
 #..........................menu 0.................................
 def Reservar(dni_cli,dni_emp,fecha,desc):
     val = 0
-    con = s.connect("GestionHotel.db")
+    con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("SELECT dni_cli from cliente")
     z = cur.fetchall()
@@ -144,7 +144,7 @@ def Reservar(dni_cli,dni_emp,fecha,desc):
 
 def Consulta(ing,eng):
     val = 0
-    con = s.connect("GestionHotel.db")
+    con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("SELECT * FROM habitacion WHERE codHab NOT IN (SELECT codHab FROM resHab WHERE fechaIngreso <= '"+ing+"' AND fechaEgreso >= '"+eng+"')")
     z = cur.fetchall()
@@ -156,7 +156,7 @@ def Consulta(ing,eng):
 
 
 def Cli_add(a,b,c,d):
-    con = s.connect("GestionHotel.db")
+    con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("INSERT INTO cliente (dni_cli, nombre, email, descr) VALUES (?,?,?,?)",(a,b,c,d))
     con.commit()
@@ -168,7 +168,7 @@ def Cli_add(a,b,c,d):
 
 
 def crear_hab(piso,camamatr,camaind,costo):
-    con = s.connect("GestionHotel.db")
+    con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("INSERT INTO habitacion (piso,camaMatr,camaInd,costo) VALUES (?,?,?,?)",(piso,camamatr,camaind,costo))
     con.commit()
@@ -176,7 +176,7 @@ def crear_hab(piso,camamatr,camaind,costo):
     return True
 
 def crear_coch(piso):
-    con = s.connect("GestionHotel.db")
+    con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("INSERT INTO cochera (piso) VALUES (?)",(piso))
     con.commit()
@@ -189,7 +189,7 @@ def crear_coch(piso):
 #..........................Menu 4.......................
 def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
     i = 0
-    con = s.connect("GestionHotel.db")
+    con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
 
     cur.execute("SELECT codLog FROM login")
