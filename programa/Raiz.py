@@ -57,6 +57,7 @@ class Maestro:
             raiz.window_resizable = False
             raiz.padding = 10
             raiz.window_center()
+   
             # ------------------------------------- 
             
             #---------------Funciones de contenedor-------------------------------       
@@ -374,9 +375,6 @@ class Maestro:
                 )
                 Container_menus.update()
 
-
-                
-
             #_____________________________formatos de los sub menus_________________________
             def Selector(a):
                 Indices_menus = {0:Menu0,1:Menu1,2:Menu2,3:Menu3,4:Menu4}
@@ -450,6 +448,7 @@ class Maestro:
                         expand=True,
                     )
                 )
+                raiz.window_center()
                 
 
         ft.app(target=main)
