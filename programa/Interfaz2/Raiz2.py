@@ -8,7 +8,9 @@ x = int(input("Nivel de usuario: \n1_Administrador\n2_Empleado\n3_Cliente\n"))
 # Esto hay que conectarlo con la base de datos
 niveles = (("CS", "Camilo Sanchez", "Administrador"),("JL", "Josefina Lopez", "Empleada"),("JS", "Jose Sanchez", "Cliente"))
 
-# Sidebar Class
+# ___________________________________________________________Sidebar Class___________________________________________________________
+
+
 class ModernNavBar(UserControl):
     def __init__(self, func ):
         self.func = func
@@ -166,7 +168,113 @@ class ModernNavBar(UserControl):
                 ]
             ),
         )
-    
+
+# ___________________________________________________________Sidebar Class___________________________________________________________
+
+# ___________________________________________________________LogIn Class___________________________________________________________
+
+# class UserLogIn():
+#     def __init__(self):
+#         super().__init__()
+
+#     def HighLight(self,e):
+#         if e.data == "true":
+#             e.control.bgcolor= "white10"
+#             e.control.update()
+
+#             # Ahora lo que hago aparte de cambiar el color de fondo, el texto
+
+#             # Control del contenido por indice del IconButton y el texto
+#             e.control.content.controls[0].icon_color = "white"
+#             e.control.content.controls[1].icon_color = "white"
+#             e.control.content.update()
+
+
+#         else:
+#             e.control.bgcolor= None
+#             e.control.update()
+
+#             # Ahora lo que hago aparte de cambiar el color de fondo, el texto
+
+#             # Control del contenido por indice del IconButton y el texto
+#             e.control.content.controls[0].icon_color = "white54"
+#             e.control.content.controls[1].icon_color = "white54"
+#             e.control.content.update()
+
+
+#     # Filas del sidebar (Fila y iconos)
+
+#     def TextLog(self, icon_name:str, text:str):
+#         return Container(
+#             width=180, 
+#             height=45,
+#             border_radius=10,
+#             on_hover=lambda e: self.HighLight(e),
+#             content=Row(
+#                 controls=[
+#                     Icon(
+#                         icon=icon_name,
+#                         icon_size=18,
+#                         icon_color='white54',
+#                     ),
+#                     TextField(
+#                         value=text,
+#                         color="white54",
+#                         size=11,
+#                         opacity=1,
+#                         animate_opacity=200,
+#                     )
+#                 ]
+#             ),
+
+#         )
+
+#     def build(self):
+#         return Container(
+#             width=200,
+#             height=580,
+#             padding=padding.only(top=10),
+#             alignment=alignment.center,
+#             content = Column(
+
+#                 alignment=alignment.center,
+#                 horizontal_alignment="center",
+
+#                 controls =[
+#                     # Los iconos del SideBar aca
+
+#                     # Nivel y informacion del usuario(3 Niveles , Administrador ,empleado, cliente)
+#                     self.UserData(niveles[x-1][0],niveles[x-1][1], niveles[x-1][2]),
+
+
+#                     # Boton para redimensionar 
+
+#                     Container(
+#                         width= 24,
+#                         height=24,
+#                         bgcolor= "bluegrey800",
+#                         border_radius= 8,
+#                         on_click=partial(self.func),
+#                         # Func es la animacion para minimizar y maximizar
+#                     ),
+
+#                     # Divisor
+#                     Divider(height=2 , color='transparent'),
+#                     self.TextLog(icons.PERSON,"User"),
+#                     self.TextLog(icons.LOCK,"Password"),
+
+#                     # Divisor
+#                     Divider(height=5, color="white54"),
+
+#                 ]
+#             ),
+#         )
+
+
+# ___________________________________________________________LogIn Class___________________________________________________________
+
+
+# ___________________________________________________________VENTANA PRINCIPAL___________________________________________________________
 
 # Ventana principal
 def main(page: Page):
@@ -174,6 +282,8 @@ def main(page: Page):
     page.title = "Innaxys"
 
     # Centralizado
+    page.window_height = 700
+    page.window_width = 500
     page.horizontal_alignment='center'
     page.vertical_alignment='center'
 
@@ -243,6 +353,24 @@ def main(page: Page):
 
 
     # Agregamos la clase a la pagina
+
+    # Agregando a la pagina principal el LogIN
+    # page.add(
+    #     Container(
+    #         width=500,
+    #         height=700,
+    #         bgcolor='black',
+    #         border_radius=25,
+    #         alignment=alignment.center,
+    #         padding=10,
+    #         content=UserLogIn(),
+    #     )
+    # )
+
+    # Clausula que denomina si la contra esta bien
+
+    # if clave y usuario True:
+    # page.clean()
     page.add(
         Container(
             width=200,
@@ -256,6 +384,8 @@ def main(page: Page):
         )
     )
 
-#Run 
-if __name__ == "__main__":
-    flet.app(target=main)
+# ___________________________________________________________VENTANA PRINCIPAL___________________________________________________________
+
+
+#Ejecucion.
+flet.app(target=main)
