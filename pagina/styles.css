@@ -11,13 +11,16 @@
     --bg-barra:#121c14;
 
     /* Es el color de los botones */
-    --bg-botones:rgb(157, 184, 160);
+    --bg-botones:#99b79d;
 
     /* el color del titulo arriba de la imagen */
     --fg-header:rgb(255, 255, 255);
 
-    /* El color de fondo del apartado "Quienes somos" */
-    --bg-section:248, 249, 250;
+    /* El color de fondo del section clarito*/
+    --bg-section:#b6ceb9;
+
+    /* El color de fondo del section oscuro */
+    --bg-section2:#99b79d;
 
     /* fuente para los parrafos y el texto */
     --font-p:"Poppins", sans-serif;
@@ -65,10 +68,6 @@ font-size: 2rem;
 
 h3 {
 font-size: 1.3rem;
-}
-
-.containerPrincipio {
-height: 100svh;
 }
 
 .barra {
@@ -243,6 +242,8 @@ font-size: 1.5rem;
 color: var(--fg-header);
 }
 
+/* los botones */
+
 .container{
 display: flex;
 align-items: center;
@@ -308,15 +309,22 @@ cursor: pointer;
 width: 3.2rem; 
 height: 3.2rem; 
 }
-  
+
+.caracteristicas {
+  display: flex;
+  flex-direction: column;
+  padding: 0 5%;
+  place-items: center center;
+  box-shadow: inset 0 0 0 5rem red; /* cambiar el color
+}
+
   /* la parte del quienes somos */
 .containerPrimerItem{
 display: flex;
 align-items: center;
 justify-content: space-between;
 padding: 5rem 5% 5rem 5%;
-/*background: var(--bg-section);*/
-background: #8da790;
+background: var(--bg-section);
 min-height: 100svh;
 }
 
@@ -352,8 +360,7 @@ flex-direction: column;
 align-items: center;
 justify-content: space-between;
 padding: 5rem 0 5rem 0;
-/*background-color: var(--bg-section);*/
-background: #85a088;
+background: var(--bg-section2);
 height: auto;
 gap: 2rem;
 }
@@ -386,8 +393,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 padding: 5rem 5% 5rem 5%;
-/*background-color: var(--bg-section);*/
-background-color: #7d9780;
+background-color: var(--bg-section);
 gap: 5rem;
 }
 
@@ -441,7 +447,8 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 padding: 5rem 5% 5rem 5%;
-background-color: #778f79;
+background-color: var(--bg-section2);
+min-width: 100%;
 }
 
 .sistemasCompatibles {
