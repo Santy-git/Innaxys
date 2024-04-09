@@ -61,7 +61,7 @@ def creardb():
     );''',
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS resHab(
-        codReshab int primary key,
+        codReshab INTEGER PRIMARY KEY AUTOINCREMENT,
         codHab int not null,
         codReserva int not null,
         camaMatr number(10) not null,
@@ -74,7 +74,7 @@ def creardb():
     );''',
 #_____________________________________________________________________
         '''CREATE TABLE IF NOT EXISTS resCoch(
-        codRescoch int primary key,
+        codRescoch INTEGER PRIMARY KEY AUTOINCREMENT,
         codReserva int not null,
         codCochera int not null,
         fechaIngreso date not null,
@@ -118,9 +118,10 @@ def login(usuario, contraseña):
 
     for i in range(len(result)):
         if str(usuario) == str(result[i][0]) and str(contraseña) == str(result[i][1]):
-            return True ,result[i][2]
-    print(result)
-    con.close()
+            print(result)
+            con.close()
+            return True ,result[i][2],result[i][0]
+    
 
 #..........................menu 0.................................
 def Reservar(dni_cli,dni_emp,fecha,desc):
@@ -134,9 +135,6 @@ def Reservar(dni_cli,dni_emp,fecha,desc):
         if int(dni_cli) == z[i][0]:
             val = 1
     if val == 1:
-        cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(dni_cli,dni_emp,fecha,desc))
-        con.commit()
-        con.close()
         return 1
     else:
         return 2
@@ -146,11 +144,28 @@ def Consulta(ing,eng):
     val = 0
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("SELECT * FROM habitacion WHERE codHab NOT IN (SELECT codHab FROM resHab WHERE fechaIngreso <= '"+ing+"' AND fechaEgreso >= '"+eng+"')")
+    cur.execute("SELECT * FROM habitacion WHERE codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
     z = cur.fetchall()
+    print(z)
     con.close()
     return z
-    
+
+
+
+def completar(cli,emp,fecha,desc,hres,ing,eng):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
+    con.commit()
+    cur.execute("SELECT codReserva FROM reserva where codCliente = '"+cli+"' AND codEmpleado = '"+emp+"'")
+    info = cur.fetchall()
+    for i in range(len(hres)):
+        cur.execute("INSERT INTO resHab (codHab,codReserva,camaMatr,camaInd,costoHab,fechaIngreso,fechaEgreso) VALUES (?,?,?,?,?,?,?)",(hres[i][0],info[0][0],hres[i][2],hres[i][3],hres[i][4],ing,eng))
+        con.commit()
+    con.close()
+
+
+
 #..................................................................
 
 
@@ -162,9 +177,6 @@ def Cli_add(a,b,c,d):
     con.commit()
     con.close()
     return True
-
-
-
 
 
 def crear_hab(piso,camamatr,camaind,costo):

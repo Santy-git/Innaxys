@@ -158,26 +158,36 @@ class Maestro:
                         def Consulta_aux(Ingreso_Res,Egreso_Res):
                             global hres
                             hres = []
+
                             def pedidos(var):
                                 hres.append(variable[var])
                                 images.controls.pop(var)
                                 images.update()
                                 variable.pop(var)
                                 print(hres)
-                                #sigo por aca
+                                totalesp = 0
+                                costo = 0
+                                
+                                for i in range(len(hres)):
+                                    totalesp += hres[i][3]
+                                    totalesp += hres[i][2]*2
+                                    costo += hres[i][4]
+                                totalH = len(hres)
+                                contador.value = ("Habitaciones: ",totalH,"total de espacios: ",totalesp,"costo total: ",costo)
+                                contador.update()
                                 disponibles()
 
                             def disponibles():
                                 global images
-                                def valor(z):
-                                    indice = z
-                                    info = variable[z]                                
+                                def valor(a):
+                                    indice = a
+                                    info = variable[a]                                
                                     infoH=ft.Row([
-                                        ft.Text(value=variable[z][0]),
-                                        ft.Text(value=variable[z][1]),
-                                        ft.Text(value=variable[z][2]),
-                                        ft.Text(value=variable[z][3]),
-                                        ft.Text(value=variable[z][4])            
+                                        ft.Text(value=variable[a][0]),
+                                        ft.Text(value=variable[a][1]),
+                                        ft.Text(value=variable[a][2]),
+                                        ft.Text(value=variable[a][3]),
+                                        ft.Text(value=variable[a][4])            
                                     ])                         
                                     contener = ft.Container(width=60,height=60,bgcolor=colores[9],content=ft.Column([infoH,ft.TextButton(text="+",on_click=lambda _:pedidos(indice))]))  
                                     return contener
@@ -194,21 +204,33 @@ class Maestro:
                                 for i in range(len(variable)):
                                     images.controls.append(valor(i))                      
                                 Departamentos.clean()
-                                Departamentos.content = ft.Column([images])
-                                
-                                                                            
+                                Departamentos.content = ft.Column([images])                                                                                                        
                                 Container_menus.update()
                             
                             variable = Consulta(Ingreso_Res,Egreso_Res)
                             disponibles()
 
+
+                        def res_final(cli,emp,fecha,desc,hres,Ing,Eng):
+                            
+                            confirmar = ft.TextButton(text="Confirmar",on_click=lambda _:completar(cli,emp,fecha,desc,hres,Ing,Eng))
+                            Container_menus.clean()
+
+                            Container_menus.content = ft.Column([ft.Text(value=hres),confirmar])
+                            Container_menus.update()
+
+                           
                         Container_menus.clean()
                         Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
                         Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
                         consultar = ft.TextButton(text="Consultar",on_click=lambda _:Consulta_aux(Ingreso_Res.value,Egreso_Res.value))
+                        reservarboton = ft.TextButton(text="el otro boton",on_click=lambda _:res_final(
+                            cli,emp,fecha,desc,hres,Ingreso_Res.value,Egreso_Res.value
+                        ))
                         Departamentos = ft.Container(width=830,height=500,bgcolor=colores[2],margin=10)
+                        contador = ft.Text(value="")
                         a=ft.Row([Ingreso_Res,Egreso_Res])
-                        b=ft.Row([consultar])
+                        b=ft.Row([consultar,reservarboton,contador])
                         c=ft.Row([Departamentos])
                         Container_menus.content = ft.Column([a,b,c])
                         Container_menus.alignment = ft.alignment.top_center
@@ -229,7 +251,7 @@ class Maestro:
                     content=ft.Text("Subir", color=ft.colors.BLACK),
                     bgcolor=colores[1],
                     border_radius=ft.border_radius.all(15),
-                    on_click=lambda _:Reservar_Aux(cod_cliente.value,z[0],fecha_res,desc.value))
+                    on_click=lambda _:Reservar_Aux(cod_cliente.value,z[2],fecha_res,desc.value))
                 
                 Container_menus.content = ft.Column (
                     [cod_cliente,
