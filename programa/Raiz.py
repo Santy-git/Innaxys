@@ -1,6 +1,7 @@
 # ____________________________________________LIBRERIAS____________________________________________
 from crearBase import * 
 import flet as ft
+from flet import *
 from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
 from flet_core.control_event import ControlEvent
 from datetime import datetime
@@ -48,8 +49,12 @@ class Maestro:
         def main(raiz: ft.Page):
         
             # seteo de la pagina
-            raiz.window_prevent_close = True 
-            raiz.bgcolor = ft.colors.BLUE_GREY_100
+            raiz.window_prevent_close = True
+            raiz.window_height = 740
+            raiz.window_width = 580
+            raiz.window_bgcolor = colores2[10]
+            raiz.bgcolor = ft.colors.TRANSPARENT
+            raiz.window_title_bar_hidden = True
             raiz.window_frameless = True
             raiz.window_resizable = False
             raiz.window_full_screen = True
@@ -101,41 +106,114 @@ class Maestro:
                 ]
 
             )
+            # ------------CONTENEDOR V2------------
+    
+            User : TextField = TextField(
+                                            width=290,
+                                            height=60,
+                                            label='User',
+                                            border='underline',
+                                            color='#303030',
+                                            prefix_icon = icons.PERSON,
+                                        )
+            Password : TextField = TextField(
+                                            width=280,
+                                            height=60,
+                                            label='Password',
+                                            border='underline',
+                                            color='#303030',
+                                            prefix_icon= icons.LOCK,
+                                        )
+            Button : ElevatedButton=ElevatedButton(
+                                            content=Text(
+                                                'SIGN IN',
+                                                color='white',
+                                                weight='w500',
+                                                
+                                            ),width=280,
+                                            bgcolor='black',
+                                            on_click=logear,
+                                        )
+                                    
+    
+            body = Container(
+                Container(
+                    Stack([
+                        Container(
+                            border_radius=11,
+                            rotate=Rotate(0.98*3.14), #Degree
+                            width=360,
+                            height=560,
+                            bgcolor='#22ffffff'
+                        ),
+                        Container(
+                            Container(
+                                Column([
+                                    Container(
+                                        Image(
+                                            src='axys.png',
+                                            width=50,
+                                        ),padding=padding.only(150,20),
+                                    ),
+                                    Text(
+                                        'Sign in',
+                                        width=360,
+                                        size=30,
+                                        weight='w900',
+                                        text_align='center',
+                                    ),
+                                    Text(
+                                        'Please login to use the plataform',
+                                        width=360,
+                                        text_align='center',
 
-            # ------------CONTENEDOR------------
-            def validate(e: ControlEvent) -> None:
-                if all([User.value, Password.value]):
-                    Button.disabled = False
-                else:
-                    Button.disabled = True
-
-                raiz.update()
-
-            User: TextField = TextField(label="User", text_align=ft.TextAlign.LEFT, width= 200)
-            Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width= 200, password = True, can_reveal_password=True)
-            Button: ElevatedButton = ElevatedButton(text="Sign Up",on_click=logear)
-            
-            User.on_change = validate
-            Password.on_change = validate
-            
-            Filas_login = Row(
-                controls=[
-                    Column(
-                        [
-                            User,
-                            Password,
-                            Button]
-                    )
-                ],
-                alignment=ft.MainAxisAlignment.CENTER,
+                                    ),
+                                    Container(User,padding=padding.only(25,20)
+                                        ),
+                                    Container(Password,padding=padding.only(25,20),
+                                    ),
+                                    Container(
+                                        TextButton(
+                                            'I forgot my password: ',
+                                        ),padding=padding.only(90),
+                                    ),
+                                    Container(Button,padding=padding.only(40,10)
+                                    ),
+                                    Container(
+                                        Row([
+                                            Text(
+                                                'Don`t have an account?',
+                                            ),
+                                            TextButton(
+                                                'Create a account',
+                                            )
+                                        ],spacing=-10),padding=padding.only(40),
+                                    )
+                                ])
+                            ),
+                            width=360,
+                            height=560,
+                            bgcolor='#22ffffff',
+                            border_radius=11,
+                        )
+                    ]),
+                    padding=110,
+                    width=360,
+                    height=560 
+                ),  
+                width=580,
+                height=740,
+                gradient=LinearGradient(['white30','white10'])
             )
 
-            contenedor_login = ft.Container(content=Filas_login, 
-                    height=623, width=500, bgcolor=colores[3], 
-                    border_radius=ft.border_radius.all(10), 
-                    padding=ft.padding.only(top=70),
-                    )
-            raiz.add(contenedor_login)
+
+
+            # ------------CONTENEDOR V2------------
+
+            # ------------CONTENEDOR------------
+            
+
+            raiz.add(body)
 
 
             #_______________________________SUB MENUS______________________________________
