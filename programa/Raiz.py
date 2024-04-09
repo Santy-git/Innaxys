@@ -165,7 +165,6 @@ class Maestro:
                                 images.controls.pop(var)
                                 images.update()
                                 variable.pop(var)
-                                print(hres)
                                 totalesp = 0
                                 costo = 0
                                 
@@ -264,7 +263,102 @@ class Maestro:
                 Container_menus.update()
 
             def Menu1():
-                pass
+                def ReservarCoch_Aux(cli,emp,fecha,desc):
+                    
+                    Container_menus.clean()
+                    Verificar = ReservarCoch(cli,emp,fecha,desc)
+                    print("Verificar: ",Verificar)
+
+                    if Verificar == 1:
+                        def ConsultaCoch_aux(Ingreso_Res,Egreso_Res):
+                            global hres
+                            hres = []
+                            variable = ConsultaCoch(Ingreso_Res,Egreso_Res)
+
+                            def pedidosCoch(var):
+                                hres.append(variable[var])
+                                images.controls.pop(var)
+                                images.update()
+                                variable.pop(var)
+                                contador.update()
+                                disponiblesCoch()
+
+                            def disponiblesCoch():
+                                global images
+                                def valor(a):
+                                    indice = a
+                                    infoH=ft.Row([
+                                        ft.Text(value=variable[a][0]),
+                                        ft.Text(value=variable[a][1])            
+                                    ])                         
+                                    contener = ft.Container(width=60,height=60,bgcolor=colores[9],content=ft.Column([infoH,ft.TextButton(text="+",on_click=lambda _:pedidosCoch(indice))]))  
+                                    return contener
+                                
+                                images = ft.GridView(
+                                    runs_count=5,
+                                    max_extent=300,
+                                    child_aspect_ratio=1.0,
+                                    spacing=20,
+                                    run_spacing=5,
+                                    expand=1,
+                                )
+                                
+                                for i in range(len(variable)):
+                                    images.controls.append(valor(i))                      
+                                Departamentos.clean()
+                                Departamentos.content = ft.Column([images])                                                                                                        
+                                Container_menus.update()
+                            
+                            variable = Consulta(Ingreso_Res,Egreso_Res)
+                            disponiblesCoch()
+
+                        def resCoch_final(cli,emp,fecha,desc,hres,Ing,Eng):
+                            
+                            confirmar = ft.TextButton(text="Confirmar",on_click=lambda _:completarCoch(cli,emp,fecha,desc,hres,Ing,Eng))
+                            Container_menus.clean()
+
+                            Container_menus.content = ft.Column([ft.Text(value=hres),confirmar])
+                            Container_menus.update()                       
+
+
+
+                        Container_menus.clean()
+                        Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
+                        Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
+                        consultar = ft.TextButton(text="Consultar",on_click=lambda _:ConsultaCoch_aux(Ingreso_Res.value,Egreso_Res.value))
+                        reservarboton = ft.TextButton(text="el otro boton",on_click=lambda _:resCoch_final(
+                            cli,emp,fecha,desc,hres,Ingreso_Res.value,Egreso_Res.value
+                        ))
+                        Departamentos = ft.Container(width=830,height=500,bgcolor=colores[2],margin=10)
+                        contador = ft.Text(value="")
+                        a=ft.Row([Ingreso_Res,Egreso_Res])
+                        b=ft.Row([consultar,reservarboton,contador])
+                        c=ft.Row([Departamentos])
+                        Container_menus.content = ft.Column([a,b,c])
+                        Container_menus.alignment = ft.alignment.top_center
+                        
+                        Container_menus.update()
+                    if Verificar == 2:
+                        pass
+
+                cod_cliente = ft.TextField(label="Dni de cliente",width=300)
+                fecha_res = datetime.now().date()
+                desc = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
+                subir = ft.CupertinoButton(
+                    content=ft.Text("Subir", color=ft.colors.BLACK),
+                    bgcolor=colores[1],
+                    border_radius=ft.border_radius.all(15),
+                    on_click=lambda _:ReservarCoch_Aux(cod_cliente.value,z[2],fecha_res,desc.value))
+                
+                Container_menus.content = ft.Column (
+                    [cod_cliente,
+                    desc,
+                    subir],
+                    expand= True
+                )
+                Container_menus.alignment = ft.alignment.center
+                Container_menus.update()
+
 
             def Menu2():
                 #Ingresar cliente
