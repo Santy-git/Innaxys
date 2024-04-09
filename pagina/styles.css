@@ -17,10 +17,10 @@
     --fg-header:rgb(255, 255, 255);
 
     /* El color de fondo del section clarito*/
-    --bg-section:#b6ceb9;
+    --bg-section:#f2f2f2;
 
     /* El color de fondo del section oscuro */
-    --bg-section2:#99b79d;
+    --bg-section2:#f2f2f2f2;
 
     /* fuente para los parrafos y el texto */
     --font-p:"Poppins", sans-serif;
@@ -314,8 +314,9 @@ height: 3.2rem;
   display: flex;
   flex-direction: column;
   padding: 0 5%;
-  place-items: center center;
-  box-shadow: inset 0 0 0 5rem red; /* cambiar el color
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 5rem rgb(213, 208, 208); /* cambiar el color */
 }
 
   /* la parte del quienes somos */
@@ -529,4 +530,3 @@ text-align: center;
 padding: 1rem 0;
 font-size: .7rem;
 }
-
