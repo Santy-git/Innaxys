@@ -144,7 +144,7 @@ def Consulta(ing,eng):
     val = 0
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("SELECT * FROM habitacion WHERE codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+    cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
     z = cur.fetchall()
     print(z)
     con.close()
@@ -165,29 +165,7 @@ def completar(cli,emp,fecha,desc,hres,ing,eng):
     con.close()
 
 #..........................menu 1..............................
-def Consultacochera(ing,eng):
-    val = 0
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("SELECT * FROM cochera WHERE codCochera in (SELECT codRescoch FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
-    z = cur.fetchall()
-    print(z)
-    con.close()
-    return z
 
-
-
-def completarCoch(cli,emp,fecha,desc,hres,ing,eng):
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
-    con.commit()
-    cur.execute("SELECT codReserva FROM reserva where codCliente = '"+cli+"' AND codEmpleado = '"+emp+"'")
-    info = cur.fetchall()
-    for i in range(len(hres)):
-        cur.execute("INSERT INTO resCoch (codReserva,codCochera,fechaIngreso,fechaEgreso) VALUES (?,?,?,?,?,?,?)",(info[-1][0],hres[i][0],ing,eng))
-        con.commit()
-    con.close()
 #..................................................................
 
 
