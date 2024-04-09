@@ -26,7 +26,8 @@
     --font-p:"Poppins", sans-serif;
 
     /* fuente para los headers */
-    --font-h:"Epilogue", sans-serif;
+    --font-h:"Nunito", sans-serif;
+
 }
 
 html {
@@ -337,12 +338,16 @@ justify-content: center;
 max-width: 50%;
 }
 
+.containerSomos h2{
+  font-family: Nunito;
+}
+
 .imagenSomos {
 display: flex;
 align-items: center;
 justify-content: center;
 width: fit-content;
-max-width: 50%;
+max-width: 20%;
 }
 
 .imagenSomos img{
@@ -350,7 +355,7 @@ max-width: 100%;
 height: auto;
 }
 #textoSomos {
-margin-top: 2rem;
+margin-top: 5rem;
 }
 
 
