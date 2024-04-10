@@ -183,11 +183,205 @@ class Plantilla:
 
 # ...................................Menus............................
 
+    def pedidos(self,var):
+        hres.append(self.variable2[var])
+        images.controls.pop(var)
+        images.update()
+        self.variable2.pop(var)
+        totalesp = 0
+        costo = 0
+        
+        for i in range(len(hres)):
+            totalesp += hres[i][3]
+            totalesp += hres[i][2]*2
+            costo += hres[i][4]
+        totalH = len(hres)
+        self.contador.value = ("Habitaciones: ",totalH,"total de espacios: ",totalesp,"costo total: ",costo)
+        self.contador.update()
+        self.disponibles()
+
+    def disponibles(self):
+        global images
+        def valor(a):
+            indice = a                              
+            infoH=ft.Row([
+                ft.Text(value=self.variable2[a][0]),
+                ft.Text(value=self.variable2[a][1]),
+                ft.Text(value=self.variable2[a][2]),
+                ft.Text(value=self.variable2[a][3]),
+                ft.Text(value=self.variable2[a][4])            
+            ])                         
+            contener = ft.Container(width=60,height=60,bgcolor=colores[9],content=ft.Column([infoH,ft.TextButton(text="+",on_click=lambda _:self.pedidos(indice))]))  
+            return contener
+        
+        images = ft.GridView(
+            runs_count=5,
+            max_extent=300,
+            child_aspect_ratio=1.0,
+            spacing=20,
+            run_spacing=5,
+            expand=1,
+        )
+        
+        for i in range(len(self.variable2)):
+            images.controls.append(valor(i))                      
+        self.Departamentos.clean()
+        self.Departamentos.content = ft.Column([images])                                                                                                        
+        Container_menus.update()
+
+    def Consulta_aux(self,Ingreso_Res,Egreso_Res):
+        global hres
+        hres = []    
+        self.variable2 = Consulta(Ingreso_Res,Egreso_Res)
+        self.disponibles()
+
+    def res_final(self,cli,emp,fecha,desc,hres,Ing,Eng):
+
+        confirmar = ft.TextButton(text="Confirmar",on_click=lambda _:completar(cli,emp,fecha,desc,hres,Ing,Eng))
+        Container_menus.clean()
+
+        Container_menus.content = ft.Column([ft.Text(value=hres),confirmar])
+        Container_menus.update()
+
+
+    def Reservar_Aux(self,cli,emp,fecha,desc):
+        Container_menus.clean()
+        Verificar = Reservar(cli,emp,fecha,desc)
+        if Verificar == 1:
+            Container_menus.clean()
+            Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
+            Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
+            consultar = ft.TextButton(text="Consultar",on_click=lambda _:self.Consulta_aux(Ingreso_Res.value,Egreso_Res.value))
+            reservarboton = ft.TextButton(text="el otro boton",on_click=lambda _:self.res_final(
+                cli,emp,fecha,desc,hres,Ingreso_Res.value,Egreso_Res.value
+            ))
+            self.Departamentos = ft.Container(width=830,height=500,bgcolor=colores[2],margin=10)
+            self.contador = ft.Text(value="")
+            a=ft.Row([Ingreso_Res,Egreso_Res])
+            b=ft.Row([consultar,reservarboton,self.contador])
+            c=ft.Row([self.Departamentos])
+            Container_menus.content = ft.Column([a,b,c])
+            Container_menus.alignment = ft.alignment.top_center
+            
+            Container_menus.update()
+        if Verificar == 2:
+            #aca poner que el cliente no existe
+            pass
+
     def Menu0(self):
-        print("0")
+        cod_cliente = ft.TextField(label="Dni de cliente",width=300)
+        fecha_res = datetime.now().date()
+        desc = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
+        subir = ft.CupertinoButton(
+            content=ft.Text("Subir", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            border_radius=ft.border_radius.all(15),
+            on_click=lambda _:self.Reservar_Aux(cod_cliente.value,z[2],fecha_res,desc.value))
+        
+        Container_menus.content = ft.Column (
+            [cod_cliente,
+            desc,
+            subir],
+            expand= True
+        )
+        Container_menus.alignment = ft.alignment.center
+        Container_menus.update()
+
+
+
+    def pedidosCoch(self,var):
+        hres.append(self.variable2[var])
+        images.controls.pop(var)
+        images.update()
+        self.variable2.pop(var)
+        self.disponiblesCoch()
+
+    def disponiblesCoch(self):
+        global images
+        def valor(a):
+            indice = a
+            infoH=ft.Row([
+                ft.Text(value=self.variable2[a][0]),
+                ft.Text(value=self.variable2[a][1])            
+            ])                         
+            contener = ft.Container(width=60,height=60,bgcolor=colores[9],content=ft.Column([infoH,ft.TextButton(text="+",on_click=lambda _:self.pedidosCoch(indice))]))  
+            return contener
+        
+        images = ft.GridView(
+            runs_count=5,
+            max_extent=300,
+            child_aspect_ratio=1.0,
+            spacing=20,
+            run_spacing=5,
+            expand=1,
+        )
+        
+        for i in range(len(self.variable2)):
+            images.controls.append(valor(i))                      
+        self.Departamentos.clean()
+        self.Departamentos.content = ft.Column([images])                                                                                                        
+        Container_menus.update()
+                            
+
+    def ConsultaCoch_aux(self,Ingreso_Res,Egreso_Res):
+        global hres
+        hres = []
+        self.variable2 = ConsultaCoch(Ingreso_Res,Egreso_Res)
+        self.disponiblesCoch()
+
+    def resCoch_final(self,cli,emp,fecha,desc,hres,Ing,Eng):
+                                
+        confirmar = ft.TextButton(text="Confirmar",on_click=lambda _:completarCoch(cli,emp,fecha,desc,hres,Ing,Eng))
+        Container_menus.clean()
+
+        Container_menus.content = ft.Column([ft.Text(value=hres),confirmar])
+        Container_menus.update()    
+
+
+    def ReservarCoch_Aux(self,cli,emp,fecha,desc):                   
+        Container_menus.clean()
+        Verificar = ReservarCoch(cli,emp,fecha,desc)
+        
+
+        if Verificar == 1:
+            Container_menus.clean()
+            Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
+            Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
+            consultar = ft.TextButton(text="Consultar",on_click=lambda _:self.ConsultaCoch_aux(Ingreso_Res.value,Egreso_Res.value))
+            reservarboton = ft.TextButton(text="el otro boton",on_click=lambda _:self.resCoch_final(
+                cli,emp,fecha,desc,hres,Ingreso_Res.value,Egreso_Res.value
+            ))
+            self.Departamentos = ft.Container(width=830,height=500,bgcolor=colores[2],margin=10)
+            contador = ft.Text(value="")
+            a=ft.Row([Ingreso_Res,Egreso_Res])
+            b=ft.Row([consultar,reservarboton,contador])
+            c=ft.Row([self.Departamentos])
+            Container_menus.content = ft.Column([a,b,c])
+            Container_menus.alignment = ft.alignment.top_center
+            
+            Container_menus.update()
+        if Verificar == 2:
+            pass    
 
     def Menu1(self):
-        print("1")
+        cod_cliente = ft.TextField(label="Dni de cliente",width=300)
+        fecha_res = datetime.now().date()
+        desc = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
+        subir = ft.CupertinoButton(
+            content=ft.Text("Subir", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            border_radius=ft.border_radius.all(15),
+            on_click=lambda _:self.ReservarCoch_Aux(cod_cliente.value,z[2],fecha_res,desc.value))
+        
+        Container_menus.content = ft.Column (
+            [cod_cliente,
+            desc,
+            subir],
+            expand= True
+        )
+        Container_menus.alignment = ft.alignment.center
+        Container_menus.update()
+
 
     def Cli_Aux(self,a,b,c,d):
         Verificar = Cli_add(a,b,c,d)
@@ -224,13 +418,6 @@ class Plantilla:
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
-
-
-
-
-
-
-        
 
 
 

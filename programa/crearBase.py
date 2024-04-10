@@ -115,7 +115,7 @@ def login(usuario, contraseña):
 
     cur.execute("SELECT * FROM login")
     result=cur.fetchall()
-    print(result)
+
     for i in range(len(result)):
         if str(usuario) == str(result[i][0]) and str(contraseña) == str(result[i][1]):
             con.close()
@@ -182,6 +182,7 @@ def ConsultaCoch(ing,eng):
     cur = con.cursor()
     cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera FROM resCoch) OR codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
     z = cur.fetchall()
+    print(z)
     con.close()
     return z
 
@@ -233,7 +234,7 @@ def crear_coch(piso):
 
 #..........................Menu 4.......................
 def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
-    print("mamacita")
+
     i = 0
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
