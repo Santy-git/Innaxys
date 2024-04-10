@@ -9,30 +9,19 @@ import time
 #.................................................
 
 colores = [
-    '#f3f6f4',
-    '#e1eae1',
-    '#c5d5c6',
-    '#9db8a0',
-    '#729577',
-    '#557c5c',
-    '#3d5e44',
-    '#314b37',
-    '#293c2e',
-    '#223226',
-    '#121c14'
+'#f6f6f6',
+'#e7e7e7',
+'#d1d1d1',
+'#b0b0b0',
+'#888888',
+'#6d6d6d',
+'#5d5d5d',
+'#4f4f4f',
+'#454545',
+'#3d3d3d',
+'#0f0f0f',
 ]
-colores2 = [
-    '#f2f7f4',
-    '#dfece3',
-    '#c0dacb',
-    '#96bfaa',
-    '#699e84',
-    '#4b866b',
-    '#356651',
-    '#2b5141',
-    '#244135',
-    '#1e362d',
-    '#101e19']
+
 
 niveles = {5:"Administrador"}
 
@@ -88,7 +77,7 @@ class Plantilla:
         self.raiz.appbar = ft.AppBar(
             title=self.nombre,
             center_title=True,
-            bgcolor=colores2[8],
+            bgcolor=colores[8],
             actions=[
                 ft.IconButton(ft.icons.LANGUAGE,on_click=self.EnEs,icon_size=35),
                 ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,on_click=self.OFF, icon_size=35,),
@@ -246,9 +235,7 @@ class Plantilla:
                                 value=name,
                                 size=11,
                                 weight='bold',
-                                # Detalles para la animacion
-                                opacity=1,
-                                animate_opacity=200, #Velocidad de animacion
+
 
                             )
                         ]
@@ -256,7 +243,6 @@ class Plantilla:
                 ]
             )
         )
-
 
     def ContainerIcon(self, icon_name:str, text:str):
         return Container(
@@ -270,13 +256,14 @@ class Plantilla:
                         icon=icon_name,
                         icon_size=18,
                         icon_color='white54',
+                        
                         style=ft.ButtonStyle(
                             shape={
                                 "": ft.RoundedRectangleBorder(radius=7),
                             },
                             overlay_color={"":"transparent"}
-
-                        ),
+                        )
+                        ,
                     ),
                     Text(
                         value=text,
@@ -289,7 +276,7 @@ class Plantilla:
             ),
 
         )
-
+        
 
     def build(self):
         
@@ -303,7 +290,7 @@ class Plantilla:
         self.raiz.appbar = ft.AppBar(
         title=self.nombre,
         center_title=True,
-        bgcolor=colores2[8],
+        bgcolor=colores[8],
         actions=[
             ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,on_click=self.OFF, icon_size=35,),
         ])
@@ -335,9 +322,10 @@ class Plantilla:
             label_content=ft.Text("5",color=ft.colors.BLACK),
         )]
 
-
         for i in range(Nivel):
             formatsubmenus.append(formatsubmenusAux[i])
+
+
 
         Left_bar = ft.Container(
 
@@ -349,6 +337,7 @@ class Plantilla:
             horizontal_alignment="center",
 
             controls =[
+                self.UserData(niveles[5]),
                 ft.Divider(height=2 , color='white54'),
                 self.ContainerIcon(ft.icons.SEARCH,"Search"),
                 self.ContainerIcon(ft.icons.DASHBOARD_ROUNDED,"Bashboard"),
@@ -392,11 +381,8 @@ def main(raiz: ft.Page):
     raiz.window_frameless = True
     raiz.window_resizable = False
     raiz.window_full_screen = True
-
     raiz.update()
-
     objeto = Plantilla(raiz)
-
     objeto.ej()
     z = objeto.appbar()
     objeto.login_menu()
