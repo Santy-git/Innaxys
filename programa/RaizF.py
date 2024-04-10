@@ -106,6 +106,7 @@ class Plantilla:
             border='underline',
             color='#303030',
             prefix_icon = ft.icons.PERSON,)
+        
         self.Password : TextField = TextField(
             width=280,
             height=60,
@@ -113,12 +114,12 @@ class Plantilla:
             border='underline',
             color='#303030',
             prefix_icon= ft.icons.LOCK,)
+        
         Button : ElevatedButton=ElevatedButton(
             content=Text(
                 'SIGN IN',
                 color='white',
-                weight='w500',
-                
+                weight='w500',       
             ),width=280,
             bgcolor='black',
             on_click=self.logear)
@@ -193,93 +194,13 @@ class Plantilla:
         Indices_menus = {0:self.Menu0,1:self.Menu1,2:self.Menu2,3:self.Menu3,4:self.Menu4}
         Indices_menus[a]()  
 
-    def Menu(self):
-        global Container_menus
-        self.raiz.clean()
-        self.raiz.appbar = ft.AppBar(
-        title=self.nombre,
-        center_title=True,
-        bgcolor=colores2[8],
-        actions=[
-            ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,on_click=self.OFF, icon_size=35,),
-        ])
-        formatsubmenus=[]
-        formatsubmenusAux=[
-        ft.NavigationRailDestination(
-            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
-            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
-            label_content=ft.Text("1",color=ft.colors.BLACK)
-        ),
-        ft.NavigationRailDestination(
-            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
-            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
-            label_content=ft.Text("2",color=ft.colors.BLACK)
-        ),
-        ft.NavigationRailDestination(
-            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
-            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
-            label_content=ft.Text("3",color=ft.colors.BLACK),
-        ),
-        ft.NavigationRailDestination(
-            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
-            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
-            label_content=ft.Text("4",color=ft.colors.BLACK),
-        ),
-        ft.NavigationRailDestination(
-            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
-            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
-            label_content=ft.Text("5",color=ft.colors.BLACK),
-        )]
-
-        for i in range(Nivel):
-            formatsubmenus.append(formatsubmenusAux[i])
-
-
-        rail = ft.NavigationRail(
-            selected_index=0,
-            label_type=ft.NavigationRailLabelType.ALL,
-            min_width=100,
-            min_extended_width=400,
-            group_alignment=-0.9,
-            bgcolor=colores[1],
-            destinations=formatsubmenus,                   
-            on_change=lambda e:self.Selector(e.control.selected_index),
-            
-        )
-        Container_menus = ft.Container(width=1700,height=850,bgcolor=colores[3],border_radius=ft.border_radius.all(3))
-
-        self.raiz.add(ft.Row(
-                [                    
-                    rail,
-                    ft.VerticalDivider(width=1),
-                    Container_menus
-                ],
-                expand=True,
-            )
-        )
-
-def main(raiz: ft.Page):
-    global altura 
-    global ancho
-    altura = raiz.height
-    ancho = raiz.width
-    raiz.window_prevent_close = True 
-    raiz.bgcolor = ft.colors.BLUE_GREY_100
-    raiz.window_frameless = True
-    raiz.window_resizable = False
-    raiz.window_full_screen = True
-    raiz.update()
-    objeto = Plantilla(raiz)
-    objeto.ej()
-    z = objeto.appbar()
-    objeto.login_menu()
-
-
-ft.app(target=main)
 
 
 
-'''
+
+
+
+
     def HighLight(self,e):
         if e.data == "true":
             e.control.bgcolor= "white10"
@@ -378,7 +299,6 @@ ft.app(target=main)
 
     def build(self):
         
-        print(Nivel)
         self.Left_bar = ft.Container(
 
         width=200,
@@ -420,13 +340,101 @@ ft.app(target=main)
             ]
         ),)
 
-        self.raiz.add(
-        Container(
+        return Container(
             width=200,
             height=1000,
             bgcolor='black',
             border_radius=10,
             content=self.Left_bar
             )
+
+
+
+    def Menu(self):
+        global Container_menus
+        self.raiz.clean()
+        self.raiz.appbar = ft.AppBar(
+        title=self.nombre,
+        center_title=True,
+        bgcolor=colores2[8],
+        actions=[
+            ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,on_click=self.OFF, icon_size=35,),
+        ])
+        formatsubmenus=[]
+        formatsubmenusAux=[
+        ft.NavigationRailDestination(
+            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+            label_content=ft.Text("1",color=ft.colors.BLACK)
+        ),
+        ft.NavigationRailDestination(
+            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+            label_content=ft.Text("2",color=ft.colors.BLACK)
+        ),
+        ft.NavigationRailDestination(
+            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+            label_content=ft.Text("3",color=ft.colors.BLACK),
+        ),
+        ft.NavigationRailDestination(
+            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+            label_content=ft.Text("4",color=ft.colors.BLACK),
+        ),
+        ft.NavigationRailDestination(
+            icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER,color=ft.colors.BLACK),
+            selected_icon_content=ft.Icon(ft.icons.BOOKMARK,color=ft.colors.BLACK),
+            label_content=ft.Text("5",color=ft.colors.BLACK),
+        )]
+
+        for i in range(Nivel):
+            formatsubmenus.append(formatsubmenusAux[i])
+
+
+        rail = ft.NavigationRail(
+            selected_index=0,
+            label_type=ft.NavigationRailLabelType.ALL,
+            min_width=100,
+            min_extended_width=400,
+            group_alignment=-0.9,
+            bgcolor=colores[1],
+            destinations=formatsubmenus,                   
+            on_change=lambda e:self.Selector(e.control.selected_index),
+            
         )
+        Container_menus = ft.Container(width=1700,height=850,bgcolor=colores[3],border_radius=ft.border_radius.all(3))
+
+        self.raiz.add(ft.Row(
+                [                    
+                    rail,
+                    ft.VerticalDivider(width=1),
+                    Container_menus
+                ],
+                expand=True,
+            )
+        )
+
+def main(raiz: ft.Page):
+    global altura 
+    global ancho
+    altura = raiz.height
+    ancho = raiz.width
+    raiz.window_prevent_close = True 
+    raiz.bgcolor = ft.colors.BLUE_GREY_100
+    raiz.window_frameless = True
+    raiz.window_resizable = False
+    raiz.window_full_screen = True
+    raiz.update()
+    objeto = Plantilla(raiz)
+    objeto.ej()
+    z = objeto.appbar()
+    objeto.login_menu()
+
+
+ft.app(target=main)
+
+
+
+
 '''
