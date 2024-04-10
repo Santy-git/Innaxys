@@ -348,6 +348,8 @@ align-items: center;
 justify-content: center;
 width: fit-content;
 max-width: 20%;
+margin-left: 7rem;
+margin-top: 10rem;
 }
 
 .imagenSomos img{
@@ -388,7 +390,7 @@ padding: 0 5%;
 }
 
 .contenedorItems img{
-max-width: 50%;
+max-width: 30%;
 height: auto;
 border-radius: .3rem;
 }
@@ -420,17 +422,17 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 gap: 2rem;
-font-size: 5rem;
+font-size: 3rem;
 }
 
 .benefitItem::before {
 content: ''; /* Agrega contenido al pseudo-elemento */
 padding: 1rem;
 position: absolute;
-top: -10%;
+top: -15%;
 left: 3rem;
 width: 80%; /* Ancho del cuadrado */
-min-height: 20rem; /* Alto del cuadrado */
+min-height: 15rem; /* Alto del cuadrado */
 background-color: #d5d0d0; /* Color del cuadrado con transparencia */
 border-radius: 15px; /* Borde redondeado */
 z-index: -1;
