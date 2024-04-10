@@ -181,6 +181,15 @@ class Plantilla:
 
 # ...................................Menus............................
 
+#...................................Menus............................
+    def Menu0(self):
+        print("0")
+    def Menu1(self):
+        print("1")
+    def Menu2(self):
+        print("2")
+    def Menu3(self):
+        print("3")
 
     def Menu4(self):
 
@@ -231,8 +240,8 @@ class Plantilla:
             expand=True
         )
         Container_menus.update()
-
-    def HighLight(self, e):
+    
+    def HighLight(self,e):
         if e.data == "true":
             e.control.bgcolor = "white10"
             e.control.update()
@@ -255,10 +264,11 @@ class Plantilla:
             e.control.content.controls[1].icon_color = "white54"
             e.control.content.update()
 
-    def Selector(self, a):
-        Indices_menus = {0: self.Menu0, 1: self.Menu1,
-                         2: self.Menu2, 3: self.Menu3, 4: self.Menu4}
-        Indices_menus[a]()
+
+    def Selector(self,a):
+        diccionario = {"Reservar Habitacion":0,"Reservar Cochera":1,"Añadir Cliente":2,"Añadir elementos":3,"Añadir Empleado":4,"Likes":5}
+        Indices_menus = {0:self.Menu0,1:self.Menu1,2:self.Menu2,3:self.Menu3,4:self.Menu4}
+        Indices_menus[diccionario[a]]()  
 
     def UserData(self, name: str):
         # Fila esclusiva para la informacion del usuario
@@ -295,13 +305,14 @@ class Plantilla:
             )
         )
 
-    def ContainerIcon(self, icon_name: str, text: str, a: int):
+    def ContainerIcon(self, icon_name:str, text:str):
+        print("hola")
         return Container(
             width=180,
             height=45,
             border_radius=10,
             on_hover=lambda e: self.HighLight(e),
-            on_click=lambda: self.Selector(a),
+            on_click=lambda e: self.Selector(text),
             content=Row(
                 controls=[
                     ft.IconButton(
@@ -388,20 +399,14 @@ class Plantilla:
                 alignment=ft.alignment.center,
                 horizontal_alignment="center",
 
-                controls=[
-                    self.UserData(niveles[5]),
-                    ft.Divider(height=2, color='white54'),
-                    self.ContainerIcon(ft.icons.SEARCH, "Search", 0),
-                    self.ContainerIcon(
-                        ft.icons.DASHBOARD_ROUNDED, "Bashboard", 1),
-                    self.ContainerIcon(ft.icons.BAR_CHART, "Analitics", 2),
-                    self.ContainerIcon(
-                        ft.icons.NOTIFICATIONS, "Nofications", 3),
-                    self.ContainerIcon(ft.icons.PIE_CHART, "Analitics", 4),
-
-                    # Divisor
-                    ft.Divider(height=5, color="white54"),
-                    self.ContainerIcon(ft.icons.FAVORITE_ROUNDED, "Likes", 5),
+            controls =[
+                self.UserData(niveles[5]),
+                ft.Divider(height=2 , color='white54'),
+                self.ContainerIcon(ft.icons.SEARCH,"Reservar Habitacion"),
+                self.ContainerIcon(ft.icons.DASHBOARD_ROUNDED,"Reservar Cochera"),
+                self.ContainerIcon(ft.icons.BAR_CHART,"Añadir Cliente"),
+                self.ContainerIcon(ft.icons.NOTIFICATIONS,"Añadir elementos"),
+                self.ContainerIcon(ft.icons.PIE_CHART,"Añadir Empleado"),
 
                 ]
             ),)
