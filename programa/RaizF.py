@@ -172,7 +172,7 @@ class Plantilla:
             height=740,
             gradient=ft.LinearGradient(['white30', 'white10']),
             border_radius=ft.border_radius.all(30),
-            margin=ft.margin.symmetric(horizontal=650, vertical=115),
+            margin=ft.margin.symmetric(horizontal=(ancho*0.30)),
 
         )
 
@@ -744,7 +744,7 @@ class Plantilla:
             height=850,
             bgcolor=colores[3],
             border_radius=ft.border_radius.all(3),
-            padding=ft.padding.symmetric(horizontal=650, vertical=115)
+            padding=ft.padding.symmetric(horizontal=(ancho*0.04), vertical=(altura*0.1))
         )
 
         self.raiz.add(ft.Row(
@@ -753,7 +753,7 @@ class Plantilla:
                 ft.VerticalDivider(width=1),
                 ft.Container(
                     Container_menus,
-                    width=1700,
+                    width=1100,
                     height=850,
                     alignment=ft.alignment.center,
                 )
