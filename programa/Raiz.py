@@ -2,7 +2,7 @@
 from crearBase import * 
 import flet as ft
 from flet import *
-from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
+from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column, Container
 from flet_core.control_event import ControlEvent
 from datetime import datetime
 
