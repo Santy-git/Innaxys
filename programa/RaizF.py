@@ -181,16 +181,20 @@ class Plantilla:
 
 # ...................................Menus............................
 
-#...................................Menus............................
+# ...................................Menus............................
+
     def Menu0(self):
         print("0")
+
     def Menu1(self):
         print("1")
+
     def Menu2(self):
         print("2")
+
     def Menu3(self):
         print("3")
-#....................................................zona de trabajo.........................................................................................    
+# ....................................................zona de trabajo.........................................................................................
 
     def Menu4(self):
 
@@ -212,20 +216,24 @@ class Plantilla:
                 self.Menu4()
 
         # --------------Elementos-------------
-        dni_emp = ft.TextField(label="Dni de Empleado", width=300)
-        nombre_emp = ft.TextField(label="Nombre", width=300)
-        email = ft.TextField(label="Email", width=300)
-        telefono = ft.TextField(label="Telefono", width=300)
-        puesto = ft.TextField(label="Puesto", width=300)
-        usuario = ft.TextField(label="Usuario", width=300)
-        contraseña = ft.TextField(label="Contraseña", width=300)
-        nivel = ft.TextField(label="Nivel de acceso", width=300)
+        dni_emp = ft.TextField(label="Dni de Empleado",
+                               width=300, border_radius=20)
+        nombre_emp = ft.TextField(label="Nombre", width=300, border_radius=20)
+        email = ft.TextField(label="Email", width=300, border_radius=20)
+        telefono = ft.TextField(label="Telefono", width=300, border_radius=20)
+        puesto = ft.TextField(label="Puesto", width=300, border_radius=20)
+        usuario = ft.TextField(label="Usuario", width=300, border_radius=20)
+        contraseña = ft.TextField(
+            label="Contraseña", width=300, border_radius=20)
+        nivel = ft.TextField(label="Nivel de acceso",
+                             width=300, border_radius=20)
         registrar = ft.CupertinoButton(
             content=ft.Text("Registrar", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            border_radius=ft.border_radius.all(15),
+            border_radius=ft.border_radius.all(25),
             on_click=lambda _: reg_emp_aux(dni_emp.value, nombre_emp.value, email.value,
-                                           telefono.value, puesto.value, usuario.value, contraseña.value, nivel.value)
+                                           telefono.value, puesto.value, usuario.value, contraseña.value, nivel.value),
+            padding=ft.padding.symmetric(horizontal=120, vertical=0)
         )
         # ---------------como se muestran---------------------
         Container_menus.content = ft.Column(
@@ -241,8 +249,9 @@ class Plantilla:
             expand=True
         )
         Container_menus.update()
-#.............................................................................................................................................    
-    def HighLight(self,e):
+# .............................................................................................................................................
+
+    def HighLight(self, e):
         if e.data == "true":
             e.control.bgcolor = "white10"
             e.control.update()
@@ -265,11 +274,12 @@ class Plantilla:
             e.control.content.controls[1].icon_color = "white54"
             e.control.content.update()
 
-
-    def Selector(self,a):
-        diccionario = {"Reservar Habitacion":0,"Reservar Cochera":1,"Añadir Cliente":2,"Añadir elementos":3,"Añadir Empleado":4,"Likes":5}
-        Indices_menus = {0:self.Menu0,1:self.Menu1,2:self.Menu2,3:self.Menu3,4:self.Menu4}
-        Indices_menus[diccionario[a]]()  
+    def Selector(self, a):
+        diccionario = {"Reservar Habitacion": 0, "Reservar Cochera": 1,
+                       "Añadir Cliente": 2, "Añadir elementos": 3, "Añadir Empleado": 4, "Likes": 5}
+        Indices_menus = {0: self.Menu0, 1: self.Menu1,
+                         2: self.Menu2, 3: self.Menu3, 4: self.Menu4}
+        Indices_menus[diccionario[a]]()
 
     def UserData(self, name: str):
         # Fila esclusiva para la informacion del usuario
@@ -306,7 +316,7 @@ class Plantilla:
             )
         )
 
-    def ContainerIcon(self, icon_name:str, text:str):
+    def ContainerIcon(self, icon_name: str, text: str):
         print("hola")
         return Container(
             width=180,
@@ -400,14 +410,16 @@ class Plantilla:
                 alignment=ft.alignment.center,
                 horizontal_alignment="center",
 
-            controls =[
-                self.UserData(niveles[5]),
-                ft.Divider(height=2 , color='white54'),
-                self.ContainerIcon(ft.icons.SEARCH,"Reservar Habitacion"),
-                self.ContainerIcon(ft.icons.DASHBOARD_ROUNDED,"Reservar Cochera"),
-                self.ContainerIcon(ft.icons.BAR_CHART,"Añadir Cliente"),
-                self.ContainerIcon(ft.icons.NOTIFICATIONS,"Añadir elementos"),
-                self.ContainerIcon(ft.icons.PIE_CHART,"Añadir Empleado"),
+                controls=[
+                    self.UserData(niveles[5]),
+                    ft.Divider(height=2, color='white54'),
+                    self.ContainerIcon(ft.icons.SEARCH, "Reservar Habitacion"),
+                    self.ContainerIcon(
+                        ft.icons.DASHBOARD_ROUNDED, "Reservar Cochera"),
+                    self.ContainerIcon(ft.icons.BAR_CHART, "Añadir Cliente"),
+                    self.ContainerIcon(
+                        ft.icons.NOTIFICATIONS, "Añadir elementos"),
+                    self.ContainerIcon(ft.icons.PIE_CHART, "Añadir Empleado"),
 
                 ]
             ),)
@@ -420,13 +432,23 @@ class Plantilla:
             content=Left_bar
         )
         Container_menus = ft.Container(
-            width=1700, height=850, bgcolor=colores[3], border_radius=ft.border_radius.all(3))
+            width=1700,
+            height=850,
+            bgcolor=colores[3],
+            border_radius=ft.border_radius.all(3),
+            padding=ft.padding.symmetric(horizontal=650, vertical=115)
+        )
 
         self.raiz.add(ft.Row(
             [
                 penas,
                 ft.VerticalDivider(width=1),
-                Container_menus
+                ft.Container(
+                    Container_menus,
+                    width=1700,
+                    height=850,
+                    alignment=ft.alignment.center,
+                )
             ],
             expand=True,
         )
