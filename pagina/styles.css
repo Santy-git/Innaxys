@@ -153,16 +153,17 @@ transform: rotate(180deg);
 }
 
 .contact-bar {
-position: absolute;
-top: 0;
-right: -700px; /* Inicialmente fuera de la pantalla */
-width: 700px; /* Ancho de la barra de contactos */
-height: 11%;
+position: absolute; 
+right: -900px;
+width: 900px;
+height: auto;
 background-color: hsla(0, 0%, 100%, 0);
-transition: right 0.5s ease-in-out; /* Transición para el desplazamiento lateral */
+transition: right 0.5s ease-in-out;
 overflow: hidden;
 padding: 32px;
 display: flex;
+align-items: center;
+justify-content: center;
 gap: 4rem;
 }
 
@@ -192,6 +193,56 @@ align-items: center;
 font-size: 25px;
 }
 
+#idiomas::-ms-expand {
+    display: none;
+}
+
+#idiomas{
+	max-width: 250px;
+	position: relative;
+}
+ 
+#idiomas{
+  display: inline-block;
+  cursor: pointer;
+  padding: 7px 10px;
+  height: 42px;
+  outline: 0; 
+  border: 0;
+  border-radius: 0;
+  background: #f0f0f0;
+  color: #7b7b7b;
+  font-size: 1em;
+  color: #999;
+  font-family: 'Quicksand', sans-serif;
+  border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+ 
+#idiomas:hover{
+	background: #B1E8CD;
+}
+ 
+#idiomas i{
+	position: absolute;
+	right: 20px;
+	top: calc(50% - 13px);
+	width: 16px;
+	height: 16px;
+	display: block;
+	border-left:4px solid #2AC176;
+	border-bottom:4px solid #2AC176;
+	transform: rotate(-45deg); 
+	transition: all 0.25s ease;
+}
+ 
+#idiomas:hover i{
+	margin-top: 3px;
+}
+
+ 
 
 /* --------------------- */
 
@@ -320,6 +371,10 @@ height: 3.2rem;
   box-shadow: inset 0 0 0 5rem rgb(213, 208, 208); /* cambiar el color */
 }
 
+.caracteristicas section {
+  min-width: 100%;
+}
+
   /* la parte del quienes somos */
 .containerPrimerItem{
 display: flex;
@@ -378,19 +433,23 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+min-width: 100%;
 }
 
-.contenedorItems{
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 2rem;
-max-width: 100%;
-padding: 0 5%;
-}
+.contenedorItems {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 2rem;
+  max-width: 100%;
+  min-width: 100%;
+  padding: 0 5%;
+  align-items: center; 
+  justify-items: center; 
+ }
+ 
 
 .contenedorItems img{
-max-width: 30%;
 height: auto;
 border-radius: .3rem;
 }
