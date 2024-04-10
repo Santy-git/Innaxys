@@ -228,7 +228,7 @@ class Plantilla:
             ])                     
             contener = ft.Container(width=60,height=60,
                 border_radius=ft.border_radius.all(3),bgcolor=colores[9],
-                content=ft.Column(spacing=10,controls=[infoH,infoH2,infoH4,infoH3])),
+                content=ft.Column([infoH,infoH2,infoH4,infoH3]))  
             return contener
         
         images = ft.GridView(
