@@ -430,7 +430,7 @@ position: absolute;
 top: -10%;
 left: 3rem;
 width: 80%; /* Ancho del cuadrado */
-min-height: 16rem; /* Alto del cuadrado */
+min-height: 20rem; /* Alto del cuadrado */
 background-color: #d5d0d0; /* Color del cuadrado con transparencia */
 border-radius: 15px; /* Borde redondeado */
 z-index: -1;
