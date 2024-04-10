@@ -299,7 +299,7 @@ class Plantilla:
         fecha_res = datetime.now().date()
         desc = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
         subir = ft.CupertinoButton(
-            content=ft.Text("Subir", color=ft.colors.BLACK),
+            content=ft.Text("Next", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _:self.Reservar_Aux(cod_cliente.value,z[2],fecha_res,desc.value))
