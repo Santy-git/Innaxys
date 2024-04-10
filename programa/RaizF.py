@@ -178,12 +178,53 @@ class Plantilla:
 
 #...................................Menus............................
 
+    def Menu4(self):
 
-    def Selector(self,a):
-        Indices_menus = {0:self.Menu0,1:self.Menu1,2:self.Menu2,3:self.Menu3,4:self.Menu4}
-        Indices_menus[a]()  
+        #--------------Funciones--------------
+        def reg_emp_aux(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
+            validacion = reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel)
+            if validacion:
+                dlg = ft.AlertDialog(
+                title=ft.Text("Registro completo")
+                )
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+                Container_menus.clean()
+                self.Menu4()
 
-
+            
+        #--------------Elementos-------------
+        dni_emp = ft.TextField(label="Dni de Empleado",width=300)
+        nombre_emp = ft.TextField(label="Nombre",width=300)
+        email = ft.TextField(label="Email",width=300)
+        telefono = ft.TextField(label="Telefono",width=300)
+        puesto = ft.TextField(label="Puesto",width=300)
+        usuario = ft.TextField(label="Usuario",width=300)
+        contraseña = ft.TextField(label="Contraseña",width=300)
+        nivel = ft.TextField(label="Nivel de acceso",width=300)
+        registrar = ft.CupertinoButton(
+            content=ft.Text("Registrar", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            border_radius=ft.border_radius.all(15),
+            on_click=lambda _: reg_emp_aux(dni_emp.value,nombre_emp.value,email.value,telefono.value,puesto.value,usuario.value,contraseña.value,nivel.value)
+            )
+        #---------------como se muestran---------------------
+        Container_menus.content = ft.Column (
+            [dni_emp,
+            nombre_emp,
+            email,
+            telefono,
+            puesto,
+            usuario,
+            contraseña,
+            nivel,
+            registrar],
+            expand= True
+        )
+        Container_menus.update()
     def HighLight(self,e):
         if e.data == "true":
             e.control.bgcolor= "white10"
@@ -208,6 +249,10 @@ class Plantilla:
             e.control.content.controls[1].icon_color = "white54"
             e.control.content.update()
 
+
+    def Selector(self,a):
+        Indices_menus = {0:self.Menu0,1:self.Menu1,2:self.Menu2,3:self.Menu3,4:self.Menu4}
+        Indices_menus[a]()  
 
     def UserData(self,name:str):
         # Fila esclusiva para la informacion del usuario
@@ -244,12 +289,13 @@ class Plantilla:
             )
         )
 
-    def ContainerIcon(self, icon_name:str, text:str):
+    def ContainerIcon(self, icon_name:str, text:str, a:int):
         return Container(
             width=180, 
             height=45,
             border_radius=10,
             on_hover=lambda e: self.HighLight(e),
+            on_click=lambda: self.Selector(a),
             content=Row(
                 controls=[
                     ft.IconButton(
@@ -277,13 +323,6 @@ class Plantilla:
 
         )
         
-
-    def build(self):
-        
-        pass
-
-
-
     def Menu(self):
         global Container_menus
         self.raiz.clean()
@@ -339,15 +378,15 @@ class Plantilla:
             controls =[
                 self.UserData(niveles[5]),
                 ft.Divider(height=2 , color='white54'),
-                self.ContainerIcon(ft.icons.SEARCH,"Search"),
-                self.ContainerIcon(ft.icons.DASHBOARD_ROUNDED,"Bashboard"),
-                self.ContainerIcon(ft.icons.BAR_CHART,"Analitics"),
-                self.ContainerIcon(ft.icons.NOTIFICATIONS,"Nofications"),
-                self.ContainerIcon(ft.icons.PIE_CHART,"Analitics"),
+                self.ContainerIcon(ft.icons.SEARCH,"Search",0),
+                self.ContainerIcon(ft.icons.DASHBOARD_ROUNDED,"Bashboard",1),
+                self.ContainerIcon(ft.icons.BAR_CHART,"Analitics",2),
+                self.ContainerIcon(ft.icons.NOTIFICATIONS,"Nofications",3),
+                self.ContainerIcon(ft.icons.PIE_CHART,"Analitics",4),
                 
                 # Divisor
                 ft.Divider(height=5, color="white54"),
-                self.ContainerIcon(ft.icons.FAVORITE_ROUNDED,"Likes"),
+                self.ContainerIcon(ft.icons.FAVORITE_ROUNDED,"Likes",5),
 
             ]
         ),)
