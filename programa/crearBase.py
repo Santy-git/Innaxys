@@ -118,7 +118,6 @@ def login(usuario, contraseña):
 
     for i in range(len(result)):
         if str(usuario) == str(result[i][0]) and str(contraseña) == str(result[i][1]):
-            print(result)
             con.close()
             return True ,result[i][2],result[i][0]
     
@@ -144,13 +143,10 @@ def Consulta(ing,eng):
     val = 0
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("SELECT * FROM habitacion WHERE codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+    cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
     z = cur.fetchall()
-    print(z)
     con.close()
     return z
-
-
 
 def completar(cli,emp,fecha,desc,hres,ing,eng):
     con = s.connect("GestionHotel.sqlite3")
@@ -160,7 +156,45 @@ def completar(cli,emp,fecha,desc,hres,ing,eng):
     cur.execute("SELECT codReserva FROM reserva where codCliente = '"+cli+"' AND codEmpleado = '"+emp+"'")
     info = cur.fetchall()
     for i in range(len(hres)):
-        cur.execute("INSERT INTO resHab (codHab,codReserva,camaMatr,camaInd,costoHab,fechaIngreso,fechaEgreso) VALUES (?,?,?,?,?,?,?)",(hres[i][0],info[0][0],hres[i][2],hres[i][3],hres[i][4],ing,eng))
+        cur.execute("INSERT INTO resHab (codHab,codReserva,camaMatr,camaInd,costoHab,fechaIngreso,fechaEgreso) VALUES (?,?,?,?,?,?,?)",(hres[i][0],info[-1][0],hres[i][2],hres[i][3],hres[i][4],ing,eng))
+        con.commit()
+    con.close()
+
+#..........................menu 1..............................
+def ReservarCoch(dni_cli,dni_emp,fecha,desc):
+    val = 0
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("SELECT dni_cli from cliente")
+    z = cur.fetchall()
+
+    for i in range(len(z)):
+        if int(dni_cli) == z[i][0]:
+            val = 1
+    if val == 1:
+        return 1
+    else:
+        return 2
+
+def ConsultaCoch(ing,eng):
+    val = 0
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera FROM resCoch) OR codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+    z = cur.fetchall()
+    print(z)
+    con.close()
+    return z
+
+def completarCoch(cli,emp,fecha,desc,hres,ing,eng):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
+    con.commit()
+    cur.execute("SELECT codReserva FROM reserva where codCliente = '"+cli+"' AND codEmpleado = '"+emp+"'")
+    info = cur.fetchall()
+    for i in range(len(hres)):
+        cur.execute("INSERT INTO resCoch (codReserva,codCochera,fechaIngreso,fechaEgreso) VALUES (?,?,?,?)",(info[-1][0],hres[i][0],ing,eng))
         con.commit()
     con.close()
 
@@ -200,6 +234,7 @@ def crear_coch(piso):
 
 #..........................Menu 4.......................
 def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
+
     i = 0
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
@@ -209,7 +244,6 @@ def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
     for i in range(len(var)):
         if var[i][0] == usuario:
             i = 1
-    print(i)
     if i == 0:
         cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
         con.commit()

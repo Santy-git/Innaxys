@@ -1,7 +1,8 @@
 # ____________________________________________LIBRERIAS____________________________________________
 from crearBase import * 
 import flet as ft
-from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column
+from flet import *
+from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column, Container
 from flet_core.control_event import ControlEvent
 from datetime import datetime
 
@@ -49,14 +50,14 @@ class Maestro:
         
             # seteo de la pagina
             raiz.window_prevent_close = True
-            raiz.window_height = 700
-            raiz.window_width = 500
-            raiz.window_bgcolor = colores2[0]
+            raiz.window_height = 740
+            raiz.window_width = 580
+            raiz.window_bgcolor = colores2[10]
             raiz.bgcolor = ft.colors.TRANSPARENT
+            raiz.window_title_bar_hidden = True
             raiz.window_frameless = True
             raiz.window_resizable = False
-            raiz.padding = 10
-            raiz.window_center()
+            raiz.window_full_screen = True
    
             # ------------------------------------- 
             
@@ -105,43 +106,121 @@ class Maestro:
                 ]
 
             )
+            # ------------CONTENEDOR V2------------
+    
+            User : TextField = TextField(
+                                            width=290,
+                                            height=60,
+                                            label='User',
+                                            border='underline',
+                                            color='#303030',
+                                            prefix_icon = icons.PERSON,
+                                        )
+            Password : TextField = TextField(
+                                            width=280,
+                                            height=60,
+                                            label='Password',
+                                            border='underline',
+                                            color='#303030',
+                                            prefix_icon= icons.LOCK,
+                                        )
+            Button : ElevatedButton=ElevatedButton(
+                                            content=Text(
+                                                'SIGN IN',
+                                                color='white',
+                                                weight='w500',
+                                                
+                                            ),width=280,
+                                            bgcolor='black',
+                                            on_click=logear,
+                                        )
+                                    
+    
+            body = Container(
+                Container(
+                    Stack([
+                        Container(
+                            border_radius=11,
+                            rotate=Rotate(0.98*3.14), #Degree
+                            width=360,
+                            height=560,
+                            bgcolor='#22ffffff'
+                        ),
+                        Container(
+                            Container(
+                                Column([
+                                    Container(
+                                        Image(
+                                            src='axys.png',
+                                            width=50,
+                                        ),padding=padding.only(150,20),
+                                    ),
+                                    Text(
+                                        'Sign in',
+                                        width=360,
+                                        size=30,
+                                        weight='w900',
+                                        text_align='center',
+                                    ),
+                                    Text(
+                                        'Please login to use the plataform',
+                                        width=360,
+                                        text_align='center',
 
-            # ------------CONTENEDOR------------
-            def validate(e: ControlEvent) -> None:
-                if all([User.value, Password.value]):
-                    Button.disabled = False
-                else:
-                    Button.disabled = True
-
-                raiz.update()
-
-            User: TextField = TextField(label="User", text_align=ft.TextAlign.LEFT, width= 200)
-            Password: TextField = TextField(label="Password", text_align=ft.TextAlign.LEFT, width= 200, password = True, can_reveal_password=True)
-            Button: ElevatedButton = ElevatedButton(text="Sign Up",on_click=logear)
-            
-            User.on_change = validate
-            Password.on_change = validate
-            
-            Filas_login = Row(
-                controls=[
-                    Column(
-                        [
-                            User,
-                            Password,
-                            Button]
-                    )
-                ],
-                alignment=ft.MainAxisAlignment.CENTER,
+                                    ),
+                                    Container(User,padding=padding.only(25,20)
+                                        ),
+                                    Container(Password,padding=padding.only(25,20),
+                                    ),
+                                    Container(
+                                        TextButton(
+                                            'I forgot my password: ',
+                                        ),padding=padding.only(90),
+                                    ),
+                                    Container(Button,padding=padding.only(40,10)
+                                    ),
+                                    Container(
+                                        Row([
+                                            Text(
+                                                'Don`t have an account?',
+                                            ),
+                                            TextButton(
+                                                'Create a account',
+                                            )
+                                        ],spacing=-10),padding=padding.only(40),
+                                    )
+                                ])
+                            ),
+                            width=360,
+                            height=560,
+                            bgcolor='#22ffffff',
+                            border_radius=11,
+                        )
+                    ]),
+                    padding=110,
+                    width=360,
+                    height=560 
+                ),  
+                width=580,
+                height=740,
+                gradient=LinearGradient(['white30','white10'])
             )
 
-            contenedor_login = ft.Container(content=Filas_login, height=623, width=500, bgcolor=colores[3], border_radius=ft.border_radius.all(10), padding=ft.padding.only(top=70))
-            raiz.add(contenedor_login)
+
+
+            # ------------CONTENEDOR V2------------
+
+            # ------------CONTENEDOR------------
+            
+
+            raiz.add(body)
 
 
             #_______________________________SUB MENUS______________________________________
             """
             Menu 0 generar una reserva
-            menu 1 ingresar cliente
+            Menu 1 generar una reserva de cochera
+            menu 2 ingresar cliente
             Menu 3 crear Habitacion y cochera
             Menu 4 registro de empleado
             """
@@ -164,7 +243,6 @@ class Maestro:
                                 images.controls.pop(var)
                                 images.update()
                                 variable.pop(var)
-                                print(hres)
                                 totalesp = 0
                                 costo = 0
                                 
@@ -263,6 +341,104 @@ class Maestro:
                 Container_menus.update()
 
             def Menu1():
+                def ReservarCoch_Aux(cli,emp,fecha,desc):
+                    
+                    Container_menus.clean()
+                    Verificar = ReservarCoch(cli,emp,fecha,desc)
+                    print("Verificar: ",Verificar)
+
+                    if Verificar == 1:
+                        def ConsultaCoch_aux(Ingreso_Res,Egreso_Res):
+                            global hres
+                            hres = []
+                            variable = ConsultaCoch(Ingreso_Res,Egreso_Res)
+
+                            def pedidosCoch(var):
+                                hres.append(variable[var])
+                                images.controls.pop(var)
+                                images.update()
+                                variable.pop(var)
+                                contador.update()
+                                disponiblesCoch()
+
+                            def disponiblesCoch():
+                                global images
+                                def valor(a):
+                                    indice = a
+                                    infoH=ft.Row([
+                                        ft.Text(value=variable[a][0]),
+                                        ft.Text(value=variable[a][1])            
+                                    ])                         
+                                    contener = ft.Container(width=60,height=60,bgcolor=colores[9],content=ft.Column([infoH,ft.TextButton(text="+",on_click=lambda _:pedidosCoch(indice))]))  
+                                    return contener
+                                
+                                images = ft.GridView(
+                                    runs_count=5,
+                                    max_extent=300,
+                                    child_aspect_ratio=1.0,
+                                    spacing=20,
+                                    run_spacing=5,
+                                    expand=1,
+                                )
+                                
+                                for i in range(len(variable)):
+                                    images.controls.append(valor(i))                      
+                                Departamentos.clean()
+                                Departamentos.content = ft.Column([images])                                                                                                        
+                                Container_menus.update()
+                            
+                            variable = Consulta(Ingreso_Res,Egreso_Res)
+                            disponiblesCoch()
+
+                        def resCoch_final(cli,emp,fecha,desc,hres,Ing,Eng):
+                            
+                            confirmar = ft.TextButton(text="Confirmar",on_click=lambda _:completarCoch(cli,emp,fecha,desc,hres,Ing,Eng))
+                            Container_menus.clean()
+
+                            Container_menus.content = ft.Column([ft.Text(value=hres),confirmar])
+                            Container_menus.update()                       
+
+
+
+                        Container_menus.clean()
+                        Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
+                        Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
+                        consultar = ft.TextButton(text="Consultar",on_click=lambda _:ConsultaCoch_aux(Ingreso_Res.value,Egreso_Res.value))
+                        reservarboton = ft.TextButton(text="el otro boton",on_click=lambda _:resCoch_final(
+                            cli,emp,fecha,desc,hres,Ingreso_Res.value,Egreso_Res.value
+                        ))
+                        Departamentos = ft.Container(width=830,height=500,bgcolor=colores[2],margin=10)
+                        contador = ft.Text(value="")
+                        a=ft.Row([Ingreso_Res,Egreso_Res])
+                        b=ft.Row([consultar,reservarboton,contador])
+                        c=ft.Row([Departamentos])
+                        Container_menus.content = ft.Column([a,b,c])
+                        Container_menus.alignment = ft.alignment.top_center
+                        
+                        Container_menus.update()
+                    if Verificar == 2:
+                        pass
+
+                cod_cliente = ft.TextField(label="Dni de cliente",width=300)
+                fecha_res = datetime.now().date()
+                desc = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
+                subir = ft.CupertinoButton(
+                    content=ft.Text("Subir", color=ft.colors.BLACK),
+                    bgcolor=colores[1],
+                    border_radius=ft.border_radius.all(15),
+                    on_click=lambda _:ReservarCoch_Aux(cod_cliente.value,z[2],fecha_res,desc.value))
+                
+                Container_menus.content = ft.Column (
+                    [cod_cliente,
+                    desc,
+                    subir],
+                    expand= True
+                )
+                Container_menus.alignment = ft.alignment.center
+                Container_menus.update()
+
+
+            def Menu2():
                 #Ingresar cliente
                 def Cli_Aux(a,b,c,d):
                     Verificar = Cli_add(a,b,c,d)
@@ -299,8 +475,6 @@ class Maestro:
                 Container_menus.alignment = ft.alignment.center
                 Container_menus.update()
 
-            def Menu2():
-                pass
             def Menu3():
                 def cochera():
                     def crear_coch_aux(piso):
