@@ -195,12 +195,6 @@ class Plantilla:
         Indices_menus[a]()  
 
 
-
-
-
-
-
-
     def HighLight(self,e):
         if e.data == "true":
             e.control.bgcolor= "white10"
@@ -299,54 +293,7 @@ class Plantilla:
 
     def build(self):
         
-        self.Left_bar = ft.Container(
-
-        width=200,
-        height=580,
-        content = Column(
-
-            alignment=ft.alignment.center,
-            horizontal_alignment="center",
-
-            controls =[
-                # Los iconos del SideBar aca
-
-                # Nivel y informacion del usuario(3 Niveles , Administrador ,empleado, cliente)
-                
-                self.UserData(niveles[Nivel]),
-
-                # Boton para redimensionar 
-
-                Container(
-                    width= 24,
-                    height=24,
-                    bgcolor= "bluegrey800",
-                    border_radius= 8
-                    # Func es la animacion para minimizar y maximizar
-                ),
-
-                # Divisor
-                ft.Divider(height=2 , color='white54'),
-                self.ContainerIcon(ft.icons.SEARCH,"Search"),
-                self.ContainerIcon(ft.icons.DASHBOARD_ROUNDED,"Bashboard"),
-                self.ContainerIcon(ft.icons.BAR_CHART,"Analitics"),
-                self.ContainerIcon(ft.icons.NOTIFICATIONS,"Nofications"),
-                self.ContainerIcon(ft.icons.PIE_CHART,"Analitics"),
-                
-                # Divisor
-                ft.Divider(height=5, color="white54"),
-                self.ContainerIcon(ft.icons.FAVORITE_ROUNDED,"Likes"),
-
-            ]
-        ),)
-
-        return Container(
-            width=200,
-            height=1000,
-            bgcolor='black',
-            border_radius=10,
-            content=self.Left_bar
-            )
+        pass
 
 
 
@@ -388,26 +335,46 @@ class Plantilla:
             label_content=ft.Text("5",color=ft.colors.BLACK),
         )]
 
+
         for i in range(Nivel):
             formatsubmenus.append(formatsubmenusAux[i])
 
+        Left_bar = ft.Container(
 
-        rail = ft.NavigationRail(
-            selected_index=0,
-            label_type=ft.NavigationRailLabelType.ALL,
-            min_width=100,
-            min_extended_width=400,
-            group_alignment=-0.9,
-            bgcolor=colores[1],
-            destinations=formatsubmenus,                   
-            on_change=lambda e:self.Selector(e.control.selected_index),
-            
-        )
+        width=200,
+        height=580,
+        content = Column(
+
+            alignment=ft.alignment.center,
+            horizontal_alignment="center",
+
+            controls =[
+                ft.Divider(height=2 , color='white54'),
+                self.ContainerIcon(ft.icons.SEARCH,"Search"),
+                self.ContainerIcon(ft.icons.DASHBOARD_ROUNDED,"Bashboard"),
+                self.ContainerIcon(ft.icons.BAR_CHART,"Analitics"),
+                self.ContainerIcon(ft.icons.NOTIFICATIONS,"Nofications"),
+                self.ContainerIcon(ft.icons.PIE_CHART,"Analitics"),
+                
+                # Divisor
+                ft.Divider(height=5, color="white54"),
+                self.ContainerIcon(ft.icons.FAVORITE_ROUNDED,"Likes"),
+
+            ]
+        ),)
+
+        penas = Container(
+            width=200,
+            height=1000,
+            bgcolor='black',
+            border_radius=10,
+            content=Left_bar
+            )    
         Container_menus = ft.Container(width=1700,height=850,bgcolor=colores[3],border_radius=ft.border_radius.all(3))
 
         self.raiz.add(ft.Row(
                 [                    
-                    rail,
+                    penas,
                     ft.VerticalDivider(width=1),
                     Container_menus
                 ],
@@ -425,8 +392,11 @@ def main(raiz: ft.Page):
     raiz.window_frameless = True
     raiz.window_resizable = False
     raiz.window_full_screen = True
+
     raiz.update()
+
     objeto = Plantilla(raiz)
+
     objeto.ej()
     z = objeto.appbar()
     objeto.login_menu()
@@ -437,4 +407,3 @@ ft.app(target=main)
 
 
 
-'''
