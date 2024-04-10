@@ -233,6 +233,7 @@ def crear_coch(piso):
 
 #..........................Menu 4.......................
 def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
+    print("mamacita")
     i = 0
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
@@ -242,7 +243,6 @@ def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
     for i in range(len(var)):
         if var[i][0] == usuario:
             i = 1
-    
     if i == 0:
         cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
         con.commit()
