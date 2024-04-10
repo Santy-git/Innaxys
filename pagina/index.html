@@ -197,27 +197,30 @@
   <script src="app.js"></script>
   <script>
     
-  let translations = {};
+    let translations = {};
 
-  // Cargar las traducciones desde el archivo JSON
-  fetch('traducciones.json')
-      .then(response => response.json())
-      .then(data => {
+fetch('traducciones.json')
+    .then(response => response.json())
+    .then(data => {
         translations = data;
-        // Establecer el idioma inicial basado en el idioma del navegador o un valor predeterminado
         const lang = navigator.language.startsWith('es') ? 'es' : 'en';
         changeLanguage(lang);
-      });
+    })
+    .catch(error => console.error('Error loading translations:', error));
 
-  function changeLanguage(lang) {
-      // Cambiar el idioma de la página
-      document.documentElement.lang = lang;
-      const elements = document.querySelectorAll('[data-translate]');
-      elements.forEach(element => {
+function changeLanguage(lang) {
+    document.documentElement.lang = lang;
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
         const key = element.getAttribute('data-translate');
-        element.textContent = translations[lang][key];
-      });
-  }
+        if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        } else {
+            console.error(`Translation for key '${key}' not found in language '${lang}'`);
+        }
+    });
+}
+
   </script>
 
 </html>
