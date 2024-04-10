@@ -237,10 +237,19 @@ class Plantilla:
 
     def res_final(self,cli,emp,fecha,desc,hres,Ing,Eng):
 
-        confirmar = ft.TextButton(text="Confirmar",on_click=lambda _:completar(cli,emp,fecha,desc,hres,Ing,Eng))
-        Container_menus.clean()
-
-        Container_menus.content = ft.Column([ft.Text(value=hres),confirmar])
+        confirmar = ft.TextButton(text="Confirmar",icon_color="#659863",on_click=lambda _:completar(cli,emp,fecha,desc,hres,Ing,Eng))
+        Container_menus.clean()   
+        a = 0
+        c = 0
+        d = 0
+        e = 0    
+        for i in range(len(hres)):
+            a += hres[i][0]
+            c += hres[i][2]
+            d += hres[i][3]
+            e += hres[i][4]
+        texto = "Numero de habitacion: "+str(a)+" camas matrimoniales:"+str(c)+" camas individuales:"+str(d)+" Costo:"+str(e)
+        Container_menus.content = ft.Container(content=ft.Row([ft.Text(value=texto),confirmar]),bgcolor='#3B6639',width=ancho*0.56,height=altura*0.1,border_radius=ft.border_radius.all(3))
         Container_menus.update()
 
 
@@ -330,11 +339,18 @@ class Plantilla:
         self.disponiblesCoch()
 
     def resCoch_final(self,cli,emp,fecha,desc,hres,Ing,Eng):
+        confirmar = ft.TextButton(text="Confirmar",icon_color="#659863",on_click=lambda _:completarCoch(cli,emp,fecha,desc,hres,Ing,Eng))
+        Container_menus.clean()   
+        a = []   
+        for i in range(len(hres)):
+            a.append(hres[i][0])
+            
+        texto = "Numeros de las habitaciones: "+str(a)
+        Container_menus.content = ft.Container(content=ft.Row([ft.Text(value=texto),confirmar]),bgcolor='#3B6639',width=ancho*0.56,height=altura*0.1,border_radius=ft.border_radius.all(3))
+        Container_menus.update()
                                 
         confirmar = ft.TextButton(text="Confirmar",on_click=lambda _:completarCoch(cli,emp,fecha,desc,hres,Ing,Eng))
         Container_menus.clean()
-
-        Container_menus.content = ft.Column([ft.Text(value=hres),confirmar])
         Container_menus.update()    
 
 
