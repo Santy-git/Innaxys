@@ -450,6 +450,7 @@ min-width: 100%;
  
 
 .contenedorItems img{
+max-width: 30%;
 height: auto;
 border-radius: .3rem;
 }
