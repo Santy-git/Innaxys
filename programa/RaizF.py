@@ -425,7 +425,7 @@ class Plantilla:
         cocherav = ft.CupertinoButton(text="cochera",width=300,on_click=lambda _:self.cochera(),bgcolor=colores[5])
         habitacionv = ft.CupertinoButton(text="habitacion",width=300,on_click=lambda _:self.habitacion(),bgcolor=colores[5])
         Container_menus.content = ft.Row([cocherav,habitacionv])
-        Container_menus.alignment = ft.alignment.center
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho*0.18)
         Container_menus.update()
             
     def crear_coch(self,a):
