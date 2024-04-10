@@ -205,13 +205,30 @@ class Plantilla:
         def valor(a):
             indice = a                              
             infoH=ft.Row([
-                ft.Text(value=self.variable2[a][0]),
-                ft.Text(value=self.variable2[a][1]),
-                ft.Text(value=self.variable2[a][2]),
-                ft.Text(value=self.variable2[a][3]),
-                ft.Text(value=self.variable2[a][4])            
-            ])                         
-            contener = ft.Container(width=60,height=60,bgcolor=colores[9],content=ft.Column([infoH,ft.TextButton(text="+",on_click=lambda _:self.pedidos(indice))]))  
+                ft.Container(width=50,height=50,bgcolor='#A3CD91',
+                             border_radius=ft.border_radius.all(6),
+                             margin=ft.margin.all(10),
+                             alignment=ft.alignment.center,
+                             content=ft.Text(value=self.variable2[a][0],color='#000000')),
+                             
+                ft.Text(value="Piso: "+str(self.variable2[a][1]))          
+            ])
+            infoH2 = ft.Row([
+                ft.Text(value="Camas Individuales: "+str(self.variable2[a][2])),
+                
+            ]) 
+            infoH4 = ft.Row([
+                ft.Text(value="Camas Matrimoniales: "+str(self.variable2[a][3])) ,
+                
+            ])     
+            
+            infoH3 = ft.Row([     
+                ft.Text(value="Costo: "+str(self.variable2[a][4])), 
+                ft.TextButton(text="+",on_click=lambda _:self.pedidos(indice))
+            ])                     
+            contener = ft.Container(width=60,height=60,
+                border_radius=ft.border_radius.all(3),bgcolor=colores[9],
+                content=ft.Column(spacing=10,controls=[infoH,infoH2,infoH4,infoH3])),
             return contener
         
         images = ft.GridView(
