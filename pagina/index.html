@@ -1,268 +1,281 @@
 <!DOCTYPE htmlp>
 <html lang="en">
+  <head>
+    <title>Innaxys</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<head>
-  <title>Innaxys</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
+  <body>
+    <!-- contiene desde la barra de arriba hasta los botones -->
+    <section class="containerPrincipio">
+      <!-- La barra donde está el logo, el nombre de la empresa y el menu de contactos -->
+      <div class="barra">
+        <nav>
+          <div class="logo">
+            <img src="rsc/axys.png" alt="imagen del logo" />
+          </div>
 
-<body>
-  <!-- contiene desde la barra de arriba hasta los botones -->
-  <section class="containerPrincipio">
-    <!-- La barra donde está el logo, el nombre de la empresa y el menu de contactos -->
-    <div class="barra">
-      <nav>
-        <div class="logo">
-          <img src="rsc/axys.png" alt="imagen del logo" />
-        </div>
-        
-        <!-- contactos -->
-        <input type="checkbox" id="checkbox" />
-        <label for="checkbox" class="toggle">
-          <div class="bars" id="bar1"></div>
-          <div class="bars" id="bar2"></div>
-          <div class="bars" id="bar3"></div>
-        </label>
-        <div class="contact-bar" id="contactBar">
-          <div class="color-phone">
-            <i class="fa-solid fa-phone"></i>
-            <p>3541-55 8609</p>
+          <!-- contactos -->
+          <input type="checkbox" id="checkbox" />
+          <label for="checkbox" class="toggle">
+            <div class="bars" id="bar1"></div>
+            <div class="bars" id="bar2"></div>
+            <div class="bars" id="bar3"></div>
+          </label>
+          <div class="contact-bar" id="contactBar">
+            <select id="idiomas">
+              <option value="es">Español</option>
+              <option value="en">English</option>
+              <i></i>
+            </select>
           </div>
-          <div class="color-email">
-            <i class="fa-solid fa-envelope"></i>
-            <p>info.innaxys@gmail.com</p>
-          </div>
-          <select id="idiomas">
-            <option value="es">Español</option>
-            <option value="en">English</option>
-            <i></i>
-          </select>
-        </div>
-      </nav>
-    </div>
+        </nav>
+      </div>
 
-    <!-- Imagen con la frase de la empresa -->
-    <div class="containerImagen">
-      <img class="imagenHotel" src="rsc/fondoverde.png" alt="imagen de relleno" />
-      <div class="imagenSuperpuesta">
-        <img src="rsc/logo.png" alt="nombre de la empresa" />
-        <div class="texto">
-          <p data-translate="descubre"></p>
+      <!-- Imagen con la frase de la empresa -->
+      <div class="containerImagen">
+        <img
+          class="imagenHotel"
+          src="rsc/fondoverde.png"
+          alt="imagen de relleno"
+        />
+        <div class="imagenSuperpuesta">
+          <img src="rsc/logo.png" alt="nombre de la empresa" />
+          <div class="texto">
+            <p data-translate="descubre"></p>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- Los botones que te redireccionan al resto de la pagina -->
-    <div class="container">
-      <div class="containerButtons">
-        <div class="contBotonTexto">
-          <div class="somos" onclick="scrollToSection('quienes-somos')">
-            <i class="fa-solid fa-user"></i>
+      <!-- Los botones que te redireccionan al resto de la pagina -->
+      <div class="container">
+        <div class="containerButtons">
+          <div class="contBotonTexto">
+            <div class="somos" onclick="scrollToSection('quienes-somos')">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <p data-translate="quienesSomos"></p>
           </div>
-          <p data-translate="quienesSomos"></p>
-        </div>
 
-        <div class="contBotonTexto">
-          <div class="ofrecemos" onclick="scrollToSection('que-ofrecemos')">
-            <i class="fa-solid fa-handshake"></i>
+          <div class="contBotonTexto">
+            <div class="ofrecemos" onclick="scrollToSection('que-ofrecemos')">
+              <i class="fa-solid fa-handshake"></i>
+            </div>
+            <p data-translate="queOfrecemos"></p>
           </div>
-          <p data-translate="queOfrecemos"></p>
-        </div>
 
-        <div class="contBotonTexto">
-          <div class="beneficios" onclick="scrollToSection('beneficios')">
-            <i class="fa-solid fa-list-ul"></i>
+          <div class="contBotonTexto">
+            <div class="beneficios" onclick="scrollToSection('beneficios')">
+              <i class="fa-solid fa-list-ul"></i>
+            </div>
+            <p data-translate="beneficios"></p>
           </div>
-          <p data-translate="beneficios"></p>
-        </div>
 
-        <div class="contBotonTexto">
-          <div class="compatibilidad" onclick="scrollToSection('compatibilidad')">
-            <i class="fa-solid fa-display"></i>
-          </div>
-          <p data-translate="compatibilidad"></p>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-  <section class="caracteristicas">
-    <!-- Quienes somos -->
-    <section class="containerPrimerItem" id="quienes-somos">
-      <div class="imagenSomos">
-        <img src="rsc/axys.png" alt="imagen de quienes somos" />
-      </div>
-      <div class="containerSomos">
-        <h2 data-translate="quienesSomos"></h2>
-        <p id="textoSomos" data-translate="quienesSomosDesc"></p>
-      </div>
-    </section>
-    <!-- Que ofrecemos -->
-    <section class="containerSegundoItem" id="que-ofrecemos">
-      <!-- un div para cada item que pongamos -->
-      <div class="tituloOfrecemos">
-        <h2 data-translate="queOfrecemos"></h2>
-      </div>
-      <div class="items">
-        <div class="contenedorItems" id="seccion1" >
-          <p data-translate="queOfrecemosDesc1"></p>
-          <img src="rsc/items.jpg" alt="un item de que ofrecemos" />
-        </div>
-        <div class="contenedorItems" id="seccion2">
-          <img src="rsc/items.jpg" alt="un item de que ofrecemos" />
-          <p data-translate="queOfrecemosDesc2"></p>
-        </div>
-      </div>
-    </section>
-    <!-- Beneficios -->
-    <section class="containerTercerItem" id="beneficios">
-      <div>
-        <h2 data-translate="beneficios"></h2>
-      </div>
-      <div class="containerBeneficios">
-        <div class="benefitItem">
-          <i class="fa-solid fa-lightbulb"></i>
-          <div class="contTexto">
-            <h3 class="tituloBeneficio" data-translate="eficiencia">Eficiencia</h3>
-            <p class="descBeneficio" data-translate="eficienciaDesc"></p>
-          </div>
-        </div>
-        <div class="benefitItem">
-          <i class="fa-solid fa-arrow-trend-up"></i>
-          <div class="contTexto">
-            <h3 class="tituloBeneficio" data-translate="rentabilidad"></h3>
-            <p class="descBeneficio" data-translate="rentabilidadDesc"></p>
-          </div>
-        </div>
-        <div class="benefitItem">
-          <i class="fa-solid fa-bolt"></i>
-          <div class="contTexto">
-            <h3 class="tituloBeneficio" data-translate="persoFlexi"></h3>
-            <p class="descBeneficio" data-translate="persoFlexiDesc"></p>
-          </div>
-        </div>
-        <div class="benefitItem">
-          <i class="fa-solid fa-people-roof"></i>
-          <div class="contTexto">
-            <h3 class="tituloBeneficio" data-translate="experiencia"></h3>
-            <p class="descBeneficio" data-translate="experienciaDesc"></p>
+          <div class="contBotonTexto">
+            <div
+              class="compatibilidad"
+              onclick="scrollToSection('compatibilidad')"
+            >
+              <i class="fa-solid fa-display"></i>
+            </div>
+            <p data-translate="compatibilidad"></p>
           </div>
         </div>
       </div>
     </section>
-    <!-- compatibilidad -->
-    <section class="containerCuartoItem" id="compatibilidad">
-      <div>
-        <h2 data-translate="compatibilidad"></h2>
-      </div>
-      <div class="sistemasCompatibles">
-        <i class="fa-solid fa-laptop" title="Laptop"></i>
-        <i class="fa-solid fa-desktop" title="Computadora"></i>
-        <i class="fa-brands fa-android" title="Android"></i>
-        <i class="fa-brands fa-apple" title="Apple"></i>
-      </div>
-      <p data-translate="compatibilidadDesc"></p>
+    <section class="caracteristicas">
+      <!-- Quienes somos -->
+      <section class="containerPrimerItem" id="quienes-somos">
+        <div class="imagenSomos">
+          <img src="rsc/axys.png" alt="imagen de quienes somos" />
+        </div>
+        <div class="containerSomos">
+          <h2 data-translate="quienesSomos"></h2>
+          <p id="textoSomos" data-translate="quienesSomosDesc"></p>
+        </div>
+      </section>
+      <!-- Que ofrecemos -->
+      <section class="containerSegundoItem" id="que-ofrecemos">
+        <!-- un div para cada item que pongamos -->
+        <div class="tituloOfrecemos">
+          <h2 data-translate="queOfrecemos"></h2>
+        </div>
+        <div class="items">
+          <div class="contenedorItems" id="seccion1">
+            <p data-translate="queOfrecemosDesc1"></p>
+            <img src="rsc/items.jpg" alt="un item de que ofrecemos" />
+          </div>
+          <div class="contenedorItems" id="seccion2">
+            <img src="rsc/items.jpg" alt="un item de que ofrecemos" />
+            <p data-translate="queOfrecemosDesc2"></p>
+          </div>
+        </div>
+      </section>
+      <!-- Beneficios -->
+      <section class="containerTercerItem" id="beneficios">
+        <div>
+          <h2 data-translate="beneficios"></h2>
+        </div>
+        <div class="containerBeneficios">
+          <div class="benefitItem">
+            <i class="fa-solid fa-lightbulb"></i>
+            <div class="contTexto">
+              <h3 class="tituloBeneficio" data-translate="eficiencia">
+                Eficiencia
+              </h3>
+              <p class="descBeneficio" data-translate="eficienciaDesc"></p>
+            </div>
+          </div>
+          <div class="benefitItem">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+            <div class="contTexto">
+              <h3 class="tituloBeneficio" data-translate="rentabilidad"></h3>
+              <p class="descBeneficio" data-translate="rentabilidadDesc"></p>
+            </div>
+          </div>
+          <div class="benefitItem">
+            <i class="fa-solid fa-bolt"></i>
+            <div class="contTexto">
+              <h3 class="tituloBeneficio" data-translate="persoFlexi"></h3>
+              <p class="descBeneficio" data-translate="persoFlexiDesc"></p>
+            </div>
+          </div>
+          <div class="benefitItem">
+            <i class="fa-solid fa-people-roof"></i>
+            <div class="contTexto">
+              <h3 class="tituloBeneficio" data-translate="experiencia"></h3>
+              <p class="descBeneficio" data-translate="experienciaDesc"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- compatibilidad -->
+      <section class="containerCuartoItem" id="compatibilidad">
+        <div>
+          <h2 data-translate="compatibilidad"></h2>
+        </div>
+        <div class="sistemasCompatibles">
+          <i class="fa-solid fa-laptop" title="Laptop"></i>
+          <i class="fa-solid fa-desktop" title="Computadora"></i>
+          <i class="fa-brands fa-android" title="Android"></i>
+          <i class="fa-brands fa-apple" title="Apple"></i>
+        </div>
+        <p data-translate="compatibilidadDesc"></p>
+      </section>
     </section>
+    <!-- Comprar el software -->
+    <section class="containerCompra">
+      <h2 data-translate="compra"></h2>
+      <div class="compra">
+        <h3 data-translate="solicitarInfo"></h3>
+        <form id="compraForm">
+          <div class="form-group">
+            <label for="nombre" data-translate="nombre"></label>
+            <input type="text" id="nombre" name="nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="email" data-translate="email"></label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="mensaje" data-translate="mensaje"></label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              rows="4"
+              cols="50"
+              placeholder="Escribe aquí tu mensaje..."
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            id="buyNow"
+            onclick="redirectToBuyPage()"
+            data-translate="enviar"
+          >
+            Enviar
+          </button>
+        </form>
+      </div>
+    </section>
+  </body>
 
-  </section>
-  <!-- Comprar el software -->
-  <section class="containerCompra">
-    <h2 data-translate="Compra"></h2>
-    <div class="compra">
-      <h3 data-translate="solicitarInfo"></h3>
-      <form id="compraForm">
-        <div class="form-group">
-          <label for="nombre" data-translate="nombre"></label>
-          <input type="text" id="nombre" name="nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="email" data-translate="email"></label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="mensaje" data-translate="mensaje"></label>
-          <textarea id="mensaje" name="mensaje" rows="4" cols="50" placeholder="Escribe aquí tu mensaje..."></textarea>
-        </div>
-        <button type="submit id="buyNow" onclick="redirectToBuyPage()" data-translate="enviar"">Enviar</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Disclaimer -->
-  <section class="disclaimer">
-    <p data-translate="copy"></p>
-  </section>
+  <footer>
+    <!-- Disclaimer -->
+    <section class="disclaimer">
+      <p data-translate="copy"></p>
+    </section>
+    <!-- social -->
+    <section class="social">
+      <!-- whatsapp -->
+      <div class="social-item">
+        <svg
+          class="whatsapp"
+          width="2rem"
+          height="2rem"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M19.001 4.908A9.817 9.817 0 0 0 11.992 2C6.534 2 2.085 6.448 2.08 11.908c0 1.748.458 3.45 1.321 4.956L2 22l5.255-1.377a9.916 9.916 0 0 0 4.737 1.206h.005c5.46 0 9.908-4.448 9.913-9.913A9.872 9.872 0 0 0 19 4.908h.001ZM11.992 20.15A8.216 8.216 0 0 1 7.797 19l-.3-.18-3.117.818.833-3.041-.196-.314a8.2 8.2 0 0 1-1.258-4.381c0-4.533 3.696-8.23 8.239-8.23a8.2 8.2 0 0 1 5.825 2.413 8.196 8.196 0 0 1 2.41 5.825c-.006 4.55-3.702 8.24-8.24 8.24Zm4.52-6.167c-.247-.124-1.463-.723-1.692-.808-.228-.08-.394-.123-.556.124-.166.246-.641.808-.784.969-.143.166-.29.185-.537.062-.247-.125-1.045-.385-1.99-1.23-.738-.657-1.232-1.47-1.38-1.716-.142-.247-.013-.38.11-.504.11-.11.247-.29.37-.432.126-.143.167-.248.248-.413.082-.167.043-.31-.018-.433-.063-.124-.557-1.345-.765-1.838-.2-.486-.404-.419-.557-.425-.142-.009-.309-.009-.475-.009a.911.911 0 0 0-.661.31c-.228.247-.864.845-.864 2.067 0 1.22.888 2.395 1.013 2.56.122.167 1.742 2.666 4.229 3.74.587.257 1.05.408 1.41.523.595.19 1.13.162 1.558.1.475-.072 1.464-.6 1.673-1.178.205-.58.205-1.075.142-1.18-.061-.104-.227-.165-.475-.29Z"
+          ></path>
+        </svg>
+      </div>
+      <!-- instagram -->
+      <div class="social-item">
+        <svg
+          class="instagram"
+          fill-rule="nonzero"
+          height="2rem"
+          width="2rem"
+          viewBox="0,0,256,256"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            style="mix-blend-mode: normal"
+            text-anchor="none"
+            font-size="none"
+            font-weight="none"
+            font-family="none"
+            stroke-dashoffset="0"
+            stroke-dasharray=""
+            stroke-miterlimit="10"
+            stroke-linejoin="miter"
+            stroke-linecap="butt"
+            stroke-width="1"
+            stroke="none"
+            fill-rule="nonzero"
+          >
+            <g transform="scale(8,8)">
+              <path
+                d="M11.46875,5c-3.55078,0 -6.46875,2.91406 -6.46875,6.46875v9.0625c0,3.55078 2.91406,6.46875 6.46875,6.46875h9.0625c3.55078,0 6.46875,-2.91406 6.46875,-6.46875v-9.0625c0,-3.55078 -2.91406,-6.46875 -6.46875,-6.46875zM11.46875,7h9.0625c2.47266,0 4.46875,1.99609 4.46875,4.46875v9.0625c0,2.47266 -1.99609,4.46875 -4.46875,4.46875h-9.0625c-2.47266,0 -4.46875,-1.99609 -4.46875,-4.46875v-9.0625c0,-2.47266 1.99609,-4.46875 4.46875,-4.46875zM21.90625,9.1875c-0.50391,0 -0.90625,0.40234 -0.90625,0.90625c0,0.50391 0.40234,0.90625 0.90625,0.90625c0.50391,0 0.90625,-0.40234 0.90625,-0.90625c0,-0.50391 -0.40234,-0.90625 -0.90625,-0.90625zM16,10c-3.30078,0 -6,2.69922 -6,6c0,3.30078 2.69922,6 6,6c3.30078,0 6,-2.69922 6,-6c0,-3.30078 -2.69922,-6 -6,-6zM16,12c2.22266,0 4,1.77734 4,4c0,2.22266 -1.77734,4 -4,4c-2.22266,0 -4,-1.77734 -4,-4c0,-2.22266 1.77734,-4 4,-4z"
+              ></path>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <!-- twitter -->
+      <div class="social-item">
+        <svg
+          class="twitter"
+          height="2rem"
+          width="2rem"
+          viewBox="0 0 48 48"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"
+          ></path>
+        </svg>
+      </div>
+    </section>
+  </footer>
   <script src="app.js"></script>
-  <script>
-    const translations = {
-       "es": {
-         "descubre": "Descubre el poder de la innovación con Innaxys en tu hotel",
-         "quienesSomos": "¿Quienes somos?",
-         "quienesSomosDesc": "En Innaxys, nos dedicamos a impulsar la excelencia en la gestión hotelera a través de soluciones tecnológicas innovadoras y personalizadas. Con años de experiencia en el sector, entendemos las necesidades únicas de cada hotel y nos comprometemos a ofrecer soluciones que impulsen el éxito y la eficiencia.",
-         "queOfrecemos": "¿Qué ofrecemos?",
-         "queOfrecemosDesc1": "Ofrecemos un completo sistema de gestión hotelera diseñado para optimizar cada aspecto de tu operación..",
-         "queOfrecemosDesc2": "Desde la reserva de habitaciones hasta la administración de inventarios y la gestión de personal, nuestro software está diseñado para simplificar tus procesos y potenciar tu negocio.",
-         "beneficios": "Beneficios",
-         "eficiencia": "Eficiencia",
-         "eficienciaDesc": "Nuestro software automatiza procesos tediosos y optimiza operaciones complejas, permitiéndote centrarte en lo que más importa: brindar una experiencia excepcional a tus huespedes.",
-         "rentabilidad": "Rentabilidad",
-         "rentabilidadDesc": "Con herramientas avanzadas de análisis y optimización de ingresos, puedes tomar decisiones informadas que maximicen tus ingresos y mejoren tu competitividad en el mercado.",
-         "persoFlexi": "Personalización y flexibilidad",
-         "persoFlexiDesc": "No importa el tamaño o el tipo de tu hotel, nuestro sistema se adapta a tus necesidades específicas y evoluciona contigo a medida que creces y te expandes.",
-         "experiencia": "Experiencia con el huésped",
-         "experienciaDesc": "Desde la reserva hasta el check-out, nuestro software ofrece una experiencia perfecta y personalizada que deja una impresión duradera en tus huespedes y fomenta la fidelidad a tu marca.",
-         "compatibilidad": "Compatibilidad",
-         "compatibilidadDesc": "Nuestro sistema es compatible con todos los dispositivos",
-         "compra": "Compra Innaxys",
-         "solicitarInfo": "Solicitar más información",
-         "nombre": "Nombre:",
-         "email": "Correo electrónico:",
-         "mensaje": "Mensaje:",
-         "enviar": "Enviar",
-         "copy": "Copyright &copy; 2024 Innaxys. Todos los derechos reservados. | Powered by Innaxys"
-       },
-       "en": {
-         "descubre": "Discover the power of innovation with Innaxys in your hotel",
-         "quienesSomos": "About us",
-         "quienesSomosDesc": "At Innaxys, we dedicate ourselves to driving excellence in hotel management through innovative and customized technological solutions. With years of experience in the sector, we understand the unique needs of each hotel and commit ourselves to offering solutions that drive success and efficiency.",
-         "queOfrecemos": "What do we offer?",
-         "queOfrecemosDesc1": "We offer a complete hotel management system designed to optimize every aspect of your operation..",
-         "queOfrecemosDesc2": "From room reservations to inventory management and personnel management, our software is designed to simplify your processes and boost your business.",
-         "beneficios": "Benefits",
-         "eficiencia": "Efficiency",
-         "eficienciaDesc": "Our software automates tedious processes and optimizes complex operations, allowing you to focus on what matters most: providing an exceptional experience to your guests.",
-         "rentabilidad": "Profitability",
-         "rentabilidadDesc": "With advanced analysis and revenue optimization tools, you can make informed decisions that maximize your income and improve your competitiveness in the market.",
-         "persoFlexi": "Personalization and flexibility",
-         "persoFlexiDesc": "Whether the size or type of your hotel, our system adapts to your specific needs and evolves with you as you grow and expand.",
-         "experiencia": "Experience with the guest",
-         "experienciaDesc": "From reservation to check-out, our software offers a perfect and personalized experience that leaves a lasting impression on your guests and fosters loyalty to your brand.",
-         "compatibilidad": "Compatibility",
-         "compatibilidadDesc": "Our system is compatible with all devices",
-         "compra": "Buy Innaxys",
-         "solicitarInfo": "Request more information",
-         "nombre": "Name:",
-         "email": "Email:",
-         "mensaje": "Message:",
-         "enviar": "Send",
-         "copy": "Copyright &copy; 2024 Innaxys. All rights reserved. | Powered by Innaxys"
-       }
-    };
-   
-    function changeLanguage(lang) {
-       document.documentElement.lang = lang;
-       const elements = document.querySelectorAll('[data-translate]');
-       elements.forEach(element => {
-         const key = element.getAttribute('data-translate');
-         if (translations[lang] && translations[lang][key]) {
-           element.textContent = translations[lang][key];
-         } else {
-           console.error(`Translation for key '${key}' not found in language '${lang}'`);
-         }
-       });
-    }
-  </script>
-
 </html>
