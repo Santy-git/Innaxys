@@ -22,7 +22,7 @@ colores = [
     '#121c14'
 ]
 
-niveles = {5: "Administrador"}
+niveles = {5: "Administrador",3: "Empleado"}
 creardb()
 # ....................................
 
@@ -269,7 +269,6 @@ class Plantilla:
         Container_menus.content = ft.Container(content=ft.Row([ft.Text(value=texto),confirmar]),bgcolor='#3B6639',width=ancho*0.56,height=altura*0.1,border_radius=ft.border_radius.all(3))
         Container_menus.update()
 
-
     def Reservar_Aux(self,cli,emp,fecha,desc):
         Container_menus.clean()
         Verificar = Reservar(cli,emp,fecha,desc)
@@ -313,8 +312,6 @@ class Plantilla:
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
 
-
-
     def pedidosCoch(self,var):
         hres.append(self.variable2[var])
         images.controls.pop(var)
@@ -348,7 +345,6 @@ class Plantilla:
         self.Departamentos.content = ft.Column([images])                                                                                                        
         Container_menus.update()
                             
-
     def ConsultaCoch_aux(self,Ingreso_Res,Egreso_Res):
         global hres
         hres = []
@@ -369,7 +365,6 @@ class Plantilla:
         confirmar = ft.TextButton(text="Confirmar",on_click=lambda _:completarCoch(cli,emp,fecha,desc,hres,Ing,Eng))
         Container_menus.clean()
         Container_menus.update()    
-
 
     def ReservarCoch_Aux(self,cli,emp,fecha,desc):                   
         Container_menus.clean()
@@ -415,7 +410,6 @@ class Plantilla:
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
 
-
     def Cli_Aux(self,a,b,c,d):
         Verificar = Cli_add(a,b,c,d)
         if Verificar:
@@ -451,8 +445,6 @@ class Plantilla:
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
-
-
 
     def Menu3(self):
         cocherav = ft.CupertinoButton(text="cochera",width=300,on_click=lambda _:self.cochera(),bgcolor=colores[5])
@@ -504,7 +496,6 @@ class Plantilla:
             open_dlg(self)
             Container_menus.clean()
             self.Menu3()
-
 
     def habitacion(self):
         piso = ft.TextField(label="Piso",width=300)
