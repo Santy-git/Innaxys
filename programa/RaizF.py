@@ -22,7 +22,25 @@ colores = [
     '#121c14'
 ]
 
-niveles = {5: "Administrador",3: "Empleado"}
+# Funcionas que nos ayudan a modificar muchos objetos del flet
+
+# los label
+
+
+def create_text_field(label_text, **kwargs):
+    return ft.TextField(
+        label=label_text,
+        label_style={
+            'color': ft.colors.BLACK,
+            'font_size': 16,
+        },
+        border_radius=20,
+        width=500,
+        **kwargs
+    )
+
+
+niveles = {5: "Administrador", 3: "Empleado"}
 creardb()
 # ....................................
 
@@ -183,54 +201,59 @@ class Plantilla:
 
 # ...................................Menus............................
 
-    def pedidos(self,var):
+    def pedidos(self, var):
         hres.append(self.variable2[var])
         images.controls.pop(var)
         images.update()
         self.variable2.pop(var)
         totalesp = 0
         costo = 0
-        
+
         for i in range(len(hres)):
             totalesp += hres[i][3]
             totalesp += hres[i][2]*2
             costo += hres[i][4]
         totalH = len(hres)
-        self.contador.value = ("Habitaciones: ",totalH,"total de espacios: ",totalesp,"costo total: ",costo)
+        self.contador.value = (
+            "Habitaciones: ", totalH, "total de espacios: ", totalesp, "costo total: ", costo)
         self.contador.update()
         self.disponibles()
 
     def disponibles(self):
         global images
+
         def valor(a):
-            indice = a                              
-            infoH=ft.Row([
-                ft.Container(width=50,height=50,bgcolor='#A3CD91',
+            indice = a
+            infoH = ft.Row([
+                ft.Container(width=50, height=50, bgcolor='#A3CD91',
                              border_radius=ft.border_radius.all(6),
                              margin=ft.margin.all(10),
                              alignment=ft.alignment.center,
-                             content=ft.Text(value=self.variable2[a][0],color='#000000')),
-                             
-                ft.Text(value="Piso: "+str(self.variable2[a][1]))          
+                             content=ft.Text(value=self.variable2[a][0], color='#000000')),
+
+                ft.Text(value="Piso: "+str(self.variable2[a][1]))
             ])
             infoH2 = ft.Row([
-                ft.Text(value="Camas Individuales: "+str(self.variable2[a][2])),
-                
-            ]) 
+                ft.Text(value="Camas Individuales: " +
+                        str(self.variable2[a][2])),
+
+            ])
             infoH4 = ft.Row([
-                ft.Text(value="Camas Matrimoniales: "+str(self.variable2[a][3])) ,
-                
-            ])     
-            
-            infoH3 = ft.Row([     
-                ft.Text(value="Costo: "+str(self.variable2[a][4])), 
-                ft.TextButton(text="+",on_click=lambda _:self.pedidos(indice))
-            ])                     
-            contener = ft.Container(width=60,height=60,
-                border_radius=ft.border_radius.all(3),bgcolor=colores[9],
-                content=ft.Column([infoH,infoH2,infoH4,infoH3]))  
+                ft.Text(value="Camas Matrimoniales: " +
+                        str(self.variable2[a][3])),
+
+            ])
+
+            infoH3 = ft.Row([
+                ft.Text(value="Costo: "+str(self.variable2[a][4])),
+                ft.TextButton(
+                    text="+", on_click=lambda _: self.pedidos(indice))
+            ])
+            contener = ft.Container(width=60, height=60,
+                                    border_radius=ft.border_radius.all(3), bgcolor=colores[9],
+                                    content=ft.Column([infoH, infoH2, infoH4, infoH3]))
             return contener
-        
+
         images = ft.GridView(
             runs_count=5,
             max_extent=300,
@@ -239,80 +262,93 @@ class Plantilla:
             run_spacing=5,
             expand=1,
         )
-        
+
         for i in range(len(self.variable2)):
-            images.controls.append(valor(i))                      
+            images.controls.append(valor(i))
         self.Departamentos.clean()
-        self.Departamentos.content = ft.Column([images])                                                                                                        
+        self.Departamentos.content = ft.Column([images])
         Container_menus.update()
 
-    def Consulta_aux(self,Ingreso_Res,Egreso_Res):
+    def Consulta_aux(self, Ingreso_Res, Egreso_Res):
         global hres
-        hres = []    
-        self.variable2 = Consulta(Ingreso_Res,Egreso_Res)
+        hres = []
+        self.variable2 = Consulta(Ingreso_Res, Egreso_Res)
         self.disponibles()
 
-    def res_final(self,cli,emp,fecha,desc,hres,Ing,Eng):
+    def res_final(self, cli, emp, fecha, desc, hres, Ing, Eng):
 
-        confirmar = ft.TextButton(text="Confirmar",icon_color="#659863",on_click=lambda _:completar(cli,emp,fecha,desc,hres,Ing,Eng))
-        Container_menus.clean()   
+        confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar(
+            cli, emp, fecha, desc, hres, Ing, Eng))
+        Container_menus.clean()
         a = 0
         c = 0
         d = 0
-        e = 0    
+        e = 0
         for i in range(len(hres)):
             a += hres[i][0]
             c += hres[i][2]
             d += hres[i][3]
             e += hres[i][4]
-        texto = "Numero de habitacion: "+str(a)+" camas matrimoniales:"+str(c)+" camas individuales:"+str(d)+" Costo:"+str(e)
-        Container_menus.content = ft.Container(content=ft.Row([ft.Text(value=texto),confirmar]),bgcolor='#3B6639',width=ancho*0.56,height=altura*0.1,border_radius=ft.border_radius.all(3))
+        texto = "Numero de habitacion: " + \
+            str(a)+" camas matrimoniales:"+str(c) + \
+            " camas individuales:"+str(d)+" Costo:"+str(e)
+        Container_menus.content = ft.Container(content=ft.Row([ft.Text(
+            value=texto), confirmar]), bgcolor='#3B6639', width=ancho*0.56, height=altura*0.1, border_radius=ft.border_radius.all(3))
         Container_menus.update()
 
-    def Reservar_Aux(self,cli,emp,fecha,desc):
+    def Reservar_Aux(self, cli, emp, fecha, desc):
         Container_menus.clean()
-        Verificar = Reservar(cli,emp,fecha,desc)
+        Verificar = Reservar(cli, emp, fecha, desc)
         if Verificar == 1:
             Container_menus.clean()
             Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
             Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
-            consultar = ft.TextButton(text="Consultar",on_click=lambda _:self.Consulta_aux(Ingreso_Res.value,Egreso_Res.value))
-            reservarboton = ft.TextButton(text="el otro boton",on_click=lambda _:self.res_final(
-                cli,emp,fecha,desc,hres,Ingreso_Res.value,Egreso_Res.value
+            consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
+                Ingreso_Res.value, Egreso_Res.value))
+            reservarboton = ft.TextButton(text="el otro boton", on_click=lambda _: self.res_final(
+                cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value
             ))
-            self.Departamentos = ft.Container(width=830,height=500,bgcolor=colores[2],margin=10)
+            self.Departamentos = ft.Container(
+                width=830, height=500, bgcolor=colores[2], margin=10)
             self.contador = ft.Text(value="")
-            a=ft.Row([Ingreso_Res,Egreso_Res])
-            b=ft.Row([consultar,reservarboton,self.contador])
-            c=ft.Row([self.Departamentos])
-            Container_menus.content = ft.Column([a,b,c])
+            a = ft.Row([Ingreso_Res, Egreso_Res])
+            b = ft.Row([consultar, reservarboton, self.contador])
+            c = ft.Row([self.Departamentos])
+            Container_menus.content = ft.Column([a, b, c])
             Container_menus.alignment = ft.alignment.top_center
-            
+
             Container_menus.update()
         if Verificar == 2:
-            #aca poner que el cliente no existe
+            # aca poner que el cliente no existe
             pass
 
     def Menu0(self):
-        cod_cliente = ft.TextField(label="Dni de cliente",width=300)
+        cod_cliente = create_text_field(
+            "Dni de cliente")
+
         fecha_res = datetime.now().date()
-        desc = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
+        desc = create_text_field(
+            "Descripción",
+            multiline=True,
+            max_length=200,
+            max_lines=3)
+
         subir = ft.CupertinoButton(
             content=ft.Text("Next", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            border_radius=ft.border_radius.all(15),
-            on_click=lambda _:self.Reservar_Aux(cod_cliente.value,z[2],fecha_res,desc.value))
-        
-        Container_menus.content = ft.Column (
+            on_click=lambda _: self.Reservar_Aux(cod_cliente.value, z[2], fecha_res, desc.value))
+
+        Container_menus.content = ft.Column(
             [cod_cliente,
-            desc,
-            subir],
-            expand= True
+             desc,
+             subir],
+            expand=True,
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
-#................................habitacion.......................
-    def pedidosCoch(self,var):
+# ................................habitacion.......................
+
+    def pedidosCoch(self, var):
         hres.append(self.variable2[var])
         images.controls.pop(var)
         images.update()
@@ -321,15 +357,17 @@ class Plantilla:
 
     def disponiblesCoch(self):
         global images
+
         def valor(a):
             indice = a
-            infoH=ft.Row([
+            infoH = ft.Row([
                 ft.Text(value=self.variable2[a][0]),
-                ft.Text(value=self.variable2[a][1])            
-            ])                         
-            contener = ft.Container(width=60,height=60,bgcolor=colores[9],content=ft.Column([infoH,ft.TextButton(text="+",on_click=lambda _:self.pedidosCoch(indice))]))  
+                ft.Text(value=self.variable2[a][1])
+            ])
+            contener = ft.Container(width=60, height=60, bgcolor=colores[9], content=ft.Column(
+                [infoH, ft.TextButton(text="+", on_click=lambda _: self.pedidosCoch(indice))]))
             return contener
-        
+
         images = ft.GridView(
             runs_count=5,
             max_extent=300,
@@ -338,85 +376,91 @@ class Plantilla:
             run_spacing=5,
             expand=1,
         )
-        
+
         for i in range(len(self.variable2)):
-            images.controls.append(valor(i))                      
+            images.controls.append(valor(i))
         self.Departamentos.clean()
-        self.Departamentos.content = ft.Column([images])                                                                                                        
+        self.Departamentos.content = ft.Column([images])
         Container_menus.update()
-                            
-    def ConsultaCoch_aux(self,Ingreso_Res,Egreso_Res):
+
+    def ConsultaCoch_aux(self, Ingreso_Res, Egreso_Res):
         global hres
         hres = []
-        self.variable2 = ConsultaCoch(Ingreso_Res,Egreso_Res)
+        self.variable2 = ConsultaCoch(Ingreso_Res, Egreso_Res)
         self.disponiblesCoch()
 
-    def resCoch_final(self,cli,emp,fecha,desc,hres,Ing,Eng):
-        confirmar = ft.TextButton(text="Confirmar",icon_color="#659863",on_click=lambda _:completarCoch(cli,emp,fecha,desc,hres,Ing,Eng))
-        Container_menus.clean()   
-        a = []   
+    def resCoch_final(self, cli, emp, fecha, desc, hres, Ing, Eng):
+        confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completarCoch(
+            cli, emp, fecha, desc, hres, Ing, Eng))
+        Container_menus.clean()
+        a = []
         for i in range(len(hres)):
             a.append(hres[i][0])
-            
-        texto = "Numeros de las habitaciones: "+str(a)
-        Container_menus.content = ft.Container(content=ft.Row([ft.Text(value=texto),confirmar]),bgcolor='#3B6639',width=ancho*0.56,height=altura*0.1,border_radius=ft.border_radius.all(3))
-        Container_menus.update()
-                                
-        confirmar = ft.TextButton(text="Confirmar",on_click=lambda _:completarCoch(cli,emp,fecha,desc,hres,Ing,Eng))
-        Container_menus.clean()
-        Container_menus.update()    
 
-    def ReservarCoch_Aux(self,cli,emp,fecha,desc):                   
+        texto = "Numeros de las habitaciones: "+str(a)
+        Container_menus.content = ft.Container(content=ft.Row([ft.Text(
+            value=texto), confirmar]), bgcolor='#3B6639', width=ancho*0.56, height=altura*0.1, border_radius=ft.border_radius.all(3))
+        Container_menus.update()
+
+        confirmar = ft.TextButton(text="Confirmar", on_click=lambda _: completarCoch(
+            cli, emp, fecha, desc, hres, Ing, Eng))
         Container_menus.clean()
-        Verificar = ReservarCoch(cli,emp,fecha,desc)
-        
+        Container_menus.update()
+
+    def ReservarCoch_Aux(self, cli, emp, fecha, desc):
+        Container_menus.clean()
+        Verificar = ReservarCoch(cli, emp, fecha, desc)
 
         if Verificar == 1:
             Container_menus.clean()
             Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
             Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
-            consultar = ft.TextButton(text="Consultar",on_click=lambda _:self.ConsultaCoch_aux(Ingreso_Res.value,Egreso_Res.value))
-            reservarboton = ft.TextButton(text="el otro boton",on_click=lambda _:self.resCoch_final(
-                cli,emp,fecha,desc,hres,Ingreso_Res.value,Egreso_Res.value
+            consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.ConsultaCoch_aux(
+                Ingreso_Res.value, Egreso_Res.value))
+            reservarboton = ft.TextButton(text="el otro boton", on_click=lambda _: self.resCoch_final(
+                cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value
             ))
-            self.Departamentos = ft.Container(width=830,height=500,bgcolor=colores[2],margin=10)
+            self.Departamentos = ft.Container(
+                width=830, height=500, bgcolor=colores[2], margin=10)
             contador = ft.Text(value="")
-            a=ft.Row([Ingreso_Res,Egreso_Res])
-            b=ft.Row([consultar,reservarboton,contador])
-            c=ft.Row([self.Departamentos])
-            Container_menus.content = ft.Column([a,b,c])
+            a = ft.Row([Ingreso_Res, Egreso_Res])
+            b = ft.Row([consultar, reservarboton, contador])
+            c = ft.Row([self.Departamentos])
+            Container_menus.content = ft.Column([a, b, c])
             Container_menus.alignment = ft.alignment.top_center
-            
+
             Container_menus.update()
         if Verificar == 2:
-            pass    
+            pass
 
     def Menu1(self):
-        cod_cliente = ft.TextField(label="Dni de cliente",width=300)
+        cod_cliente = ft.TextField(label="Dni de cliente", width=300)
         fecha_res = datetime.now().date()
-        desc = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
+        desc = ft.TextField(label="descripcion", multiline=True,
+                            width=500, max_length=200, max_lines=3)
         subir = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _:self.ReservarCoch_Aux(cod_cliente.value,z[2],fecha_res,desc.value))
-        
-        Container_menus.content = ft.Column (
+            on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[2], fecha_res, desc.value))
+
+        Container_menus.content = ft.Column(
             [cod_cliente,
-            desc,
-            subir],
-            expand= True
+             desc,
+             subir],
+            expand=True
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
-#................................cochera.......................
+# ................................cochera.......................
 
-    def Cli_Aux(self,a,b,c,d):
-        Verificar = Cli_add(a,b,c,d)
+    def Cli_Aux(self, a, b, c, d):
+        Verificar = Cli_add(a, b, c, d)
         if Verificar:
             dlg = ft.AlertDialog(
-            title=ft.Text("Datos Ingresados")
+                title=ft.Text("Datos Ingresados")
             )
+
             def open_dlg(self):
                 self.raiz.dialog = dlg
                 dlg.open = True
@@ -426,41 +470,46 @@ class Plantilla:
             self.Menu2()
 
     def Menu2(self):
-        cod_cliente = ft.TextField(label="Dni de cliente",width=300)
-        nom_cli = ft.TextField(label="Nombre",width=300)
-        email_cli = ft.TextField(label="Email",width=300)
-        desc_cli = ft.TextField(label="descripcion",multiline=True, width= 500, max_length=200, max_lines=3)
+        cod_cliente = ft.TextField(label="Dni de cliente", width=300)
+        nom_cli = ft.TextField(label="Nombre", width=300)
+        email_cli = ft.TextField(label="Email", width=300)
+        desc_cli = ft.TextField(
+            label="descripcion", multiline=True, width=500, max_length=200, max_lines=3)
         subir_cli = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _:self.Cli_Aux(cod_cliente.value,nom_cli.value,email_cli.value,desc_cli.value))
-        
-        Container_menus.content = ft.Column (
+            on_click=lambda _: self.Cli_Aux(cod_cliente.value, nom_cli.value, email_cli.value, desc_cli.value))
+
+        Container_menus.content = ft.Column(
             [cod_cliente,
-            nom_cli,
-            email_cli,
-            desc_cli,
-            subir_cli],
-            expand= True
+             nom_cli,
+             email_cli,
+             desc_cli,
+             subir_cli],
+            expand=True
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
-#......................cliente...............
+# ......................cliente...............
+
     def Menu3(self):
-        cocherav = ft.CupertinoButton(text="cochera",width=300,on_click=lambda _:self.cochera(),bgcolor=colores[5])
-        habitacionv = ft.CupertinoButton(text="habitacion",width=300,on_click=lambda _:self.habitacion(),bgcolor=colores[5])
-        Container_menus.content = ft.Row([cocherav,habitacionv])
+        cocherav = ft.CupertinoButton(
+            text="cochera", width=300, on_click=lambda _: self.cochera(), bgcolor=colores[5])
+        habitacionv = ft.CupertinoButton(
+            text="habitacion", width=300, on_click=lambda _: self.habitacion(), bgcolor=colores[5])
+        Container_menus.content = ft.Row([cocherav, habitacionv])
         Container_menus.padding = ft.padding.symmetric(horizontal=ancho*0.18)
         Container_menus.update()
-      
-    def crear_coch(self,a):
+
+    def crear_coch(self, a):
         print("crear_coch")
         validacion = crear_coch(a)
         if validacion:
             dlg = ft.AlertDialog(
-            title=ft.Text("cochera registrada")
+                title=ft.Text("cochera registrada")
             )
+
             def open_dlg(self):
                 self.raiz.dialog = dlg
                 dlg.open = True
@@ -476,20 +525,21 @@ class Plantilla:
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _:self.crear_coch(piso_coch.value))
-        Container_menus.content = ft.Column (
-            [piso_coch,subir_coch
-            ],
-            expand= True
+            on_click=lambda _: self.crear_coch(piso_coch.value))
+        Container_menus.content = ft.Column(
+            [piso_coch, subir_coch
+             ],
+            expand=True
         )
         Container_menus.update()
 
-    def crear_habitacion(self,a,b,c,d):
-        validacion = crear_hab(a,b,c,d)
+    def crear_habitacion(self, a, b, c, d):
+        validacion = crear_hab(a, b, c, d)
         if validacion:
             dlg = ft.AlertDialog(
-            title=ft.Text("Habitacion registrada")
+                title=ft.Text("Habitacion registrada")
             )
+
             def open_dlg(self):
                 self.raiz.dialog = dlg
                 dlg.open = True
@@ -499,25 +549,25 @@ class Plantilla:
             self.Menu3()
 
     def habitacion(self):
-        piso = ft.TextField(label="Piso",width=300)
-        camamatr = ft.TextField(label="camas matrimoniales",width=300)
-        camaind = ft.TextField(label="camas individuales",width=300)
-        costo = ft.TextField(label="costo",width=300)
+        piso = ft.TextField(label="Piso", width=300)
+        camamatr = ft.TextField(label="camas matrimoniales", width=300)
+        camaind = ft.TextField(label="camas individuales", width=300)
+        costo = ft.TextField(label="costo", width=300)
         subir_cli = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _:self.crear_habitacion(piso.value,camamatr.value,camaind.value,costo.value))
-        Container_menus.content = ft.Column (
+            on_click=lambda _: self.crear_habitacion(piso.value, camamatr.value, camaind.value, costo.value))
+        Container_menus.content = ft.Column(
             [piso,
-            camamatr,
-            camaind,
-            costo,
-            subir_cli],
-            expand= True
+             camamatr,
+             camaind,
+             costo,
+             subir_cli],
+            expand=True
         )
         Container_menus.update()
-#....................elementos........................        
+# ....................elementos........................
 
     def Menu4(self):
 
@@ -571,7 +621,7 @@ class Plantilla:
              registrar],
             expand=True
         )
-        
+
         Container_menus.update()
 
     def HighLight(self, e):
@@ -671,7 +721,8 @@ class Plantilla:
                 ]
             )
         )
-#....................empleado.........................
+# ....................empleado.........................
+
     def Menu(self):
         global Container_menus
         self.raiz.clean()
@@ -759,7 +810,8 @@ class Plantilla:
             height=850,
             bgcolor=colores[3],
             border_radius=ft.border_radius.all(3),
-            padding=ft.padding.symmetric(horizontal=(ancho*0.04), vertical=(altura*0.1))
+            padding=ft.padding.symmetric(
+                horizontal=(ancho*0.04), vertical=(altura*0.1))
         )
 
         self.raiz.add(ft.Row(
@@ -776,6 +828,7 @@ class Plantilla:
             expand=True,
         )
         )
+
 
 def main(raiz: ft.Page):
     global altura
