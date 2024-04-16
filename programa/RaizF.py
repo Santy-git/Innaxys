@@ -108,93 +108,100 @@ class Plantilla:
         self.raiz.update()
 
     def login_menu(self):
-
-        self.User: TextField = TextField(
-            width=290,
-            height=60,
-            label='User',
-            border='underline',
-            color='white',
-            prefix_icon=ft.icons.PERSON,)
-
-        self.Password: TextField = TextField(
-            width=280,
-            height=60,
-            label='Password',
-            border='underline',
-            color='white',
-            prefix_icon=ft.icons.LOCK,)
-
-        Button: ElevatedButton = ElevatedButton(
-            content=Text(
-                'SIGN IN',
+        global Nivel
+        global z
+        z = (True, '5', '0')
+        Nivel = 5
+        self.Menu()
+        # esto es lo que saca el login sacar lo de arriba y eliminar el if
+        if z[2] == 3:
+            
+            self.User: TextField = TextField(
+                width=290,
+                height=60,
+                label='User',
+                border='underline',
                 color='white',
-                weight='w500',
-            ), width=280,
-            bgcolor='black',
-            on_click=self.logear)
+                prefix_icon=ft.icons.PERSON,)
 
-        self.contenedor_login = ft.Container(
-            Container(
-                Stack([
-                    Container(
-                        border_radius=11,
-                        rotate=ft.Rotate(0.98*3.1),  # Degree
-                        width=360,
-                        height=560,
-                        bgcolor='#22ffffff'
-                    ),
-                    Container(
+            self.Password: TextField = TextField(
+                width=280,
+                height=60,
+                label='Password',
+                border='underline',
+                color='white',
+                prefix_icon=ft.icons.LOCK,)
+
+            Button: ElevatedButton = ElevatedButton(
+                content=Text(
+                    'SIGN IN',
+                    color='white',
+                    weight='w500',
+                ), width=280,
+                bgcolor='black',
+                on_click=self.logear)
+
+            self.contenedor_login = ft.Container(
+                Container(
+                    Stack([
                         Container(
-                            Column([
-                                Container(
-                                    ft.Image(
-                                        src='axys.png',
-                                        width=100,
-                                    ), padding=ft.padding.only(130, 20),
-                                ),
-                                Text(
-                                    'Sign in',
-                                    width=360,
-                                    size=30,
-                                    weight='w900',
-                                    text_align='center',
-                                ),
-                                Text(
-                                    'Please login to use the plataform',
-                                    width=360,
-                                    text_align='center',
-
-                                ),
-                                Container(self.User, padding=ft.padding.only(25, 20)
-                                          ),
-                                Container(self.Password, padding=ft.padding.only(25, 20),
-                                          ),
-                                Container(Button, padding=ft.padding.only(40, 10)
-                                          )
-                            ])
+                            border_radius=11,
+                            rotate=ft.Rotate(0.98*3.1),  # Degree
+                            width=360,
+                            height=560,
+                            bgcolor='#22ffffff'
                         ),
-                        width=360,
-                        height=560,
-                        bgcolor='#22ffffff',
-                        border_radius=11,
-                    )
-                ]),
-                padding=110,
-                width=360,
-                height=560,
-                bgcolor='grey900'
+                        Container(
+                            Container(
+                                Column([
+                                    Container(
+                                        ft.Image(
+                                            src='axys.png',
+                                            width=100,
+                                        ), padding=ft.padding.only(130, 20),
+                                    ),
+                                    Text(
+                                        'Sign in',
+                                        width=360,
+                                        size=30,
+                                        weight='w900',
+                                        text_align='center',
+                                    ),
+                                    Text(
+                                        'Please login to use the plataform',
+                                        width=360,
+                                        text_align='center',
 
-            ),
-            width=580,
-            height=740,
-            gradient=ft.LinearGradient(['white30', 'white10']),
-            border_radius=ft.border_radius.all(30),
-            margin=ft.margin.symmetric(horizontal=(ancho*0.30)),
+                                    ),
+                                    Container(self.User, padding=ft.padding.only(25, 20)
+                                            ),
+                                    Container(self.Password, padding=ft.padding.only(25, 20),
+                                            ),
+                                    Container(Button, padding=ft.padding.only(40, 10)
+                                            )
+                                ])
+                            ),
+                            width=360,
+                            height=560,
+                            bgcolor='#22ffffff',
+                            border_radius=11,
+                        )
+                    ]),
+                    padding=110,
+                    width=360,
+                    height=560,
+                    bgcolor='grey900'
 
-        )
+                ),
+                width=580,
+                height=740,
+                gradient=ft.LinearGradient(['white30', 'white10']),
+                border_radius=ft.border_radius.all(30),
+                margin=ft.margin.symmetric(horizontal=(ancho*0.30)),
 
-        self.raiz.add(self.contenedor_login)
+            )
+
+            self.raiz.add(self.contenedor_login)
 
 
 # ...................................Menus............................
