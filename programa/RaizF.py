@@ -649,9 +649,9 @@ class Plantilla:
 
     def Selector(self, a):
         diccionario = {"Reservar Habitacion": 0, "Reservar Cochera": 1,
-                       "Añadir Cliente": 2, "Añadir elementos": 3, "Añadir Empleado": 4, "Likes": 5}
+                       "Añadir Cliente": 2, "Añadir elementos": 3, "Añadir Empleado": 4, "nose": 5}
         Indices_menus = {0: self.Menu0, 1: self.Menu1,
-                         2: self.Menu2, 3: self.Menu3, 4: self.Menu4}
+                         2: self.Menu2, 3: self.Menu3, 4: self.Menu4, 5: self.Menu5}
         Indices_menus[diccionario[a]]()
 
     def UserData(self, name: str):
@@ -770,6 +770,13 @@ class Plantilla:
                 selected_icon_content=ft.Icon(
                     ft.icons.BOOKMARK, color=ft.colors.BLACK),
                 label_content=ft.Text("5", color=ft.colors.BLACK),
+            ),
+            ft.NavigationRailDestination(
+                icon_content=ft.Icon(
+                    ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                selected_icon_content=ft.Icon(
+                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                label_content=ft.Text("6", color=ft.colors.BLACK)
             )]
 
         for i in range(Nivel):
@@ -794,6 +801,7 @@ class Plantilla:
                     self.ContainerIcon(
                         ft.icons.NOTIFICATIONS, "Añadir elementos"),
                     self.ContainerIcon(ft.icons.PIE_CHART, "Añadir Empleado"),
+                    self.ContainerIcon(ft.icons.PIE_CHART_OUTLINE, "nose")
 
                 ]
             ),)
@@ -810,8 +818,7 @@ class Plantilla:
             height=850,
             bgcolor=colores[3],
             border_radius=ft.border_radius.all(3),
-            padding=ft.padding.symmetric(
-                horizontal=(ancho*0.04), vertical=(altura*0.1))
+            padding=ft.padding.symmetric(horizontal=(ancho*0.05), vertical=(altura*0.5)),
         )
 
         self.raiz.add(ft.Row(
@@ -829,6 +836,20 @@ class Plantilla:
         )
         )
 
+#...................calendario.......................
+    def Menu5(self):       
+        Container_menus.clean()
+        Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
+        Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
+        consultar = ft.TextButton(text="Consultar")
+        reservarboton = ft.TextButton(text="el otro boton")
+        Container_menus.content = ft.Row(
+            [Ingreso_Res,Egreso_Res,consultar,reservarboton],
+        )
+        Container_menus.alignment=ft.alignment.top_center
+        
+        Container_menus.update()
+        
 
 def main(raiz: ft.Page):
     global altura
