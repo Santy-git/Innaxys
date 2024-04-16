@@ -35,7 +35,7 @@ def create_text_field(label_text, **kwargs):
             'font_size': 16,
         },
         border_radius=20,
-        width=ancho*.5,
+        width=ancho*.3,
         **kwargs
     )
 
@@ -115,7 +115,7 @@ class Plantilla:
         self.Menu()
         # esto es lo que saca el login sacar lo de arriba y eliminar el if
         if z[2] == 3:
-            
+
             self.User: TextField = TextField(
                 width=290,
                 height=60,
@@ -174,11 +174,11 @@ class Plantilla:
 
                                     ),
                                     Container(self.User, padding=ft.padding.only(25, 20)
-                                            ),
+                                              ),
                                     Container(self.Password, padding=ft.padding.only(25, 20),
-                                            ),
+                                              ),
                                     Container(Button, padding=ft.padding.only(40, 10)
-                                            )
+                                              )
                                 ])
                             ),
                             width=360,
@@ -207,6 +207,7 @@ class Plantilla:
 # ...................................Menus............................
 
 # ...................................Menus............................
+
 
     def pedidos(self, var):
         hres.append(self.variable2[var])
@@ -844,8 +845,8 @@ class Plantilla:
 # ...................calendario.......................
     def Menu5(self):
         Container_menus.clean()
-        Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
-        Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
+        Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
+        Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
         consultar = ft.TextButton(text="Consultar")
         reservarboton = ft.TextButton(text="el otro boton")
         Container_menus.content = ft.Row(
