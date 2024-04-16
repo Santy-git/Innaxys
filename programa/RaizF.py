@@ -818,7 +818,7 @@ class Plantilla:
             height=850,
             bgcolor=colores[3],
             border_radius=ft.border_radius.all(3),
-            padding=ft.padding.symmetric(horizontal=(ancho*0.05), vertical=(altura*0.5)),
+            padding=ft.padding.symmetric(horizontal=(ancho*0.05), vertical=(altura*0.15)),
         )
 
         self.raiz.add(ft.Row(
