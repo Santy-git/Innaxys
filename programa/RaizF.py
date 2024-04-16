@@ -311,7 +311,7 @@ class Plantilla:
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
-
+#................................habitacion.......................
     def pedidosCoch(self,var):
         hres.append(self.variable2[var])
         images.controls.pop(var)
@@ -409,6 +409,7 @@ class Plantilla:
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
+#................................cochera.......................
 
     def Cli_Aux(self,a,b,c,d):
         Verificar = Cli_add(a,b,c,d)
@@ -445,14 +446,14 @@ class Plantilla:
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
-
+#......................cliente...............
     def Menu3(self):
         cocherav = ft.CupertinoButton(text="cochera",width=300,on_click=lambda _:self.cochera(),bgcolor=colores[5])
         habitacionv = ft.CupertinoButton(text="habitacion",width=300,on_click=lambda _:self.habitacion(),bgcolor=colores[5])
         Container_menus.content = ft.Row([cocherav,habitacionv])
         Container_menus.padding = ft.padding.symmetric(horizontal=ancho*0.18)
         Container_menus.update()
-            
+      
     def crear_coch(self,a):
         print("crear_coch")
         validacion = crear_coch(a)
@@ -516,16 +517,7 @@ class Plantilla:
             expand= True
         )
         Container_menus.update()
-
-
-
-
-
-
-
-
-    
-#....................................................zona de trabajo.........................................................................................    
+#....................elementos........................        
 
     def Menu4(self):
 
@@ -581,7 +573,6 @@ class Plantilla:
         )
         
         Container_menus.update()
-# .............................................................................................................................................
 
     def HighLight(self, e):
         if e.data == "true":
@@ -680,7 +671,7 @@ class Plantilla:
                 ]
             )
         )
-
+#....................empleado.........................
     def Menu(self):
         global Container_menus
         self.raiz.clean()
@@ -785,7 +776,6 @@ class Plantilla:
             expand=True,
         )
         )
-
 
 def main(raiz: ft.Page):
     global altura
