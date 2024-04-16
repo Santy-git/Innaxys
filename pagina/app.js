@@ -94,23 +94,15 @@ function changeLanguage(lang) {
   const elements = document.querySelectorAll("[data-translate]");
   elements.forEach((element) => {
     const key = element.getAttribute("data-translate");
-    let translatedText = translatedElementsCache.get(key);
+    let translatedText = translations[lang] && translations[lang][key];
 
-    // Si el texto traducido no está en la caché, lo buscamos y lo almacenamos
-    if (!translatedText) {
-      if (translations[lang] && translations[lang][key]) {
-        translatedText = translations[lang][key];
-        translatedElementsCache.set(key, translatedText);
-      } else {
-        console.error(
-          `Translation for key '${key}' not found in language '${lang}'`
-        );
-        return; // No actualizamos el texto si no encontramos la traducción
-      }
+    if (translatedText) {
+      element.textContent = translatedText;
+    } else {
+      console.error(
+        `Translation for key '${key}' not found in language '${lang}'`
+      );
     }
-
-    // Actualizamos el contenido del elemento
-    element.textContent = translatedText;
   });
   localStorage.setItem("language", lang);
 }
