@@ -90,7 +90,7 @@ class Plantilla:
 
     def appbar(self):
         self.nombre = ft.Container(content=Text(
-            "Axys", color=colores[9],), bgcolor=colores[3], width=200, height=40, border_radius=ft.border_radius.all(10))
+            "Axys", color=colores[9],), bgcolor=colores[3], width=ancho*0.10, height=altura*0.03, border_radius=ft.border_radius.all(10))
         self.nombre.alignment = ft.alignment.center
 
         self.raiz.appbar = ft.AppBar(
@@ -854,8 +854,9 @@ class Plantilla:
 def main(raiz: ft.Page):
     global altura
     global ancho
-    altura = raiz.height
-    ancho = raiz.width
+    altura = raiz.window_height
+    ancho = raiz.window_width
+    print(altura,ancho)
     raiz.window_resizable = False
     raiz.window_full_screen = True
     raiz.update()
