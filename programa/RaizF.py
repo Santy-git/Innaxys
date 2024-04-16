@@ -35,7 +35,7 @@ def create_text_field(label_text, **kwargs):
             'font_size': 16,
         },
         border_radius=20,
-        width=500,
+        width=ancho*.5,
         **kwargs
     )
 
@@ -308,8 +308,9 @@ class Plantilla:
         Verificar = Reservar(cli, emp, fecha, desc)
         if Verificar == 1:
             Container_menus.clean()
-            Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
-            Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
+            print("aca es el tema")
+            Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
+            Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
                 Ingreso_Res.value, Egreso_Res.value))
             reservarboton = ft.TextButton(text="el otro boton", on_click=lambda _: self.res_final(
@@ -420,8 +421,8 @@ class Plantilla:
 
         if Verificar == 1:
             Container_menus.clean()
-            Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
-            Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
+            Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
+            Egreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.ConsultaCoch_aux(
                 Ingreso_Res.value, Egreso_Res.value))
             reservarboton = ft.TextButton(text="el otro boton", on_click=lambda _: self.resCoch_final(
@@ -441,10 +442,10 @@ class Plantilla:
             pass
 
     def Menu1(self):
-        cod_cliente = ft.TextField(label="Dni de cliente", width=300)
+        cod_cliente = create_text_field("Dni de cliente")
         fecha_res = datetime.now().date()
-        desc = ft.TextField(label="descripcion", multiline=True,
-                            width=500, max_length=200, max_lines=3)
+        desc = create_text_field(
+            "Descripcion", multiline=True, max_length=200, max_lines=3)
         subir = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
@@ -477,11 +478,11 @@ class Plantilla:
             self.Menu2()
 
     def Menu2(self):
-        cod_cliente = ft.TextField(label="Dni de cliente", width=300)
-        nom_cli = ft.TextField(label="Nombre", width=300)
-        email_cli = ft.TextField(label="Email", width=300)
-        desc_cli = ft.TextField(
-            label="descripcion", multiline=True, width=500, max_length=200, max_lines=3)
+        cod_cliente = create_text_field("Dni de cliente")
+        nom_cli = create_text_field("Nombre")
+        email_cli = create_text_field("Email")
+        desc_cli = create_text_field(
+            "Descripcion", multiline=True, max_length=200, max_lines=3)
         subir_cli = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
@@ -502,9 +503,9 @@ class Plantilla:
 
     def Menu3(self):
         cocherav = ft.CupertinoButton(
-            text="cochera", width=300, on_click=lambda _: self.cochera(), bgcolor=colores[5])
+            text="cochera", on_click=lambda _: self.cochera(), bgcolor=colores[5])
         habitacionv = ft.CupertinoButton(
-            text="habitacion", width=300, on_click=lambda _: self.habitacion(), bgcolor=colores[5])
+            text="habitacion", on_click=lambda _: self.habitacion(), bgcolor=colores[5])
         Container_menus.content = ft.Row([cocherav, habitacionv])
         Container_menus.padding = ft.padding.symmetric(horizontal=ancho*0.18)
         Container_menus.update()
@@ -527,7 +528,7 @@ class Plantilla:
 
     def cochera(self):
         print("cochera")
-        piso_coch = ft.TextField(label="piso")
+        piso_coch = create_text_field("Piso")
         subir_coch = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
@@ -556,10 +557,10 @@ class Plantilla:
             self.Menu3()
 
     def habitacion(self):
-        piso = ft.TextField(label="Piso", width=300)
-        camamatr = ft.TextField(label="camas matrimoniales", width=300)
-        camaind = ft.TextField(label="camas individuales", width=300)
-        costo = ft.TextField(label="costo", width=300)
+        piso = create_text_field("Piso")
+        camamatr = create_text_field("camas matrimoniales")
+        camaind = create_text_field("camas individuales")
+        costo = create_text_field("Costo")
         subir_cli = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
@@ -596,17 +597,14 @@ class Plantilla:
                 self.Menu4()
 
         # --------------Elementos-------------
-        dni_emp = ft.TextField(label="Dni de Empleado",
-                               width=300, border_radius=20)
-        nombre_emp = ft.TextField(label="Nombre", width=300, border_radius=20)
-        email = ft.TextField(label="Email", width=300, border_radius=20)
-        telefono = ft.TextField(label="Telefono", width=300, border_radius=20)
-        puesto = ft.TextField(label="Puesto", width=300, border_radius=20)
-        usuario = ft.TextField(label="Usuario", width=300, border_radius=20)
-        contraseña = ft.TextField(
-            label="Contraseña", width=300, border_radius=20)
-        nivel = ft.TextField(label="Nivel de acceso",
-                             width=300, border_radius=20)
+        dni_emp = create_text_field("Dni del empleado")
+        nombre_emp = create_text_field("Nombre")
+        email = create_text_field("Email")
+        telefono = create_text_field("Telefono")
+        puesto = create_text_field("Puesto")
+        usuario = create_text_field("Usuario")
+        contraseña = create_text_field("Contraseña")
+        nivel = create_text_field("Nivel de acceso")
         registrar = ft.CupertinoButton(
             content=ft.Text("Registrar", color=ft.colors.BLACK),
             bgcolor=colores[1],
@@ -697,7 +695,6 @@ class Plantilla:
         )
 
     def ContainerIcon(self, icon_name: str, text: str):
-        print("hola")
         return Container(
             width=180,
             height=45,
@@ -825,7 +822,8 @@ class Plantilla:
             height=850,
             bgcolor=colores[3],
             border_radius=ft.border_radius.all(3),
-            padding=ft.padding.symmetric(horizontal=(ancho*0.05), vertical=(altura*0.15)),
+            padding=ft.padding.symmetric(horizontal=(
+                ancho*0.05), vertical=(altura*0.15)),
         )
 
         self.raiz.add(ft.Row(
@@ -843,27 +841,27 @@ class Plantilla:
         )
         )
 
-#...................calendario.......................
-    def Menu5(self):       
+# ...................calendario.......................
+    def Menu5(self):
         Container_menus.clean()
         Ingreso_Res = ft.TextField(label="Ingreso (aaaa-mm-dd)")
         Egreso_Res = ft.TextField(label="Egreso (aaaa-mm-dd)")
         consultar = ft.TextButton(text="Consultar")
         reservarboton = ft.TextButton(text="el otro boton")
         Container_menus.content = ft.Row(
-            [Ingreso_Res,Egreso_Res,consultar,reservarboton],
+            [Ingreso_Res, Egreso_Res, consultar, reservarboton],
         )
-        Container_menus.alignment=ft.alignment.top_center
-        
+        Container_menus.alignment = ft.alignment.top_center
+
         Container_menus.update()
-        
+
 
 def main(raiz: ft.Page):
     global altura
     global ancho
     altura = raiz.window_height
     ancho = raiz.window_width
-    print(altura,ancho)
+    print(altura, ancho)
     raiz.window_resizable = False
     raiz.window_full_screen = True
     raiz.update()
