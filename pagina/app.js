@@ -53,25 +53,16 @@ const translations = {
       "Our software automate tedius processes and optimize complex operations, allowing you to focus on the most important: bring a exceptional experience to your guests",
     rentabilidad: "Rentability",
     rentabilidadDesc: "descripcion de rentabilidad",
-<<<<<<< HEAD
     persoFlexi: "Customization and flexibility",
-    persoFlexiDesc: "Doesnt matter the size or the type of your hotel, our system adapts to your specific needs and evolves with you as you grow and expand.",
+    persoFlexiDesc:
+      "Doesnt matter the size or the type of your hotel, our system adapts to your specific needs and evolves with you as you grow and expand.",
     experiencia: "Experence with guest",
-    experienciaDesc: "From reservation to check-out, our software offers a perfectly experence and that leaves a lasting impression on your guests and encourages fidelity to your brand",
+    experienciaDesc:
+      "From reservation to check-out, our software offers a perfectly experence and that leaves a lasting impression on your guests and encourages fidelity to your brand",
     compatibilidad: "Compatibility",
     compatibilidadDesc: "Our system is compatibility with all devices",
     compra: "Buy Innaxys",
     solicitarInfo: "Request more informartion",
-=======
-    persoFlexi: "Flexibility and Personalisation",
-    persoFlexiDesc: "descripcion de flexibilidad y perso",
-    experiencia: "Experience",
-    experienciaDesc: "descripcion de experiencia",
-    compatibilidad: "Compatibility",
-    compatibilidadDesc: "descripcion compatibilidad",
-    compra: "comprar",
-    solicitarInfo: "mas informacion",
->>>>>>> a7cd04594e10abbd4f4e60e332e895f821abcba8
     nombre: "Name:",
     email: "Email:",
     mensaje: "Message:",
