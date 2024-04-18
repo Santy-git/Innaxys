@@ -46,7 +46,7 @@ const translations = {
     queOfrecemosDesc1:
       "We offer a complete hotel management system, designed to optimize each aspect of your hotel.",
     queOfrecemosDesc2:
-      "From the habitation reserve until the inventories administration and the personal management, our software is designed to simplify your processes and boost your bussines.",
+      "From the room reservation until the inventories administration and the personal management, our software is designed to simplify your processes and boost your bussines.",
     beneficios: "Benefits",
     eficiencia: "Eficiency",
     eficienciaDesc: "descripcion eficiencia",
