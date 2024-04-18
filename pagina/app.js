@@ -19,7 +19,7 @@ const translations = {
       "Nuestro software automatiza procesos tediosos y optimiza operaciones complejas, permitiéndote centrarte en lo que más importa: brindar una experiencia excepcional a tus huespedes.",
     rentabilidad: "Rentabilidad",
     rentabilidadDesc:
-      "Con herramientas avanzadas de análisis y optimización de ingresos, puedes tomar decisiones informadas que maximicen tus ingresos y mejoren tu competitividad en el mercado.",
+      "Con herramientas avanzadas de análisis y optimización puedes maximizar tus ingresos y mejorar tu competitividad en el mercado.",
     persoFlexi: "Personalización y flexibilidad",
     persoFlexiDesc:
       "No importa el tamaño o el tipo de tu hotel, nuestro sistema se adapta a tus necesidades específicas y evoluciona contigo a medida que creces y te expandes.",
@@ -53,7 +53,7 @@ const translations = {
       "Our software automate tedius processes and optimize complex operations, allowing you to focus on the most important issues offer an exceptional experience to your guests",
     rentabilidad: "Rentability",
     rentabilidadDesc:
-      "With advanced tools of analysis and income of optimization, you can make informed decisions that maximize your income and improve your competitiveness in the market.",
+      "With advanced tools of analysis and optimization you can maximize your income and improve your competitiveness in the market.",
     persoFlexi: "Customization and flexibility",
     persoFlexiDesc:
       "It doesn't matter the size or the type of your hotel, our system adapts to your specific needs and evolves with you as you grow and expand.",
