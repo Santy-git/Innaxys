@@ -49,7 +49,8 @@ const translations = {
       "From the room reservation until the inventories administration and the personal management, our software is designed to simplify your processes and boost your bussines.",
     beneficios: "Benefits",
     eficiencia: "Eficiency",
-    eficienciaDesc: "descripcion eficiencia",
+    eficienciaDesc:
+      "Our software automate tedius processes and optimize complex operations, allowing you to focus on the most important: bring a exceptional experience to your guests",
     rentabilidad: "Rentability",
     rentabilidadDesc: "descripcion de rentabilidad",
     persoFlexi: "Flexibility and Personalisation",
