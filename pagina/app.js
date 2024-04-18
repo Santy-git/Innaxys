@@ -52,7 +52,8 @@ const translations = {
     eficienciaDesc:
       "Our software automate tedius processes and optimize complex operations, allowing you to focus on the most important: bring a exceptional experience to your guests",
     rentabilidad: "Rentability",
-    rentabilidadDesc: "With advanced tools of analysis and income of optimization, you can make informed decisions that maximize your income and improve your competitiveness in the market.",
+    rentabilidadDesc:
+      "With advanced tools of analysis and income of optimization, you can make informed decisions that maximize your income and improve your competitiveness in the market.",
     persoFlexi: "Customization and flexibility",
     persoFlexiDesc:
       "Doesnt matter the size or the type of your hotel, our system adapts to your specific needs and evolves with you as you grow and expand.",
@@ -60,9 +61,9 @@ const translations = {
     experienciaDesc:
       "From reservation to check-out, our software offers a perfectly experence and that leaves a lasting impression on your guests and encourages fidelity to your brand",
     compatibilidad: "Compatibility",
-    compatibilidadDesc: "Our system is compatibility with all devices",
+    compatibilidadDesc: "All devices compatibility",
     compra: "Buy Innaxys",
-    solicitarInfo: "Request more informartion",
+    solicitarInfo: "Contact us",
     nombre: "Name:",
     email: "Email:",
     mensaje: "Message:",
