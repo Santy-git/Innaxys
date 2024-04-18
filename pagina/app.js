@@ -52,7 +52,7 @@ const translations = {
     eficienciaDesc:
       "Our software automate tedius processes and optimize complex operations, allowing you to focus on the most important: bring a exceptional experience to your guests",
     rentabilidad: "Rentability",
-    rentabilidadDesc: "descripcion de rentabilidad",
+    rentabilidadDesc: "With advanced tools of analysis and income of optimization, you can make informed decisions that maximize your income and improve your competitiveness in the market.",
     persoFlexi: "Customization and flexibility",
     persoFlexiDesc:
       "Doesnt matter the size or the type of your hotel, our system adapts to your specific needs and evolves with you as you grow and expand.",
