@@ -25,7 +25,7 @@ const translations = {
       "No importa el tamaño o el tipo de tu hotel, nuestro sistema se adapta a tus necesidades específicas y evoluciona contigo a medida que creces y te expandes.",
     experiencia: "Experiencia con el huésped",
     experienciaDesc:
-      "Desde la reserva hasta el check-out, nuestro software ofrece una experiencia perfecta y personalizada que deja una impresión duradera en tus huespedes y fomenta la fidelidad a tu marca.",
+      "Desde la reserva hasta el check-out, nuestro software ofrece una experiencia perfecta y personalizada que deja una impresión duradera en tus huespedes",
     compatibilidad: "Compatibilidad",
     compatibilidadDesc:
       "Nuestro sistema es compatible con todos los dispositivos",
@@ -52,13 +52,14 @@ const translations = {
     eficienciaDesc:
       "Our software automate tedius processes and optimize complex operations, allowing you to focus on the most important issues offer an exceptional experience to your guests",
     rentabilidad: "Rentability",
-    rentabilidadDesc: "With advanced tools of analysis and income of optimization, you can make informed decisions that maximize your income and improve your competitiveness in the market.",
+    rentabilidadDesc:
+      "With advanced tools of analysis and income of optimization, you can make informed decisions that maximize your income and improve your competitiveness in the market.",
     persoFlexi: "Customization and flexibility",
     persoFlexiDesc:
       "It doesn't matter the size or the type of your hotel, our system adapts to your specific needs and evolves with you as you grow and expand.",
     experiencia: "Experience with guest",
     experienciaDesc:
-      "From reservation to check-out, our software offers a perfectly experence and that leaves a lasting impression on your guests and encourages fidelity to your brand",
+      "From reservation to check-out, our software offers a perfect and personalized experience, leaving a lasting impression on your guests",
     compatibilidad: "Compatibility",
     compatibilidadDesc: "Our system is compatible with all devices",
     compra: "Buy Innaxys",
