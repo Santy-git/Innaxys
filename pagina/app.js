@@ -10,7 +10,7 @@ const translations = {
       "En Innaxys, nos dedicamos a impulsar la excelencia en la gestión hotelera a través de soluciones tecnológicas innovadoras y personalizadas. Con años de experiencia en el sector, entendemos las necesidades únicas de cada hotel y nos comprometemos a ofrecer soluciones que impulsen el éxito y la eficiencia.",
     queOfrecemos: "¿Qué ofrecemos?",
     queOfrecemosDesc1:
-      "Ofrecemos un completo sistema de gestión hotelera diseñado para optimizar cada aspecto de tu operación..",
+      "Ofrecemos un completo sistema de gestión hotelera diseñado para optimizar cada aspecto de tu hotel",
     queOfrecemosDesc2:
       "Desde la reserva de habitaciones hasta la administración de inventarios y la gestión de personal, nuestro software está diseñado para simplificar tus procesos y potenciar tu negocio.",
     beneficios: "Beneficios",
@@ -38,17 +38,22 @@ const translations = {
     copy: "Copyright © | 2024 Innaxys. Todos los derechos reservados. | Desarrollado por Innaxys",
   },
   en: {
-    descubre: "subtitulo del logo",
-    quienesSomos: "quienes somos",
-    quienesSomosDesc: "descripcion del quienes somo",
-    queOfrecemos: "que ofrecemos",
-    queOfrecemosDesc1: "descripcion de que ofrecemos",
-    queOfrecemosDesc2: "descripcion de que ofrecemos 2",
-    beneficios: "beneficios",
-    eficiencia: "eficiencia",
-    eficienciaDesc: "descripcion eficiencia",
-    rentabilidad: "rentabilidad",
+    descubre: "Discover the innovation power with Innaxys in your hotel",
+    quienesSomos: "About us",
+    quienesSomosDesc:
+      "At Innaxys, we dedicate ourselves to propelling excellence in hotel management with innovative and personalized technology solutions. With years of experience in the sector, we understand the unique needs of each hotel and commit to offering solutions that propel success and efficiency.",
+    queOfrecemos: "Services",
+    queOfrecemosDesc1:
+      "We offer a complete hotel management system, designed to optimize each aspect of your hotel.",
+    queOfrecemosDesc2:
+      "From the room reservation until the inventories administration and the personal management, our software is designed to simplify your processes and boost your bussines.",
+    beneficios: "Benefits",
+    eficiencia: "Eficiency",
+    eficienciaDesc:
+      "Our software automate tedius processes and optimize complex operations, allowing you to focus on the most important: bring a exceptional experience to your guests",
+    rentabilidad: "Rentability",
     rentabilidadDesc: "descripcion de rentabilidad",
+<<<<<<< HEAD
     persoFlexi: "Customization and flexibility",
     persoFlexiDesc: "Doesnt matter the size or the type of your hotel, our system adapts to your specific needs and evolves with you as you grow and expand.",
     experiencia: "Experence with guest",
@@ -57,6 +62,16 @@ const translations = {
     compatibilidadDesc: "Our system is compatibility with all devices",
     compra: "Buy Innaxys",
     solicitarInfo: "Request more informartion",
+=======
+    persoFlexi: "Flexibility and Personalisation",
+    persoFlexiDesc: "descripcion de flexibilidad y perso",
+    experiencia: "Experience",
+    experienciaDesc: "descripcion de experiencia",
+    compatibilidad: "Compatibility",
+    compatibilidadDesc: "descripcion compatibilidad",
+    compra: "comprar",
+    solicitarInfo: "mas informacion",
+>>>>>>> a7cd04594e10abbd4f4e60e332e895f821abcba8
     nombre: "Name:",
     email: "Email:",
     mensaje: "Message:",
