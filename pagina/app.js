@@ -41,28 +41,28 @@ const translations = {
     descubre: "Discover the innovation power with Innaxys in your hotel",
     quienesSomos: "About us",
     quienesSomosDesc:
-      "At Innaxys, we dedicate ourselves to propelling excellence in hotel management with innovative and personalized technology solutions. With years of experience in the sector, we understand the unique needs of each hotel and commit to offering solutions that propel success and efficiency.",
+      "At Innaxys, we dedicate ourselves to propelling excellence in hotel management with innovative and personalized technology solutions. With years of experience in the area, we understand the unique needs of each hotel and commit to offer solutions that propel success and efficiency.",
     queOfrecemos: "Services",
     queOfrecemosDesc1:
       "We offer a complete hotel management system, designed to optimize each aspect of your hotel.",
     queOfrecemosDesc2:
-      "From the room reservation until the inventories administration and the personal management, our software is designed to simplify your processes and boost your bussines.",
+      "From the room reservation until the inventories administration and the personal management as well, our software is designed to simplify your processes and boost your bussines.",
     beneficios: "Benefits",
     eficiencia: "Eficiency",
     eficienciaDesc:
-      "Our software automate tedius processes and optimize complex operations, allowing you to focus on the most important: bring a exceptional experience to your guests",
+      "Our software automate tedius processes and optimize complex operations, allowing you to focus on the most important issues offer an exceptional experience to your guests",
     rentabilidad: "Rentability",
     rentabilidadDesc: "With advanced tools of analysis and income of optimization, you can make informed decisions that maximize your income and improve your competitiveness in the market.",
     persoFlexi: "Customization and flexibility",
     persoFlexiDesc:
-      "Doesnt matter the size or the type of your hotel, our system adapts to your specific needs and evolves with you as you grow and expand.",
-    experiencia: "Experence with guest",
+      "It doesn't matter the size or the type of your hotel, our system adapts to your specific needs and evolves with you as you grow and expand.",
+    experiencia: "Experience with guest",
     experienciaDesc:
       "From reservation to check-out, our software offers a perfectly experence and that leaves a lasting impression on your guests and encourages fidelity to your brand",
     compatibilidad: "Compatibility",
-    compatibilidadDesc: "Our system is compatibility with all devices",
+    compatibilidadDesc: "Our system is compatible with all devices",
     compra: "Buy Innaxys",
-    solicitarInfo: "Request more informartion",
+    solicitarInfo: "For more informartion",
     nombre: "Name:",
     email: "Email:",
     mensaje: "Message:",
