@@ -81,10 +81,9 @@ function scrollToSection(sectionId) {
 document.getElementById("checkbox").addEventListener("change", function () {
   var contactBar = document.getElementById("contactBar");
   if (this.checked) {
-    console.log("Holaaaaa");
-    contactBar.style.right = "5rem"; // Desplazar la barra hacia la izquierda
+    contactBar.style.display = "flex";
   } else {
-    contactBar.style.right = "-100%"; // Ocultar la barra hacia la derecha
+    contactBar.style.display = "none";
   }
 });
 

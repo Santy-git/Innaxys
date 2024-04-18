@@ -153,16 +153,20 @@ nav {
   transform: rotate(180deg);
 }
 
+#checkbox:checked ~ .contact-bar {
+  display: none;
+}
+
 .contact-bar {
+  display: none;
   position: absolute;
-  right: -900px;
   width: fit-content;
   height: auto;
+  right: 5rem;
   background-color: hsla(0, 0%, 100%, 0);
-  transition: right 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   overflow: hidden;
   padding: 32px;
-  display: flex;
   align-items: center;
   justify-content: center;
   gap: 4rem;
