@@ -42,11 +42,11 @@ const translations = {
     quienesSomos: "About us",
     quienesSomosDesc:
       "At Innaxys, we dedicate ourselves to propelling excellence in hotel management with innovative and personalized technology solutions. With years of experience in the sector, we understand the unique needs of each hotel and commit to offering solutions that propel success and efficiency.",
-    queOfrecemos: "¿What we offer?",
+    queOfrecemos: "Services",
     queOfrecemosDesc1:
       "We offer a complete hotel management system, designed to optimize each aspect of your hotel.",
     queOfrecemosDesc2:
-      "From the habitation reserve until the inventories administration and the personal management, our software is designed to simplify your process and boost your bussines.",
+      "From the habitation reserve until the inventories administration and the personal management, our software is designed to simplify your processes and boost your bussines.",
     beneficios: "Benefits",
     eficiencia: "Eficiency",
     eficienciaDesc: "descripcion eficiencia",
