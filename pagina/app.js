@@ -117,3 +117,29 @@ document.addEventListener("DOMContentLoaded", function () {
       : "en";
   changeLanguage(lang);
 });
+
+// la flecha para volver al inicio
+document.addEventListener("DOMContentLoaded", function () {
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Función para mostrar el botón de flecha cuando el usuario se desplace hacia abajo
+  function showScrollTopBtn() {
+    if (window.pageYOffset > 200) {
+      scrollTopBtn.style.display = "block";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+  }
+
+  // Función para hacer scroll hacia arriba al hacer clic en el botón de flecha
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  window.addEventListener("scroll", showScrollTopBtn);
+
+  scrollTopBtn.addEventListener("click", scrollToTop);
+});

@@ -9,8 +9,11 @@
   /* Es el color de la barra de arriba y los botones */
   --bg-barra: #121c14;
 
-  /* Es el color de los botones */
-  --bg-botones: #5c6f5e;
+  /* Es el color del fondo de los botones */
+  --bg-cont-btns: #5c6f5e;
+
+  /* Color del hover de los botones que redireccionan */
+  --bg-btn-hover: #6c826e;
 
   /* el color del titulo arriba de la imagen */
   --fg-header: rgb(255, 255, 255);
@@ -19,7 +22,7 @@
   --bg-section: #f2f2f2;
 
   /* El color de fondo del section oscuro */
-  --bg-section2: #f2f2f2f2;
+  --bg-section2: #f2f2f2;
 
   /* fuente para los parrafos y el texto */
   --font-p: "Poppins", sans-serif;
@@ -302,7 +305,7 @@ nav {
 .container {
   display: flex;
   align-items: center;
-  background-color: var(--bg-botones);
+  background-color: var(--bg-cont-btns);
   height: 22svh;
 }
 
@@ -312,13 +315,16 @@ nav {
   align-items: center;
   padding: 2rem 10rem;
   min-width: 100%;
-  color: black;
 }
 
 .contBotonTexto {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .contBotonTexto a {
@@ -330,39 +336,26 @@ nav {
 .ofrecemos,
 .beneficios,
 .compatibilidad {
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--bg-btn);
+}
+
+.botonCircular {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  font-size: 1.7rem;
-  flex: 1;
-}
-
-/* para hacer los circulos  */
-.somos::before,
-.ofrecemos::before,
-.beneficios::before,
-.compatibilidad::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  padding: 1rem;
   border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
   border: 2px solid black;
   transition: all 0.35s ease;
   cursor: pointer;
 }
 
-/* para que haga la transision de tamaño en los botones */
-.somos:hover::before,
-.ofrecemos:hover::before,
-.beneficios:hover::before,
-.compatibilidad:hover::before {
-  width: 3.2rem;
-  height: 3.2rem;
+.botonCircular:hover {
+  transform: scale(1.1);
+  background-color: var(--bg-btn-hover);
 }
 
 .caracteristicas {
@@ -470,7 +463,7 @@ nav {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 5rem 0rem;
+  gap: 5rem;
   align-items: start;
 }
 
@@ -483,19 +476,12 @@ nav {
   justify-content: center;
   gap: 2rem;
   font-size: 3rem;
-}
-
-.benefitItem::before {
-  content: ""; /* Agrega contenido al pseudo-elemento */
-  padding: 1rem;
-  position: absolute;
-  top: -15%;
-  left: 3rem;
-  width: 80%; /* Ancho del cuadrado */
-  min-height: 15rem; /* Alto del cuadrado */
-  background-color: #d5d0d0; /* Color del cuadrado con transparencia */
-  border-radius: 15px; /* Borde redondeado */
-  z-index: -1;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  background-color: #d5d0d0;
+  border-radius: 0.3rem;
+  /* hola */
 }
 
 .contTexto {
@@ -545,7 +531,6 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /*border-top: solid var(--bg-botones);*/
   padding: 5rem 5% 5rem 5%;
   background: linear-gradient(135deg, #336847, #0f1f16, #000000);
   color: white;
@@ -573,7 +558,7 @@ nav {
   color: white;
 }
 
-label {
+.form-group label {
   display: block;
   margin-bottom: 0.3rem;
   font-family: var(--font-p);
@@ -588,7 +573,7 @@ textarea {
   border-radius: 0.3rem;
 }
 
-button {
+#buyNow {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -597,7 +582,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+#buyNow:hover {
   background-color: #0056b3;
 }
 
@@ -638,4 +623,12 @@ footer {
 .twitter:hover {
   fill: #03a9f4;
   transform: scale(1.1);
+}
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  display: none;
 }
