@@ -327,8 +327,7 @@ class Plantilla:
         Container_menus.clean()
         Verificar = Reservar(cli, emp, fecha, desc)
         if Verificar == 1:
-            Container_menus.clean()
-            print("aca es el tema")
+            Container_menus.clean()         
             Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
             Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
@@ -863,13 +862,23 @@ class Plantilla:
 
 # ...................calendario.......................
     def Menu5(self):
-        Container_menus.clean()
-        Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
-        Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
-        consultar = ft.TextButton(text="Consultar")
-        reservarboton = ft.TextButton(text="el otro boton")
+        def Calendario_menu(ing,eng):
+            matris = calendario()
+            
+            for i in range(len(matris)):
+                pass
+            
+
+        self.Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
+        self.Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
+        consultar = ft.TextButton(
+            text="Consultar",
+            on_click=lambda _:Calendario_menu(
+                self.Ingreso_Res.value,
+                self.Egreso_Res.value)
+                )
         Container_menus.content = ft.Row(
-            [Ingreso_Res, Egreso_Res, consultar, reservarboton],
+            [self.Ingreso_Res, self.Egreso_Res, consultar],
         )
         Container_menus.alignment = ft.alignment.top_center
 
