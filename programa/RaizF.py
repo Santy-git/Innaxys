@@ -176,12 +176,6 @@ class Plantilla:
                     Container(
                         Container(
                             Column([
-                                Container(
-                                    ft.Image(
-                                        src='axys.png',
-                                        width=100,
-                                    ), padding=ft.padding.only(130, 20),
-                                ),
                                 Text(
                                     'Sign in',
                                     width=ancho * .25,
