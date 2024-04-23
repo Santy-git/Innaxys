@@ -151,7 +151,7 @@ class Plantilla:
 
         self.User: TextField = TextField(
             width=ancho * .2,
-            height=altura * .1,
+            height=altura * .08,
             label='User',
             border='underline',
             color='white',
@@ -159,13 +159,13 @@ class Plantilla:
 
         self.Password: TextField = TextField(
             width=ancho * .2,
-            height=altura * .1,
+            height=altura * .08,
             label='Password',
             border='underline',
             color='white',
             prefix_icon=ft.icons.LOCK,)
 
-        Button: ElevatedButton = ElevatedButton(
+        self.Button: ElevatedButton = ElevatedButton(
             content=Text(
                 'SIGN IN',
                 color='white',
@@ -180,8 +180,8 @@ class Plantilla:
                     Container(
                         border_radius=11,
                         rotate=ft.Rotate(0.98*3.1),  # Degree
-                        width=ancho * .45,
-                        height=altura * .8,
+                        width=ancho * .2,
+                        height=altura * .5,
                         bgcolor='#22ffffff'
                     ),
                     Container(
@@ -189,42 +189,42 @@ class Plantilla:
                             Column([
                                 Text(
                                     'Sign in',
-                                    width=ancho * .25,
-                                    size=altura * .05,
+                                    width=ancho * .2,
+                                    size=altura * .03,
                                     weight='w900',
                                     text_align='center',
                                 ),
                                 Text(
                                     'Please login to use the plataform',
-                                    width=ancho * .25,
+                                    width=ancho * .2,
                                     text_align='center',
 
                                 ),
-                                Container(self.User, padding=ft.padding.only(ancho * .04, altura * .03)
+                                Container(self.User, padding=ft.padding.symmetric(horizontal=ancho * .03)
                                           ),
-                                Container(self.Password, padding=ft.padding.only(ancho * .04, altura * .03),
+                                Container(self.Password, padding=ft.padding.symmetric(horizontal=ancho * .03)
                                           ),
-                                Container(Button, padding=ft.padding.only(ancho * .04, altura * .03)
+                                Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03)
                                           )
                             ])
                         ),
-                        width=ancho * .45,
-                        height=altura * .8,
+                        width=ancho * .2,
+                        height=altura * .5,
                         bgcolor='#22ffffff',
                         border_radius=11,
                     )
                 ]),
-                padding=ancho * .09,
-                width=ancho * .45,
-                height=altura * .8,
+                padding=ancho * .06,
+                width=ancho * .3,
+                height=altura * .6,
                 bgcolor='grey900'
 
             ),
-            width=ancho * .45,
-            height=altura * 1.1,
+            width=ancho * .3,
+            height=altura * .7,
             gradient=ft.LinearGradient(['white30', 'white10']),
             border_radius=ft.border_radius.all(30),
-            margin=ft.margin.only(left=ancho*.305)
+            margin=ft.margin.only(left=ancho * .25)
         )
 
         self.raiz.add(self.contenedor_login)
