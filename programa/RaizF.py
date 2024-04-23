@@ -132,9 +132,9 @@ class Plantilla:
             bgcolor=colores[8],
             actions=[
                 ft.IconButton(ft.icons.LANGUAGE,
-                              on_click=self.EnEs, icon_size=35),
+                              on_click=self.EnEs, icon_size=ancho*.03),
                 ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,
-                              on_click=self.OFF, icon_size=35,),
+                              on_click=self.OFF, icon_size=ancho*.03),
             ]
 
         )
@@ -214,7 +214,7 @@ class Plantilla:
                         border_radius=11,
                     )
                 ]),
-                padding=ancho * .06,
+                alignment=ft.alignment.center,
                 width=ancho * .3,
                 height=altura * .6,
                 bgcolor='grey900'
@@ -222,9 +222,8 @@ class Plantilla:
             ),
             width=ancho * .3,
             height=altura * .7,
-            gradient=ft.LinearGradient(['white30', 'white10']),
             border_radius=ft.border_radius.all(30),
-            margin=ft.margin.only(left=ancho * .25)
+            margin = ft.margin.symmetric(horizontal=(ancho-ancho * 0.3)/2)   
         )
 
         self.raiz.add(self.contenedor_login)
