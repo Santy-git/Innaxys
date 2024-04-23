@@ -169,7 +169,7 @@ class Plantilla:
                     Container(
                         border_radius=11,
                         rotate=ft.Rotate(0.98*3.1),  # Degree
-                        width=ancho * .25,
+                        width=ancho * .45,
                         height=altura * .8,
                         bgcolor='#22ffffff'
                     ),
@@ -209,7 +209,7 @@ class Plantilla:
                         border_radius=11,
                     )
                 ]),
-                padding=110,
+                padding=ancho * .09,
                 width=ancho * .45,
                 height=altura * .8,
                 bgcolor='grey900'
@@ -860,20 +860,20 @@ class Plantilla:
 
 # ...................calendario.......................
     def Menu5(self):
-        def Calendario_menu(ing,eng):
-            a = ing.replace("-","")
-            e = eng.replace("-","")
-            matris = calendario()            
+        def Calendario_menu(ing, eng):
+            a = ing.replace("-", "")
+            e = eng.replace("-", "")
+            matris = calendario()
             for i in range(len(matris)):
-                y = matris[i][1].replace("-","")
-                x = matris[i][2].replace("-","")
+                y = matris[i][1].replace("-", "")
+                x = matris[i][2].replace("-", "")
                 if int(x) > int(a) and int(y) < int(e):
-                    print(matris[i],"ocupado")
+                    print(matris[i], "ocupado")
 
                 else:
-                    
-                    print(matris[i],"desocupado")
-                
+
+                    print(matris[i], "desocupado")
+
         self.Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
         self.Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
         consultar = ft.TextButton(
