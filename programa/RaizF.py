@@ -863,12 +863,19 @@ class Plantilla:
 # ...................calendario.......................
     def Menu5(self):
         def Calendario_menu(ing,eng):
-            matris = calendario()
-            
+            a = ing.replace("-","")
+            e = eng.replace("-","")
+            matris = calendario()            
             for i in range(len(matris)):
-                pass
-            
+                y = matris[i][1].replace("-","")
+                x = matris[i][2].replace("-","")
+                if int(x) > int(a) and int(y) < int(e):
+                    print(matris[i],"ocupado")
 
+                else:
+                    
+                    print(matris[i],"desocupado")
+                
         self.Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
         self.Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
         consultar = ft.TextButton(
