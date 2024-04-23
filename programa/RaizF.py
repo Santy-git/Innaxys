@@ -6,7 +6,18 @@ from flet_core.control_event import ControlEvent
 from datetime import datetime
 from functools import partial
 import time
+# para sacar el ancho y el alto
+from screeninfo import get_monitors
 # .................................................
+
+
+def dimensones():
+    monitores = get_monitors()
+    primer_monitor = monitores[0]
+    ancho = primer_monitor.width
+    altura = primer_monitor.height
+    return ancho, altura
+
 
 colores = [
     '#f3f6f4',
@@ -853,18 +864,17 @@ class Plantilla:
 
 # ...................calendario.......................
     def Menu5(self):
-        def Calendario_menu(ing,eng):
+        def Calendario_menu(ing, eng):
 
-            
-            a = ing.replace("-","")
-            e = eng.replace("-","")
-            matris = calendario()            
+            a = ing.replace("-", "")
+            e = eng.replace("-", "")
+            matris = calendario()
             for i in range(len(matris)):
-                y = matris[i][1].replace("-","")
-                x = matris[i][2].replace("-","")
+                y = matris[i][1].replace("-", "")
+                x = matris[i][2].replace("-", "")
                 if int(x) >= int(a) and int(y) <= int(e):
-                    
-                    print(matris[i],"ocupado")
+
+                    print(matris[i], "ocupado")
 
                 else:
 
@@ -885,19 +895,19 @@ class Plantilla:
 
         Container_menus.update()
 
-#....................eliminar.........................
+# ....................eliminar.........................
     def Menu6(self):
         pass
 
-#.....................modificar.......................
+
+# .....................modificar.......................
 while True:
     if codigo == 0:
         def main(raiz: ft.Page):
             global altura
             global ancho
-            altura = 720
-            ancho = 1280
-            print(altura, ancho)
+            ancho, altura = dimensones()
+            print(f"EL ancho y alto es {ancho, altura}")
             raiz.window_resizable = False
             raiz.window_full_screen = True
             raiz.update()
