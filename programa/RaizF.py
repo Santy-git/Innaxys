@@ -222,7 +222,7 @@ class Plantilla:
             width=(ancho/100)*30,
             height=(altura/100)*70,
             border_radius=ft.border_radius.all(ancho*.005),
-            margin = ft.margin.symmetric(horizontal=ancho*0.1)   
+            margin = ft.margin.symmetric(horizontal=ancho*0.33)   
         )
 
         self.raiz.add(self.contenedor_login)
@@ -905,9 +905,10 @@ while True:
             global altura
             global ancho
             ancho, altura = dimensones()
+            ancho = 1280
+            altura = 720
             print(f"EL ancho y alto es {ancho, altura}")
             raiz.window_resizable = False
-            raiz.window_full_screen = True
             raiz.update()
             objeto = Plantilla(raiz, idioma, español, ingles)
             objeto.ej()
