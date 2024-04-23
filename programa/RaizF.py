@@ -895,8 +895,8 @@ while True:
         def main(raiz: ft.Page):
             global altura
             global ancho
-            altura = raiz.window_height
-            ancho = raiz.window_width
+            altura = 720
+            ancho = 1280
             print(altura, ancho)
             raiz.window_resizable = False
             raiz.window_full_screen = True
