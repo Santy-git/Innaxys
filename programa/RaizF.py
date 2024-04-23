@@ -213,8 +213,7 @@ class Plantilla:
             height=altura * 1.1,
             gradient=ft.LinearGradient(['white30', 'white10']),
             border_radius=ft.border_radius.all(30),
-            margin=ft.margin.symmetric(horizontal=(ancho*0.37)),
-
+            margin=ft.margin.only(left=ancho*.305)
         )
 
         self.raiz.add(self.contenedor_login)
