@@ -680,7 +680,7 @@ class Plantilla:
         Indices_menus[diccionario[a]]()
 
     def UserData(self, name: str):
-        # Fila esclusiva para la informacion del usuario
+        # Fila exclusiva para la informacion del usuario
 
         return Container(
             content=Row(
@@ -834,27 +834,24 @@ class Plantilla:
             width=200,
             height=1000,
             bgcolor='black',
-            border_radius=10,
+            border_radius=3,
             content=Left_bar
         )
         Container_menus = ft.Container(
-            width=1700,
+            width=ancho - penas.width,
             height=850,
             bgcolor=colores[3],
-            border_radius=ft.border_radius.all(3),
-            padding=ft.padding.symmetric(horizontal=(
-                ancho*0.05), vertical=(altura*0.15)),
+            border_radius=ft.border_radius.all(3)
         )
 
+        print(f"El ancho tendría que ser de {ancho - penas.width}")
         self.raiz.add(ft.Row(
             [
                 penas,
-                ft.VerticalDivider(width=1),
                 ft.Container(
                     Container_menus,
-                    width=1100,
+                    width=ancho * 1.02,
                     height=850,
-                    alignment=ft.alignment.center,
                 )
             ],
             expand=True,
