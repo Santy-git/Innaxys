@@ -909,6 +909,10 @@ while True:
             altura = 720
             print(f"EL ancho y alto es {ancho, altura}")
             raiz.window_resizable = False
+            raiz.window_title_bar_hidden = True
+            raiz.window_width = 1280
+            raiz.window_height = 720
+            raiz.window_center()
             raiz.update()
             objeto = Plantilla(raiz, idioma, español, ingles)
             objeto.ej()
