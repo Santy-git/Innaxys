@@ -23,9 +23,9 @@ colores = [
 ]
 
 
-#....................diccionario idioma..............................
+# ....................diccionario idioma..............................
 
-#....................diccionario idioma..............................
+# ....................diccionario idioma..............................
 
 # Funcionas que nos ayudan a modificar muchos objetos del flet
 
@@ -34,10 +34,11 @@ global idioma
 global español
 global ingles
 global codigo
-español = {3:"hola"}
+español = {3: "hola"}
 idioma = español
-ingles = {3:"hello"}
+ingles = {3: "hello"}
 codigo = 0
+
 
 def create_text_field(label_text, **kwargs):
     return ft.TextField(
@@ -58,12 +59,13 @@ creardb()
 
 
 class Plantilla:
-    def __init__(self, raiz,idioma,español,ingles):
+    def __init__(self, raiz, idioma, español, ingles):
         self.raiz = raiz
         self.idioma = idioma
         self.español = español
         self.ingles = ingles
 # ..................................................
+
     def ej(self):
         self.raiz.bgcolor = '#4a624e'
         self.raiz.update()
@@ -72,9 +74,9 @@ class Plantilla:
         global codigo
         self.raiz.window_destroy()
         codigo = 1
-        
+
     def EnEs(self, e):
-        global codigo 
+        global codigo
         global idioma
         self.raiz.window_destroy()
         if self.idioma == self.español:
@@ -83,7 +85,7 @@ class Plantilla:
             idioma = self.español
         print(idioma)
         codigo = 0
-        
+
     def logear(self, e):
         global Nivel
         global z
@@ -130,11 +132,11 @@ class Plantilla:
     def login_menu(self):
         global Nivel
         global z
-        #z = (True, '5', '0')
-        #Nivel = 5
-        #self.Menu()
+        # z = (True, '5', '0')
+        # Nivel = 5
+        # self.Menu()
         # esto es lo que saca el login sacar lo de arriba y eliminar el if
-        #if z[2] == 3:
+        # if z[2] == 3:
 
         self.User: TextField = TextField(
             width=290,
@@ -194,11 +196,11 @@ class Plantilla:
 
                                 ),
                                 Container(self.User, padding=ft.padding.only(25, 20)
-                                            ),
+                                          ),
                                 Container(self.Password, padding=ft.padding.only(25, 20),
-                                            ),
+                                          ),
                                 Container(Button, padding=ft.padding.only(40, 10)
-                                            )
+                                          )
                             ])
                         ),
                         width=360,
@@ -214,10 +216,10 @@ class Plantilla:
 
             ),
             width=580,
-            height=740,
+            height=780,
             gradient=ft.LinearGradient(['white30', 'white10']),
             border_radius=ft.border_radius.all(30),
-            margin=ft.margin.symmetric(horizontal=(ancho*0.30)),
+            margin=ft.margin.symmetric(horizontal=(ancho*0.37)),
 
         )
 
@@ -226,7 +228,6 @@ class Plantilla:
 # ...................................Menus............................
 
 # ...................................Menus............................
-
 
     def pedidos(self, var):
         hres.append(self.variable2[var])
@@ -327,7 +328,7 @@ class Plantilla:
         Container_menus.clean()
         Verificar = Reservar(cli, emp, fecha, desc)
         if Verificar == 1:
-            Container_menus.clean()         
+            Container_menus.clean()
             Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
             Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
@@ -679,7 +680,7 @@ class Plantilla:
         Indices_menus[diccionario[a]]()
 
     def UserData(self, name: str):
-        # Fila esclusiva para la informacion del usuario
+        # Fila exclusiva para la informacion del usuario
 
         return Container(
             content=Row(
@@ -833,27 +834,24 @@ class Plantilla:
             width=200,
             height=1000,
             bgcolor='black',
-            border_radius=10,
+            border_radius=3,
             content=Left_bar
         )
         Container_menus = ft.Container(
-            width=1700,
+            width=ancho - penas.width,
             height=850,
             bgcolor=colores[3],
-            border_radius=ft.border_radius.all(3),
-            padding=ft.padding.symmetric(horizontal=(
-                ancho*0.05), vertical=(altura*0.15)),
+            border_radius=ft.border_radius.all(3)
         )
 
+        print(f"El ancho tendría que ser de {ancho - penas.width}")
         self.raiz.add(ft.Row(
             [
                 penas,
-                ft.VerticalDivider(width=1),
                 ft.Container(
                     Container_menus,
-                    width=1100,
+                    width=ancho,
                     height=850,
-                    alignment=ft.alignment.center,
                 )
             ],
             expand=True,
@@ -880,16 +878,17 @@ class Plantilla:
         self.Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
         consultar = ft.TextButton(
             text="Consultar",
-            on_click=lambda _:Calendario_menu(
+            on_click=lambda _: Calendario_menu(
                 self.Ingreso_Res.value,
                 self.Egreso_Res.value)
-                )
+        )
         Container_menus.content = ft.Row(
             [self.Ingreso_Res, self.Egreso_Res, consultar],
         )
         Container_menus.alignment = ft.alignment.top_center
 
         Container_menus.update()
+
 
 while True:
     if codigo == 0:
@@ -902,7 +901,7 @@ while True:
             raiz.window_resizable = False
             raiz.window_full_screen = True
             raiz.update()
-            objeto = Plantilla(raiz,idioma,español,ingles)
+            objeto = Plantilla(raiz, idioma, español, ingles)
             objeto.ej()
             z = objeto.appbar()
             objeto.login_menu()
