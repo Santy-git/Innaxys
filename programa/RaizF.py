@@ -854,15 +854,18 @@ class Plantilla:
 
 # ...................calendario.......................
     def Menu5(self):
-        def Calendario_menu(ing, eng):
-            a = ing.replace("-", "")
-            e = eng.replace("-", "")
-            matris = calendario()
+        def Calendario_menu(ing,eng):
+
+            
+            a = ing.replace("-","")
+            e = eng.replace("-","")
+            matris = calendario()            
             for i in range(len(matris)):
-                y = matris[i][1].replace("-", "")
-                x = matris[i][2].replace("-", "")
-                if int(x) > int(a) and int(y) < int(e):
-                    print(matris[i], "ocupado")
+                y = matris[i][1].replace("-","")
+                x = matris[i][2].replace("-","")
+                if int(x) >= int(a) and int(y) <= int(e):
+                    
+                    print(matris[i],"ocupado")
 
                 else:
 
@@ -883,7 +886,11 @@ class Plantilla:
 
         Container_menus.update()
 
+#....................eliminar.........................
+    def Menu6(self):
+        pass
 
+#.....................modificar.......................
 while True:
     if codigo == 0:
         def main(raiz: ft.Page):

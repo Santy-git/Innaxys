@@ -2,11 +2,13 @@ import datetime
 import flet as ft
 
 def main(page: ft.Page):
+
     def change_date(e):
-        print(f"Date picker changed, value is {date_picker.value}")
+        x = date_picker.value
+        print(x)
 
     def date_picker_dismissed(e):
-        print(f"Date picker dismissed, value is {date_picker.value}")
+        print(date_picker.value)
 
     date_picker = ft.DatePicker(
         on_change=change_date,
