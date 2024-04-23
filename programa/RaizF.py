@@ -195,11 +195,11 @@ class Plantilla:
                                     text_align='center',
 
                                 ),
-                                Container(self.User, padding=ft.padding.only(25, 20)
+                                Container(self.User, padding=ft.padding.only(ancho * .04, altura * .03)
                                           ),
-                                Container(self.Password, padding=ft.padding.only(25, 20),
+                                Container(self.Password, padding=ft.padding.only(ancho * .04, altura * .03),
                                           ),
-                                Container(Button, padding=ft.padding.only(40, 10)
+                                Container(Button, padding=ft.padding.only(ancho * .04, altura * .03)
                                           )
                             ])
                         ),
