@@ -123,7 +123,7 @@ class Plantilla:
 
     def appbar(self):
         self.nombre = ft.Container(content=Text(
-            self.idioma[3], color=colores[9],), bgcolor=colores[3], width=ancho*0.10, height=altura*0.05, border_radius=ft.border_radius.all(10))
+            self.idioma[3], color=colores[9],), bgcolor=colores[3], width=ancho*0.33, height=altura*0.05, border_radius=ft.border_radius.all(10))
         self.nombre.alignment = ft.alignment.center
 
         self.raiz.appbar = ft.AppBar(
@@ -215,15 +215,15 @@ class Plantilla:
                     )
                 ]),
                 alignment=ft.alignment.center,
-                width=ancho * .3,
-                height=altura * .6,
+                width=ancho * 0.3,
+                height=altura * 0.6,
                 bgcolor='grey900'
 
             ),
-            width=ancho * .3,
-            height=altura * .7,
+            width=(ancho/100)*30,
+            height=(altura/100)*70,
             border_radius=ft.border_radius.all(30),
-            margin = ft.margin.symmetric(horizontal=(ancho-ancho * 0.3)/2)   
+            margin = ft.margin.symmetric(horizontal=ancho*0.1)   
         )
 
         self.raiz.add(self.contenedor_login)
