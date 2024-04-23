@@ -850,7 +850,7 @@ class Plantilla:
                 penas,
                 ft.Container(
                     Container_menus,
-                    width=ancho * 1.02,
+                    width=ancho,
                     height=850,
                 )
             ],
