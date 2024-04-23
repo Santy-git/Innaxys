@@ -123,7 +123,7 @@ class Plantilla:
 
     def appbar(self):
         self.nombre = ft.Container(content=Text(
-            self.idioma[3], color=colores[9],), bgcolor=colores[3], width=ancho*0.33, height=altura*0.05, border_radius=ft.border_radius.all(10))
+            self.idioma[3], color=colores[9],), bgcolor=colores[3], width=ancho*0.1, height=altura*0.05, border_radius=ft.border_radius.all(10))
         self.nombre.alignment = ft.alignment.center
 
         self.raiz.appbar = ft.AppBar(
@@ -178,7 +178,7 @@ class Plantilla:
             Container(
                 Stack([
                     Container(
-                        border_radius=11,
+                        border_radius=ancho*.005,
                         rotate=ft.Rotate(0.98*3.1),  # Degree
                         width=ancho * .2,
                         height=altura * .5,
@@ -191,7 +191,6 @@ class Plantilla:
                                     'Sign in',
                                     width=ancho * .2,
                                     size=altura * .03,
-                                    weight='w900',
                                     text_align='center',
                                 ),
                                 Text(
@@ -211,7 +210,7 @@ class Plantilla:
                         width=ancho * .2,
                         height=altura * .5,
                         bgcolor='#22ffffff',
-                        border_radius=11,
+                        border_radius=ancho*0.005,
                     )
                 ]),
                 alignment=ft.alignment.center,
@@ -222,7 +221,7 @@ class Plantilla:
             ),
             width=(ancho/100)*30,
             height=(altura/100)*70,
-            border_radius=ft.border_radius.all(30),
+            border_radius=ft.border_radius.all(ancho*.005),
             margin = ft.margin.symmetric(horizontal=ancho*0.1)   
         )
 
