@@ -139,16 +139,16 @@ class Plantilla:
         # if z[2] == 3:
 
         self.User: TextField = TextField(
-            width=290,
-            height=60,
+            width=ancho * .2,
+            height=altura * .1,
             label='User',
             border='underline',
             color='white',
             prefix_icon=ft.icons.PERSON,)
 
         self.Password: TextField = TextField(
-            width=280,
-            height=60,
+            width=ancho * .2,
+            height=altura * .1,
             label='Password',
             border='underline',
             color='white',
@@ -159,7 +159,7 @@ class Plantilla:
                 'SIGN IN',
                 color='white',
                 weight='w500',
-            ), width=280,
+            ), width=ancho * .2,
             bgcolor='black',
             on_click=self.logear)
 
@@ -169,8 +169,8 @@ class Plantilla:
                     Container(
                         border_radius=11,
                         rotate=ft.Rotate(0.98*3.1),  # Degree
-                        width=360,
-                        height=560,
+                        width=ancho * .25,
+                        height=altura * .8,
                         bgcolor='#22ffffff'
                     ),
                     Container(
@@ -184,14 +184,14 @@ class Plantilla:
                                 ),
                                 Text(
                                     'Sign in',
-                                    width=360,
-                                    size=30,
+                                    width=ancho * .25,
+                                    size=altura * .05,
                                     weight='w900',
                                     text_align='center',
                                 ),
                                 Text(
                                     'Please login to use the plataform',
-                                    width=360,
+                                    width=ancho * .25,
                                     text_align='center',
 
                                 ),
@@ -203,20 +203,20 @@ class Plantilla:
                                           )
                             ])
                         ),
-                        width=360,
-                        height=560,
+                        width=ancho * .45,
+                        height=altura * .8,
                         bgcolor='#22ffffff',
                         border_radius=11,
                     )
                 ]),
                 padding=110,
-                width=360,
-                height=560,
+                width=ancho * .45,
+                height=altura * .8,
                 bgcolor='grey900'
 
             ),
-            width=580,
-            height=780,
+            width=ancho * .45,
+            height=altura * 1.1,
             gradient=ft.LinearGradient(['white30', 'white10']),
             border_radius=ft.border_radius.all(30),
             margin=ft.margin.symmetric(horizontal=(ancho*0.37)),
