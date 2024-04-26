@@ -7,17 +7,7 @@ from datetime import datetime
 from functools import partial
 import time
 # para sacar el ancho y el alto
-from screeninfo import get_monitors
 # .................................................
-
-
-def dimensones():
-    monitores = get_monitors()
-    primer_monitor = monitores[0]
-    ancho = primer_monitor.width
-    altura = primer_monitor.height
-    return ancho, altura
-
 
 colores = [
     '#f3f6f4',
@@ -45,8 +35,7 @@ global idioma
 global español
 global ingles
 global codigo
-español = {1: "axys",2:"Ingresar",
-           
+español = {1: "axys",2:"Ingresar",      
            }
 idioma = español
 ingles = {1: "axys"
@@ -85,6 +74,19 @@ ingles = {1: "axys"
 34:"Access level",
 }
 codigo = 0
+
+Meses={'01':31,
+'02':29,
+'03':31,
+'04':30,
+'05':31,
+'06':30,
+'07':31,
+'08':31,
+'09':30,
+'10':31,
+'11':30,
+'12':31}
 
 
 def create_text_field(label_text, **kwargs):
@@ -138,10 +140,8 @@ class Plantilla:
         global z
         z = [self.User.value, self.Password.value]
         z = login(z[0], z[1])
-        print(z)
         try:
             if z[0]:
-                print("hola")
                 Nivel = int(z[1])
                 self.Menu()
                 # Menu0()
@@ -569,7 +569,6 @@ class Plantilla:
         Container_menus.update()
 
     def crear_coch(self, a):
-        print("crear_coch")
         validacion = crear_coch(a)
         if validacion:
             dlg = ft.AlertDialog(
@@ -585,7 +584,6 @@ class Plantilla:
             self.Menu3()
 
     def cochera(self):
-        print("cochera")
         piso_coch = create_text_field("Piso")
         subir_coch = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
@@ -785,6 +783,74 @@ class Plantilla:
         )
 # ....................empleado.........................
 
+    def Menu5(self):
+        def Calendario_menu(mes, año):
+            # aca estan los elementos visuales
+            cl = ft.Column(
+                width=Container_menus.width - 100, 
+                height=Container_menus.height - 100,
+                spacing=2,
+                scroll=ft.ScrollMode.ALWAYS,
+                on_scroll_interval=0,
+            )
+            
+            
+            mes_consulta = str(año)+'-'+str(mes)+'-'+'01'
+            año_consulta = str(año)+'-'+str(mes)+'-'+str(Meses[mes])        
+            matris = calendario(mes_consulta,año_consulta)
+            
+            #listas para armar la tabla 
+            verificador = [[0,0,0]]
+            for i in range(len(matris[0])):
+                y = datetime.fromisoformat(matris[0][i][1])
+                y = y.strftime("%d")
+                x = datetime.fromisoformat(matris[0][i][2])
+                x = x.strftime("%d")
+                verificador.append([matris[0][i][0],y,x])
+
+            for j in range(len(matris[1])):    
+                dias = [ft.Text(bgcolor=colores[4],value="hab:"+str(matris[1][j][0])),]
+                for o in range(Meses[mes]):
+                    bandera = 0
+                    for i in range(len(verificador)):       
+                        if o+1 >= int(verificador[i][1]) and o+1 <= int(verificador[i][2]) and int(matris[1][j][0]) == int(verificador[i][0]):
+                            bandera = 1                          
+                    if bandera == 1:
+                        dias.append(ft.Container(width=20,height=20,bgcolor='red',content=ft.Text(value=o+1),alignment=ft.alignment.center))
+                    else:
+                        dias.append(ft.Container(width=20,height=20,bgcolor='green',content=ft.Text(value=o+1),alignment=ft.alignment.center))
+                    
+                cl.controls.append(ft.Row(controls=dias))
+
+            container_calendar = ft.Container(cl, border=ft.border.all(1))
+            elementos.controls.append(container_calendar)
+            Container_menus.update()
+
+        self.Ingreso_Res = create_text_field("Mes (mm)")
+        self.Egreso_Res = create_text_field("Año(aaaa)")
+        consultar = ft.TextButton(
+            text="Consultar",
+            on_click=lambda _: Calendario_menu(
+                self.Ingreso_Res.value,
+                self.Egreso_Res.value)
+        )
+        
+        input_fecha = ft.Row([self.Ingreso_Res, self.Egreso_Res, consultar])
+        elementos = ft.Column([input_fecha])
+        Container_menus.content = elementos
+        Container_menus.alignment = ft.alignment.top_center
+
+        Container_menus.update()
+# ...................calendario.......................
+
+    def Menu6(self):
+        pass
+# ....................eliminar.........................
+
+
+
+
+# .....................modificar.......................
     def Menu(self):
         global Container_menus
         self.raiz.clean()
@@ -882,7 +948,6 @@ class Plantilla:
             border_radius=ft.border_radius.all(3)
         )
 
-        print(f"El ancho tendría que ser de {ancho - penas.width}")
         self.raiz.add(ft.Row(
             [
                 penas,
@@ -896,54 +961,14 @@ class Plantilla:
         )
         )
 
-# ...................calendario.......................
-    def Menu5(self):
-        def Calendario_menu(ing, eng):
 
-            a = ing.replace("-", "")
-            e = eng.replace("-", "")
-            matris = calendario()
-            for i in range(len(matris)):
-                y = matris[i][1].replace("-", "")
-                x = matris[i][2].replace("-", "")
-                if int(x) >= int(a) and int(y) <= int(e):
-
-                    print(matris[i], "ocupado")
-
-                else:
-
-                    print(matris[i], "desocupado")
-
-        self.Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
-        self.Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
-        consultar = ft.TextButton(
-            text="Consultar",
-            on_click=lambda _: Calendario_menu(
-                self.Ingreso_Res.value,
-                self.Egreso_Res.value)
-        )
-        Container_menus.content = ft.Row(
-            [self.Ingreso_Res, self.Egreso_Res, consultar],
-        )
-        Container_menus.alignment = ft.alignment.top_center
-
-        Container_menus.update()
-
-# ....................eliminar.........................
-    def Menu6(self):
-        pass
-
-
-# .....................modificar.......................
 while True:
     if codigo == 0:
         def main(raiz: ft.Page):
             global altura
             global ancho
-            ancho, altura = dimensones()
             ancho = 1280
             altura = 720
-            print(f"EL ancho y alto es {ancho, altura}")
             raiz.window_resizable = False
             raiz.window_title_bar_hidden = True
             raiz.window_width = 1280

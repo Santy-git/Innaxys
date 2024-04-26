@@ -256,13 +256,15 @@ def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
         return False
     
 #.................calendario.................
-def calendario():
+def calendario(ing,eng):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("SELECT codHab,fechaIngreso,fechaEgreso FROM resHab ORDER BY codHab")
+    cur.execute("SELECT codHab,fechaIngreso,fechaEgreso FROM resHab WHERE fechaIngreso >= '"+ing+"' AND fechaEgreso <= '"+eng+"' ORDER BY codHab")
     matris2 = cur.fetchall()
+    cur.execute("SELECT codHab FROM habitacion")
+    total = cur.fetchall()
     con.close()
-    return matris2
+    return matris2, total
 
 
 
