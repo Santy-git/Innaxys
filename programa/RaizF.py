@@ -45,9 +45,45 @@ global idioma
 global español
 global ingles
 global codigo
-español = {3: "hola"}
+español = {1: "axys",2:"Ingresar",
+           
+           }
 idioma = español
-ingles = {3: "hello"}
+ingles = {1: "axys"
+,2:"Sing in"
+,3:"User"
+,4:"Password"
+,5:"SIGN IN"
+,6:"Admin"
+,7:"Employees"
+,8:"Room booking"
+,9:"Park booking",
+10:"Add client",
+11:"Add element",
+12:"Add employee",
+13:"calendar",
+14:"client id",
+15:"Description",
+16:"Query",
+17:"Check in",
+18:"Check out",
+19:"Query",
+20:"Confirm",
+21:"Name",
+22:"Mail",
+23:"Upload",
+24:"Parking",
+25:"Room",
+26:"Floor",
+27:"boked parking",
+28:"Queen size bed",
+29:"Bed",
+30:"Price",
+31:"Employee id",
+32:"Phone",
+33:"Job",
+34:"Access level",
+}
 codigo = 0
 
 
@@ -123,7 +159,7 @@ class Plantilla:
 
     def appbar(self):
         self.nombre = ft.Container(content=Text(
-            self.idioma[3], color=colores[9],), bgcolor=colores[3], width=ancho*0.1, height=altura*0.05, border_radius=ft.border_radius.all(10))
+            self.idioma[1], color=colores[9],), bgcolor=colores[3], width=ancho*0.1, height=altura*0.05, border_radius=ft.border_radius.all(10))
         self.nombre.alignment = ft.alignment.center
 
         self.raiz.appbar = ft.AppBar(
