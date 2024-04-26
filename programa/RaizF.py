@@ -6,7 +6,6 @@ from flet_core.control_event import ControlEvent
 from datetime import datetime
 from functools import partial
 import time
-# para sacar el ancho y el alto
 # .................................................
 
 colores = [
@@ -35,58 +34,50 @@ global idioma
 global español
 global ingles
 global codigo
-español = {1: "axys",2:"Ingresar",      
+español = {1: "axys", 2: "Ingresar",
            }
 idioma = español
-ingles = {1: "axys"
-,2:"Sing in"
-,3:"User"
-,4:"Password"
-,5:"SIGN IN"
-,6:"Admin"
-,7:"Employees"
-,8:"Room booking"
-,9:"Park booking",
-10:"Add client",
-11:"Add element",
-12:"Add employee",
-13:"calendar",
-14:"client id",
-15:"Description",
-16:"Query",
-17:"Check in",
-18:"Check out",
-19:"Query",
-20:"Confirm",
-21:"Name",
-22:"Mail",
-23:"Upload",
-24:"Parking",
-25:"Room",
-26:"Floor",
-27:"boked parking",
-28:"Queen size bed",
-29:"Bed",
-30:"Price",
-31:"Employee id",
-32:"Phone",
-33:"Job",
-34:"Access level",
-}
+ingles = {1: "axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "Admin", 7: "Employees", 8: "Room booking", 9: "Park booking",
+          10: "Add client",
+          11: "Add element",
+          12: "Add employee",
+          13: "calendar",
+          14: "client id",
+          15: "Description",
+          16: "Query",
+          17: "Check in",
+          18: "Check out",
+          19: "Query",
+          20: "Confirm",
+          21: "Name",
+          22: "Mail",
+          23: "Upload",
+          24: "Parking",
+          25: "Room",
+          26: "Floor",
+          27: "boked parking",
+          28: "Queen size bed",
+          29: "Bed",
+          30: "Price",
+          31: "Employee id",
+          32: "Phone",
+          33: "Job",
+          34: "Access level",
+          }
 codigo = 0
 
-Meses={'01':31,
-'02':29,
-'03':31,
-'04':30,
-'05':31,
-'06':30,
-'07':31,
-'08':31,
-'09':30,
-'10':31,
-'11':30,
-'12':31}
+Meses = {'01': 31,
+         '02': 29,
+         '03': 31,
+         '04': 30,
+         '05': 31,
+         '06': 30,
+         '07': 31,
+         '08': 31,
+         '09': 30,
+         '10': 31,
+         '11': 30,
+         '12': 31}
 
 
 def create_text_field(label_text, **kwargs):
@@ -258,7 +249,7 @@ class Plantilla:
             width=(ancho/100)*30,
             height=(altura/100)*70,
             border_radius=ft.border_radius.all(ancho*.005),
-            margin = ft.margin.symmetric(horizontal=ancho*0.33)   
+            margin=ft.margin.symmetric(horizontal=ancho*0.33)
         )
 
         self.raiz.add(self.contenedor_login)
@@ -787,39 +778,41 @@ class Plantilla:
         def Calendario_menu(mes, año):
             # aca estan los elementos visuales
             cl = ft.Column(
-                width=Container_menus.width - 100, 
+                width=Container_menus.width - 100,
                 height=Container_menus.height - 100,
                 spacing=2,
                 scroll=ft.ScrollMode.ALWAYS,
                 on_scroll_interval=0,
             )
-            
-            
+
             mes_consulta = str(año)+'-'+str(mes)+'-'+'01'
-            año_consulta = str(año)+'-'+str(mes)+'-'+str(Meses[mes])        
-            matris = calendario(mes_consulta,año_consulta)
-            
-            #listas para armar la tabla 
-            verificador = [[0,0,0]]
+            año_consulta = str(año)+'-'+str(mes)+'-'+str(Meses[mes])
+            matris = calendario(mes_consulta, año_consulta)
+
+            # listas para armar la tabla
+            verificador = [[0, 0, 0]]
             for i in range(len(matris[0])):
                 y = datetime.fromisoformat(matris[0][i][1])
                 y = y.strftime("%d")
                 x = datetime.fromisoformat(matris[0][i][2])
                 x = x.strftime("%d")
-                verificador.append([matris[0][i][0],y,x])
+                verificador.append([matris[0][i][0], y, x])
 
-            for j in range(len(matris[1])):    
-                dias = [ft.Text(bgcolor=colores[4],value="hab:"+str(matris[1][j][0])),]
+            for j in range(len(matris[1])):
+                dias = [ft.Text(bgcolor=colores[4],
+                                value="hab:"+str(matris[1][j][0])),]
                 for o in range(Meses[mes]):
                     bandera = 0
-                    for i in range(len(verificador)):       
+                    for i in range(len(verificador)):
                         if o+1 >= int(verificador[i][1]) and o+1 <= int(verificador[i][2]) and int(matris[1][j][0]) == int(verificador[i][0]):
-                            bandera = 1                          
+                            bandera = 1
                     if bandera == 1:
-                        dias.append(ft.Container(width=20,height=20,bgcolor='red',content=ft.Text(value=o+1),alignment=ft.alignment.center))
+                        dias.append(ft.Container(width=20, height=20, bgcolor='red', content=ft.Text(
+                            value=o+1), alignment=ft.alignment.center))
                     else:
-                        dias.append(ft.Container(width=20,height=20,bgcolor='green',content=ft.Text(value=o+1),alignment=ft.alignment.center))
-                    
+                        dias.append(ft.Container(width=20, height=20, bgcolor='green', content=ft.Text(
+                            value=o+1), alignment=ft.alignment.center))
+
                 cl.controls.append(ft.Row(controls=dias))
 
             container_calendar = ft.Container(cl, border=ft.border.all(1))
@@ -834,7 +827,7 @@ class Plantilla:
                 self.Ingreso_Res.value,
                 self.Egreso_Res.value)
         )
-        
+
         input_fecha = ft.Row([self.Ingreso_Res, self.Egreso_Res, consultar])
         elementos = ft.Column([input_fecha])
         Container_menus.content = elementos
@@ -848,9 +841,9 @@ class Plantilla:
 # ....................eliminar.........................
 
 
-
-
 # .....................modificar.......................
+
+
     def Menu(self):
         global Container_menus
         self.raiz.clean()
