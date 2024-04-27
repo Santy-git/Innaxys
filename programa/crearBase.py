@@ -18,7 +18,7 @@ def creardb():
         telefono varchar(20) not null,
         puesto varchar(100) not null,
         codLog varchar(30) not null,
-        foreign key (codLog) references login(codLog)
+        foreign key (codLog) references login(codLog) 
     );''',
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS cochera (
@@ -47,8 +47,8 @@ def creardb():
         codEmpleado int not null,
         fechaReserva date not null,
         descr varchar(255),
-        foreign key (codCliente) references cliente(dni_cli),
-        foreign key (codEmpleado) references empleado(dni_emp)
+        foreign key (codCliente) references cliente(dni_cli) ,
+        foreign key (codEmpleado) references empleado(dni_emp) 
     );''',
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS historial (
@@ -56,8 +56,8 @@ def creardb():
         codReserva int not null,
         codEmpleado int not null,
         descr varchar(255),
-        foreign key (codReserva) references reserva(codReserva),
-        foreign key (codEmpleado) references empleado(dni_emp)
+        foreign key (codReserva) references reserva(codReserva) ,
+        foreign key (codEmpleado) references empleado(dni_emp) 
     );''',
 #_____________________________________________________________________
     '''CREATE TABLE IF NOT EXISTS resHab(
@@ -69,8 +69,8 @@ def creardb():
         costoHab decimal(10,2) not null,
         fechaIngreso date not null,
         fechaEgreso date not null,
-        foreign key (codHab) references habitacion(codHab),
-        foreign key (codReserva) references reserva(codReserva)
+        foreign key (codHab) references habitacion(codHab) ,
+        foreign key (codReserva) references reserva(codReserva) 
     );''',
 #_____________________________________________________________________
         '''CREATE TABLE IF NOT EXISTS resCoch(
@@ -79,8 +79,8 @@ def creardb():
         codCochera int not null,
         fechaIngreso date not null,
         fechaEgreso date not null,
-        foreign key (codCochera) references cochera(codCochera),
-        foreign key (codReserva) references reserva(codReserva)
+        foreign key (codCochera) references cochera(codCochera) ,
+        foreign key (codReserva) references reserva(codReserva) 
     );'''
     ]
 #_____________________________________________________________________
@@ -96,8 +96,11 @@ def creardb():
     for query in tablas:
         cur.execute(query)
 
-    # realizo los cambios
     con.commit()
+
+
+
+
     try:
         sql = "INSERT INTO login (codLog, password, nivel) VALUES ('0','0',5)"
         con.execute(sql)
@@ -159,6 +162,27 @@ def completar(cli,emp,fecha,desc,hres,ing,eng):
         cur.execute("INSERT INTO resHab (codHab,codReserva,camaMatr,camaInd,costoHab,fechaIngreso,fechaEgreso) VALUES (?,?,?,?,?,?,?)",(hres[i][0],info[-1][0],hres[i][2],hres[i][3],hres[i][4],ing,eng))
         con.commit()
     con.close()
+
+#eliminar reservas
+
+def consulta_eliminar(dni):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("SELECT * from reserva where codCliente = '"+str(dni)+"'")
+    cons = cur.fetchall()
+    return cons 
+
+def eliminar_reserva(numero):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    print(numero)
+    cur.execute("DELETE FROM resHab where codReserva = '"+str(numero)+"'")
+    cur.execute("DELETE FROM reserva where codReserva = '"+str(numero)+"'")
+    con.commit()
+    con.close()
+
+
+
 
 #..........................menu 1..............................
 def ReservarCoch(dni_cli,dni_emp,fecha,desc):
