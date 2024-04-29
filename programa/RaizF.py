@@ -378,8 +378,9 @@ class Plantilla:
         if Verificar == 2:
             # aca poner que el cliente no existe
             pass
-#...............lo de arriba es la reserva subir..............
-    def res_eliminar_aux(self,dni):
+# ...............lo de arriba es la reserva subir..............
+
+    def res_eliminar_aux(self, dni):
         info = consulta_eliminar(dni)
         registro = ft.Column(
             width=Container_menus.width - 100,
@@ -390,7 +391,8 @@ class Plantilla:
         )
 
         for i in range(len(info)):
-            self.text = ft.Text(value="codigo de reserva:"+str(info[i][0])+"   codigo del empleado: "+str(info[i][2])+"   fecha de reserva: "+str(info[i][3]),)
+            self.text = ft.Text(value="codigo de reserva:"+str(info[i][0])+"   codigo del empleado: "+str(
+                info[i][2])+"   fecha de reserva: "+str(info[i][3]),)
             registro.controls.append(ft.Row(controls=[self.text]))
         codigo = ft.TextField(label="codigo de reserva a eliminar")
         registro.controls.append(
@@ -400,14 +402,15 @@ class Plantilla:
                                         icon_size=30,
                                         width=60,
                                         height=60,
-                                        on_click=lambda _:eliminar_reserva(codigo.value)
+                                        on_click=lambda _: eliminar_reserva(
+                                            codigo.value)
                                         )]))
         Container_menus.clean()
         Container_menus.content = registro
         Container_menus.update()
-        
-        
-#...............eliminar reservas arriba....................
+
+
+# ...............eliminar reservas arriba....................
 
     def Menu0(self):
         cod_cliente = create_text_field(
@@ -424,17 +427,17 @@ class Plantilla:
             content=ft.Text("eliminar", color=ft.colors.BLACK),
             bgcolor=colores[1],
             on_click=lambda _: self.res_eliminar_aux(cod_cliente.value))
-        
+
         modificar = ft.CupertinoButton(
             content=ft.Text("modificar", color=ft.colors.BLACK),
             bgcolor=colores[1],
             on_click=lambda _: self.Reservar_Aux(cod_cliente.value, z[2], fecha_res, desc.value))
-        
+
         subir = ft.CupertinoButton(
             content=ft.Text("subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             on_click=lambda _: self.Reservar_Aux(cod_cliente.value, z[2], fecha_res, desc.value))
-        botones = ft.Row(controls=[eliminar,modificar,subir])
+        botones = ft.Row(controls=[eliminar, modificar, subir])
         Container_menus.content = ft.Column(
             [cod_cliente,
              desc,
@@ -741,7 +744,7 @@ class Plantilla:
 
     def Selector(self, a):
         diccionario = {"Reservar Habitacion": 0, "Reservar Cochera": 1,
-                       "Añadir Cliente": 2, "Añadir elementos": 3, "Añadir Empleado": 4, "calendario": 5}
+                       "Añadir Cliente": 2, "Añadir elementos": 3, "Añadir Empleado": 4, "Calendario": 5}
         Indices_menus = {0: self.Menu0, 1: self.Menu1,
                          2: self.Menu2, 3: self.Menu3, 4: self.Menu4, 5: self.Menu5}
         Indices_menus[diccionario[a]]()
@@ -878,7 +881,6 @@ class Plantilla:
 
 # .....................modificar.......................
 
-
     def Menu(self):
         global Container_menus
         self.raiz.clean()
@@ -957,7 +959,8 @@ class Plantilla:
                     self.ContainerIcon(
                         ft.icons.NOTIFICATIONS, "Añadir elementos"),
                     self.ContainerIcon(ft.icons.PIE_CHART, "Añadir Empleado"),
-                    self.ContainerIcon(ft.icons.PIE_CHART_OUTLINE, "Calendario"),
+                    self.ContainerIcon(
+                        ft.icons.PIE_CHART_OUTLINE, "Calendario"),
                 ]
             ),)
 
