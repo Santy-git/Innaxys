@@ -142,20 +142,30 @@ def Reservar(dni_cli,dni_emp,fecha,desc):
         return 2
 
 
-def Consulta(ing,eng):
-    val = 0
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
-    z = cur.fetchall()
-    con.close()
-    return z
+def Consulta(ing,eng,num):
+    if num == 0:
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+        z = cur.fetchall()
+        con.close()
+        return z
+    else:
+        print(num,"numero")
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("SELECT * FROM habitacion WHERE codHab in (SELECT codHab FROM resHab WHERE codReserva = "+num+") or codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+        z = cur.fetchall()
+        print(z,"z")
+        con.close()
+        return z
+
 
 def completar(cli,emp,fecha,desc,hres,ing,eng):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
-    con.commit()
+    con.commit() 
     cur.execute("SELECT codReserva FROM reserva where codCliente = '"+cli+"' AND codEmpleado = '"+emp+"'")
     info = cur.fetchall()
     for i in range(len(hres)):
@@ -180,9 +190,6 @@ def eliminar_reserva(numero):
     cur.execute("DELETE FROM reserva where codReserva = '"+str(numero)+"'")
     con.commit()
     con.close()
-
-
-
 
 #..........................menu 1..............................
 def ReservarCoch(dni_cli,dni_emp,fecha,desc):

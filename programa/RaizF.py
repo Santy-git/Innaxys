@@ -326,10 +326,10 @@ class Plantilla:
         self.Departamentos.content = ft.Column([images])
         Container_menus.update()
 
-    def Consulta_aux(self, Ingreso_Res, Egreso_Res):
+    def Consulta_aux(self, Ingreso_Res, Egreso_Res,num):
         global hres
         hres = []
-        self.variable2 = Consulta(Ingreso_Res, Egreso_Res)
+        self.variable2 = Consulta(Ingreso_Res, Egreso_Res,num)
         self.disponibles()
 
     def res_final(self, cli, emp, fecha, desc, hres, Ing, Eng):
@@ -353,7 +353,7 @@ class Plantilla:
             value=texto), confirmar]), bgcolor='#3B6639', width=ancho*0.56, height=altura*0.1, border_radius=ft.border_radius.all(3))
         Container_menus.update()
 
-    def Reservar_Aux(self, cli, emp, fecha, desc):
+    def Reservar_Aux(self, cli, emp, fecha, desc,num):
         Container_menus.clean()
         Verificar = Reservar(cli, emp, fecha, desc)
         if Verificar == 1:
@@ -361,7 +361,7 @@ class Plantilla:
             Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
             Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
-                Ingreso_Res.value, Egreso_Res.value))
+                Ingreso_Res.value, Egreso_Res.value,num))
             reservarboton = ft.TextButton(text="el otro boton", on_click=lambda _: self.res_final(
                 cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value
             ))
@@ -394,7 +394,7 @@ class Plantilla:
             self.text = ft.Text(value="codigo de reserva:"+str(info[i][0])+"   codigo del empleado: "+str(
                 info[i][2])+"   fecha de reserva: "+str(info[i][3]),)
             registro.controls.append(ft.Row(controls=[self.text]))
-        codigo = ft.TextField(label="codigo de reserva a eliminar")
+        codigo = ft.TextField(label="codigo de reserva a modificar")
         registro.controls.append(
             ft.Row(
                 controls=[codigo,
@@ -409,8 +409,49 @@ class Plantilla:
         Container_menus.content = registro
         Container_menus.update()
 
-
 # ...............eliminar reservas arriba....................
+
+
+
+    def dador(self,cod,info,dni):
+
+        for j in range(len(info)):
+            if str(cod) == str(info[j][0]):
+                self.Reservar_Aux(dni,str(
+                info[j][2]),
+                datetime.now().date(),
+                info[j][4],
+                cod
+                )
+
+    def res_actualizar(self, dni):
+        info = consulta_eliminar(dni)
+        registro = ft.Column(
+            width=Container_menus.width - 100,
+            height=Container_menus.height - 100,
+            spacing=2,
+            scroll=ft.ScrollMode.ALWAYS,
+            on_scroll_interval=0,
+        )
+
+        for i in range(len(info)):
+            self.text = ft.Text(value="codigo de reserva:"+str(info[i][0])+"   codigo del empleado: "+str(
+                info[i][2])+"   fecha de reserva: "+str(info[i][3]),)
+            registro.controls.append(ft.Row(controls=[self.text]))
+        codigo = ft.TextField(label="codigo de reserva a modificar")
+        registro.controls.append(
+            ft.Row(
+                controls=[codigo,
+                          ft.IconButton(icon=ft.icons.SEND,
+                                        icon_size=30,
+                                        width=60,
+                                        height=60,
+                                        on_click=lambda _:self.dador(codigo.value,info,dni)                                  
+                                        )]))
+        Container_menus.clean()
+        Container_menus.content = registro
+        Container_menus.update()
+#................actualizar reserva.......................
 
     def Menu0(self):
         cod_cliente = create_text_field(
@@ -431,12 +472,12 @@ class Plantilla:
         modificar = ft.CupertinoButton(
             content=ft.Text("modificar", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            on_click=lambda _: self.Reservar_Aux(cod_cliente.value, z[2], fecha_res, desc.value))
+            on_click=lambda _: self.res_actualizar(cod_cliente.value))
 
         subir = ft.CupertinoButton(
             content=ft.Text("subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            on_click=lambda _: self.Reservar_Aux(cod_cliente.value, z[2], fecha_res, desc.value))
+            on_click=lambda _: self.Reservar_Aux(cod_cliente.value, z[2], fecha_res, desc.value,0))
         botones = ft.Row(controls=[eliminar, modificar, subir])
         Container_menus.content = ft.Column(
             [cod_cliente,
