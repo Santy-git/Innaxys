@@ -380,8 +380,15 @@ class Plantilla:
 
             Container_menus.update()
         if Verificar == 2:
-            # aca poner que el cliente no existe
-            pass
+            dlg = ft.AlertDialog(
+                title=ft.Text("Cliente no encontrado")
+            )
+
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
 # ...............lo de arriba es la reserva subir..............
 
     def res_eliminar_aux(self, dni):
@@ -1020,7 +1027,7 @@ class Plantilla:
             content=Left_bar
         )
         Container_menus = ft.Container(
-            width=ancho - penas.width,
+            width=1000,
             height=850,
             bgcolor=colores[3],
             border_radius=ft.border_radius.all(3)
@@ -1031,7 +1038,7 @@ class Plantilla:
                 penas,
                 ft.Container(
                     Container_menus,
-                    width=ancho,
+                    width=ancho - penas.width - 45,
                     height=850,
                 )
             ],
