@@ -379,8 +379,15 @@ class Plantilla:
 
             Container_menus.update()
         if Verificar == 2:
-            # TODO verificación de que no existe el cliente
-            pass
+            dlg = ft.AlertDialog(
+                title=ft.Text("Cliente no encontrado")
+            )
+
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
 # ...............lo de arriba es la reserva subir..............
 
     def res_eliminar_aux(self, dni):
@@ -900,8 +907,8 @@ class Plantilla:
                         dias.append(ft.Container(width=20, height=20, bgcolor='green', content=ft.Text(
                             value=o+1), alignment=ft.alignment.center))
 
-                cl.controls.append(ft.Row(controls=dias,width=Container_menus.width -100))
-
+                cl.controls.append(
+                    ft.Row(controls=dias, width=Container_menus.width - 100))
 
             container_calendar = ft.Container(cl, border=ft.border.all(1))
             elementos.controls.append(container_calendar)
