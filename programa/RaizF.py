@@ -488,12 +488,13 @@ class Plantilla:
             content=ft.Text("subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             on_click=lambda _: self.Reservar_Aux(cod_cliente.value, z[2], fecha_res, desc.value, 0))
+
+        inputs = ft.Column(
+            controls=[cod_cliente, desc])
         botones = ft.Row(controls=[eliminar, modificar, subir])
         Container_menus.content = ft.Column(
-            [cod_cliente,
-             desc,
+            [inputs,
              botones],
-            expand=True,
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
@@ -1027,7 +1028,8 @@ class Plantilla:
             width=1000,
             height=850,
             bgcolor=colores[3],
-            border_radius=ft.border_radius.all(3)
+            border_radius=ft.border_radius.all(3),
+            alignment=ft.alignment.center,
         )
 
         self.raiz.add(ft.Row(
