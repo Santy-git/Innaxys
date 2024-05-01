@@ -6,6 +6,7 @@ from flet_core.control_event import ControlEvent
 from datetime import datetime
 from functools import partial
 import time
+import threading
 # .................................................
 
 colores = [
@@ -862,16 +863,17 @@ class Plantilla:
 
     def Menu5(self):
         def Calendario_menu(mes, año):
-
+            contador = 0
             # aca estan los elementos visuales
             cl = ft.Column(
                 width=Container_menus.width-50,
-                height=Container_menus.height-50,
-                spacing=2,
+                height=Container_menus.height-300,
+                spacing=17,
                 scroll=ft.ScrollMode.ALWAYS,
                 on_scroll_interval=0,
             )
 
+            
             mes_consulta = str(año)+'-'+str(mes)+'-'+'01'
             año_consulta = str(año)+'-'+str(mes)+'-'+str(Meses[mes])
             matris = calendario(mes_consulta, año_consulta)
@@ -894,14 +896,15 @@ class Plantilla:
                         if o+1 >= int(verificador[i][1]) and o+1 <= int(verificador[i][2]) and int(matris[1][j][0]) == int(verificador[i][0]):
                             bandera = 1
                     if bandera == 1:
+
                         dias.append(ft.Container(width=20, height=20, bgcolor='red', content=ft.Text(
                             value=o+1), alignment=ft.alignment.center))
                     else:
                         dias.append(ft.Container(width=20, height=20, bgcolor='green', content=ft.Text(
                             value=o+1), alignment=ft.alignment.center))
-
+                contador += 1
                 cl.controls.append(ft.Row(controls=dias,width=Container_menus.width -100))
-
+            print(contador)
 
             container_calendar = ft.Container(cl, border=ft.border.all(1))
             elementos.controls.append(container_calendar)
