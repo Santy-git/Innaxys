@@ -379,7 +379,7 @@ class Plantilla:
 
             Container_menus.update()
         if Verificar == 2:
-            # aca poner que el cliente no existe
+            # TODO verificación de que no existe el cliente
             pass
 # ...............lo de arriba es la reserva subir..............
 
@@ -1017,7 +1017,7 @@ class Plantilla:
             content=Left_bar
         )
         Container_menus = ft.Container(
-            width=ancho - penas.width,
+            width=1000,
             height=850,
             bgcolor=colores[3],
             border_radius=ft.border_radius.all(3)
@@ -1028,7 +1028,7 @@ class Plantilla:
                 penas,
                 ft.Container(
                     Container_menus,
-                    width=ancho,
+                    width=ancho - penas.width - 45,
                     height=850,
                 )
             ],
