@@ -863,10 +863,11 @@ class Plantilla:
 
     def Menu5(self):
         def Calendario_menu(mes, año):
+
             # aca estan los elementos visuales
             cl = ft.Column(
-                width=Container_menus.width - 100,
-                height=Container_menus.height - 100,
+                width=Container_menus.width-50,
+                height=Container_menus.height-50,
                 spacing=2,
                 scroll=ft.ScrollMode.ALWAYS,
                 on_scroll_interval=0,
@@ -900,7 +901,8 @@ class Plantilla:
                         dias.append(ft.Container(width=20, height=20, bgcolor='green', content=ft.Text(
                             value=o+1), alignment=ft.alignment.center))
 
-                cl.controls.append(ft.Row(controls=dias))
+                cl.controls.append(ft.Row(controls=dias,width=Container_menus.width -100))
+
 
             container_calendar = ft.Container(cl, border=ft.border.all(1))
             elementos.controls.append(container_calendar)
