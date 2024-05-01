@@ -260,7 +260,7 @@ nav {
 
 .imagenHotel {
   width: 100%;
-  height: 68svh; /* Ajusta la altura a un valor específico o porcentaje */
+  height: 75svh; /* Ajusta la altura a un valor específico o porcentaje */
   object-fit: cover;
   filter: brightness(60%);
 }
@@ -304,7 +304,7 @@ nav {
   display: flex;
   align-items: center;
   background-color: var(--bg-cont-btns);
-  height: 7rem;
+  height: 15svh;
 }
 
 .containerButtons {
@@ -329,13 +329,17 @@ nav {
   text-decoration: none;
 }
 
+.contBotonTexto p {
+  font-size: 0.9rem;
+}
+
 /* los botones */
 .somos,
 .ofrecemos,
 .beneficios,
 .compatibilidad {
-  width: 4rem;
-  height: 4rem;
+  width: 3.5rem;
+  height: 3.5rem;
   background-color: var(--bg-btn);
 }
 
