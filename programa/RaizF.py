@@ -332,9 +332,12 @@ class Plantilla:
         self.variable2 = Consulta(Ingreso_Res, Egreso_Res,num)
         self.disponibles()
 
-    def res_final(self, cli, emp, fecha, desc, hres, Ing, Eng):
-
-        confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar(
+    def res_final(self, cli, emp, fecha, desc, hres, Ing, Eng,num):
+        if num != 0:
+            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar_actualizar(
+                cli, emp, fecha, desc, hres, Ing, Eng,num))
+        else:
+            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar(
             cli, emp, fecha, desc, hres, Ing, Eng))
         Container_menus.clean()
         a = 0
@@ -363,7 +366,7 @@ class Plantilla:
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
                 Ingreso_Res.value, Egreso_Res.value,num))
             reservarboton = ft.TextButton(text="el otro boton", on_click=lambda _: self.res_final(
-                cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value
+                cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value,num
             ))
             self.Departamentos = ft.Container(
                 width=830, height=500, bgcolor=colores[2], margin=10)

@@ -173,6 +173,22 @@ def completar(cli,emp,fecha,desc,hres,ing,eng):
         con.commit()
     con.close()
 
+
+def completar_actualizar(cli,emp,fecha,desc,hres,ing,eng,num):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    print(num)
+    cur.execute("DELETE FROM resHab where codReserva = '"+str(num)+"'")
+    cur.execute("DELETE FROM reserva where codReserva = '"+str(num)+"'")
+    con.commit()
+    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
+    con.commit() 
+    cur.execute("SELECT codReserva FROM reserva where codCliente = '"+cli+"' AND codEmpleado = '"+emp+"'")
+    info = cur.fetchall()
+    for i in range(len(hres)):
+        cur.execute("INSERT INTO resHab (codHab,codReserva,camaMatr,camaInd,costoHab,fechaIngreso,fechaEgreso) VALUES (?,?,?,?,?,?,?)",(hres[i][0],info[-1][0],hres[i][2],hres[i][3],hres[i][4],ing,eng))
+        con.commit()
+    con.close()    
 #eliminar reservas
 
 def consulta_eliminar(dni):
