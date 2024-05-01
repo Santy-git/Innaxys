@@ -34,10 +34,10 @@ global idioma
 global español
 global ingles
 global codigo
-español = {1: "axys", 2: "Ingresar",
+español = {1: "Axys", 2: "Ingresar",
            }
 idioma = español
-ingles = {1: "axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "Admin", 7: "Employees", 8: "Room booking", 9: "Park booking",
+ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "Admin", 7: "Employees", 8: "Room booking", 9: "Park booking",
           10: "Add client",
           11: "Add element",
           12: "Add employee",
@@ -326,19 +326,19 @@ class Plantilla:
         self.Departamentos.content = ft.Column([images])
         Container_menus.update()
 
-    def Consulta_aux(self, Ingreso_Res, Egreso_Res,num):
+    def Consulta_aux(self, Ingreso_Res, Egreso_Res, num):
         global hres
         hres = []
-        self.variable2 = Consulta(Ingreso_Res, Egreso_Res,num)
+        self.variable2 = Consulta(Ingreso_Res, Egreso_Res, num)
         self.disponibles()
 
-    def res_final(self, cli, emp, fecha, desc, hres, Ing, Eng,num):
+    def res_final(self, cli, emp, fecha, desc, hres, Ing, Eng, num):
         if num != 0:
             confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar_actualizar(
-                cli, emp, fecha, desc, hres, Ing, Eng,num))
+                cli, emp, fecha, desc, hres, Ing, Eng, num))
         else:
             confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar(
-            cli, emp, fecha, desc, hres, Ing, Eng))
+                cli, emp, fecha, desc, hres, Ing, Eng))
         Container_menus.clean()
         a = 0
         c = 0
@@ -356,7 +356,7 @@ class Plantilla:
             value=texto), confirmar]), bgcolor='#3B6639', width=ancho*0.56, height=altura*0.1, border_radius=ft.border_radius.all(3))
         Container_menus.update()
 
-    def Reservar_Aux(self, cli, emp, fecha, desc,num):
+    def Reservar_Aux(self, cli, emp, fecha, desc, num):
         Container_menus.clean()
         Verificar = Reservar(cli, emp, fecha, desc)
         if Verificar == 1:
@@ -364,9 +364,9 @@ class Plantilla:
             Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
             Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
-                Ingreso_Res.value, Egreso_Res.value,num))
+                Ingreso_Res.value, Egreso_Res.value, num))
             reservarboton = ft.TextButton(text="el otro boton", on_click=lambda _: self.res_final(
-                cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value,num
+                cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value, num
             ))
             self.Departamentos = ft.Container(
                 width=830, height=500, bgcolor=colores[2], margin=10)
@@ -414,17 +414,15 @@ class Plantilla:
 
 # ...............eliminar reservas arriba....................
 
-
-
-    def dador(self,cod,info,dni):
+    def dador(self, cod, info, dni):
 
         for j in range(len(info)):
             if str(cod) == str(info[j][0]):
-                self.Reservar_Aux(dni,str(
-                info[j][2]),
-                datetime.now().date(),
-                info[j][4],
-                cod
+                self.Reservar_Aux(dni, str(
+                    info[j][2]),
+                    datetime.now().date(),
+                    info[j][4],
+                    cod
                 )
 
     def res_actualizar(self, dni):
@@ -449,12 +447,13 @@ class Plantilla:
                                         icon_size=30,
                                         width=60,
                                         height=60,
-                                        on_click=lambda _:self.dador(codigo.value,info,dni)                                  
+                                        on_click=lambda _: self.dador(
+                                            codigo.value, info, dni)
                                         )]))
         Container_menus.clean()
         Container_menus.content = registro
         Container_menus.update()
-#................actualizar reserva.......................
+# ................actualizar reserva.......................
 
     def Menu0(self):
         cod_cliente = create_text_field(
@@ -480,7 +479,7 @@ class Plantilla:
         subir = ft.CupertinoButton(
             content=ft.Text("subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            on_click=lambda _: self.Reservar_Aux(cod_cliente.value, z[2], fecha_res, desc.value,0))
+            on_click=lambda _: self.Reservar_Aux(cod_cliente.value, z[2], fecha_res, desc.value, 0))
         botones = ft.Row(controls=[eliminar, modificar, subir])
         Container_menus.content = ft.Column(
             [cod_cliente,

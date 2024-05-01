@@ -1,11 +1,14 @@
 import threading
 import flet as ft
 
+
 class State:
     i = 0
 
+
 s = State()
 sem = threading.Semaphore()
+
 
 def main(page: ft.Page):
 
@@ -16,10 +19,11 @@ def main(page: ft.Page):
         scroll=ft.ScrollMode.ALWAYS,
         on_scroll_interval=0,
     )
-    for i in range(0, 50):
-        cl.controls.append(ft.Container(width=100,height=100,bgcolor='red'))
+    for _ in range(0, 50):
+        cl.controls.append(ft.Container(width=100, height=100, bgcolor='red'))
         s.i += 1
 
     page.add(ft.Container(cl, border=ft.border.all(1)))
+
 
 ft.app(main)
