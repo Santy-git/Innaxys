@@ -376,7 +376,7 @@ class Plantilla:
             b = ft.Row([consultar, reservarboton, self.contador])
             c = ft.Row([self.Departamentos])
             Container_menus.content = ft.Column([a, b, c])
-            Container_menus.alignment = ft.alignment.top_center
+            
 
             Container_menus.update()
         if Verificar == 2:
@@ -465,8 +465,6 @@ class Plantilla:
 #Reservar habitacion
     def Menu1(self):
         
-
-
         cod_cliente = create_text_field(
             "Dni de cliente")
 
@@ -477,15 +475,6 @@ class Plantilla:
             max_length=200,
             max_lines=3)
 
-        eliminar = ft.CupertinoButton(
-            content=ft.Text("eliminar", color=ft.colors.BLACK),
-            bgcolor=colores[1],
-            on_click=lambda _: self.res_eliminar_aux(cod_cliente.value))
-
-        modificar = ft.CupertinoButton(
-            content=ft.Text("modificar", color=ft.colors.BLACK),
-            bgcolor=colores[1],
-            on_click=lambda _: self.res_actualizar(cod_cliente.value))
 
         subir = ft.CupertinoButton(
             content=ft.Text("subir", color=ft.colors.BLACK),
@@ -494,12 +483,15 @@ class Plantilla:
 
         inputs = ft.Column(
             controls=[cod_cliente, desc])
-        botones = ft.Row(controls=[eliminar, modificar, subir])
+        botones = ft.Row(controls=[subir])
         Container_menus.content = ft.Column(
             [inputs,
-             botones],
+             botones],   
+            expand=True    
         )
-        Container_menus.alignment = ft.alignment.center
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho*0.38)
+        Container_menus.padding = ft.padding.symmetric(vertical=ancho*0.38)
+
         Container_menus.update()
 # ................................habitacion.......................
 
@@ -582,7 +574,6 @@ class Plantilla:
             b = ft.Row([consultar, reservarboton, contador])
             c = ft.Row([self.Departamentos])
             Container_menus.content = ft.Column([a, b, c])
-            Container_menus.alignment = ft.alignment.top_center
 
             Container_menus.update()
         if Verificar == 2:
@@ -609,7 +600,28 @@ class Plantilla:
         Container_menus.update()
 #Gestor de reserva
     def Menu3(self):
-        pass
+        cod_cliente = create_text_field(
+            "Dni de cliente")
+        eliminar = ft.CupertinoButton(
+            content=ft.Text("eliminar", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            on_click=lambda _: self.res_eliminar_aux(cod_cliente.value))
+
+        modificar = ft.CupertinoButton(
+            content=ft.Text("modificar", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            on_click=lambda _: self.res_actualizar(cod_cliente.value))
+        
+        inputs = ft.Column(
+            controls=[cod_cliente, botones])
+        botones = ft.Row(controls=[])
+        Container_menus.content = ft.Column(
+            [inputs,
+             botones],
+        )
+        Container_menus.alignment = ft.alignment.center
+        Container_menus.update()
+
 # ................................cochera.......................
 
     def Cli_Aux(self, a, b, c, d):
@@ -786,7 +798,6 @@ class Plantilla:
         input_fecha = ft.Row([self.Ingreso_Res, self.Egreso_Res, consultar])
         elementos = ft.Column([input_fecha])
         Container_menus.content = elementos
-        Container_menus.alignment = ft.alignment.top_center
 
         Container_menus.update()
 
