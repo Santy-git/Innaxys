@@ -489,9 +489,6 @@ class Plantilla:
              botones],   
             expand=True    
         )
-        Container_menus.padding = ft.padding.symmetric(horizontal=ancho*0.38)
-        Container_menus.padding = ft.padding.symmetric(vertical=ancho*0.38)
-
         Container_menus.update()
 # ................................habitacion.......................
 
@@ -611,13 +608,12 @@ class Plantilla:
             content=ft.Text("modificar", color=ft.colors.BLACK),
             bgcolor=colores[1],
             on_click=lambda _: self.res_actualizar(cod_cliente.value))
-        
+        botones = ft.Row(controls=[eliminar,modificar])
         inputs = ft.Column(
             controls=[cod_cliente, botones])
-        botones = ft.Row(controls=[])
+        
         Container_menus.content = ft.Column(
-            [inputs,
-             botones],
+            [inputs],
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
