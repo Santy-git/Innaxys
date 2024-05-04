@@ -203,6 +203,7 @@ def eliminar_reserva(numero):
     cur = con.cursor()
     print(numero)
     cur.execute("DELETE FROM resHab where codReserva = '"+str(numero)+"'")
+    cur.execute("DELETE FROM resCoch where codReserva = '"+str(numero)+"'")
     cur.execute("DELETE FROM reserva where codReserva = '"+str(numero)+"'")
     con.commit()
     con.close()
