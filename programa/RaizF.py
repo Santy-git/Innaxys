@@ -136,7 +136,7 @@ class Plantilla:
             if z[0]:
                 Nivel = int(z[1])
                 self.Menu()
-                # Menu0()
+                self.Menu1()
 
         except TypeError:
             dlg = ft.AlertDialog(
@@ -462,8 +462,11 @@ class Plantilla:
         Container_menus.content = registro
         Container_menus.update()
 # ................actualizar reserva.......................
+#Reservar habitacion
+    def Menu1(self):
+        
 
-    def Menu0(self):
+
         cod_cliente = create_text_field(
             "Dni de cliente")
 
@@ -584,8 +587,8 @@ class Plantilla:
             Container_menus.update()
         if Verificar == 2:
             pass
-
-    def Menu1(self):
+#Reservar cochera
+    def Menu2(self):
         cod_cliente = create_text_field("Dni de cliente")
         fecha_res = datetime.now().date()
         desc = create_text_field(
@@ -604,6 +607,9 @@ class Plantilla:
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
+#Gestor de reserva
+    def Menu3(self):
+        pass
 # ................................cochera.......................
 
     def Cli_Aux(self, a, b, c, d):
@@ -619,9 +625,9 @@ class Plantilla:
                 self.raiz.update()
             open_dlg(self)
             Container_menus.clean()
-            self.Menu2()
-
-    def Menu2(self):
+            self.Menu3()
+#Añadir cliente
+    def Menu4(self):
         cod_cliente = create_text_field("Dni de cliente")
         nom_cli = create_text_field("Nombre")
         email_cli = create_text_field("Email")
@@ -644,8 +650,8 @@ class Plantilla:
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
 # ......................cliente...............
-
-    def Menu3(self):
+#Añadir elemento
+    def Menu5(self):
         cocherav = ft.CupertinoButton(
             text="cochera", on_click=lambda _: self.cochera(), bgcolor=colores[5])
         habitacionv = ft.CupertinoButton(
@@ -667,7 +673,7 @@ class Plantilla:
                 self.raiz.update()
             open_dlg(self)
             Container_menus.clean()
-            self.Menu3()
+            self.Menu5()
 
     def cochera(self):
         piso_coch = create_text_field("Piso")
@@ -696,7 +702,7 @@ class Plantilla:
                 self.raiz.update()
             open_dlg(self)
             Container_menus.clean()
-            self.Menu3()
+            self.Menu5()
 
     def habitacion(self):
         piso = create_text_field("Piso")
@@ -718,8 +724,74 @@ class Plantilla:
         )
         Container_menus.update()
 # ....................elementos........................
+#Gestor de elementos 
+    def Menu6(self):
+        pass
+#Calendario
+    def Menu7(self):
+        def Calendario_menu(mes, año):
+            # aca estan los elementos visuales
+            cl = ft.Column(
+                width=Container_menus.width,
+                height=Container_menus.height-300,
+                spacing=17,
+                scroll=ft.ScrollMode.ALWAYS,
+                on_scroll_interval=0,
+            )
 
-    def Menu4(self):
+            
+            mes_consulta = str(año)+'-'+str(mes)+'-'+'01'
+            año_consulta = str(año)+'-'+str(mes)+'-'+str(Meses[mes])
+            matris = calendario(mes_consulta, año_consulta)
+
+            # listas para armar la tabla
+            verificador = [[0, 0, 0]]
+            for i in range(len(matris[0])):
+                y = datetime.fromisoformat(matris[0][i][1])
+                y = y.strftime("%d")
+                x = datetime.fromisoformat(matris[0][i][2])
+                x = x.strftime("%d")
+                verificador.append([matris[0][i][0], y, x])
+
+            for j in range(len(matris[1])):
+                dias = [ft.Text(bgcolor=colores[4],
+                                value="hab:"+str(matris[1][j][0])),]
+                for o in range(Meses[mes]):
+                    bandera = 0
+                    for i in range(len(verificador)):
+                        if o+1 >= int(verificador[i][1]) and o+1 <= int(verificador[i][2]) and int(matris[1][j][0]) == int(verificador[i][0]):
+                            bandera = 1
+                    if bandera == 1:
+
+                        dias.append(ft.Container(width=20, height=20, bgcolor='red', content=ft.Text(
+                            value=o+1), alignment=ft.alignment.center))
+                    else:
+                        dias.append(ft.Container(width=20, height=20, bgcolor='green', content=ft.Text(
+                            value=o+1), alignment=ft.alignment.center))
+                cl.controls.append(ft.Row(controls=dias))
+
+            container_calendar = ft.Container(cl, border=ft.border.all(1))
+            elementos.controls.append(container_calendar)
+            Container_menus.update()
+
+        self.Ingreso_Res = create_text_field("Mes (mm)")
+        self.Egreso_Res = create_text_field("Año(aaaa)")
+        consultar = ft.TextButton(
+            text="Consultar",
+            on_click=lambda _: Calendario_menu(
+                self.Ingreso_Res.value,
+                self.Egreso_Res.value)
+        )
+
+        input_fecha = ft.Row([self.Ingreso_Res, self.Egreso_Res, consultar])
+        elementos = ft.Column([input_fecha])
+        Container_menus.content = elementos
+        Container_menus.alignment = ft.alignment.top_center
+
+        Container_menus.update()
+
+#Añadir empleado
+    def Menu8(self):
 
         # --------------Funciones--------------
         def reg_emp_aux(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel):
@@ -736,7 +808,7 @@ class Plantilla:
                     self.raiz.update()
                 open_dlg(self)
                 Container_menus.clean()
-                self.Menu4()
+                self.Menu8()
 
         # --------------Elementos-------------
         dni_emp = create_text_field("Dni del empleado")
@@ -771,6 +843,10 @@ class Plantilla:
 
         Container_menus.update()
 
+
+# ....................empleado.........................
+
+# ...................calendario.......................
     def HighLight(self, e):
         if e.data == "true":
             e.control.bgcolor = "white10"
@@ -795,10 +871,9 @@ class Plantilla:
             e.control.content.update()
 
     def Selector(self, a):
-        diccionario = {"Reservar Habitacion": 0, "Reservar Cochera": 1,
-                       "Añadir Cliente": 2, "Añadir elementos": 3, "Añadir Empleado": 4, "Calendario": 5}
-        Indices_menus = {0: self.Menu0, 1: self.Menu1,
-                         2: self.Menu2, 3: self.Menu3, 4: self.Menu4, 5: self.Menu5}
+        diccionario = {"Reservar Habitacion": 1, "Reservar Cochera": 2,"Gestor de reserva":3,
+                       "Añadir Cliente":4,"Añadir elementos": 5,"Gestor de elementos":6,"Calendario": 7,"Añadir Empleado": 8}
+        Indices_menus = {1: self.Menu1,2: self.Menu2, 3: self.Menu3, 4: self.Menu4, 5: self.Menu5,6: self.Menu6,7:self.Menu7,8:self.Menu8}
         Indices_menus[diccionario[a]]()
 
     def UserData(self, name: str):
@@ -867,73 +942,9 @@ class Plantilla:
                 ]
             )
         )
-# ....................empleado.........................
 
-    def Menu5(self):
-        def Calendario_menu(mes, año):
-            # aca estan los elementos visuales
-            cl = ft.Column(
-                width=Container_menus.width,
-                height=Container_menus.height-300,
-                spacing=17,
-                scroll=ft.ScrollMode.ALWAYS,
-                on_scroll_interval=0,
-            )
 
-            
-            mes_consulta = str(año)+'-'+str(mes)+'-'+'01'
-            año_consulta = str(año)+'-'+str(mes)+'-'+str(Meses[mes])
-            matris = calendario(mes_consulta, año_consulta)
-
-            # listas para armar la tabla
-            verificador = [[0, 0, 0]]
-            for i in range(len(matris[0])):
-                y = datetime.fromisoformat(matris[0][i][1])
-                y = y.strftime("%d")
-                x = datetime.fromisoformat(matris[0][i][2])
-                x = x.strftime("%d")
-                verificador.append([matris[0][i][0], y, x])
-
-            for j in range(len(matris[1])):
-                dias = [ft.Text(bgcolor=colores[4],
-                                value="hab:"+str(matris[1][j][0])),]
-                for o in range(Meses[mes]):
-                    bandera = 0
-                    for i in range(len(verificador)):
-                        if o+1 >= int(verificador[i][1]) and o+1 <= int(verificador[i][2]) and int(matris[1][j][0]) == int(verificador[i][0]):
-                            bandera = 1
-                    if bandera == 1:
-
-                        dias.append(ft.Container(width=20, height=20, bgcolor='red', content=ft.Text(
-                            value=o+1), alignment=ft.alignment.center))
-                    else:
-                        dias.append(ft.Container(width=20, height=20, bgcolor='green', content=ft.Text(
-                            value=o+1), alignment=ft.alignment.center))
-                cl.controls.append(ft.Row(controls=dias))
-
-            container_calendar = ft.Container(cl, border=ft.border.all(1))
-            elementos.controls.append(container_calendar)
-            Container_menus.update()
-
-        self.Ingreso_Res = create_text_field("Mes (mm)")
-        self.Egreso_Res = create_text_field("Año(aaaa)")
-        consultar = ft.TextButton(
-            text="Consultar",
-            on_click=lambda _: Calendario_menu(
-                self.Ingreso_Res.value,
-                self.Egreso_Res.value)
-        )
-
-        input_fecha = ft.Row([self.Ingreso_Res, self.Egreso_Res, consultar])
-        elementos = ft.Column([input_fecha])
-        Container_menus.content = elementos
-        Container_menus.alignment = ft.alignment.top_center
-
-        Container_menus.update()
-# ...................calendario.......................
-
-# .....................modificar.......................
-
+#................Selector de menus...........
     def Menu(self):
         global Container_menus
         self.raiz.clean()
@@ -988,6 +999,20 @@ class Plantilla:
                 selected_icon_content=ft.Icon(
                     ft.icons.BOOKMARK, color=ft.colors.BLACK),
                 label_content=ft.Text("6", color=ft.colors.BLACK)
+            ),
+            ft.NavigationRailDestination(
+                icon_content=ft.Icon(
+                    ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                selected_icon_content=ft.Icon(
+                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                label_content=ft.Text("7", color=ft.colors.BLACK)
+            ),
+            ft.NavigationRailDestination(
+                icon_content=ft.Icon(
+                    ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                selected_icon_content=ft.Icon(
+                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                label_content=ft.Text("8", color=ft.colors.BLACK)
             )]
 
         for i in range(Nivel):
@@ -1008,12 +1033,16 @@ class Plantilla:
                     self.ContainerIcon(ft.icons.SEARCH, "Reservar Habitacion"),
                     self.ContainerIcon(
                         ft.icons.DASHBOARD_ROUNDED, "Reservar Cochera"),
-                    self.ContainerIcon(ft.icons.BAR_CHART, "Añadir Cliente"),
+                    self.ContainerIcon(ft.icons.BAR_CHART, "Gestor de reserva"),
                     self.ContainerIcon(
-                        ft.icons.NOTIFICATIONS, "Añadir elementos"),
-                    self.ContainerIcon(ft.icons.PIE_CHART, "Añadir Empleado"),
+                        ft.icons.NOTIFICATIONS, "Añadir Cliente"),
+                    self.ContainerIcon(ft.icons.PIE_CHART, "Añadir elementos"),
+                    self.ContainerIcon(
+                        ft.icons.PIE_CHART_OUTLINE, "Gestor de elementos"),
                     self.ContainerIcon(
                         ft.icons.PIE_CHART_OUTLINE, "Calendario"),
+                    self.ContainerIcon(
+                        ft.icons.PIE_CHART_OUTLINE, "Añadir Empleado"),
                 ]
             ),)
 
