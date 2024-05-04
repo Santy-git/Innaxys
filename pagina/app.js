@@ -7,12 +7,12 @@ const translations = {
     descubre: "Descubre el poder de la innovación con Innaxys en tu hotel",
     quienesSomos: "¿Quienes somos?",
     quienesSomosDesc:
-      "En Innaxys, nos dedicamos a impulsar la excelencia en la gestión hotelera a través de soluciones tecnológicas innovadoras y personalizadas. Con años de experiencia en el sector, entendemos las necesidades únicas de cada hotel y nos comprometemos a ofrecer soluciones que impulsen el éxito y la eficiencia.",
+      "En Innaxys, nos dedicamos a impulsar la excelencia en la gestión de reservas a través de soluciones tecnológicas innovadoras y personalizadas. Con años de experiencia en el sector, entendemos las necesidades únicas de cada hotel y nos comprometemos a ofrecer soluciones que impulsen el éxito y la eficiencia.",
     queOfrecemos: "¿Qué ofrecemos?",
     queOfrecemosDesc1:
-      "Ofrecemos un completo sistema de gestión hotelera diseñado para optimizar cada aspecto de tu hotel",
+      "Ofrecemos un completo sistema de gestión de reservas, diseñado para optimizar cada aspecto de tu hotel",
     queOfrecemosDesc2:
-      "Desde la reserva de habitaciones hasta la administración de inventarios y la gestión de personal, nuestro software está diseñado para simplificar tus procesos y potenciar tu negocio.",
+      "Desde la reserva de habitaciones hasta la gestión de personal, nuestro software está diseñado para simplificar tus procesos y potenciar tu negocio.",
     beneficios: "Beneficios",
     eficiencia: "Eficiencia",
     eficienciaDesc:
@@ -29,6 +29,7 @@ const translations = {
     compatibilidad: "Compatibilidad",
     compatibilidadDesc:
       "Nuestro sistema es compatible con todos los dispositivos",
+    contactanos: "Contactanos",
     compra: "Compra Innaxys",
     solicitarInfo: "Solicitar más información",
     nombre: "Nombre:",
@@ -41,12 +42,12 @@ const translations = {
     descubre: "Discover the innovation power with Innaxys in your hotel",
     quienesSomos: "About us",
     quienesSomosDesc:
-      "At Innaxys, we dedicate ourselves to propelling excellence in hotel management with innovative and personalized technology solutions. With years of experience in the area, we understand the unique needs of each hotel and commit to offer solutions that propel success and efficiency.",
+      "At Innaxys, we dedicate ourselves to propelling excellence in booking management with innovative and personalized technology solutions. With years of experience in the area, we understand the unique needs of each hotel and commit to offer solutions that propel success and efficiency.",
     queOfrecemos: "Services",
     queOfrecemosDesc1:
-      "We offer a complete hotel management system, designed to optimize each aspect of your hotel.",
+      "We offer a complete booking management system, designed to optimize each aspect of your hotel.",
     queOfrecemosDesc2:
-      "From the room reservation until the inventories administration and the personal management as well, our software is designed to simplify your processes and boost your bussines.",
+      "From the room booking until the personal management, our software is designed to simplify your processes and boost your bussines.",
     beneficios: "Benefits",
     eficiencia: "Eficiency",
     eficienciaDesc:
@@ -59,11 +60,12 @@ const translations = {
       "It doesn't matter the size or the type of your hotel, our system adapts to your specific needs and evolves with you as you grow and expand.",
     experiencia: "Experience with guest",
     experienciaDesc:
-      "From reservation to check-out, our software offers a perfect and personalized experience, leaving a lasting impression on your guests",
+      "From booking to check-out, our software offers a perfect and personalized experience, leaving a lasting impression on your guests",
     compatibilidad: "Compatibility",
     compatibilidadDesc: "Our system is compatible with all devices",
+    contactanos: "Contact us",
     compra: "Buy Innaxys",
-    solicitarInfo: "For more informartion",
+    solicitarInfo: "For more information",
     nombre: "Name:",
     email: "Email:",
     mensaje: "Message:",

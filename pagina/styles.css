@@ -165,38 +165,12 @@ nav {
   height: auto;
   right: 5rem;
   background-color: hsla(0, 0%, 100%, 0);
-  transition: all 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
   overflow: hidden;
   padding: 32px;
   align-items: center;
   justify-content: center;
   gap: 4rem;
-}
-
-.contact-bar p {
-  color: white;
-}
-
-.color-phone {
-  color: white;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.color-phone i {
-  font-size: 20px;
-}
-
-.color-email {
-  color: white;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.color-email i {
-  font-size: 25px;
 }
 
 #idiomas::-ms-expand {
@@ -218,13 +192,13 @@ nav {
   border-radius: 0;
   background: #f0f0f0;
   color: #7b7b7b;
-  font-size: 1em;
+  font-size: 1rem;
   color: #999;
-  font-family: "Quicksand", sans-serif;
+  font-family: "Nunito", sans-serif;
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   position: relative;
-  transition: all 0.25s ease;
+  font-weight: 500;
 }
 
 #idiomas:hover {
@@ -337,7 +311,8 @@ nav {
 .somos,
 .ofrecemos,
 .beneficios,
-.compatibilidad {
+.compatibilidad,
+.contactanos {
   width: 3.5rem;
   height: 3.5rem;
   background-color: var(--bg-btn);
@@ -533,8 +508,9 @@ nav {
   flex-direction: column;
   align-items: center;
   padding: 5rem 5% 5rem 5%;
-  background: linear-gradient(135deg, #336847, #0f1f16, #000000);
+  background: linear-gradient(130deg, #2e5e40, #101f17);
   color: white;
+  height: 100vh;
 }
 
 .compra {
@@ -572,6 +548,12 @@ textarea {
   padding: 0.7rem;
   border: 1px solid #ccc;
   border-radius: 0.3rem;
+}
+
+textarea {
+  min-height: 5rem;
+  max-height: 10rem;
+  resize: vertical;
 }
 
 #buyNow {

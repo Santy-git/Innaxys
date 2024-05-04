@@ -10,6 +10,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" href="rsc/axys.png" type="image/x-icon" />
   </head>
 
   <body>
@@ -98,6 +99,16 @@
             </button>
             <p data-translate="compatibilidad"></p>
           </div>
+
+          <div class="contBotonTexto">
+            <button
+              class="botonCircular contactanos"
+              onclick="scrollToSection('contactanos')"
+            >
+              <i class="fa-solid fa-phone"></i>
+            </button>
+            <p data-translate="contactanos"></p>
+          </div>
         </div>
       </div>
     </section>
@@ -182,8 +193,8 @@
       </section>
     </section>
     <!-- Comprar el software -->
-    <section class="containerCompra">
-      <h2 data-translate="compra"></h2>
+    <section class="containerCompra" id="contactanos">
+      <h2 data-translate="contactanos"></h2>
       <div class="compra">
         <h3 data-translate="solicitarInfo"></h3>
         <form id="compraForm">
@@ -197,13 +208,7 @@
           </div>
           <div class="form-group">
             <label for="mensaje" data-translate="mensaje"></label>
-            <textarea
-              id="mensaje"
-              name="mensaje"
-              rows="4"
-              cols="50"
-              placeholder="Escribe aquí tu mensaje..."
-            ></textarea>
+            <textarea id="mensaje" name="mensaje" rows="4" cols="50"></textarea>
           </div>
           <button
             type="submit"
