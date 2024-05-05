@@ -163,63 +163,26 @@ nav {
   position: absolute;
   width: fit-content;
   height: auto;
-  right: 5rem;
-  background-color: hsla(0, 0%, 100%, 0);
+  right: 7rem;
   transition: 0.5s ease-in-out;
   overflow: hidden;
-  padding: 32px;
   align-items: center;
   justify-content: center;
   gap: 4rem;
 }
 
-#idiomas::-ms-expand {
-  display: none;
-}
-
 #idiomas {
-  max-width: 250px;
   position: relative;
-}
-
-#idiomas {
   display: inline-block;
+  align-items: center;
+  border: none;
   cursor: pointer;
-  padding: 7px 10px;
-  height: 42px;
-  outline: 0;
-  border: 0;
-  border-radius: 0;
-  background: #f0f0f0;
-  color: #7b7b7b;
-  font-size: 1rem;
-  color: #999;
-  font-family: "Nunito", sans-serif;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-  position: relative;
   font-weight: 500;
-}
-
-#idiomas:hover {
-  background: #b1e8cd;
-}
-
-#idiomas i {
-  position: absolute;
-  right: 20px;
-  top: calc(50% - 13px);
-  width: 16px;
-  height: 16px;
-  display: block;
-  border-left: 4px solid #2ac176;
-  border-bottom: 4px solid #2ac176;
-  transform: rotate(-45deg);
-  transition: all 0.25s ease;
-}
-
-#idiomas:hover i {
-  margin-top: 3px;
+  background: transparent;
+  font-size: 1rem;
+  font-family: "Nunito", sans-serif;
+  padding: 0.5rem 1rem;
+  color: #fff;
 }
 
 /* --------------------- */
@@ -590,22 +553,19 @@ footer {
 
 .social svg {
   cursor: pointer;
-  transition: color 0.5s, transform 0.5s;
+  transition: fill 0.3s;
 }
 
 .whatsapp:hover {
   fill: #25d366;
-  transform: scale(1.1);
 }
 
 .instagram:hover {
   fill: #cc39a4;
-  transform: scale(1.1);
 }
 
 .twitter:hover {
   fill: #03a9f4;
-  transform: scale(1.1);
 }
 
 #scrollTopBtn {
