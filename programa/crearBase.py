@@ -173,6 +173,21 @@ def completar(cli,emp,fecha,desc,hres,ing,eng):
         con.commit()
     con.close()
 
+def completar_cochera_actualizar(cli,emp,fecha,desc,hres,ing,eng,num):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    print("por aca",num)
+    cur.execute("DELETE FROM resCoch where codReserva = '"+str(num)+"'")
+    cur.execute("DELETE FROM reserva where codReserva = '"+str(num)+"'")
+    con.commit()
+    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
+    con.commit()
+    cur.execute("SELECT codReserva FROM reserva where codCliente = '"+cli+"' AND codEmpleado = '"+emp+"'")
+    info = cur.fetchall()
+    for i in range(len(hres)):
+        cur.execute("INSERT INTO resCoch (codReserva,codCochera,fechaIngreso,fechaEgreso) VALUES (?,?,?,?)",(info[-1][0],hres[i][0],ing,eng))
+        con.commit()
+    con.close()  
 
 def completar_actualizar(cli,emp,fecha,desc,hres,ing,eng,num):
     con = s.connect("GestionHotel.sqlite3")
@@ -195,6 +210,13 @@ def consulta_eliminar(dni):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("SELECT * from reserva where codCliente = '"+str(dni)+"'")
+    cons = cur.fetchall()
+    return cons 
+
+def consulta_tipo(cod):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("SELECT codReshab from resHab where codReserva = '"+str(cod)+"'")
     cons = cur.fetchall()
     return cons 
 
@@ -224,15 +246,26 @@ def ReservarCoch(dni_cli,dni_emp,fecha,desc):
     else:
         return 2
 
-def ConsultaCoch(ing,eng):
-    val = 0
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera FROM resCoch) OR codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
-    z = cur.fetchall()
-    print(z)
-    con.close()
-    return z
+def ConsultaCoch(ing,eng,num):
+    if num == 0:
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera FROM resCoch) OR codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+        z = cur.fetchall()
+        print(z)
+        con.close()
+        return z
+    else:
+        print(num,"numero")
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("SELECT * FROM cochera WHERE codCochera in (SELECT codCochera FROM resCoch WHERE codReserva = "+num+") or codCochera not in (SELECT codCochera FROM resCoch) or codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+        z = cur.fetchall()
+        print(z,"z")
+        con.close()
+        return z
+    
+
 
 def completarCoch(cli,emp,fecha,desc,hres,ing,eng):
     con = s.connect("GestionHotel.sqlite3")

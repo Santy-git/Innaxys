@@ -377,7 +377,6 @@ class Plantilla:
             c = ft.Row([self.Departamentos])
             Container_menus.content = ft.Column([a, b, c])
             
-
             Container_menus.update()
         if Verificar == 2:
             dlg = ft.AlertDialog(
@@ -391,77 +390,7 @@ class Plantilla:
             open_dlg(self)
 # ...............lo de arriba es la reserva subir..............
 
-    def res_eliminar_aux(self, dni):
-        info = consulta_eliminar(dni)
-        registro = ft.Column(
-            width=Container_menus.width - 100,
-            height=Container_menus.height - 100,
-            spacing=2,
-            scroll=ft.ScrollMode.ALWAYS,
-            on_scroll_interval=0,
-        )
 
-        for i in range(len(info)):
-            self.text = ft.Text(value="codigo de reserva:"+str(info[i][0])+"   codigo del empleado: "+str(
-                info[i][2])+"   fecha de reserva: "+str(info[i][3]),)
-            registro.controls.append(ft.Row(controls=[self.text]))
-        codigo = ft.TextField(label="codigo de reserva a modificar")
-        registro.controls.append(
-            ft.Row(
-                controls=[codigo,
-                          ft.IconButton(icon=ft.icons.DELETE,
-                                        icon_size=30,
-                                        width=60,
-                                        height=60,
-                                        on_click=lambda _: eliminar_reserva(
-                                            codigo.value)
-                                        )]))
-        Container_menus.clean()
-        Container_menus.content = registro
-        Container_menus.update()
-
-# ...............eliminar reservas arriba....................
-
-    def dador(self, cod, info, dni):
-
-        for j in range(len(info)):
-            if str(cod) == str(info[j][0]):
-                self.Reservar_Aux(dni, str(
-                    info[j][2]),
-                    datetime.now().date(),
-                    info[j][4],
-                    cod
-                )
-
-    def res_actualizar(self, dni):
-        info = consulta_eliminar(dni)
-        registro = ft.Column(
-            width=Container_menus.width - 100,
-            height=Container_menus.height - 100,
-            spacing=2,
-            scroll=ft.ScrollMode.ALWAYS,
-            on_scroll_interval=0,
-        )
-
-        for i in range(len(info)):
-            self.text = ft.Text(value="codigo de reserva:"+str(info[i][0])+"   codigo del empleado: "+str(
-                info[i][2])+"   fecha de reserva: "+str(info[i][3]),)
-            registro.controls.append(ft.Row(controls=[self.text]))
-        codigo = ft.TextField(label="codigo de reserva a modificar")
-        registro.controls.append(
-            ft.Row(
-                controls=[codigo,
-                          ft.IconButton(icon=ft.icons.SEND,
-                                        icon_size=30,
-                                        width=60,
-                                        height=60,
-                                        on_click=lambda _: self.dador(
-                                            codigo.value, info, dni)
-                                        )]))
-        Container_menus.clean()
-        Container_menus.content = registro
-        Container_menus.update()
-# ................actualizar reserva.......................
 #Reservar habitacion
     def Menu1(self):
         
@@ -527,15 +456,22 @@ class Plantilla:
         self.Departamentos.content = ft.Column([images])
         Container_menus.update()
 
-    def ConsultaCoch_aux(self, Ingreso_Res, Egreso_Res):
+    def ConsultaCoch_aux(self, Ingreso_Res, Egreso_Res,num):
         global hres
         hres = []
-        self.variable2 = ConsultaCoch(Ingreso_Res, Egreso_Res)
+        self.variable2 = ConsultaCoch(Ingreso_Res, Egreso_Res,num)
         self.disponiblesCoch()
 
-    def resCoch_final(self, cli, emp, fecha, desc, hres, Ing, Eng):
-        confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completarCoch(
-            cli, emp, fecha, desc, hres, Ing, Eng))
+    def resCoch_final(self, cli, emp, fecha, desc, hres, Ing, Eng ,num):
+        print("num:",num)
+        if num != 0:
+            print("hola")
+            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar_cochera_actualizar(
+            cli, emp, fecha, desc, hres, Ing, Eng, num))
+        else:
+            print("hola2")
+            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completarCoch(
+                cli, emp, fecha, desc, hres, Ing, Eng))
         Container_menus.clean()
         a = []
         for i in range(len(hres)):
@@ -551,7 +487,7 @@ class Plantilla:
         Container_menus.clean()
         Container_menus.update()
 
-    def ReservarCoch_Aux(self, cli, emp, fecha, desc):
+    def ReservarCoch_Aux(self, cli, emp, fecha, desc, num):
         Container_menus.clean()
         Verificar = ReservarCoch(cli, emp, fecha, desc)
 
@@ -560,9 +496,9 @@ class Plantilla:
             Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
             Egreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.ConsultaCoch_aux(
-                Ingreso_Res.value, Egreso_Res.value))
+                Ingreso_Res.value, Egreso_Res.value, num))
             reservarboton = ft.TextButton(text="el otro boton", on_click=lambda _: self.resCoch_final(
-                cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value
+                cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value, num
             ))
             self.Departamentos = ft.Container(
                 width=830, height=500, bgcolor=colores[2], margin=10)
@@ -574,7 +510,15 @@ class Plantilla:
 
             Container_menus.update()
         if Verificar == 2:
-            pass
+            dlg = ft.AlertDialog(
+                title=ft.Text("Cliente no encontrado")
+            )
+
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
 #Reservar cochera
     def Menu2(self):
         cod_cliente = create_text_field("Dni de cliente")
@@ -585,7 +529,7 @@ class Plantilla:
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[2], fecha_res, desc.value))
+            on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[2], fecha_res, desc.value,0))
 
         Container_menus.content = ft.Column(
             [cod_cliente,
@@ -595,6 +539,124 @@ class Plantilla:
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
+
+
+
+    def act_reserva_Aux(self, cli, emp, fecha, desc, num):
+        Container_menus.clean()
+        Verificar = Reservar(cli, emp, fecha, desc)
+        if Verificar == 1:
+            Container_menus.clean()
+            Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
+            Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
+            consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
+                Ingreso_Res.value, Egreso_Res.value, num))
+            reservarboton = ft.TextButton(text="el otro boton", on_click=lambda _: self.res_final(
+                cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value, num
+            ))
+            self.Departamentos = ft.Container(
+                width=830, height=500, bgcolor=colores[2], margin=10)
+            self.contador = ft.Text(value="")
+            a = ft.Row([Ingreso_Res, Egreso_Res])
+            b = ft.Row([consultar, reservarboton, self.contador])
+            c = ft.Row([self.Departamentos])
+            Container_menus.content = ft.Column([a, b, c])
+            
+
+            Container_menus.update()
+        if Verificar == 2:
+            dlg = ft.AlertDialog(
+                title=ft.Text("Cliente no encontrado")
+            )
+
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
+
+
+    def res_eliminar_aux(self, dni):
+        info = consulta_eliminar(dni)
+        registro = ft.Column(
+            width=Container_menus.width - 100,
+            height=Container_menus.height - 100,
+            spacing=2,
+            scroll=ft.ScrollMode.ALWAYS,
+            on_scroll_interval=0,
+        )
+
+        for i in range(len(info)):
+            self.text = ft.Text(value="codigo de reserva:"+str(info[i][0])+"   codigo del empleado: "+str(
+                info[i][2])+"   fecha de reserva: "+str(info[i][3]),)
+            registro.controls.append(ft.Row(controls=[self.text]))
+        codigo = ft.TextField(label="codigo de reserva a modificar")
+        registro.controls.append(
+            ft.Row(
+                controls=[codigo,
+                          ft.IconButton(icon=ft.icons.DELETE,
+                                        icon_size=30,
+                                        width=60,
+                                        height=60,
+                                        on_click=lambda _: eliminar_reserva(
+                                            codigo.value)
+                                        )]))
+        Container_menus.clean()
+        Container_menus.content = registro
+        Container_menus.update()
+# ...............eliminar reservas arriba....................
+
+    def dador(self, cod, info, dni):
+        tipo = consulta_tipo(cod)
+        if tipo == []:
+            for j in range(len(info)):
+                if str(cod) == str(info[j][0]):
+                    self.ReservarCoch_Aux(dni, str(
+                        info[j][2]),
+                        datetime.now().date(),
+                        info[j][4],
+                        cod
+                    )
+        else:
+            for j in range(len(info)):
+                if str(cod) == str(info[j][0]):
+                    self.Reservar_Aux(dni, str(
+                        info[j][2]),
+                        datetime.now().date(),
+                        info[j][4],
+                        cod
+                    )
+
+    def res_actualizar(self, dni):
+        info = consulta_eliminar(dni)
+        registro = ft.Column(
+            width=Container_menus.width - 100,
+            height=Container_menus.height - 100,
+            spacing=2,
+            scroll=ft.ScrollMode.ALWAYS,
+            on_scroll_interval=0,
+        )
+
+        for i in range(len(info)):
+            self.text = ft.Text(value="codigo de reserva:"+str(info[i][0])+"   codigo del empleado: "+str(
+                info[i][2])+"   fecha de reserva: "+str(info[i][3]),)
+            registro.controls.append(ft.Row(controls=[self.text]))
+        codigo = ft.TextField(label="codigo de reserva a modificar")
+        registro.controls.append(
+            ft.Row(
+                controls=[codigo,
+                          ft.IconButton(icon=ft.icons.SEND,
+                                        icon_size=30,
+                                        width=60,
+                                        height=60,
+                                        on_click=lambda _: self.dador(
+                                            codigo.value, info, dni)
+                                        )]))
+        Container_menus.clean()
+        Container_menus.content = registro
+        Container_menus.update()
+# ................actualizar reserva.......................
+
 #Gestor de reserva
     def Menu3(self):
         cod_cliente = create_text_field(
