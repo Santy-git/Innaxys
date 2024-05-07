@@ -220,8 +220,8 @@ class Plantilla:
                                     'Sign in',
                                     width=ancho * .2,
                                     size=altura * .03,
-                                    text_align='center',
-                                ),
+                                    text_align='center'),
+        
                                 Text(
                                     'Please login to use the plataform',
                                     width=ancho * .2,
@@ -232,11 +232,12 @@ class Plantilla:
                                           ),
                                 Container(self.Password, padding=ft.padding.symmetric(horizontal=ancho * .03)
                                           ),
-                                Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .05)
+                                Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .04)
 
                                           )
                             ])
                         ),
+                        padding=ft.padding.all(25),
                         width=ancho * .2,
                         height=altura * .5,
                         bgcolor='#22ffffff',
