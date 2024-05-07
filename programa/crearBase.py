@@ -356,24 +356,41 @@ def gest_elementos_consulta(date):
     cur = con.cursor()
     cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab from reshab where fechaEgreso > '"+date+"' )")
     matris2 = cur.fetchall()
+    cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera from resCoch where fechaEgreso > '"+date+"' )")
+    matris3 = cur.fetchall()
     con.close()
-    return matris2
+    return matris2,matris3
 
 def gest_elementos_eliminar(lista,cod_cliente,hab,coch):
     bandera = 0
-    for i in range(len(lista)):
-        if int(lista[i][0])==int(cod_cliente):
-            bandera = 1
-    if bandera == 1:
-        con = s.connect("GestionHotel.sqlite3")
-        cur = con.cursor()
-        cur.execute("DELETE FROM habitacion WHERE codHab = "+cod_cliente+"")
-        con.commit()
-        con.close()
-        return True
+    if hab:
+        for i in range(len(lista[0])):
+            if int(lista[0][i][0])==int(cod_cliente):
+                bandera = 1
+        if bandera == 1:
+            con = s.connect("GestionHotel.sqlite3")
+            cur = con.cursor()
+            cur.execute("DELETE FROM habitacion WHERE codHab = "+cod_cliente+"")
+            con.commit()
+            con.close()
+            return True
+        else:
+            return False
     else:
-        return False
-    
+        for i in range(len(lista[1])):
+            if int(lista[1][i][0])==int(cod_cliente):
+                bandera = 1
+        if bandera == 1:
+            print("haol")
+            con = s.connect("GestionHotel.sqlite3")
+            cur = con.cursor()
+            cur.execute("DELETE FROM cochera WHERE codCochera = "+cod_cliente+"")
+            con.commit()
+            con.close()
+            return True
+        else:
+            return False
+        
 def gest_modificiar(codigo):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
