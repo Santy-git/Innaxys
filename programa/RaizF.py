@@ -250,7 +250,8 @@ class Plantilla:
             width=(ancho/100)*30,
             height=(altura/100)*70,
             border_radius=ft.border_radius.all(ancho*.005),
-            margin=ft.margin.symmetric(horizontal=ancho*0.33)
+            margin=ft.margin.symmetric(
+                horizontal=ancho*0.33, vertical=altura*0.08)
         )
 
         self.raiz.add(self.contenedor_login)
@@ -376,7 +377,7 @@ class Plantilla:
             b = ft.Row([consultar, reservarboton, self.contador])
             c = ft.Row([self.Departamentos])
             Container_menus.content = ft.Column([a, b, c])
-            
+
             Container_menus.update()
         if Verificar == 2:
             dlg = ft.AlertDialog(
@@ -391,9 +392,11 @@ class Plantilla:
 # ...............lo de arriba es la reserva subir..............
 
 
-#Reservar habitacion
+# Reservar habitacion
+
+
     def Menu1(self):
-        
+
         cod_cliente = create_text_field(
             "Dni de cliente")
 
@@ -403,7 +406,6 @@ class Plantilla:
             multiline=True,
             max_length=200,
             max_lines=3)
-
 
         subir = ft.CupertinoButton(
             content=ft.Text("subir", color=ft.colors.BLACK),
@@ -415,8 +417,8 @@ class Plantilla:
         botones = ft.Row(controls=[subir])
         Container_menus.content = ft.Column(
             [inputs,
-             botones],   
-            expand=True    
+             botones],
+            expand=True
         )
         Container_menus.update()
 # ................................habitacion.......................
@@ -456,18 +458,18 @@ class Plantilla:
         self.Departamentos.content = ft.Column([images])
         Container_menus.update()
 
-    def ConsultaCoch_aux(self, Ingreso_Res, Egreso_Res,num):
+    def ConsultaCoch_aux(self, Ingreso_Res, Egreso_Res, num):
         global hres
         hres = []
-        self.variable2 = ConsultaCoch(Ingreso_Res, Egreso_Res,num)
+        self.variable2 = ConsultaCoch(Ingreso_Res, Egreso_Res, num)
         self.disponiblesCoch()
 
-    def resCoch_final(self, cli, emp, fecha, desc, hres, Ing, Eng ,num):
-        print("num:",num)
+    def resCoch_final(self, cli, emp, fecha, desc, hres, Ing, Eng, num):
+        print("num:", num)
         if num != 0:
             print("hola")
             confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar_cochera_actualizar(
-            cli, emp, fecha, desc, hres, Ing, Eng, num))
+                cli, emp, fecha, desc, hres, Ing, Eng, num))
         else:
             print("hola2")
             confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completarCoch(
@@ -519,7 +521,8 @@ class Plantilla:
                 dlg.open = True
                 self.raiz.update()
             open_dlg(self)
-#Reservar cochera
+# Reservar cochera
+
     def Menu2(self):
         cod_cliente = create_text_field("Dni de cliente")
         fecha_res = datetime.now().date()
@@ -529,7 +532,7 @@ class Plantilla:
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[2], fecha_res, desc.value,0))
+            on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[2], fecha_res, desc.value, 0))
 
         Container_menus.content = ft.Column(
             [cod_cliente,
@@ -539,8 +542,6 @@ class Plantilla:
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
-
-
 
     def act_reserva_Aux(self, cli, emp, fecha, desc, num):
         Container_menus.clean()
@@ -561,7 +562,6 @@ class Plantilla:
             b = ft.Row([consultar, reservarboton, self.contador])
             c = ft.Row([self.Departamentos])
             Container_menus.content = ft.Column([a, b, c])
-            
 
             Container_menus.update()
         if Verificar == 2:
@@ -574,7 +574,6 @@ class Plantilla:
                 dlg.open = True
                 self.raiz.update()
             open_dlg(self)
-
 
     def res_eliminar_aux(self, dni):
         info = consulta_eliminar(dni)
@@ -657,7 +656,7 @@ class Plantilla:
         Container_menus.update()
 # ................actualizar reserva.......................
 
-#Gestor de reserva
+# Gestor de reserva
     def Menu3(self):
         cod_cliente = create_text_field(
             "Dni de cliente")
@@ -670,10 +669,10 @@ class Plantilla:
             content=ft.Text("modificar", color=ft.colors.BLACK),
             bgcolor=colores[1],
             on_click=lambda _: self.res_actualizar(cod_cliente.value))
-        botones = ft.Row(controls=[eliminar,modificar])
+        botones = ft.Row(controls=[eliminar, modificar])
         inputs = ft.Column(
             controls=[cod_cliente, botones])
-        
+
         Container_menus.content = ft.Column(
             [inputs],
         )
@@ -696,7 +695,8 @@ class Plantilla:
             open_dlg(self)
             Container_menus.clean()
             self.Menu4()
-#Añadir cliente
+# Añadir cliente
+
     def Menu4(self):
         cod_cliente = create_text_field("Dni de cliente")
         nom_cli = create_text_field("Nombre")
@@ -720,7 +720,8 @@ class Plantilla:
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
 # ......................cliente...............
-#Añadir elemento
+# Añadir elemento
+
     def Menu5(self):
         cocherav = ft.CupertinoButton(
             text="cochera", on_click=lambda _: self.cochera(), bgcolor=colores[5])
@@ -794,13 +795,14 @@ class Plantilla:
         )
         Container_menus.update()
 # ....................elementos........................
-#Gestor de elementos 
+# Gestor de elementos
+
     def Menu6(self):
         cod_cliente = create_text_field(
             "numero")
         hab = ft.Checkbox(label="habitacion", value=False)
         coch = ft.Checkbox(label="cochera", value=False)
-        
+
         eliminar = ft.CupertinoButton(
             content=ft.Text("eliminar", color=ft.colors.BLACK),
             bgcolor=colores[1])
@@ -808,17 +810,18 @@ class Plantilla:
         modificar = ft.CupertinoButton(
             content=ft.Text("modificar", color=ft.colors.BLACK),
             bgcolor=colores[1])
-        botones = ft.Row(controls=[eliminar,modificar])
-        elementos = ft.Row(controls=[hab,coch])
+        botones = ft.Row(controls=[eliminar, modificar])
+        elementos = ft.Row(controls=[hab, coch])
         inputs = ft.Column(
-            controls=[cod_cliente,elementos, botones])
-        
+            controls=[cod_cliente, elementos, botones])
+
         Container_menus.content = ft.Column(
             [inputs],
         )
         Container_menus.alignment = ft.alignment.center
         Container_menus.update()
-#Calendario
+# Calendario
+
     def Menu7(self):
         def Calendario_menu(mes, año):
             # aca estan los elementos visuales
@@ -830,7 +833,6 @@ class Plantilla:
                 on_scroll_interval=0,
             )
 
-            
             mes_consulta = str(año)+'-'+str(mes)+'-'+'01'
             año_consulta = str(año)+'-'+str(mes)+'-'+str(Meses[mes])
             matris = calendario(mes_consulta, año_consulta)
@@ -880,7 +882,7 @@ class Plantilla:
 
         Container_menus.update()
 
-#Añadir empleado
+# Añadir empleado
     def Menu8(self):
 
         # --------------Funciones--------------
@@ -937,6 +939,8 @@ class Plantilla:
 # ....................empleado.........................
 
 # ...................calendario.......................
+
+
     def HighLight(self, e):
         if e.data == "true":
             e.control.bgcolor = "white10"
@@ -961,9 +965,10 @@ class Plantilla:
             e.control.content.update()
 
     def Selector(self, a):
-        diccionario = {"Reservar Habitacion": 1, "Reservar Cochera": 2,"Gestor de reserva":3,
-                       "Añadir Cliente":4,"Añadir elementos": 5,"Gestor de elementos":6,"Calendario": 7,"Añadir Empleado": 8}
-        Indices_menus = {1: self.Menu1,2: self.Menu2, 3: self.Menu3, 4: self.Menu4, 5: self.Menu5,6: self.Menu6,7:self.Menu7,8:self.Menu8}
+        diccionario = {"Reservar Habitacion": 1, "Reservar Cochera": 2, "Gestor de reserva": 3,
+                       "Añadir Cliente": 4, "Añadir elementos": 5, "Gestor de elementos": 6, "Calendario": 7, "Añadir Empleado": 8}
+        Indices_menus = {1: self.Menu1, 2: self.Menu2, 3: self.Menu3,
+                         4: self.Menu4, 5: self.Menu5, 6: self.Menu6, 7: self.Menu7, 8: self.Menu8}
         Indices_menus[diccionario[a]]()
 
     def UserData(self, name: str):
@@ -1034,7 +1039,9 @@ class Plantilla:
         )
 
 
-#................Selector de menus...........
+# ................Selector de menus...........
+
+
     def Menu(self):
         global Container_menus
         self.raiz.clean()
@@ -1123,7 +1130,8 @@ class Plantilla:
                     self.ContainerIcon(ft.icons.SEARCH, "Reservar Habitacion"),
                     self.ContainerIcon(
                         ft.icons.DASHBOARD_ROUNDED, "Reservar Cochera"),
-                    self.ContainerIcon(ft.icons.BAR_CHART, "Gestor de reserva"),
+                    self.ContainerIcon(ft.icons.BAR_CHART,
+                                       "Gestor de reserva"),
                     self.ContainerIcon(
                         ft.icons.NOTIFICATIONS, "Añadir Cliente"),
                     self.ContainerIcon(ft.icons.PIE_CHART, "Añadir elementos"),
