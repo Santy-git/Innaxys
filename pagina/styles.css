@@ -58,6 +58,7 @@ h2,
 h3 {
   font-family: var(--font-h);
   font-weight: bolder;
+  text-align: center;
 }
 
 h1 {
@@ -75,7 +76,6 @@ h3 {
 .barra {
   margin: 0;
   background-color: var(--bg-barra);
-  height: 10svh;
   padding: 0.5rem;
 }
 
@@ -317,7 +317,6 @@ nav {
   justify-content: space-between;
   padding: 5rem 5% 5rem 5%;
   background: var(--bg-section);
-  min-height: 100svh;
 }
 
 .containerSomos {
@@ -329,7 +328,8 @@ nav {
 }
 
 .containerSomos h2 {
-  font-family: Nunito;
+  font-family: "Nunito", sans-serif;
+  text-align: center;
 }
 
 .imagenSomos {
@@ -537,7 +537,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 5rem;
+  padding: 1rem 3rem;
 }
 
 /* copyright */
@@ -574,4 +574,36 @@ footer {
   right: 20px;
   cursor: pointer;
   display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Vamos a hacerlo responsive porque me la re banco */
+@media (max-width: 1100px) {
+  .containerButtons {
+    padding: 0;
+  }
+
+  .disclaimer {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 700px) {
+  p {
+    font-size: 0.85rem;
+  }
+
+  .texto p {
+    font-size: 1.4rem;
+  }
+  .contBotonTexto p {
+    display: none;
+  }
+
+  .imagenSomos {
+    width: auto;
+    margin: 0;
+    margin-top: 10rem;
+    max-width: 40%;
+  }
 }
