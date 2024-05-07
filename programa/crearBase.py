@@ -396,8 +396,10 @@ def gest_modificiar(codigo):
     cur = con.cursor()
     cur.execute("SELECT codHab FROM habitacion WHERE codHab = '"+codigo+"'")
     matris2 = cur.fetchall()
+    cur.execute("SELECT codCochera FROM cochera WHERE codCochera = '"+codigo+"'")
+    matris3 = cur.fetchall()
     con.close()
-    return matris2
+    return matris2 ,matris3
 
 def gest_modf_up(codigo,a,b,c,d):
     print(codigo)
@@ -407,3 +409,9 @@ def gest_modf_up(codigo,a,b,c,d):
     con.commit()
     con.close()
 
+def gest_modfCoch_up(cod_cliente,piso_coch):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("UPDATE cochera SET codCochera = ?,piso = ? WHERE codCochera = ?",(cod_cliente,piso_coch,cod_cliente))
+    con.commit()
+    con.close()
