@@ -155,10 +155,10 @@ class Plantilla:
         self.nombre.alignment = ft.alignment.center
 
         self.raiz.appbar = ft.AppBar(
-            title= ft.Container(ft.Image(src="programa\logo.png", width=25),
-                         width=100,
-                         padding=ft.padding.symmetric(horizontal=25)),
-            center_title= True,
+            title=ft.Container(ft.Image(src="logo.png", width=25),
+                               width=100,
+                               padding=ft.padding.symmetric(horizontal=25)),
+            center_title=True,
             bgcolor=colores[8],
             actions=[
                 ft.IconButton(ft.icons.LANGUAGE,
@@ -193,7 +193,8 @@ class Plantilla:
             label='Password',
             border='underline',
             color='white',
-            prefix_icon=ft.icons.LOCK,)
+            prefix_icon=ft.icons.LOCK,
+            password=True)
 
         self.Button: ElevatedButton = ElevatedButton(
             content=Text(
@@ -219,7 +220,7 @@ class Plantilla:
                         Container(
                             Column([
                                 ft.Image(
-                                    src= "programa\Isologo.png",
+                                    src="Isologo.png",
                                     width=ancho * .2/1.2,
                                     height=altura * .1/1.2,
                                 ),
@@ -228,12 +229,12 @@ class Plantilla:
                                     width=ancho * .2,
                                     size=altura * .03,
                                     text_align='center'),
-        
+
                                 Text(
                                     'Please login to use the plataform',
                                     width=ancho * .2,
                                     text_align='center',
-                                    size= 10
+                                    size=10
 
                                 ),
                                 Container(self.User, padding=ft.padding.symmetric(horizontal=ancho * .03)
@@ -428,7 +429,7 @@ class Plantilla:
         Container_menus.content = ft.Column(
             [inputs,
              botones],
-             
+
             expand=True,
         )
         Container_menus.update()
@@ -807,7 +808,7 @@ class Plantilla:
         Container_menus.update()
 # ....................elementos........................
 
-    def gest_elementos_modificar(self,lista,cod_cliente,hab,coch):
+    def gest_elementos_modificar(self, lista, cod_cliente, hab, coch):
         valores = gest_modificiar(cod_cliente)
         print(valores)
         piso = create_text_field("Piso")
@@ -818,7 +819,7 @@ class Plantilla:
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _: gest_modf_up(cod_cliente,piso.value,camamatr.value,camaind.value,costo.value))
+            on_click=lambda _: gest_modf_up(cod_cliente, piso.value, camamatr.value, camaind.value, costo.value))
         Container_menus.content = ft.Column(
             [piso,
              camamatr,
@@ -829,12 +830,13 @@ class Plantilla:
         )
         Container_menus.update()
 
-    def gest_elementos_eliminar_aux(self,lista,cod_cliente,hab,coch):
-        vuelta = gest_elementos_eliminar(lista,cod_cliente,hab,coch)
+    def gest_elementos_eliminar_aux(self, lista, cod_cliente, hab, coch):
+        vuelta = gest_elementos_eliminar(lista, cod_cliente, hab, coch)
         if vuelta:
             dlg = ft.AlertDialog(
                 title=ft.Text("Habitacion registrada")
             )
+
             def open_dlg(self):
                 self.raiz.dialog = dlg
                 dlg.open = True
@@ -843,7 +845,9 @@ class Plantilla:
             open_dlg(self)
 
 
-#Gestor de elementos 
+# Gestor de elementos
+
+
     def Menu6(self):
         fecha_sys = datetime.now().date()
         fecha_sys = fecha_sys.strftime("%x")
@@ -858,15 +862,15 @@ class Plantilla:
         eliminar = ft.CupertinoButton(
             content=ft.Text("eliminar", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            on_click=lambda _:self.gest_elementos_eliminar_aux(lista,cod_cliente.value,hab.value,coch.value))
+            on_click=lambda _: self.gest_elementos_eliminar_aux(lista, cod_cliente.value, hab.value, coch.value))
 
         modificar = ft.CupertinoButton(
             content=ft.Text("modificar", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            on_click=lambda _:self.gest_elementos_modificar(lista,cod_cliente.value,hab.value,coch.value))
-        
-        botones = ft.Row(controls=[eliminar,modificar])
-        elementos = ft.Row(controls=[hab,coch])
+            on_click=lambda _: self.gest_elementos_modificar(lista, cod_cliente.value, hab.value, coch.value))
+
+        botones = ft.Row(controls=[eliminar, modificar])
+        elementos = ft.Row(controls=[hab, coch])
         inputs = ft.Column(
             controls=[cod_cliente, elementos, botones])
 
