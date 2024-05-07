@@ -198,7 +198,8 @@ class Plantilla:
                 'SIGN IN',
                 color='white',
                 weight='w500',
-            ), width=ancho * .2,
+            ),
+            width=ancho * .2,
             bgcolor='black',
             on_click=self.logear)
 
@@ -231,7 +232,8 @@ class Plantilla:
                                           ),
                                 Container(self.Password, padding=ft.padding.symmetric(horizontal=ancho * .03)
                                           ),
-                                Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03)
+                                Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .05)
+
                                           )
                             ])
                         ),
@@ -393,7 +395,6 @@ class Plantilla:
 
 
 # Reservar habitacion
-
 
     def Menu1(self):
 
@@ -940,7 +941,6 @@ class Plantilla:
 
 # ...................calendario.......................
 
-
     def HighLight(self, e):
         if e.data == "true":
             e.control.bgcolor = "white10"
@@ -1040,7 +1040,6 @@ class Plantilla:
 
 
 # ................Selector de menus...........
-
 
     def Menu(self):
         global Container_menus
