@@ -75,8 +75,8 @@ h3 {
 .barra {
   margin: 0;
   background-color: var(--bg-barra);
-  min-height: 10svh;
-  padding: 1rem;
+  height: 10svh;
+  padding: 0.5rem;
 }
 
 nav {
@@ -89,7 +89,7 @@ nav {
 /* TODO: cambiar lo del filtro de brillo */
 .logo {
   display: flex;
-  height: 3rem;
+  height: 2.5rem;
   filter: brightness(100);
 }
 
@@ -100,8 +100,8 @@ nav {
 
 .toggle {
   position: relative;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.3rem;
+  height: auto;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -113,7 +113,7 @@ nav {
 
 .bars {
   width: 100%;
-  height: 4px;
+  height: 3.5px;
   background-color: rgb(255, 255, 255);
   border-radius: 4px;
 }
@@ -168,7 +168,6 @@ nav {
   overflow: hidden;
   align-items: center;
   justify-content: center;
-  gap: 4rem;
 }
 
 #idiomas {
@@ -217,6 +216,7 @@ nav {
 
 .imagenSuperpuesta img {
   width: 15rem;
+  height: auto;
   margin-bottom: 3rem;
 }
 
@@ -267,7 +267,7 @@ nav {
 }
 
 .contBotonTexto p {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
 }
 
 /* los botones */
@@ -276,8 +276,8 @@ nav {
 .beneficios,
 .compatibilidad,
 .contactanos {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
   background-color: var(--bg-btn);
 }
 
@@ -285,7 +285,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   border-radius: 50%;
   border: 2px solid black;
   transition: all 0.35s ease;
@@ -473,7 +473,7 @@ nav {
   padding: 5rem 5% 5rem 5%;
   background: linear-gradient(130deg, #2e5e40, #101f17);
   color: white;
-  height: 100vh;
+  height: auto;
 }
 
 .compra {
