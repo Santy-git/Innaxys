@@ -819,7 +819,7 @@ class Plantilla:
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _: gest_modf_up(cod_cliente, piso.value, camamatr.value, camaind.value, costo.value))
+            on_click=lambda _: gest_modf_up(cod_cliente,piso.value,camamatr.value,camaind.value,costo.value,hab,coch))
         Container_menus.content = ft.Column(
             [piso,
              camamatr,
@@ -853,7 +853,7 @@ class Plantilla:
         fecha_sys = fecha_sys.strftime("%x")
         fecha_sys = str(fecha_sys)
         lista = gest_elementos_consulta(fecha_sys)
-
+        print(lista)
         cod_cliente = create_text_field(
             "numero")
         hab = ft.Checkbox(label="habitacion", value=False)
