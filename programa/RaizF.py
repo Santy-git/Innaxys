@@ -797,8 +797,29 @@ class Plantilla:
         )
         Container_menus.update()
 # ....................elementos........................
-    def gest_elementos_modificar(self):
-        pass
+
+    def gest_elementos_modificar(self,lista,cod_cliente,hab,coch):
+        valores = gest_modificiar(cod_cliente)
+        print(valores)
+        piso = create_text_field("Piso")
+        camamatr = create_text_field("camas matrimoniales")
+        camaind = create_text_field("camas individuales")
+        costo = create_text_field("Costo")
+        subir_cli = ft.CupertinoButton(
+            content=ft.Text("Subir", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            border_radius=ft.border_radius.all(15),
+            on_click=lambda _: gest_modf_up(cod_cliente,piso.value,camamatr.value,camaind.value,costo.value))
+        Container_menus.content = ft.Column(
+            [piso,
+             camamatr,
+             camaind,
+             costo,
+             subir_cli],
+            expand=True
+        )
+        Container_menus.update()
+
     def gest_elementos_eliminar_aux(self,lista,cod_cliente,hab,coch):
         vuelta = gest_elementos_eliminar(lista,cod_cliente,hab,coch)
         if vuelta:
