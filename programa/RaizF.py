@@ -806,9 +806,50 @@ class Plantilla:
         )
         Container_menus.update()
 # ....................elementos........................
-# Gestor de elementos
 
+    def gest_elementos_modificar(self,lista,cod_cliente,hab,coch):
+        valores = gest_modificiar(cod_cliente)
+        print(valores)
+        piso = create_text_field("Piso")
+        camamatr = create_text_field("camas matrimoniales")
+        camaind = create_text_field("camas individuales")
+        costo = create_text_field("Costo")
+        subir_cli = ft.CupertinoButton(
+            content=ft.Text("Subir", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            border_radius=ft.border_radius.all(15),
+            on_click=lambda _: gest_modf_up(cod_cliente,piso.value,camamatr.value,camaind.value,costo.value))
+        Container_menus.content = ft.Column(
+            [piso,
+             camamatr,
+             camaind,
+             costo,
+             subir_cli],
+            expand=True
+        )
+        Container_menus.update()
+
+    def gest_elementos_eliminar_aux(self,lista,cod_cliente,hab,coch):
+        vuelta = gest_elementos_eliminar(lista,cod_cliente,hab,coch)
+        if vuelta:
+            dlg = ft.AlertDialog(
+                title=ft.Text("Habitacion registrada")
+            )
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+
+            open_dlg(self)
+
+
+#Gestor de elementos 
     def Menu6(self):
+        fecha_sys = datetime.now().date()
+        fecha_sys = fecha_sys.strftime("%x")
+        fecha_sys = str(fecha_sys)
+        lista = gest_elementos_consulta(fecha_sys)
+
         cod_cliente = create_text_field(
             "numero")
         hab = ft.Checkbox(label="habitacion", value=False)
@@ -816,13 +857,16 @@ class Plantilla:
 
         eliminar = ft.CupertinoButton(
             content=ft.Text("eliminar", color=ft.colors.BLACK),
-            bgcolor=colores[1])
+            bgcolor=colores[1],
+            on_click=lambda _:self.gest_elementos_eliminar_aux(lista,cod_cliente.value,hab.value,coch.value))
 
         modificar = ft.CupertinoButton(
             content=ft.Text("modificar", color=ft.colors.BLACK),
-            bgcolor=colores[1])
-        botones = ft.Row(controls=[eliminar, modificar])
-        elementos = ft.Row(controls=[hab, coch])
+            bgcolor=colores[1],
+            on_click=lambda _:self.gest_elementos_modificar(lista,cod_cliente.value,hab.value,coch.value))
+        
+        botones = ft.Row(controls=[eliminar,modificar])
+        elementos = ft.Row(controls=[hab,coch])
         inputs = ft.Column(
             controls=[cod_cliente, elementos, botones])
 

@@ -349,3 +349,44 @@ def calendario(ing,eng):
 
 
 
+#gestor de elementos
+
+def gest_elementos_consulta(date):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab from reshab where fechaEgreso > '"+date+"' )")
+    matris2 = cur.fetchall()
+    con.close()
+    return matris2
+
+def gest_elementos_eliminar(lista,cod_cliente,hab,coch):
+    bandera = 0
+    for i in range(len(lista)):
+        if int(lista[i][0])==int(cod_cliente):
+            bandera = 1
+    if bandera == 1:
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("DELETE FROM habitacion WHERE codHab = "+cod_cliente+"")
+        con.commit()
+        con.close()
+        return True
+    else:
+        return False
+    
+def gest_modificiar(codigo):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("SELECT codHab FROM habitacion WHERE codHab = '"+codigo+"'")
+    matris2 = cur.fetchall()
+    con.close()
+    return matris2
+
+def gest_modf_up(codigo,a,b,c,d):
+    print(codigo)
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("UPDATE habitacion SET codHab = ?,piso = ?, camaMatr = ?,camaInd = ?,costo = ? WHERE codHab = ?",(codigo,a,b,c,d,codigo))
+    con.commit()
+    con.close()
+
