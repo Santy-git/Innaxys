@@ -155,8 +155,10 @@ class Plantilla:
         self.nombre.alignment = ft.alignment.center
 
         self.raiz.appbar = ft.AppBar(
-            title=self.nombre,
-            center_title=True,
+            title= ft.Container(ft.Image(src="programa\logo.png", width=25),
+                         width=100,
+                         padding=ft.padding.symmetric(horizontal=25)),
+            center_title= True,
             bgcolor=colores[8],
             actions=[
                 ft.IconButton(ft.icons.LANGUAGE,
@@ -216,6 +218,11 @@ class Plantilla:
                     Container(
                         Container(
                             Column([
+                                ft.Image(
+                                    src= "programa\Isologo.png",
+                                    width=ancho * .2/1.2,
+                                    height=altura * .1/1.2,
+                                ),
                                 Text(
                                     'Sign in',
                                     width=ancho * .2,
@@ -226,18 +233,19 @@ class Plantilla:
                                     'Please login to use the plataform',
                                     width=ancho * .2,
                                     text_align='center',
+                                    size= 10
 
                                 ),
                                 Container(self.User, padding=ft.padding.symmetric(horizontal=ancho * .03)
                                           ),
                                 Container(self.Password, padding=ft.padding.symmetric(horizontal=ancho * .03)
                                           ),
-                                Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .04)
+                                Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .02)
 
                                           )
                             ])
                         ),
-                        padding=ft.padding.all(25),
+                        padding=ft.padding.only(25, 25, 25, 0),
                         width=ancho * .2,
                         height=altura * .5,
                         bgcolor='#22ffffff',
@@ -420,7 +428,8 @@ class Plantilla:
         Container_menus.content = ft.Column(
             [inputs,
              botones],
-            expand=True
+             
+            expand=True,
         )
         Container_menus.update()
 # ................................habitacion.......................
