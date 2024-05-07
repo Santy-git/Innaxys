@@ -803,13 +803,11 @@ class Plantilla:
         
         eliminar = ft.CupertinoButton(
             content=ft.Text("eliminar", color=ft.colors.BLACK),
-            bgcolor=colores[1],
-            on_click=lambda _: self.res_eliminar_aux(cod_cliente.value))
+            bgcolor=colores[1])
 
         modificar = ft.CupertinoButton(
             content=ft.Text("modificar", color=ft.colors.BLACK),
-            bgcolor=colores[1],
-            on_click=lambda _: self.res_actualizar(cod_cliente.value))
+            bgcolor=colores[1])
         botones = ft.Row(controls=[eliminar,modificar])
         elementos = ft.Row(controls=[hab,coch])
         inputs = ft.Column(
