@@ -695,7 +695,7 @@ class Plantilla:
                 self.raiz.update()
             open_dlg(self)
             Container_menus.clean()
-            self.Menu3()
+            self.Menu4()
 #Añadir cliente
     def Menu4(self):
         cod_cliente = create_text_field("Dni de cliente")
@@ -796,7 +796,30 @@ class Plantilla:
 # ....................elementos........................
 #Gestor de elementos 
     def Menu6(self):
-        pass
+        cod_cliente = create_text_field(
+            "numero")
+        hab = ft.Checkbox(label="habitacion", value=False)
+        coch = ft.Checkbox(label="cochera", value=False)
+        
+        eliminar = ft.CupertinoButton(
+            content=ft.Text("eliminar", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            on_click=lambda _: self.res_eliminar_aux(cod_cliente.value))
+
+        modificar = ft.CupertinoButton(
+            content=ft.Text("modificar", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            on_click=lambda _: self.res_actualizar(cod_cliente.value))
+        botones = ft.Row(controls=[eliminar,modificar])
+        elementos = ft.Row(controls=[hab,coch])
+        inputs = ft.Column(
+            controls=[cod_cliente,elementos, botones])
+        
+        Container_menus.content = ft.Column(
+            [inputs],
+        )
+        Container_menus.alignment = ft.alignment.center
+        Container_menus.update()
 #Calendario
     def Menu7(self):
         def Calendario_menu(mes, año):
