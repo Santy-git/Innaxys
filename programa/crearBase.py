@@ -415,3 +415,34 @@ def gest_modfCoch_up(cod_cliente,piso_coch):
     cur.execute("UPDATE cochera SET codCochera = ?,piso = ? WHERE codCochera = ?",(cod_cliente,piso_coch,cod_cliente))
     con.commit()
     con.close()
+
+
+
+def eliminar_emp_final(id):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
+    matris2 = cur.fetchall()
+    print(matris2)
+    cur.execute("DELETE FROM login WHERE codLog = ?",(matris2[0][0]))
+    cur.execute("DELETE FROM empleado WHERE dni_emp = ?",(id))
+    con.commit()
+    con.close()
+    return matris2
+
+#       cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
+
+def actualizar_emp_final(id,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
+    matris2 = cur.fetchall()
+    cur.execute("DELETE FROM login WHERE codLog = ?",(matris2[0][0]))
+    cur.execute("DELETE FROM empleado WHERE dni_emp = ?",(id))
+
+    cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
+    con.commit()
+    cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,codLog) VALUES (?,?,?,?,?,?)",(id,nombre_emp,email,telefono,puesto,usuario))
+    con.commit()
+    con.close()
+    return matris2

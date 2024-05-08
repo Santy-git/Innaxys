@@ -958,6 +958,54 @@ class Plantilla:
     def Menu8(self):
 
         # --------------Funciones--------------
+        def actualizar_emp(dni_emp, nombre_emp, email,telefono, puesto, usuario, contraseña, nivel):
+            valor = actualizar_emp_final(dni_emp, nombre_emp, email,telefono, puesto, usuario, contraseña, nivel)
+            print(valor)
+            if valor == []:
+                dlg = ft.AlertDialog(
+                    title=ft.Text("empleado no encontrado")
+                )
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+            else:
+                dlg = ft.AlertDialog(
+                    title=ft.Text("empleado eliminado")
+                )
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+            
+        def eliminar_emp(eliminar):
+            valor = eliminar_emp_final(eliminar)
+            print(valor)
+            if valor == []:
+                dlg = ft.AlertDialog(
+                    title=ft.Text("empleado no encontrado")
+                )
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+            else:
+                dlg = ft.AlertDialog(
+                    title=ft.Text("empleado eliminado")
+                )
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+                
         def reg_emp_aux(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel):
             validacion = reg_emp(dni_emp, nombre_emp, email,
                                  telefono, puesto, usuario, contraseña, nivel)
@@ -991,6 +1039,22 @@ class Plantilla:
                                            telefono.value, puesto.value, usuario.value, contraseña.value, nivel.value),
             padding=ft.padding.symmetric(horizontal=120, vertical=0)
         )
+        eliminar = ft.CupertinoButton(
+            content=ft.Text("eliminar", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            border_radius=ft.border_radius.all(25),
+            on_click=lambda _:eliminar_emp(dni_emp.value),
+            padding=ft.padding.symmetric(horizontal=120, vertical=0)
+        )
+        actualizar = ft.CupertinoButton(
+            content=ft.Text("actualizar", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            border_radius=ft.border_radius.all(25),
+            on_click=lambda _:actualizar_emp(dni_emp.value, nombre_emp.value, email.value,
+                                           telefono.value, puesto.value, usuario.value, contraseña.value, nivel.value),
+            padding=ft.padding.symmetric(horizontal=120, vertical=0)
+        )
+
         # ---------------como se muestran---------------------
         Container_menus.content = ft.Column(
             [dni_emp,
@@ -1001,7 +1065,7 @@ class Plantilla:
              usuario,
              contraseña,
              nivel,
-             registrar],
+             registrar,actualizar],
             expand=True
         )
 
