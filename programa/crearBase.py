@@ -349,3 +349,69 @@ def calendario(ing,eng):
 
 
 
+#gestor de elementos
+
+def gest_elementos_consulta(date):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab from reshab where fechaEgreso > '"+date+"' )")
+    matris2 = cur.fetchall()
+    cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera from resCoch where fechaEgreso > '"+date+"' )")
+    matris3 = cur.fetchall()
+    con.close()
+    return matris2,matris3
+
+def gest_elementos_eliminar(lista,cod_cliente,hab,coch):
+    bandera = 0
+    if hab:
+        for i in range(len(lista[0])):
+            if int(lista[0][i][0])==int(cod_cliente):
+                bandera = 1
+        if bandera == 1:
+            con = s.connect("GestionHotel.sqlite3")
+            cur = con.cursor()
+            cur.execute("DELETE FROM habitacion WHERE codHab = "+cod_cliente+"")
+            con.commit()
+            con.close()
+            return True
+        else:
+            return False
+    else:
+        for i in range(len(lista[1])):
+            if int(lista[1][i][0])==int(cod_cliente):
+                bandera = 1
+        if bandera == 1:
+            print("haol")
+            con = s.connect("GestionHotel.sqlite3")
+            cur = con.cursor()
+            cur.execute("DELETE FROM cochera WHERE codCochera = "+cod_cliente+"")
+            con.commit()
+            con.close()
+            return True
+        else:
+            return False
+        
+def gest_modificiar(codigo):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("SELECT codHab FROM habitacion WHERE codHab = '"+codigo+"'")
+    matris2 = cur.fetchall()
+    cur.execute("SELECT codCochera FROM cochera WHERE codCochera = '"+codigo+"'")
+    matris3 = cur.fetchall()
+    con.close()
+    return matris2 ,matris3
+
+def gest_modf_up(codigo,a,b,c,d):
+    print(codigo)
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("UPDATE habitacion SET codHab = ?,piso = ?, camaMatr = ?,camaInd = ?,costo = ? WHERE codHab = ?",(codigo,a,b,c,d,codigo))
+    con.commit()
+    con.close()
+
+def gest_modfCoch_up(cod_cliente,piso_coch):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("UPDATE cochera SET codCochera = ?,piso = ? WHERE codCochera = ?",(cod_cliente,piso_coch,cod_cliente))
+    con.commit()
+    con.close()
