@@ -173,100 +173,100 @@ class Plantilla:
     def login_menu(self):
         global Nivel
         global z
-        # z = (True, '5', '0')
-        # Nivel = 5
-        # self.Menu()
+        z = (True, '5', '0')
+        Nivel = 5
+        self.Menu()
         # esto es lo que saca el login sacar lo de arriba y eliminar el if
-        # if z[2] == 3:
+        if z[2] == 3:
 
-        self.User: TextField = TextField(
-            width=ancho * .2,
-            height=altura * .08,
-            label='User',
-            border='underline',
-            color='white',
-            prefix_icon=ft.icons.PERSON,)
-
-        self.Password: TextField = TextField(
-            width=ancho * .2,
-            height=altura * .08,
-            label='Password',
-            border='underline',
-            color='white',
-            prefix_icon=ft.icons.LOCK,
-            password=True)
-
-        self.Button: ElevatedButton = ElevatedButton(
-            content=Text(
-                'SIGN IN',
+            self.User: TextField = TextField(
+                width=ancho * .2,
+                height=altura * .08,
+                label='User',
+                border='underline',
                 color='white',
-                weight='w500',
-            ),
-            width=ancho * .2,
-            bgcolor='black',
-            on_click=self.logear)
+                prefix_icon=ft.icons.PERSON,)
 
-        self.contenedor_login = ft.Container(
-            Container(
-                Stack([
-                    Container(
-                        border_radius=ancho*.005,
-                        rotate=ft.Rotate(0.98*3.1),  # Degree
-                        width=ancho * .2,
-                        height=altura * .5,
-                        bgcolor='#22ffffff'
-                    ),
-                    Container(
+            self.Password: TextField = TextField(
+                width=ancho * .2,
+                height=altura * .08,
+                label='Password',
+                border='underline',
+                color='white',
+                prefix_icon=ft.icons.LOCK,
+                password=True)
+
+            self.Button: ElevatedButton = ElevatedButton(
+                content=Text(
+                    'SIGN IN',
+                    color='white',
+                    weight='w500',
+                ),
+                width=ancho * .2,
+                bgcolor='black',
+                on_click=self.logear)
+
+            self.contenedor_login = ft.Container(
+                Container(
+                    Stack([
                         Container(
-                            Column([
-                                ft.Image(
-                                    src="Isologo.png",
-                                    width=ancho * .2/1.2,
-                                    height=altura * .1/1.2,
-                                ),
-                                Text(
-                                    'Sign in',
-                                    width=ancho * .2,
-                                    size=altura * .03,
-                                    text_align='center'),
-
-                                Text(
-                                    'Please login to use the plataform',
-                                    width=ancho * .2,
-                                    text_align='center',
-                                    size=10
-
-                                ),
-                                Container(self.User, padding=ft.padding.symmetric(horizontal=ancho * .03)
-                                          ),
-                                Container(self.Password, padding=ft.padding.symmetric(horizontal=ancho * .03)
-                                          ),
-                                Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .02)
-
-                                          )
-                            ])
+                            border_radius=ancho*.005,
+                            rotate=ft.Rotate(0.98*3.1),  # Degree
+                            width=ancho * .2,
+                            height=altura * .5,
+                            bgcolor='#22ffffff'
                         ),
-                        padding=ft.padding.only(25, 25, 25, 0),
-                        width=ancho * .2,
-                        height=altura * .5,
-                        bgcolor='#22ffffff',
-                        border_radius=ancho*0.005,
-                    )
-                ]),
-                alignment=ft.alignment.center,
-                width=ancho * 0.3,
-                height=altura * 0.6,
-                bgcolor='grey900'
+                        Container(
+                            Container(
+                                Column([
+                                    ft.Image(
+                                        src="Isologo.png",
+                                        width=ancho * .2/1.2,
+                                        height=altura * .1/1.2,
+                                    ),
+                                    Text(
+                                        'Sign in',
+                                        width=ancho * .2,
+                                        size=altura * .03,
+                                        text_align='center'),
 
-            ),
-            width=(ancho/100)*30,
-            height=(altura/100)*70,
-            border_radius=ft.border_radius.all(ancho*.005),
-            margin=ft.margin.symmetric(
-                horizontal=ancho*0.33, vertical=altura*0.08)
-        )
+                                    Text(
+                                        'Please login to use the plataform',
+                                        width=ancho * .2,
+                                        text_align='center',
+                                        size=10
 
-        self.raiz.add(self.contenedor_login)
+                                    ),
+                                    Container(self.User, padding=ft.padding.symmetric(horizontal=ancho * .03)
+                                              ),
+                                    Container(self.Password, padding=ft.padding.symmetric(horizontal=ancho * .03)
+                                              ),
+                                    Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .02)
+
+                                              )
+                                ])
+                            ),
+                            padding=ft.padding.only(25, 25, 25, 0),
+                            width=ancho * .2,
+                            height=altura * .5,
+                            bgcolor='#22ffffff',
+                            border_radius=ancho*0.005,
+                        )
+                    ]),
+                    alignment=ft.alignment.center,
+                    width=ancho * 0.3,
+                    height=altura * 0.6,
+                    bgcolor='grey900'
+
+                ),
+                width=(ancho/100)*30,
+                height=(altura/100)*70,
+                border_radius=ft.border_radius.all(ancho*.005),
+                margin=ft.margin.symmetric(
+                    horizontal=ancho*0.33, vertical=altura*0.08)
+            )
+
+            self.raiz.add(self.contenedor_login)
 
 # ...................................Menus............................
 
@@ -406,6 +406,7 @@ class Plantilla:
 
 # Reservar habitacion
 
+
     def Menu1(self):
 
         cod_cliente = create_text_field(
@@ -432,6 +433,7 @@ class Plantilla:
 
             expand=True,
         )
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 # ................................habitacion.......................
 
@@ -552,7 +554,7 @@ class Plantilla:
              subir],
             expand=True
         )
-        Container_menus.alignment = ft.alignment.center
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 
     def act_reserva_Aux(self, cli, emp, fecha, desc, num):
@@ -688,7 +690,7 @@ class Plantilla:
         Container_menus.content = ft.Column(
             [inputs],
         )
-        Container_menus.alignment = ft.alignment.center
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 
 # ................................cochera.......................
@@ -729,7 +731,7 @@ class Plantilla:
              subir_cli],
             expand=True
         )
-        Container_menus.alignment = ft.alignment.center
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 # ......................cliente...............
 # Añadir elemento
@@ -740,7 +742,7 @@ class Plantilla:
         habitacionv = ft.CupertinoButton(
             text="habitacion", on_click=lambda _: self.habitacion(), bgcolor=colores[5])
         Container_menus.content = ft.Row([cocherav, habitacionv])
-        # Container_menus.padding = ft.padding.symmetric(horizontal=ancho*0.18)
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 
     def crear_coch(self, a):
@@ -805,9 +807,10 @@ class Plantilla:
              subir_cli],
             expand=True
         )
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 # ....................elementos........................
-    
+
     def gest_elementos_modificar(self, lista, cod_cliente, hab, coch):
         valores = gest_modificiar(cod_cliente)
         if valores[1] == []:
@@ -819,28 +822,32 @@ class Plantilla:
                 content=ft.Text("Subir", color=ft.colors.BLACK),
                 bgcolor=colores[1],
                 border_radius=ft.border_radius.all(15),
-                on_click=lambda _: gest_modf_up(cod_cliente,piso.value,camamatr.value,camaind.value,costo.value,hab,coch))
+                on_click=lambda _: gest_modf_up(cod_cliente, piso.value, camamatr.value, camaind.value, costo.value, hab, coch))
             Container_menus.content = ft.Column(
                 [piso,
-                camamatr,
-                camaind,
-                costo,
-                subir_cli],
+                 camamatr,
+                 camaind,
+                 costo,
+                 subir_cli],
                 expand=True
             )
+            Container_menus.padding = ft.padding.symmetric(
+                horizontal=ancho * 0.27)
             Container_menus.update()
         else:
             piso_coch = create_text_field("Piso")
             subir_coch = ft.CupertinoButton(
-            content=ft.Text("Subir", color=ft.colors.BLACK),
-            bgcolor=colores[1],
-            border_radius=ft.border_radius.all(15),
-            on_click=lambda _: gest_modfCoch_up(cod_cliente,piso_coch.value))
+                content=ft.Text("Subir", color=ft.colors.BLACK),
+                bgcolor=colores[1],
+                border_radius=ft.border_radius.all(15),
+                on_click=lambda _: gest_modfCoch_up(cod_cliente, piso_coch.value))
             Container_menus.content = ft.Column(
                 [piso_coch, subir_coch
-                ],
+                 ],
                 expand=True
             )
+            Container_menus.padding = ft.padding.symmetric(
+                horizontal=ancho * 0.27)
             Container_menus.update()
 
     def gest_elementos_eliminar_aux(self, lista, cod_cliente, hab, coch):
@@ -859,7 +866,6 @@ class Plantilla:
 
 
 # Gestor de elementos
-
 
     def Menu6(self):
         fecha_sys = datetime.now().date()
@@ -890,7 +896,7 @@ class Plantilla:
         Container_menus.content = ft.Column(
             [inputs],
         )
-        Container_menus.alignment = ft.alignment.center
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 # Calendario
 
@@ -942,16 +948,18 @@ class Plantilla:
         self.Ingreso_Res = create_text_field("Mes (mm)")
         self.Egreso_Res = create_text_field("Año(aaaa)")
         consultar = ft.TextButton(
-            text="Consultar",
+            text='Cosultar',
+            style=ft.ButtonStyle(color='black'),
             on_click=lambda _: Calendario_menu(
                 self.Ingreso_Res.value,
-                self.Egreso_Res.value)
+                self.Egreso_Res.value),
         )
 
         input_fecha = ft.Row([self.Ingreso_Res, self.Egreso_Res, consultar])
         elementos = ft.Column([input_fecha])
         Container_menus.content = elementos
-
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.075)
         Container_menus.update()
 
 # Añadir empleado
@@ -1068,13 +1076,14 @@ class Plantilla:
              registrar,actualizar],
             expand=True
         )
-
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 
 
 # ....................empleado.........................
 
 # ...................calendario.......................
+
 
     def HighLight(self, e):
         if e.data == "true":
@@ -1175,6 +1184,7 @@ class Plantilla:
 
 
 # ................Selector de menus...........
+
 
     def Menu(self):
         global Container_menus
