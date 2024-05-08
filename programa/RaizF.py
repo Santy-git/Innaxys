@@ -420,10 +420,13 @@ class Plantilla:
             max_lines=3)
 
         subir = ft.CupertinoButton(
-            content=ft.Text("subir", color=ft.colors.BLACK),
+            content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            on_click=lambda _: self.Reservar_Aux(cod_cliente.value, z[2], fecha_res, desc.value, 0))
-
+            border_radius=ft.border_radius.all(15),
+            on_click=lambda _: self.Reservar_Aux(
+                cod_cliente.value, z[2], fecha_res, desc.value, 0),
+            padding=ft.padding.only())
+        # subir.margin = ft.margin.only(left=ancho*1)
         inputs = ft.Column(
             controls=[cod_cliente, desc])
         botones = ft.Row(controls=[subir])
@@ -433,7 +436,8 @@ class Plantilla:
 
             expand=True,
         )
-        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.19, vertical=altura * 0.10)
         Container_menus.update()
 # ................................habitacion.......................
 
@@ -1126,7 +1130,10 @@ class Plantilla:
         global Container_menus
         self.raiz.clean()
         self.raiz.appbar = ft.AppBar(
-            title=self.nombre,
+
+            title=ft.Container(ft.Image(src="logo.png", width=25),
+                               width=120,
+                               padding=ft.padding.symmetric(horizontal=25)),
             center_title=True,
             bgcolor=colores[8],
             actions=[
