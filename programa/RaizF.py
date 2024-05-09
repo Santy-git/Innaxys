@@ -155,7 +155,9 @@ class Plantilla:
         self.nombre.alignment = ft.alignment.center
 
         self.raiz.appbar = ft.AppBar(
-            title=self.nombre,
+            title=ft.Container(ft.Image(src="logo.png", width=25),
+                               width=100,
+                               padding=ft.padding.symmetric(horizontal=25)),
             center_title=True,
             bgcolor=colores[8],
             actions=[
@@ -171,93 +173,100 @@ class Plantilla:
     def login_menu(self):
         global Nivel
         global z
-        # z = (True, '5', '0')
-        # Nivel = 5
-        # self.Menu()
+        z = (True, '5', '0')
+        Nivel = 5
+        self.Menu()
         # esto es lo que saca el login sacar lo de arriba y eliminar el if
-        # if z[2] == 3:
+        if z[2] == 3:
 
-        self.User: TextField = TextField(
-            width=ancho * .2,
-            height=altura * .08,
-            label='User',
-            border='underline',
-            color='white',
-            prefix_icon=ft.icons.PERSON,)
-
-        self.Password: TextField = TextField(
-            width=ancho * .2,
-            height=altura * .08,
-            label='Password',
-            border='underline',
-            color='white',
-            prefix_icon=ft.icons.LOCK,)
-
-        self.Button: ElevatedButton = ElevatedButton(
-            content=Text(
-                'SIGN IN',
+            self.User: TextField = TextField(
+                width=ancho * .2,
+                height=altura * .08,
+                label='User',
+                border='underline',
                 color='white',
-                weight='w500',
-            ),
-            width=ancho * .2,
-            bgcolor='black',
-            on_click=self.logear)
+                prefix_icon=ft.icons.PERSON,)
 
-        self.contenedor_login = ft.Container(
-            Container(
-                Stack([
-                    Container(
-                        border_radius=ancho*.005,
-                        rotate=ft.Rotate(0.98*3.1),  # Degree
-                        width=ancho * .2,
-                        height=altura * .5,
-                        bgcolor='#22ffffff'
-                    ),
-                    Container(
+            self.Password: TextField = TextField(
+                width=ancho * .2,
+                height=altura * .08,
+                label='Password',
+                border='underline',
+                color='white',
+                prefix_icon=ft.icons.LOCK,
+                password=True)
+
+            self.Button: ElevatedButton = ElevatedButton(
+                content=Text(
+                    'SIGN IN',
+                    color='white',
+                    weight='w500',
+                ),
+                width=ancho * .2,
+                bgcolor='black',
+                on_click=self.logear)
+
+            self.contenedor_login = ft.Container(
+                Container(
+                    Stack([
                         Container(
-                            Column([
-                                Text(
-                                    'Sign in',
-                                    width=ancho * .2,
-                                    size=altura * .03,
-                                    text_align='center'),
-        
-                                Text(
-                                    'Please login to use the plataform',
-                                    width=ancho * .2,
-                                    text_align='center',
-
-                                ),
-                                Container(self.User, padding=ft.padding.symmetric(horizontal=ancho * .03)
-                                          ),
-                                Container(self.Password, padding=ft.padding.symmetric(horizontal=ancho * .03)
-                                          ),
-                                Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .04)
-
-                                          )
-                            ])
+                            border_radius=ancho*.005,
+                            rotate=ft.Rotate(0.98*3.1),  # Degree
+                            width=ancho * .2,
+                            height=altura * .5,
+                            bgcolor='#22ffffff'
                         ),
-                        padding=ft.padding.all(25),
-                        width=ancho * .2,
-                        height=altura * .5,
-                        bgcolor='#22ffffff',
-                        border_radius=ancho*0.005,
-                    )
-                ]),
-                alignment=ft.alignment.center,
-                width=ancho * 0.3,
-                height=altura * 0.6,
-                bgcolor='grey900'
+                        Container(
+                            Container(
+                                Column([
+                                    ft.Image(
+                                        src="Isologo.png",
+                                        width=ancho * .2/1.2,
+                                        height=altura * .1/1.2,
+                                    ),
+                                    Text(
+                                        'Sign in',
+                                        width=ancho * .2,
+                                        size=altura * .03,
+                                        text_align='center'),
 
-            ),
-            width=(ancho/100)*30,
-            height=(altura/100)*70,
-            border_radius=ft.border_radius.all(ancho*.005),
-            margin=ft.margin.symmetric(
-                horizontal=ancho*0.33, vertical=altura*0.08)
-        )
+                                    Text(
+                                        'Please login to use the plataform',
+                                        width=ancho * .2,
+                                        text_align='center',
+                                        size=10
 
-        self.raiz.add(self.contenedor_login)
+                                    ),
+                                    Container(self.User, padding=ft.padding.symmetric(horizontal=ancho * .03)
+                                              ),
+                                    Container(self.Password, padding=ft.padding.symmetric(horizontal=ancho * .03)
+                                              ),
+                                    Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .02)
+
+                                              )
+                                ])
+                            ),
+                            padding=ft.padding.only(25, 25, 25, 0),
+                            width=ancho * .2,
+                            height=altura * .5,
+                            bgcolor='#22ffffff',
+                            border_radius=ancho*0.005,
+                        )
+                    ]),
+                    alignment=ft.alignment.center,
+                    width=ancho * 0.3,
+                    height=altura * 0.6,
+                    bgcolor='grey900'
+
+                ),
+                width=(ancho/100)*30,
+                height=(altura/100)*70,
+                border_radius=ft.border_radius.all(ancho*.005),
+                margin=ft.margin.symmetric(
+                    horizontal=ancho*0.33, vertical=altura*0.08)
+            )
+
+            self.raiz.add(self.contenedor_login)
 
 # ...................................Menus............................
 
@@ -397,6 +406,7 @@ class Plantilla:
 
 # Reservar habitacion
 
+
     def Menu1(self):
 
         cod_cliente = create_text_field(
@@ -410,18 +420,24 @@ class Plantilla:
             max_lines=3)
 
         subir = ft.CupertinoButton(
-            content=ft.Text("subir", color=ft.colors.BLACK),
+            content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            on_click=lambda _: self.Reservar_Aux(cod_cliente.value, z[2], fecha_res, desc.value, 0))
-
+            border_radius=ft.border_radius.all(15),
+            on_click=lambda _: self.Reservar_Aux(
+                cod_cliente.value, z[2], fecha_res, desc.value, 0),
+            padding=ft.padding.only())
+        # subir.margin = ft.margin.only(left=ancho*1)
         inputs = ft.Column(
             controls=[cod_cliente, desc])
         botones = ft.Row(controls=[subir])
         Container_menus.content = ft.Column(
             [inputs,
              botones],
-            expand=True
+
+            expand=True,
         )
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.19, vertical=altura * 0.10)
         Container_menus.update()
 # ................................habitacion.......................
 
@@ -542,7 +558,7 @@ class Plantilla:
              subir],
             expand=True
         )
-        Container_menus.alignment = ft.alignment.center
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 
     def act_reserva_Aux(self, cli, emp, fecha, desc, num):
@@ -678,7 +694,7 @@ class Plantilla:
         Container_menus.content = ft.Column(
             [inputs],
         )
-        Container_menus.alignment = ft.alignment.center
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 
 # ................................cochera.......................
@@ -719,7 +735,7 @@ class Plantilla:
              subir_cli],
             expand=True
         )
-        Container_menus.alignment = ft.alignment.center
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 # ......................cliente...............
 # Añadir elemento
@@ -730,7 +746,7 @@ class Plantilla:
         habitacionv = ft.CupertinoButton(
             text="habitacion", on_click=lambda _: self.habitacion(), bgcolor=colores[5])
         Container_menus.content = ft.Row([cocherav, habitacionv])
-        # Container_menus.padding = ft.padding.symmetric(horizontal=ancho*0.18)
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 
     def crear_coch(self, a):
@@ -795,16 +811,56 @@ class Plantilla:
              subir_cli],
             expand=True
         )
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 # ....................elementos........................
-    def gest_elementos_modificar(self):
-        pass
-    def gest_elementos_eliminar_aux(self,lista,cod_cliente,hab,coch):
-        vuelta = gest_elementos_eliminar(lista,cod_cliente,hab,coch)
+
+    def gest_elementos_modificar(self, lista, cod_cliente, hab, coch):
+        valores = gest_modificiar(cod_cliente)
+        if valores[1] == []:
+            piso = create_text_field("Piso")
+            camamatr = create_text_field("camas matrimoniales")
+            camaind = create_text_field("camas individuales")
+            costo = create_text_field("Costo")
+            subir_cli = ft.CupertinoButton(
+                content=ft.Text("Subir", color=ft.colors.BLACK),
+                bgcolor=colores[1],
+                border_radius=ft.border_radius.all(15),
+                on_click=lambda _: gest_modf_up(cod_cliente, piso.value, camamatr.value, camaind.value, costo.value, hab, coch))
+            Container_menus.content = ft.Column(
+                [piso,
+                 camamatr,
+                 camaind,
+                 costo,
+                 subir_cli],
+                expand=True
+            )
+            Container_menus.padding = ft.padding.symmetric(
+                horizontal=ancho * 0.27)
+            Container_menus.update()
+        else:
+            piso_coch = create_text_field("Piso")
+            subir_coch = ft.CupertinoButton(
+                content=ft.Text("Subir", color=ft.colors.BLACK),
+                bgcolor=colores[1],
+                border_radius=ft.border_radius.all(15),
+                on_click=lambda _: gest_modfCoch_up(cod_cliente, piso_coch.value))
+            Container_menus.content = ft.Column(
+                [piso_coch, subir_coch
+                 ],
+                expand=True
+            )
+            Container_menus.padding = ft.padding.symmetric(
+                horizontal=ancho * 0.27)
+            Container_menus.update()
+
+    def gest_elementos_eliminar_aux(self, lista, cod_cliente, hab, coch):
+        vuelta = gest_elementos_eliminar(lista, cod_cliente, hab, coch)
         if vuelta:
             dlg = ft.AlertDialog(
                 title=ft.Text("Habitacion registrada")
             )
+
             def open_dlg(self):
                 self.raiz.dialog = dlg
                 dlg.open = True
@@ -813,13 +869,14 @@ class Plantilla:
             open_dlg(self)
 
 
-#Gestor de elementos 
+# Gestor de elementos
+
     def Menu6(self):
         fecha_sys = datetime.now().date()
         fecha_sys = fecha_sys.strftime("%x")
         fecha_sys = str(fecha_sys)
         lista = gest_elementos_consulta(fecha_sys)
-
+        print(lista)
         cod_cliente = create_text_field(
             "numero")
         hab = ft.Checkbox(label="habitacion", value=False)
@@ -828,22 +885,22 @@ class Plantilla:
         eliminar = ft.CupertinoButton(
             content=ft.Text("eliminar", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            on_click=lambda _:self.gest_elementos_eliminar_aux(lista,cod_cliente.value,hab.value,coch.value))
+            on_click=lambda _: self.gest_elementos_eliminar_aux(lista, cod_cliente.value, hab.value, coch.value))
 
         modificar = ft.CupertinoButton(
             content=ft.Text("modificar", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            on_click=lambda _:self.gest_elementos_modificar(lista,cod_cliente.value,hab.value,coch.value))
-        
-        botones = ft.Row(controls=[eliminar,modificar])
-        elementos = ft.Row(controls=[hab,coch])
+            on_click=lambda _: self.gest_elementos_modificar(lista, cod_cliente.value, hab.value, coch.value))
+
+        botones = ft.Row(controls=[eliminar, modificar])
+        elementos = ft.Row(controls=[hab, coch])
         inputs = ft.Column(
             controls=[cod_cliente, elementos, botones])
 
         Container_menus.content = ft.Column(
             [inputs],
         )
-        Container_menus.alignment = ft.alignment.center
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 # Calendario
 
@@ -895,22 +952,72 @@ class Plantilla:
         self.Ingreso_Res = create_text_field("Mes (mm)")
         self.Egreso_Res = create_text_field("Año(aaaa)")
         consultar = ft.TextButton(
-            text="Consultar",
+            text='Cosultar',
+            style=ft.ButtonStyle(color='black'),
             on_click=lambda _: Calendario_menu(
                 self.Ingreso_Res.value,
-                self.Egreso_Res.value)
+                self.Egreso_Res.value),
         )
 
         input_fecha = ft.Row([self.Ingreso_Res, self.Egreso_Res, consultar])
         elementos = ft.Column([input_fecha])
         Container_menus.content = elementos
-
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.075)
         Container_menus.update()
 
 # Añadir empleado
     def Menu8(self):
 
         # --------------Funciones--------------
+        def actualizar_emp(dni_emp, nombre_emp, email,telefono, puesto, usuario, contraseña, nivel):
+            valor = actualizar_emp_final(dni_emp, nombre_emp, email,telefono, puesto, usuario, contraseña, nivel)
+            print(valor)
+            if valor == []:
+                dlg = ft.AlertDialog(
+                    title=ft.Text("empleado no encontrado")
+                )
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+            else:
+                dlg = ft.AlertDialog(
+                    title=ft.Text("empleado eliminado")
+                )
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+            
+        def eliminar_emp(eliminar):
+            valor = eliminar_emp_final(eliminar)
+            print(valor)
+            if valor == []:
+                dlg = ft.AlertDialog(
+                    title=ft.Text("empleado no encontrado")
+                )
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+            else:
+                dlg = ft.AlertDialog(
+                    title=ft.Text("empleado eliminado")
+                )
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+                
         def reg_emp_aux(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel):
             validacion = reg_emp(dni_emp, nombre_emp, email,
                                  telefono, puesto, usuario, contraseña, nivel)
@@ -944,6 +1051,22 @@ class Plantilla:
                                            telefono.value, puesto.value, usuario.value, contraseña.value, nivel.value),
             padding=ft.padding.symmetric(horizontal=120, vertical=0)
         )
+        eliminar = ft.CupertinoButton(
+            content=ft.Text("eliminar", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            border_radius=ft.border_radius.all(25),
+            on_click=lambda _:eliminar_emp(dni_emp.value),
+            padding=ft.padding.symmetric(horizontal=120, vertical=0)
+        )
+        actualizar = ft.CupertinoButton(
+            content=ft.Text("actualizar", color=ft.colors.BLACK),
+            bgcolor=colores[1],
+            border_radius=ft.border_radius.all(25),
+            on_click=lambda _:actualizar_emp(dni_emp.value, nombre_emp.value, email.value,
+                                           telefono.value, puesto.value, usuario.value, contraseña.value, nivel.value),
+            padding=ft.padding.symmetric(horizontal=120, vertical=0)
+        )
+
         # ---------------como se muestran---------------------
         Container_menus.content = ft.Column(
             [dni_emp,
@@ -954,16 +1077,17 @@ class Plantilla:
              usuario,
              contraseña,
              nivel,
-             registrar],
+             registrar,actualizar],
             expand=True
         )
-
+        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
         Container_menus.update()
 
 
 # ....................empleado.........................
 
 # ...................calendario.......................
+
 
     def HighLight(self, e):
         if e.data == "true":
@@ -1065,11 +1189,15 @@ class Plantilla:
 
 # ................Selector de menus...........
 
+
     def Menu(self):
         global Container_menus
         self.raiz.clean()
         self.raiz.appbar = ft.AppBar(
-            title=self.nombre,
+
+            title=ft.Container(ft.Image(src="logo.png", width=25),
+                               width=120,
+                               padding=ft.padding.symmetric(horizontal=25)),
             center_title=True,
             bgcolor=colores[8],
             actions=[
