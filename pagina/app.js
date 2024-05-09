@@ -30,10 +30,14 @@ const translations = {
     compatibilidadDesc:
       "Nuestro sistema es compatible con todos los dispositivos",
     
-    comentarioJesus: "gjjgjtyjijfoiew fweiofjweiofjewo",
-    comentarioMateo: "wjeijfoiew fweiofjweiofjewo",
-    comentarioLuna: "wwgefijfoiew fweiofjweiofjewo",
-    comentarioAbi: "wwhefjweiohrthrjweiofjewo",
+    nombreJesus: "Jesus Moreto",
+    comentarioJesus: "texto",
+    nombreMateo: "Mateo Silvestrin",
+    comentarioMateo: "texto",
+    nombreLuna: "Luna Graneros",
+    comentarioLuna: "texto",
+    nombreAbi: "Abigail Lopez",
+    comentarioAbi: "texto",
     
     contactanos: "Contactanos",
     compra: "Compra Innaxys",
