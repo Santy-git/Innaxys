@@ -29,6 +29,12 @@ const translations = {
     compatibilidad: "Compatibilidad",
     compatibilidadDesc:
       "Nuestro sistema es compatible con todos los dispositivos",
+    
+    comentarioJesus: "gjjgjtyjijfoiew fweiofjweiofjewo",
+    comentarioMateo: "wjeijfoiew fweiofjweiofjewo",
+    comentarioLuna: "wwgefijfoiew fweiofjweiofjewo",
+    comentarioAbi: "wwhefjweiohrthrjweiofjewo",
+    
     contactanos: "Contactanos",
     compra: "Compra Innaxys",
     solicitarInfo: "Solicitar más información",

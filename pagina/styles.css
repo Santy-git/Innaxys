@@ -465,6 +465,35 @@ nav {
   font-size: 3rem;
 }
 
+/* comentarios*/
+.containerComentarios {
+  background-color: var(--bg-section2);
+  padding: 5rem 5% 5rem 5%;}
+
+.DosImagenes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.imagenComentario {
+  display: flex;
+}
+
+.imagenComentario img {
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+}
+
+
 /* compra el software */
 .containerCompra {
   display: flex;
