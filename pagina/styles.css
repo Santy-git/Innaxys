@@ -468,7 +468,8 @@ nav {
 /* comentarios*/
 .containerComentarios {
   background-color: var(--bg-section2);
-  padding: 5rem 5% 5rem 5%;}
+  padding: 5rem 5% 5rem 5%;
+}
 
 .DosImagenes {
   display: grid;
@@ -481,7 +482,8 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 1rem;
+  margin-left: 2rem;
+  text-align: center;
 }
 
 .imagenComentario {
@@ -493,7 +495,6 @@ nav {
   width: 10rem;
   height: 10rem;
 }
-
 
 /* compra el software */
 .containerCompra {
@@ -608,6 +609,13 @@ footer {
 
 /* ------------------------------------------------------------------ */
 /* Vamos a hacerlo responsive porque me la re banco */
+@media (max-width: 1250px) {
+  .imagenComentario img {
+    width: 7rem;
+    height: 7rem;
+  }
+}
+
 @media (max-width: 1100px) {
   .containerButtons {
     padding: 0;
@@ -615,6 +623,49 @@ footer {
 
   .disclaimer {
     font-size: 0.65rem;
+  }
+
+  .imagenComentario img {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .DosImagenes {
+    gap: 5rem;
+  }
+
+  .info h2 {
+    font-size: 1.2rem;
+  }
+
+  .info p {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 850px) {
+  .sistemasCompatibles {
+    gap: 5rem;
+  }
+
+  .containerBeneficios {
+    gap: 3rem;
+  }
+
+  .imagenComentario img {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .DosImagenes {
+    gap: 4rem;
+  }
+  .info h2 {
+    font-size: 1rem;
+  }
+
+  .info p {
+    font-size: 0.6rem;
   }
 }
 
