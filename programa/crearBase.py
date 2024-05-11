@@ -102,7 +102,7 @@ def creardb():
 
 
     try:
-        sql = "INSERT INTO login (codLog, password, nivel) VALUES ('0','0',5)"
+        sql = "INSERT INTO login (codLog, password, nivel) VALUES ('0','0',8)"
         con.execute(sql)
         con.commit()
     except s.IntegrityError:
@@ -111,20 +111,18 @@ def creardb():
     con.close()
 
 def login(usuario, contraseña):
+    #cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
+    print("la que te trajo",usuario,contraseña)
     con = s.connect("GestionHotel.sqlite3")
-
     # creo el cursor
     cur = con.cursor()
-
-    cur.execute("SELECT * FROM login")
+    cur.execute("SELECT * FROM login WHERE codLog = '"+usuario+"'")
     result=cur.fetchall()
 
-    for i in range(len(result)):
-        if str(usuario) == str(result[i][0]) and str(contraseña) == str(result[i][1]):
-            con.close()
-            return True ,result[i][2],result[i][0]
-    
+    cur.execute("SELECT puesto FROM empleado where codLog = '"+usuario+"'")
+    result2 = cur.fetchall()
 
+    return result,result2
 #..........................menu 0.................................
 def Reservar(dni_cli,dni_emp,fecha,desc):
     val = 0
