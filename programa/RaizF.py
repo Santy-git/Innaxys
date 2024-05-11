@@ -94,7 +94,7 @@ def create_text_field(label_text, **kwargs):
     )
 
 
-niveles = {5: "Administrador", 3: "Empleado"}
+niveles = {8: "Administrador", 7: "Empleado"}
 creardb()
 # ....................................
 
@@ -130,15 +130,22 @@ class Plantilla:
     def logear(self, e):
         global Nivel
         global z
-        z = [self.User.value, self.Password.value]
-        z = login(z[0], z[1])
-        try:
-            if z[0]:
-                Nivel = int(z[1])
+        global laburo
+        z = login(self.User.value, self.Password.value)
+        
+        if z[0] != []:
+            if z[1] == []:
+                Nivel = int(z[0][0][2])
+                laburo = "Administrador"
+                self.Menu()
+                self.Menu1()
+            else:
+                Nivel = int(z[0][0][2])
+                laburo = z[1][0][0]
                 self.Menu()
                 self.Menu1()
 
-        except TypeError:
+        else:
             dlg = ft.AlertDialog(
                 title=ft.Text("Usuario Incorrecto"), on_dismiss=lambda e: print("Dialog dismissed!")
             )
@@ -173,100 +180,100 @@ class Plantilla:
     def login_menu(self):
         global Nivel
         global z
-        z = (True, '5', '0')
-        Nivel = 5
-        self.Menu()
+        #z = (True, '5', '0')
+        #Nivel = 5
+        #self.Menu()
         # esto es lo que saca el login sacar lo de arriba y eliminar el if
-        if z[2] == 3:
+        #if z[2] == 3:
 
-            self.User: TextField = TextField(
-                width=ancho * .2,
-                height=altura * .08,
-                label='User',
-                border='underline',
+        self.User: TextField = TextField(
+            width=ancho * .2,
+            height=altura * .08,
+            label='User',
+            border='underline',
+            color='white',
+            prefix_icon=ft.icons.PERSON,)
+
+        self.Password: TextField = TextField(
+            width=ancho * .2,
+            height=altura * .08,
+            label='Password',
+            border='underline',
+            color='white',
+            prefix_icon=ft.icons.LOCK,
+            password=True)
+
+        self.Button: ElevatedButton = ElevatedButton(
+            content=Text(
+                'SIGN IN',
                 color='white',
-                prefix_icon=ft.icons.PERSON,)
+                weight='w500',
+            ),
+            width=ancho * .2,
+            bgcolor='black',
+            on_click=self.logear)
 
-            self.Password: TextField = TextField(
-                width=ancho * .2,
-                height=altura * .08,
-                label='Password',
-                border='underline',
-                color='white',
-                prefix_icon=ft.icons.LOCK,
-                password=True)
-
-            self.Button: ElevatedButton = ElevatedButton(
-                content=Text(
-                    'SIGN IN',
-                    color='white',
-                    weight='w500',
-                ),
-                width=ancho * .2,
-                bgcolor='black',
-                on_click=self.logear)
-
-            self.contenedor_login = ft.Container(
-                Container(
-                    Stack([
+        self.contenedor_login = ft.Container(
+            Container(
+                Stack([
+                    Container(
+                        border_radius=ancho*.005,
+                        rotate=ft.Rotate(0.98*3.1),  # Degree
+                        width=ancho * .2,
+                        height=altura * .5,
+                        bgcolor='#22ffffff'
+                    ),
+                    Container(
                         Container(
-                            border_radius=ancho*.005,
-                            rotate=ft.Rotate(0.98*3.1),  # Degree
-                            width=ancho * .2,
-                            height=altura * .5,
-                            bgcolor='#22ffffff'
+                            Column([
+                                ft.Image(
+                                    src="Isologo.png",
+                                    width=ancho * .2/1.2,
+                                    height=altura * .1/1.2,
+                                ),
+                                Text(
+                                    'Sign in',
+                                    width=ancho * .2,
+                                    size=altura * .03,
+                                    text_align='center'),
+
+                                Text(
+                                    'Please login to use the plataform',
+                                    width=ancho * .2,
+                                    text_align='center',
+                                    size=10
+
+                                ),
+                                Container(self.User, padding=ft.padding.symmetric(horizontal=ancho * .03)
+                                            ),
+                                Container(self.Password, padding=ft.padding.symmetric(horizontal=ancho * .03)
+                                            ),
+                                Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .02)
+
+                                            )
+                            ])
                         ),
-                        Container(
-                            Container(
-                                Column([
-                                    ft.Image(
-                                        src="Isologo.png",
-                                        width=ancho * .2/1.2,
-                                        height=altura * .1/1.2,
-                                    ),
-                                    Text(
-                                        'Sign in',
-                                        width=ancho * .2,
-                                        size=altura * .03,
-                                        text_align='center'),
+                        padding=ft.padding.only(25, 25, 25, 0),
+                        width=ancho * .2,
+                        height=altura * .5,
+                        bgcolor='#22ffffff',
+                        border_radius=ancho*0.005,
+                    )
+                ]),
+                alignment=ft.alignment.center,
+                width=ancho * 0.3,
+                height=altura * 0.6,
+                bgcolor='grey900'
 
-                                    Text(
-                                        'Please login to use the plataform',
-                                        width=ancho * .2,
-                                        text_align='center',
-                                        size=10
+            ),
+            width=(ancho/100)*30,
+            height=(altura/100)*70,
+            border_radius=ft.border_radius.all(ancho*.005),
+            margin=ft.margin.symmetric(
+                horizontal=ancho*0.33, vertical=altura*0.08)
+        )
 
-                                    ),
-                                    Container(self.User, padding=ft.padding.symmetric(horizontal=ancho * .03)
-                                              ),
-                                    Container(self.Password, padding=ft.padding.symmetric(horizontal=ancho * .03)
-                                              ),
-                                    Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .02)
-
-                                              )
-                                ])
-                            ),
-                            padding=ft.padding.only(25, 25, 25, 0),
-                            width=ancho * .2,
-                            height=altura * .5,
-                            bgcolor='#22ffffff',
-                            border_radius=ancho*0.005,
-                        )
-                    ]),
-                    alignment=ft.alignment.center,
-                    width=ancho * 0.3,
-                    height=altura * 0.6,
-                    bgcolor='grey900'
-
-                ),
-                width=(ancho/100)*30,
-                height=(altura/100)*70,
-                border_radius=ft.border_radius.all(ancho*.005),
-                margin=ft.margin.symmetric(
-                    horizontal=ancho*0.33, vertical=altura*0.08)
-            )
-
-            self.raiz.add(self.contenedor_login)
+        self.raiz.add(self.contenedor_login)
 
 # ...................................Menus............................
 
@@ -1220,8 +1227,6 @@ class Plantilla:
 
 
 # ................Selector de menus...........
-
-
     def Menu(self):
         global Container_menus
         self.raiz.clean()
@@ -1242,8 +1247,8 @@ class Plantilla:
                 icon_content=ft.Icon(
                     ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
                 selected_icon_content=ft.Icon(
-                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
-                label_content=ft.Text("1", color=ft.colors.BLACK)
+                        ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                    label_content=ft.Text("1", color=ft.colors.BLACK)
             ),
             ft.NavigationRailDestination(
                 icon_content=ft.Icon(
@@ -1294,38 +1299,41 @@ class Plantilla:
                     ft.icons.BOOKMARK, color=ft.colors.BLACK),
                 label_content=ft.Text("8", color=ft.colors.BLACK)
             )]
+        
+        men=[
+            self.ContainerIcon(ft.icons.SEARCH, "Reservar Habitacion"),
+            self.ContainerIcon(
+                ft.icons.DASHBOARD_ROUNDED, "Reservar Cochera"),
+            self.ContainerIcon(ft.icons.BAR_CHART,
+                                "Gestor de reserva"),
+            self.ContainerIcon(
+                ft.icons.NOTIFICATIONS, "Añadir Cliente"),
+            self.ContainerIcon(ft.icons.PIE_CHART, "Añadir elementos"),
+            self.ContainerIcon(
+                ft.icons.PIE_CHART_OUTLINE, "Gestor de elementos"),
+            self.ContainerIcon(
+                ft.icons.PIE_CHART_OUTLINE, "Calendario"),
+            self.ContainerIcon(
+                ft.icons.PIE_CHART_OUTLINE, "Añadir Empleado")]
 
+        columna_lateral = Column(alignment=ft.alignment.center,
+            horizontal_alignment="center",
+            controls=[
+                self.UserData(laburo),
+                ft.Divider(height=2, color='white54'),
+            ])
         for i in range(Nivel):
+            print("a")
             formatsubmenus.append(formatsubmenusAux[i])
-
+            columna_lateral.controls.append(men[i])
+            
         Left_bar = ft.Container(
-
             width=200,
             height=580,
-            content=Column(
+            content=columna_lateral
+            )
 
-                alignment=ft.alignment.center,
-                horizontal_alignment="center",
-
-                controls=[
-                    self.UserData(niveles[5]),
-                    ft.Divider(height=2, color='white54'),
-                    self.ContainerIcon(ft.icons.SEARCH, "Reservar Habitacion"),
-                    self.ContainerIcon(
-                        ft.icons.DASHBOARD_ROUNDED, "Reservar Cochera"),
-                    self.ContainerIcon(ft.icons.BAR_CHART,
-                                       "Gestor de reserva"),
-                    self.ContainerIcon(
-                        ft.icons.NOTIFICATIONS, "Añadir Cliente"),
-                    self.ContainerIcon(ft.icons.PIE_CHART, "Añadir elementos"),
-                    self.ContainerIcon(
-                        ft.icons.PIE_CHART_OUTLINE, "Gestor de elementos"),
-                    self.ContainerIcon(
-                        ft.icons.PIE_CHART_OUTLINE, "Calendario"),
-                    self.ContainerIcon(
-                        ft.icons.PIE_CHART_OUTLINE, "Añadir Empleado"),
-                ]
-            ),)
+        
 
         penas = Container(
             width=200,
