@@ -424,8 +424,7 @@ class Plantilla:
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.Reservar_Aux(
-                cod_cliente.value, z[2], fecha_res, desc.value, 0),
-            padding=ft.padding.only())
+                cod_cliente.value, z[2], fecha_res, desc.value, 0))
         # subir.margin = ft.margin.only(left=ancho*1)
         inputs = ft.Column(
             controls=[cod_cliente, desc])
@@ -433,7 +432,6 @@ class Plantilla:
         Container_menus.content = ft.Column(
             [inputs,
              botones],
-
             expand=True,
         )
         Container_menus.padding = ft.padding.symmetric(
@@ -545,20 +543,23 @@ class Plantilla:
         cod_cliente = create_text_field("Dni de cliente")
         fecha_res = datetime.now().date()
         desc = create_text_field(
-            "Descripcion", multiline=True, max_length=200, max_lines=3)
+            "Descripción", multiline=True, max_length=200, max_lines=3)
         subir = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[2], fecha_res, desc.value, 0))
 
+        inputs = ft.Column(
+            controls=[cod_cliente, desc])
+        botones = ft.Row(controls=[subir])
         Container_menus.content = ft.Column(
-            [cod_cliente,
-             desc,
-             subir],
-            expand=True
+            [inputs,
+             botones],
+            expand=True,
         )
-        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.19, vertical=altura * 0.10)
         Container_menus.update()
 
     def act_reserva_Aux(self, cli, emp, fecha, desc, num):
@@ -580,6 +581,8 @@ class Plantilla:
             b = ft.Row([consultar, reservarboton, self.contador])
             c = ft.Row([self.Departamentos])
             Container_menus.content = ft.Column([a, b, c])
+            Container_menus.padding = ft.padding.symmetric(
+                horizontal=ancho * 0.2, vertical=altura * 0.10)
 
             Container_menus.update()
         if Verificar == 2:
@@ -620,6 +623,8 @@ class Plantilla:
                                         )]))
         Container_menus.clean()
         Container_menus.content = registro
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.1, vertical=altura * 0.10)
         Container_menus.update()
 # ...............eliminar reservas arriba....................
 
@@ -671,6 +676,8 @@ class Plantilla:
                                         )]))
         Container_menus.clean()
         Container_menus.content = registro
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.2, vertical=altura * 0.10)
         Container_menus.update()
 # ................actualizar reserva.......................
 
@@ -694,7 +701,8 @@ class Plantilla:
         Container_menus.content = ft.Column(
             [inputs],
         )
-        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.19, vertical=altura * 0.10)
         Container_menus.update()
 
 # ................................cochera.......................
@@ -727,15 +735,16 @@ class Plantilla:
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.Cli_Aux(cod_cliente.value, nom_cli.value, email_cli.value, desc_cli.value))
 
+        inputs = ft.Column(
+            controls=[cod_cliente, nom_cli, email_cli, desc_cli])
+        botones = ft.Row(controls=[subir_cli])
         Container_menus.content = ft.Column(
-            [cod_cliente,
-             nom_cli,
-             email_cli,
-             desc_cli,
-             subir_cli],
-            expand=True
+            [inputs,
+             botones],
+            expand=True,
         )
-        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.19, vertical=altura * 0.10)
         Container_menus.update()
 # ......................cliente...............
 # Añadir elemento
@@ -745,8 +754,11 @@ class Plantilla:
             text="cochera", on_click=lambda _: self.cochera(), bgcolor=colores[5])
         habitacionv = ft.CupertinoButton(
             text="habitacion", on_click=lambda _: self.habitacion(), bgcolor=colores[5])
-        Container_menus.content = ft.Row([cocherav, habitacionv])
-        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
+
+        botones = ft.Row(controls=[cocherav, habitacionv], spacing=40)
+        Container_menus.content = ft.Row([botones])
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.17, vertical=altura * 0.10)
         Container_menus.update()
 
     def crear_coch(self, a):
@@ -811,7 +823,8 @@ class Plantilla:
              subir_cli],
             expand=True
         )
-        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.19, vertical=altura * 0.10)
         Container_menus.update()
 # ....................elementos........................
 
@@ -836,7 +849,7 @@ class Plantilla:
                 expand=True
             )
             Container_menus.padding = ft.padding.symmetric(
-                horizontal=ancho * 0.27)
+                horizontal=ancho * 0.19, vertical=altura * 0.10)
             Container_menus.update()
         else:
             piso_coch = create_text_field("Piso")
@@ -851,7 +864,7 @@ class Plantilla:
                 expand=True
             )
             Container_menus.padding = ft.padding.symmetric(
-                horizontal=ancho * 0.27)
+                horizontal=ancho * 0.19, vertical=altura * 0.10)
             Container_menus.update()
 
     def gest_elementos_eliminar_aux(self, lista, cod_cliente, hab, coch):
@@ -900,7 +913,8 @@ class Plantilla:
         Container_menus.content = ft.Column(
             [inputs],
         )
-        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.19, vertical=altura * 0.10)
         Container_menus.update()
 # Calendario
 
@@ -952,8 +966,8 @@ class Plantilla:
         self.Ingreso_Res = create_text_field("Mes (mm)")
         self.Egreso_Res = create_text_field("Año(aaaa)")
         consultar = ft.TextButton(
-            text='Cosultar',
-            style=ft.ButtonStyle(color='black'),
+            text='Consultar',
+            style=ft.ButtonStyle(color='black', overlay_color=colores[5]),
             on_click=lambda _: Calendario_menu(
                 self.Ingreso_Res.value,
                 self.Egreso_Res.value),
@@ -963,15 +977,16 @@ class Plantilla:
         elementos = ft.Column([input_fecha])
         Container_menus.content = elementos
         Container_menus.padding = ft.padding.symmetric(
-            horizontal=ancho * 0.075)
+            horizontal=ancho * 0.025, vertical=altura * 0.10)
         Container_menus.update()
 
 # Añadir empleado
     def Menu8(self):
 
         # --------------Funciones--------------
-        def actualizar_emp(dni_emp, nombre_emp, email,telefono, puesto, usuario, contraseña, nivel):
-            valor = actualizar_emp_final(dni_emp, nombre_emp, email,telefono, puesto, usuario, contraseña, nivel)
+        def actualizar_emp(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel):
+            valor = actualizar_emp_final(
+                dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel)
             print(valor)
             if valor == []:
                 dlg = ft.AlertDialog(
@@ -993,7 +1008,7 @@ class Plantilla:
                     dlg.open = True
                     self.raiz.update()
                 open_dlg(self)
-            
+
         def eliminar_emp(eliminar):
             valor = eliminar_emp_final(eliminar)
             print(valor)
@@ -1017,7 +1032,7 @@ class Plantilla:
                     dlg.open = True
                     self.raiz.update()
                 open_dlg(self)
-                
+
         def reg_emp_aux(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel):
             validacion = reg_emp(dni_emp, nombre_emp, email,
                                  telefono, puesto, usuario, contraseña, nivel)
@@ -1043,8 +1058,10 @@ class Plantilla:
         usuario = create_text_field("Usuario")
         contraseña = create_text_field("Contraseña")
         nivel = create_text_field("Nivel de acceso")
+
+        # botones
         registrar = ft.CupertinoButton(
-            content=ft.Text("Registrar", color=ft.colors.BLACK),
+            content=ft.Text("Registrar ", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(25),
             on_click=lambda _: reg_emp_aux(dni_emp.value, nombre_emp.value, email.value,
@@ -1052,35 +1069,41 @@ class Plantilla:
             padding=ft.padding.symmetric(horizontal=120, vertical=0)
         )
         eliminar = ft.CupertinoButton(
-            content=ft.Text("eliminar", color=ft.colors.BLACK),
+            content=ft.Text("Eliminar   ", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(25),
-            on_click=lambda _:eliminar_emp(dni_emp.value),
+            on_click=lambda _: eliminar_emp(dni_emp.value),
             padding=ft.padding.symmetric(horizontal=120, vertical=0)
         )
         actualizar = ft.CupertinoButton(
-            content=ft.Text("actualizar", color=ft.colors.BLACK),
+            content=ft.Text("Actualizar", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(25),
-            on_click=lambda _:actualizar_emp(dni_emp.value, nombre_emp.value, email.value,
-                                           telefono.value, puesto.value, usuario.value, contraseña.value, nivel.value),
+            on_click=lambda _: actualizar_emp(dni_emp.value, nombre_emp.value, email.value,
+                                              telefono.value, puesto.value, usuario.value, contraseña.value, nivel.value),
             padding=ft.padding.symmetric(horizontal=120, vertical=0)
         )
 
         # ---------------como se muestran---------------------
-        Container_menus.content = ft.Column(
-            [dni_emp,
-             nombre_emp,
-             email,
-             telefono,
-             puesto,
-             usuario,
-             contraseña,
-             nivel,
-             registrar,actualizar],
-            expand=True
+
+        inputs = ft.Column(
+            controls=[dni_emp,
+                      nombre_emp,
+                      email,
+                      telefono,
+                      puesto,
+                      usuario,
+                      contraseña,
+                      nivel])
+        botones = ft.Column(controls=[registrar, actualizar, eliminar])
+        Container_menus.content = ft.Row(
+            [inputs,
+             botones],
+            expand=True,
+            spacing=50
         )
-        Container_menus.padding = ft.padding.symmetric(horizontal=ancho * 0.27)
+        Container_menus.padding = ft.padding.symmetric(
+            horizontal=ancho * 0.19, vertical=altura * 0.04)
         Container_menus.update()
 
 
