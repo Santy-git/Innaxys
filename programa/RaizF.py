@@ -132,7 +132,7 @@ class Plantilla:
         global z
         global laburo
         z = login(self.User.value, self.Password.value)
-        
+        print(z)
         if z[0] != []:
             if z[1] == []:
                 Nivel = int(z[0][0][2])
@@ -432,7 +432,7 @@ class Plantilla:
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.Reservar_Aux(
-                cod_cliente.value, z[2], fecha_res, desc.value, 0))
+                cod_cliente.value, z[0][0][0], fecha_res, desc.value, 0))
         inputs = ft.Column(
             controls=[cod_cliente, desc])
         botones = ft.Row(controls=[subir])
@@ -556,7 +556,7 @@ class Plantilla:
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[2], fecha_res, desc.value, 0))
+            on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[0][0][0], fecha_res, desc.value, 0))
 
         inputs = ft.Column(
             controls=[cod_cliente, desc])
@@ -1168,7 +1168,6 @@ class Plantilla:
                         width=42,
                         border_radius=8,
                         height=42,
-                        bgcolor='bluegrey900',
                         alignment=ft.alignment.center,
                         content=Text(
                             value=Nivel,
@@ -1333,12 +1332,10 @@ class Plantilla:
             content=columna_lateral
             )
 
-        
-
         penas = Container(
             width=200,
             height=1000,
-            bgcolor='black',
+            bgcolor=colores[8],
             border_radius=3,
             content=Left_bar
         )
