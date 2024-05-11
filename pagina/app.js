@@ -29,7 +29,7 @@ const translations = {
     compatibilidad: "Compatibilidad",
     compatibilidadDesc:
       "Nuestro sistema es compatible con todos los dispositivos",
-    
+
     nombreJesus: "Jesus Moreto",
     comentarioJesus: "texto",
     nombreMateo: "Mateo Silvestrin",
@@ -38,7 +38,7 @@ const translations = {
     comentarioLuna: "texto",
     nombreAbi: "Abigail Lopez",
     comentarioAbi: "texto",
-    
+
     contactanos: "Contactanos",
     compra: "Compra Innaxys",
     solicitarInfo: "Solicitar más información",
@@ -73,6 +73,16 @@ const translations = {
       "From booking to check-out, our software offers a perfect and personalized experience, leaving a lasting impression on your guests",
     compatibilidad: "Compatibility",
     compatibilidadDesc: "Our system is compatible with all devices",
+
+    nombreJesus: "Jesus Moreto",
+    comentarioJesus: "texto",
+    nombreMateo: "Mateo Silvestrin",
+    comentarioMateo: "texto",
+    nombreLuna: "Luna Graneros",
+    comentarioLuna: "texto",
+    nombreAbi: "Abigail Lopez",
+    comentarioAbi: "texto",
+
     contactanos: "Contact us",
     compra: "Buy Innaxys",
     solicitarInfo: "For more information",
@@ -100,7 +110,6 @@ document.getElementById("checkbox").addEventListener("change", function () {
 });
 
 function changeLanguage(lang) {
-  console.log(`Changing language to: ${lang}`);
   document.documentElement.lang = lang;
   const elements = document.querySelectorAll("[data-translate]");
   elements.forEach((element) => {
