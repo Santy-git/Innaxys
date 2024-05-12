@@ -1030,7 +1030,11 @@ class Plantilla:
 
     def Menu7(self):
         def Calendario_menu(mes, año):
-            # aca estan los elementos visuales
+            
+            if len(elementos.controls) > 2:
+                elementos.controls.pop()
+                elementos.update()
+                    
             cl = ft.Column(
                 width=Container_menus.width,
                 height=Container_menus.height-450,
@@ -1072,6 +1076,7 @@ class Plantilla:
             container_calendar = ft.Container(cl, border=ft.border.all(1))
             elementos.controls.append(container_calendar)
             Container_menus.update()
+
         titulo = ft.Text(value='Calendario',
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         self.Ingreso_Res = create_text_field("Mes (mm)")
