@@ -31,13 +31,16 @@ const translations = {
       "Nuestro sistema es compatible con todos los dispositivos",
 
     nombre1: "Jesus Moreto",
-    comentario1: "Excelente programa, muy bueno y bien optimizado. Es de mucha utilidad en mi hotel y todos mis empleados están conformes con el sistema.",
+    comentario1:
+      "Excelente programa, muy bueno y bien optimizado. Es de mucha utilidad en mi hotel y todos mis empleados están conformes con el sistema.",
     nombre2: "Mateo Silvestrin",
-    comentario2: "He estado usando este software durante algún tiempo y estoy satisfecho con sus características y funcionalidades.",
+    comentario2:
+      "He estado usando este software durante algún tiempo y estoy satisfecho con sus características y funcionalidades.",
     nombre3: "Luna Graneros",
     comentario3: "Buen programa, es increible lo intuitivo y facil de usar.",
     nombre4: "Abigail Lopez",
-    comentario4: "El programa es fácil de usar y gracias a eso puedo realizar reservas, gestionar inventarios y generar informes.",
+    comentario4:
+      "El programa es fácil de usar y gracias a eso puedo realizar reservas, gestionar inventarios y generar informes.",
 
     contactanos: "Contactanos",
     compra: "Compra Innaxys",
@@ -75,7 +78,8 @@ const translations = {
     compatibilidadDesc: "Our system is compatible with all devices",
 
     nombre1: "Jesus Moreto",
-    comentario1: "Excellent program, very good and well optimized, It is very utility in my hotel and all my employees they are conform with the system.",
+    comentario1:
+      "An excellent program, very good and well optimized, it is very useful in my hotel and all my employees are satisfied with the system.",
     nombre2: "Mateo Silvestrin",
     comentario2: "texto",
     nombre3: "Luna Graneros",
