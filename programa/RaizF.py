@@ -959,6 +959,7 @@ class Plantilla:
                     dlg.open = True
                     self.raiz.update()
                 open_dlg(self)
+                self.Menu6()
             else:
                 dlg = ft.AlertDialog(
                     title=ft.Text("Cochera Eliminada")
@@ -969,6 +970,7 @@ class Plantilla:
                     dlg.open = True
                     self.raiz.update()
                 open_dlg(self)
+                self.Menu6()
 
 
 # Gestor de elementos
