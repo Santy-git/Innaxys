@@ -413,6 +413,7 @@ class Plantilla:
 
 # Reservar habitacion
 
+
     def Menu1(self):
 
         cod_cliente = create_text_field(
@@ -898,7 +899,6 @@ class Plantilla:
 
 # Gestor de elementos
 
-
     def Menu6(self):
         fecha_sys = datetime.now().date()
         fecha_sys = fecha_sys.strftime("%x")
@@ -1126,6 +1126,7 @@ class Plantilla:
 
 # ...................calendario.......................
 
+
     def HighLight(self, e):
         if e.data == "true":
             e.control.bgcolor = "white10"
@@ -1225,6 +1226,7 @@ class Plantilla:
 
 # ................Selector de menus...........
 
+
     def Menu(self):
         global Container_menus
         self.raiz.clean()
@@ -1247,7 +1249,7 @@ class Plantilla:
                     ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
                 selected_icon_content=ft.Icon(
                     ft.icons.BOOKMARK, color=ft.colors.BLACK),
-                label_content=ft.Text("1", color=ft.colors.BLACK)
+                label_content=ft.Text("1", color=ft.colors.BLACK),
             ),
             ft.NavigationRailDestination(
                 icon_content=ft.Icon(
@@ -1300,20 +1302,21 @@ class Plantilla:
             )]
 
         men = [
-            self.ContainerIcon(ft.icons.SEARCH, "Reservar Habitacion"),
+            self.ContainerIcon(ft.icons.BED, "Reservar Habitacion"),
             self.ContainerIcon(
-                ft.icons.DASHBOARD_ROUNDED, "Reservar Cochera"),
-            self.ContainerIcon(ft.icons.BAR_CHART,
+                ft.icons.DIRECTIONS_CAR, "Reservar Cochera"),
+            self.ContainerIcon(ft.icons.MANAGE_SEARCH,
                                "Gestor de reserva"),
             self.ContainerIcon(
-                ft.icons.NOTIFICATIONS, "Añadir Cliente"),
-            self.ContainerIcon(ft.icons.PIE_CHART, "Añadir elementos"),
+                ft.icons.PERSON_ADD, "Añadir Cliente"),
+            self.ContainerIcon(ft.icons.DASHBOARD_CUSTOMIZE,
+                               "Añadir elementos"),
             self.ContainerIcon(
-                ft.icons.PIE_CHART_OUTLINE, "Gestor de elementos"),
+                ft.icons.DASHBOARD, "Gestor de elementos"),
             self.ContainerIcon(
-                ft.icons.PIE_CHART_OUTLINE, "Calendario"),
+                ft.icons.CALENDAR_MONTH_OUTLINED, "Calendario"),
             self.ContainerIcon(
-                ft.icons.PIE_CHART_OUTLINE, "Añadir Empleado")]
+                ft.icons.PERSON_ADD_ALT, "Añadir Empleado")]
 
         columna_lateral = Column(alignment=ft.alignment.center,
                                  horizontal_alignment="center",
