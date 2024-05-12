@@ -305,7 +305,6 @@ class Plantilla:
                              margin=ft.margin.all(10),
                              alignment=ft.alignment.center,
                              content=ft.Text(value=self.variable2[a][0], color='#000000')),
-
                 ft.Text(value="Piso: "+str(self.variable2[a][1]))
             ])
             infoH2 = ft.Row([
@@ -321,12 +320,12 @@ class Plantilla:
 
             infoH3 = ft.Row([
                 ft.Text(value="Costo: "+str(self.variable2[a][4])),
-                ft.TextButton(
-                    text="+", on_click=lambda _: self.pedidos(indice))
+                ft.IconButton(icon=ft.icons.ADD,icon_size=20,icon_color='#000000', on_click=lambda _: self.pedidos(indice))
             ])
             contener = ft.Container(width=60, height=60,
                                     border_radius=ft.border_radius.all(3), bgcolor=colores[9],
-                                    content=ft.Column([infoH, infoH2, infoH4, infoH3]))
+                                    content=ft.Column([infoH, infoH2, infoH4, infoH3]),
+                                    padding=ft.padding.symmetric(horizontal=30,vertical=30))
             return contener
 
         images = ft.GridView(
@@ -383,7 +382,7 @@ class Plantilla:
             Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
                 Ingreso_Res.value, Egreso_Res.value, num), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
-            reservarboton = ft.TextButton(text="El otro boton", on_click=lambda _: self.res_final(
+            reservarboton = ft.TextButton(text="Reservar", on_click=lambda _: self.res_final(
                 cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value, num
             ), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
             self.Departamentos = ft.Container(
