@@ -976,11 +976,6 @@ class Plantilla:
     def Menu6(self):
         titulo = ft.Text(value='Gestor de elementos',
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
-        fecha_sys = datetime.now().date()
-        fecha_sys = fecha_sys.strftime("%x")
-        fecha_sys = str(fecha_sys)
-        lista = gest_elementos_consulta(fecha_sys)
-        print(lista)
         cod_cliente = create_text_field(
             "Numero")
 
