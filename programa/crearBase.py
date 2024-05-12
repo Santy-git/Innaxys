@@ -282,19 +282,22 @@ def Cli_add(a,b,c,d):
     return True
 
 
-def crear_hab(piso,camamatr,camaind,costo):
+def crear_hab(piso,camamatr,camaind,costo,cantidad):
+    
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("INSERT INTO habitacion (piso,camaMatr,camaInd,costo) VALUES (?,?,?,?)",(piso,camamatr,camaind,costo))
-    con.commit()
+    for i in range(int(cantidad)):
+        cur.execute("INSERT INTO habitacion (piso,camaMatr,camaInd,costo) VALUES (?,?,?,?)",(piso,camamatr,camaind,costo))
+        con.commit()
     con.close()
     return True
 
-def crear_coch(piso):
+def crear_coch(piso,cantidad):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("INSERT INTO cochera (piso) VALUES (?)",(piso))
-    con.commit()
+    for i in range(int(cantidad)):
+        cur.execute("INSERT INTO cochera (piso) VALUES (?)",(piso))
+        con.commit()
     con.close()
     return True
 

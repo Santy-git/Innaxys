@@ -775,8 +775,8 @@ class Plantilla:
             horizontal=ancho * 0.17, vertical=altura * 0.10)
         Container_menus.update()
 
-    def crear_coch(self, a):
-        validacion = crear_coch(a)
+    def crear_coch(self, a, b):
+        validacion = crear_coch(a, b)
         if validacion:
             dlg = ft.AlertDialog(
                 title=ft.Text("Cochera registrada")
@@ -792,13 +792,14 @@ class Plantilla:
 
     def cochera(self):
         piso_coch = create_text_field("Piso")
+        cantidad = create_text_field("cantidad")
         subir_coch = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _: self.crear_coch(piso_coch.value))
+            on_click=lambda _: self.crear_coch(piso_coch.value,cantidad.value))
         inputs = ft.Column(
-            controls=[piso_coch])
+            controls=[piso_coch,cantidad])
         botones = ft.Row(controls=[subir_coch])
         Container_menus.content = ft.Column(
             [inputs, botones
@@ -809,8 +810,8 @@ class Plantilla:
             horizontal=ancho * 0.17, vertical=altura * 0.10)
         Container_menus.update()
 
-    def crear_habitacion(self, a, b, c, d):
-        validacion = crear_hab(a, b, c, d)
+    def crear_habitacion(self, a, b, c, d, e):
+        validacion = crear_hab(a, b, c, d, e)
         if validacion:
             dlg = ft.AlertDialog(
                 title=ft.Text("Habitacion registrada")
@@ -829,13 +830,14 @@ class Plantilla:
         camamatr = create_text_field("Camas matrimoniales")
         camaind = create_text_field("Camas individuales")
         costo = create_text_field("Costo")
+        cantidad = create_text_field("cantidad")
         subir_cli = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _: self.crear_habitacion(piso.value, camamatr.value, camaind.value, costo.value))
+            on_click=lambda _: self.crear_habitacion(piso.value, camamatr.value, camaind.value, costo.value,cantidad.value))
         inputs = ft.Column(
-            controls=[piso, camamatr, camaind, costo])
+            controls=[piso, camamatr, camaind, costo,cantidad])
         botones = ft.Row(controls=[subir_cli])
         Container_menus.content = ft.Column(
             [inputs, botones
