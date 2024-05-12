@@ -108,15 +108,14 @@ def creardb():
         pass
         
     con.close()
+#logear
 
 def login(usuario, contraseña):
-    #cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
-    con = s.connect("GestionHotel.sqlite3")
-    # creo el cursor
-    cur = con.cursor()
-    cur.execute("SELECT * FROM login WHERE codLog = '"+usuario+"'")
-    result=cur.fetchall()
 
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("SELECT * FROM login WHERE codLog = '"+usuario+"' and password = '"+contraseña+"'")
+    result=cur.fetchall()
     cur.execute("SELECT puesto FROM empleado where codLog = '"+usuario+"'")
     result2 = cur.fetchall()
 
@@ -305,27 +304,7 @@ def crear_coch(piso,cantidad):
 
 
 #..........................Menu 4.......................
-def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
 
-    i = 0
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-
-    cur.execute("SELECT codLog FROM login")
-    var = cur.fetchall()
-    for i in range(len(var)):
-        if var[i][0] == usuario:
-            i = 1
-    if i == 0:
-        cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
-        con.commit()
-        cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,codLog) VALUES (?,?,?,?,?,?)",(dni_emp,nombre_emp,email,telefono,puesto,usuario))
-        con.commit()
-        con.close()
-        return True
-    else:
-        con.close()
-        return False
     
 #.................calendario.................
 def calendario(ing,eng):
@@ -408,31 +387,80 @@ def gest_modfCoch_up(cod_cliente,piso_coch):
     
 
 
+# Añadir empleado
 
-def eliminar_emp_final(id):
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
-    matris2 = cur.fetchall()
-    cur.execute("DELETE FROM login WHERE codLog = ?",(matris2[0][0]))
-    cur.execute("DELETE FROM empleado WHERE dni_emp = ?",(id))
-    con.commit()
-    con.close()
-    return matris2
-
-#       cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
-
+#actualizar empleado
 def actualizar_emp_final(id,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
-    matris2 = cur.fetchall()
-    cur.execute("DELETE FROM login WHERE codLog = ?",(matris2[0][0]))
-    cur.execute("DELETE FROM empleado WHERE dni_emp = ?",(id))
+    try:
+        comprobador = int(id)
+        if nivel == '7' or nivel == '8':
+            con = s.connect("GestionHotel.sqlite3")
+            cur = con.cursor()
+            cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
+            matris2 = cur.fetchall()
+            cur.execute("DELETE FROM login WHERE codLog = '"+matris2[0][0]+"'")
+            cur.execute("DELETE FROM empleado WHERE dni_emp = ?",(id))
 
-    cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
-    con.commit()
-    cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,codLog) VALUES (?,?,?,?,?,?)",(id,nombre_emp,email,telefono,puesto,usuario))
-    con.commit()
-    con.close()
-    return matris2
+            cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
+            con.commit()
+            cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,codLog) VALUES (?,?,?,?,?,?)",(id,nombre_emp,email,telefono,puesto,usuario))
+            con.commit()
+            con.close()
+            return matris2
+        else:
+            matris2 = []
+            return matris2
+    except ValueError:
+        matris2 = []
+        return matris2
+
+#eliminar empleado
+def eliminar_emp_final(id):
+    try:
+        comprobador = int(id)
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
+        matris2 = cur.fetchall()
+        print(matris2)
+        if matris2 != []:
+            cur.execute("DELETE FROM login WHERE codLog = '"+matris2[0][0]+"'")
+            cur.execute("DELETE FROM empleado WHERE dni_emp = ?",(id))
+            con.commit()
+            con.close()
+            return matris2
+        else:
+            matris2 = []
+            return matris2
+    except ValueError:
+        matris2 = []
+        return matris2
+
+#registrar empleado
+def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
+    try:
+        comprobador = int(dni_emp)
+        if nivel == '7' or nivel == '8':
+            i = 0
+            con = s.connect("GestionHotel.sqlite3")
+            cur = con.cursor()
+
+            cur.execute("SELECT codLog FROM login")
+            var = cur.fetchall()
+            for i in range(len(var)):
+                if var[i][0] == usuario:
+                    i = 1
+            if i == 0:
+                cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
+                con.commit()
+                cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,codLog) VALUES (?,?,?,?,?,?)",(dni_emp,nombre_emp,email,telefono,puesto,usuario))
+                con.commit()
+                con.close()
+                return True
+            else:
+                con.close()
+                return False        
+    except ValueError:
+        return False
+
+    

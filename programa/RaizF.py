@@ -1094,7 +1094,7 @@ class Plantilla:
 
 # Añadir empleado
     def Menu8(self):
-
+        
         # --------------Funciones--------------
         def actualizar_emp(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel):
             valor = actualizar_emp_final(
@@ -1111,7 +1111,7 @@ class Plantilla:
                 open_dlg(self)
             else:
                 dlg = ft.AlertDialog(
-                    title=ft.Text("Empleado eliminado")
+                    title=ft.Text("Empleado actualizado")
                 )
 
                 def open_dlg(self):
@@ -1158,6 +1158,19 @@ class Plantilla:
                 open_dlg(self)
                 Container_menus.clean()
                 self.Menu8()
+            else:
+                dlg = ft.AlertDialog(
+                    title=ft.Text("Valores no validos")
+                )
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+                Container_menus.clean()
+                self.Menu8()
+
 
         # --------------Elementos-------------
         titulo = ft.Text(value='Añadir empleado',
