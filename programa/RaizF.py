@@ -320,12 +320,14 @@ class Plantilla:
 
             infoH3 = ft.Row([
                 ft.Text(value="Costo: "+str(self.variable2[a][4])),
-                ft.IconButton(icon=ft.icons.ADD,icon_size=20,icon_color='#000000', on_click=lambda _: self.pedidos(indice))
+                ft.IconButton(icon=ft.icons.ADD, icon_size=20,
+                              icon_color='#000000', on_click=lambda _: self.pedidos(indice))
             ])
             contener = ft.Container(width=60, height=60,
                                     border_radius=ft.border_radius.all(3), bgcolor=colores[9],
-                                    content=ft.Column([infoH, infoH2, infoH4, infoH3]),
-                                    padding=ft.padding.symmetric(horizontal=30,vertical=30))
+                                    content=ft.Column(
+                                        [infoH, infoH2, infoH4, infoH3]),
+                                    padding=ft.padding.symmetric(horizontal=30, vertical=30))
             return contener
 
         images = ft.GridView(
@@ -454,14 +456,27 @@ class Plantilla:
     def disponiblesCoch(self):
         global images
 
+        print(self.variable2)
+
         def valor(a):
             indice = a
+
+            # lo que está adentro de cuadrado
+            # --------------------------------------------
             infoH = ft.Row([
-                ft.Text(value=self.variable2[a][0]),
-                ft.Text(value=self.variable2[a][1])
+                ft.Container(width=50, height=50, bgcolor='#A3CD91',
+                             border_radius=ft.border_radius.all(6),
+                             margin=ft.margin.all(10),
+                             alignment=ft.alignment.center,
+                             content=ft.Text(value=self.variable2[a][0], color='#000000')),
+                ft.Text(value="Piso: "+str(self.variable2[a][1]))
             ])
+            # ---------------------------------------------
+
+            # el cuadrado
             contener = ft.Container(width=60, height=60, bgcolor=colores[9], content=ft.Column(
                 [infoH, ft.TextButton(text="+", on_click=lambda _: self.pedidosCoch(indice))]))
+
             return contener
 
         images = ft.GridView(
@@ -497,7 +512,7 @@ class Plantilla:
         for i in range(len(hres)):
             a.append(hres[i][0])
 
-        texto = "Numeros de las habitaciones: "+str(a)
+        texto = "Numeros de cocheras: "+str(a)
         Container_menus.content = ft.Container(content=ft.Row([ft.Text(
             value=texto), confirmar]), bgcolor='#3B6639', width=ancho*0.56, height=altura*0.1, border_radius=ft.border_radius.all(3))
         Container_menus.update()
@@ -961,7 +976,6 @@ class Plantilla:
                     dlg.open = True
                     self.raiz.update()
                 open_dlg(self)
-                self.Menu6()
             else:
                 dlg = ft.AlertDialog(
                     title=ft.Text("Cochera Eliminada")
@@ -972,7 +986,6 @@ class Plantilla:
                     dlg.open = True
                     self.raiz.update()
                 open_dlg(self)
-                self.Menu6()
 
 
 # Gestor de elementos
