@@ -414,6 +414,8 @@ class Plantilla:
 # Reservar habitacion
 
     def Menu1(self):
+        titulo = ft.Text(value='Reserva de Habitaciones',
+                         width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
 
         cod_cliente = create_text_field(
             "Dni del cliente")
@@ -432,7 +434,7 @@ class Plantilla:
             on_click=lambda _: self.Reservar_Aux(
                 cod_cliente.value, z[0][0][0], fecha_res, desc.value, 0))
         inputs = ft.Column(
-            controls=[cod_cliente, desc])
+            controls=[titulo, cod_cliente, desc])
         botones = ft.Row(controls=[subir])
         Container_menus.content = ft.Column(
             [inputs,
@@ -546,6 +548,8 @@ class Plantilla:
 # Reservar cochera
 
     def Menu2(self):
+        titulo = ft.Text(value='Reserva de Cocheras',
+                         width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         cod_cliente = create_text_field("Dni del cliente")
         fecha_res = datetime.now().date()
         desc = create_text_field(
@@ -557,7 +561,7 @@ class Plantilla:
             on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[0][0][0], fecha_res, desc.value, 0))
 
         inputs = ft.Column(
-            controls=[cod_cliente, desc])
+            controls=[titulo, cod_cliente, desc])
         botones = ft.Row(controls=[subir])
         Container_menus.content = ft.Column(
             [inputs,
@@ -689,6 +693,8 @@ class Plantilla:
 
 # Gestor de reserva
     def Menu3(self):
+        titulo = ft.Text(value='Gestor de reserva',
+                         width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         cod_cliente = create_text_field(
             "Dni del cliente")
         eliminar = ft.CupertinoButton(
@@ -705,7 +711,7 @@ class Plantilla:
 
         botones = ft.Row(controls=[eliminar, modificar])
         inputs = ft.Column(
-            controls=[cod_cliente, botones])
+            controls=[titulo, cod_cliente, botones])
 
         Container_menus.content = ft.Column(
             [inputs],
@@ -733,6 +739,8 @@ class Plantilla:
 # Añadir cliente
 
     def Menu4(self):
+        titulo = ft.Text(value='Añadir cliente',
+                         width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         cod_cliente = create_text_field("Dni del cliente")
         nom_cli = create_text_field("Nombre")
         email_cli = create_text_field("Email")
@@ -745,7 +753,7 @@ class Plantilla:
             on_click=lambda _: self.Cli_Aux(cod_cliente.value, nom_cli.value, email_cli.value, desc_cli.value))
 
         inputs = ft.Column(
-            controls=[cod_cliente, nom_cli, email_cli, desc_cli])
+            controls=[titulo, cod_cliente, nom_cli, email_cli, desc_cli])
         botones = ft.Row(controls=[subir_cli])
         Container_menus.content = ft.Column(
             [inputs,
@@ -759,13 +767,15 @@ class Plantilla:
 # Añadir elemento
 
     def Menu5(self):
+        titulo = ft.Text(value='Añadir elementos',
+                         width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         cocherav = ft.CupertinoButton(
             text="Cochera", on_click=lambda _: self.cochera(), bgcolor=colores[5])
         habitacionv = ft.CupertinoButton(
             text="Habitacion", on_click=lambda _: self.habitacion(), bgcolor=colores[5])
 
         botones = ft.Row(controls=[cocherav, habitacionv], spacing=40)
-        Container_menus.content = ft.Row([botones])
+        Container_menus.content = ft.Column([titulo, botones])
         Container_menus.padding = ft.padding.symmetric(
             horizontal=ancho * 0.17, vertical=altura * 0.10)
         Container_menus.update()
@@ -900,6 +910,8 @@ class Plantilla:
 
 
     def Menu6(self):
+        titulo = ft.Text(value='Gestor de elementos',
+                         width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         fecha_sys = datetime.now().date()
         fecha_sys = fecha_sys.strftime("%x")
         fecha_sys = str(fecha_sys)
@@ -923,7 +935,7 @@ class Plantilla:
         botones = ft.Row(controls=[eliminar, modificar])
         elementos = ft.Row(controls=[hab, coch])
         inputs = ft.Column(
-            controls=[cod_cliente, elementos, botones])
+            controls=[titulo, cod_cliente, elementos, botones])
 
         Container_menus.content = ft.Column(
             [inputs],
@@ -938,7 +950,7 @@ class Plantilla:
             # aca estan los elementos visuales
             cl = ft.Column(
                 width=Container_menus.width,
-                height=Container_menus.height-300,
+                height=Container_menus.height-450,
                 spacing=17,
                 scroll=ft.ScrollMode.ALWAYS,
                 on_scroll_interval=0,
@@ -977,7 +989,8 @@ class Plantilla:
             container_calendar = ft.Container(cl, border=ft.border.all(1))
             elementos.controls.append(container_calendar)
             Container_menus.update()
-
+        titulo = ft.Text(value='Calendario',
+                         width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         self.Ingreso_Res = create_text_field("Mes (mm)")
         self.Egreso_Res = create_text_field("Año (aaaa)")
         consultar = ft.TextButton(
@@ -988,8 +1001,9 @@ class Plantilla:
                 self.Egreso_Res.value),
         )
 
-        input_fecha = ft.Row([self.Ingreso_Res, self.Egreso_Res, consultar])
-        elementos = ft.Column([input_fecha])
+        input_fecha = ft.Row(
+            [self.Ingreso_Res, self.Egreso_Res, consultar])
+        elementos = ft.Column([titulo, input_fecha])
         Container_menus.content = elementos
         Container_menus.padding = ft.padding.symmetric(
             horizontal=ancho * 0.025, vertical=altura * 0.10)
@@ -1065,6 +1079,8 @@ class Plantilla:
                 self.Menu8()
 
         # --------------Elementos-------------
+        titulo = ft.Text(value='Añadir empleado',
+                         width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         dni_emp = create_text_field("Dni del empleado")
         nombre_emp = create_text_field("Nombre")
         email = create_text_field("Email")
@@ -1102,7 +1118,8 @@ class Plantilla:
         # ---------------como se muestran---------------------
 
         inputs = ft.Column(
-            controls=[dni_emp,
+            controls=[titulo,
+                      dni_emp,
                       nombre_emp,
                       email,
                       telefono,
@@ -1115,10 +1132,9 @@ class Plantilla:
             [inputs,
              botones],
             expand=True,
-            spacing=50
         )
         Container_menus.padding = ft.padding.symmetric(
-            horizontal=ancho * 0.19, vertical=altura * 0.08)
+            horizontal=ancho * 0.15, vertical=altura * 0.05)
         Container_menus.update()
 
 
