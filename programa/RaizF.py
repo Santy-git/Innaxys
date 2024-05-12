@@ -413,7 +413,6 @@ class Plantilla:
 
 # Reservar habitacion
 
-
     def Menu1(self):
 
         cod_cliente = create_text_field(
@@ -899,6 +898,7 @@ class Plantilla:
 
 # Gestor de elementos
 
+
     def Menu6(self):
         fecha_sys = datetime.now().date()
         fecha_sys = fecha_sys.strftime("%x")
@@ -1126,10 +1126,9 @@ class Plantilla:
 
 # ...................calendario.......................
 
-
     def HighLight(self, e):
         if e.data == "true":
-            e.control.bgcolor = "white10"
+            e.control.bgcolor = colores[5]
             e.control.update()
 
             # Ahora lo que hago aparte de cambiar el color de fondo, el texto
@@ -1225,7 +1224,6 @@ class Plantilla:
 
 
 # ................Selector de menus...........
-
 
     def Menu(self):
         global Container_menus
