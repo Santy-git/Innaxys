@@ -885,7 +885,7 @@ class Plantilla:
         vuelta = gest_elementos_eliminar(lista, cod_cliente, hab, coch)
         if vuelta:
             dlg = ft.AlertDialog(
-                title=ft.Text("Habitacion registrada")
+                title=ft.Text("Habitacion Eliminada")
             )
 
             def open_dlg(self):
