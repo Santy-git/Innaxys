@@ -124,7 +124,6 @@ class Plantilla:
             idioma = self.ingles
         else:
             idioma = self.español
-        print(idioma)
         codigo = 0
 
     def logear(self, e):
@@ -132,7 +131,6 @@ class Plantilla:
         global z
         global laburo
         z = login(self.User.value, self.Password.value)
-        print(z)
         if z[0] != []:
             if z[1] == []:
                 Nivel = int(z[0][0][2])
@@ -486,13 +484,10 @@ class Plantilla:
         self.disponiblesCoch()
 
     def resCoch_final(self, cli, emp, fecha, desc, hres, Ing, Eng, num):
-        print("num:", num)
         if num != 0:
-            print("hola")
             confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar_cochera_actualizar(
                 cli, emp, fecha, desc, hres, Ing, Eng, num))
         else:
-            print("hola2")
             confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completarCoch(
                 cli, emp, fecha, desc, hres, Ing, Eng))
         Container_menus.clean()
@@ -842,86 +837,157 @@ class Plantilla:
         Container_menus.update()
 # ....................elementos........................
 
-    def gest_elementos_modificar(self, lista, cod_cliente, hab, coch):
-        valores = gest_modificiar(cod_cliente)
-        if valores[1] == []:
-            piso = create_text_field("Piso")
-            camamatr = create_text_field("Camas matrimoniales")
-            camaind = create_text_field("Camas individuales")
-            costo = create_text_field("Costo")
-            subir_cli = ft.CupertinoButton(
-                content=ft.Text("Subir", color=ft.colors.BLACK),
-                bgcolor=colores[1],
-                border_radius=ft.border_radius.all(15),
-                on_click=lambda _: gest_modf_up(cod_cliente, piso.value, camamatr.value, camaind.value, costo.value, hab, coch))
-            Container_menus.content = ft.Column(
-                [piso,
-                 camamatr,
-                 camaind,
-                 costo,
-                 subir_cli],
-                expand=True
-            )
-            Container_menus.padding = ft.padding.symmetric(
-                horizontal=ancho * 0.19, vertical=altura * 0.10)
-            Container_menus.update()
-        else:
-            piso_coch = create_text_field("Piso")
-            subir_coch = ft.CupertinoButton(
-                content=ft.Text("Subir", color=ft.colors.BLACK),
-                bgcolor=colores[1],
-                border_radius=ft.border_radius.all(15),
-                on_click=lambda _: gest_modfCoch_up(cod_cliente, piso_coch.value))
-            Container_menus.content = ft.Column(
-                [piso_coch, subir_coch
-                 ],
-                expand=True
-            )
-            Container_menus.padding = ft.padding.symmetric(
-                horizontal=ancho * 0.19, vertical=altura * 0.10)
-            Container_menus.update()
+    def gest_elementos_result(cod_cliente,piso,camamatr,camaind,costo):
+        pass
 
-    def gest_elementos_eliminar_aux(self, lista, cod_cliente, hab, coch):
-        vuelta = gest_elementos_eliminar(lista, cod_cliente, hab, coch)
-        if vuelta:
+    def salida(self,codigo,a,b,c,d):
+        gest_modf_up(codigo,a,b,c,d)
+        dlg = ft.AlertDialog(
+            title=ft.Text("Habitacion actualizada")
+        )
+        def open_dlg(self):
+            self.raiz.dialog = dlg
+            dlg.open = True
+            self.raiz.update()
+        open_dlg(self)
+        Container_menus.clean()
+        self.Menu6()
+
+    def salidaCoch(self,cod_cliente, piso_coch):
+        gest_modfCoch_up(cod_cliente, piso_coch)
+        dlg = ft.AlertDialog(
+            title=ft.Text("Cochera actualizada")
+        )
+        def open_dlg(self):
+            self.raiz.dialog = dlg
+            dlg.open = True
+            self.raiz.update()
+        open_dlg(self)
+        Container_menus.clean()
+        self.Menu6()
+
+    def gest_elementos_modificar(self,cod_cliente,radio):
+        fecha_sys = datetime.now().date()
+        fecha_sys = fecha_sys.strftime("%x")
+        fecha_sys = str(fecha_sys)
+        lista = gest_modificiar(cod_cliente,radio)
+        print(lista)
+        if lista == []:
             dlg = ft.AlertDialog(
-                title=ft.Text("Habitacion Eliminada")
+                title=ft.Text("Elemento no encontrado")
             )
 
             def open_dlg(self):
                 self.raiz.dialog = dlg
                 dlg.open = True
                 self.raiz.update()
-
             open_dlg(self)
+        else:
+            if radio == '1':
+                piso = create_text_field("Piso")
+                camamatr = create_text_field("Camas matrimoniales")
+                camaind = create_text_field("Camas individuales")
+                costo = create_text_field("Costo")
+                subir_cli = ft.CupertinoButton(
+                    content=ft.Text("Subir", color=ft.colors.BLACK),
+                    bgcolor=colores[1],
+                    border_radius=ft.border_radius.all(15),
+                    on_click=lambda _: self.salida(cod_cliente, piso.value, camamatr.value, camaind.value, costo.value))
+                Container_menus.content = ft.Column(
+                    [piso,
+                    camamatr,
+                    camaind,
+                    costo,
+                    subir_cli],
+                    expand=True
+                )
+                Container_menus.padding = ft.padding.symmetric(
+                    horizontal=ancho * 0.19, vertical=altura * 0.10)
+                Container_menus.update()
+            else:
+                piso_coch = create_text_field("Piso")
+                subir_coch = ft.CupertinoButton(
+                    content=ft.Text("Subir", color=ft.colors.BLACK),
+                    bgcolor=colores[1],
+                    border_radius=ft.border_radius.all(15),
+                    on_click=lambda _: self.salidaCoch(cod_cliente, piso_coch.value))
+                Container_menus.content = ft.Column(
+                    [piso_coch, subir_coch
+                    ],
+                    expand=True
+                )
+                Container_menus.padding = ft.padding.symmetric(
+                    horizontal=ancho * 0.19, vertical=altura * 0.10)
+                Container_menus.update()
 
+    
 
-# Gestor de elementos
-
-
-    def Menu6(self):
+    def gest_elementos_eliminar_aux(self,cod_cliente, radio):
         fecha_sys = datetime.now().date()
         fecha_sys = fecha_sys.strftime("%x")
         fecha_sys = str(fecha_sys)
-        lista = gest_elementos_consulta(fecha_sys)
-        print(lista)
+        lista = gest_elementos_consulta(fecha_sys,radio)
+        if lista == []:
+            dlg = ft.AlertDialog(
+                title=ft.Text("Elemento no encontrado")
+            )
+
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
+        else:
+            vuelta = gest_elementos_eliminar(lista, cod_cliente, radio)
+            if vuelta:
+                dlg = ft.AlertDialog(
+                title=ft.Text("Habitacion Eliminada")
+                )
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+            else:
+                dlg = ft.AlertDialog(
+                title=ft.Text("Cochera Eliminada")
+                )
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+                    
+        
+
+
+# Gestor de elementos
+    def Menu6(self):
+
         cod_cliente = create_text_field(
             "Numero")
-        hab = ft.Checkbox(label="Habitacion", value=False)
-        coch = ft.Checkbox(label="Cochera", value=False)
+        
+        radio = ft.RadioGroup(
+            content=ft.Row(
+                [
+                    ft.Radio(value=1, label="Habitación"),
+                    ft.Radio(value=0, label="Cochera"),
+                ]
+            )
+        )
 
         eliminar = ft.CupertinoButton(
             content=ft.Text("Eliminar", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            on_click=lambda _: self.gest_elementos_eliminar_aux(lista, cod_cliente.value, hab.value, coch.value))
+            on_click=lambda _: self.gest_elementos_eliminar_aux(cod_cliente.value,radio.value))
 
         modificar = ft.CupertinoButton(
             content=ft.Text("Modificar", color=ft.colors.BLACK),
             bgcolor=colores[1],
-            on_click=lambda _: self.gest_elementos_modificar(lista, cod_cliente.value, hab.value, coch.value))
+            on_click=lambda _: self.gest_elementos_modificar(cod_cliente.value, radio.value))
 
         botones = ft.Row(controls=[eliminar, modificar])
-        elementos = ft.Row(controls=[hab, coch])
+        elementos = ft.Row(controls=[radio])
         inputs = ft.Column(
             controls=[cod_cliente, elementos, botones])
 
@@ -1002,7 +1068,6 @@ class Plantilla:
         def actualizar_emp(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel):
             valor = actualizar_emp_final(
                 dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel)
-            print(valor)
             if valor == []:
                 dlg = ft.AlertDialog(
                     title=ft.Text("Empleado no encontrado")
@@ -1026,7 +1091,6 @@ class Plantilla:
 
         def eliminar_emp(eliminar):
             valor = eliminar_emp_final(eliminar)
-            print(valor)
             if valor == []:
                 dlg = ft.AlertDialog(
                     title=ft.Text("Empleado no encontrado")
@@ -1127,6 +1191,7 @@ class Plantilla:
 # ...................calendario.......................
 
     def HighLight(self, e):
+
         if e.data == "true":
             e.control.bgcolor = "white10"
             e.control.update()
@@ -1226,6 +1291,7 @@ class Plantilla:
 # ................Selector de menus...........
 
     def Menu(self):
+        global formatsubmenus
         global Container_menus
         self.raiz.clean()
         self.raiz.appbar = ft.AppBar(
@@ -1322,7 +1388,7 @@ class Plantilla:
                                      ft.Divider(height=2, color='white54'),
                                  ])
         for i in range(Nivel):
-            print("a")
+
             formatsubmenus.append(formatsubmenusAux[i])
             columna_lateral.controls.append(men[i])
 

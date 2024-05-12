@@ -6,16 +6,16 @@ import flet as ft
 
 def main(page: ft.Page):
 
-    cl = ft.Column(
-        spacing=10,
-        height=200,
-        width=500,
-        scroll=ft.ScrollMode.ALWAYS,
-        on_scroll_interval=0,
+    cg = ft.RadioGroup(
+        content=ft.Column(
+            [
+                ft.Radio(value="red", label="Red"),
+                ft.Radio(value="green", label="Green"),
+                ft.Radio(value="blue", label="Blue"),
+            ]
+        )
     )
-    for i in range(0, 1000):
-        cl.controls.append(ft.Container(width=100,height=100,bgcolor='red',content=ft.Text(value=i)))
 
-    page.add(ft.Container(cl, border=ft.border.all(1)))
+    page.add(cg)
 
 ft.app(main)
