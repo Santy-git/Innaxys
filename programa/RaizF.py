@@ -160,36 +160,35 @@ class Plantilla:
         self.nombre = ft.Container(content=Text(
             self.idioma[1], color=colores[9],), bgcolor=colores[3], width=ancho*0.1, height=altura*0.05, border_radius=ft.border_radius.all(10))
         self.nombre.alignment = ft.alignment.center
-
         self.raiz.appbar = ft.AppBar(
-            title=ft.Container(ft.Image(src="logo.png", width=25),
-                               width=100,
+
+            title=ft.Container(ft.Image(src="logo.svg", width=100),
+                               width=125,
+                               height=55,
                                padding=ft.padding.symmetric(horizontal=25)),
             center_title=True,
             bgcolor=colores[8],
             actions=[
                 ft.IconButton(ft.icons.LANGUAGE,
-                              on_click=self.EnEs, icon_size=ancho*.03),
+                              on_click=self.EnEs, icon_size=35),
                 ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,
-                              on_click=self.OFF, icon_size=ancho*.03),
-            ]
-
-        )
+                              on_click=self.OFF, icon_size=35),
+            ])
         self.raiz.update()
 
     def login_menu(self):
         global Nivel
         global z
-        #z = (True, '5', '0')
-        #Nivel = 5
-        #self.Menu()
+        # z = (True, '5', '0')
+        # Nivel = 5
+        # self.Menu()
         # esto es lo que saca el login sacar lo de arriba y eliminar el if
-        #if z[2] == 3:
+        # if z[2] == 3:
 
         self.User: TextField = TextField(
             width=ancho * .2,
             height=altura * .08,
-            label='User',
+            label='Usuario',
             border='underline',
             color='white',
             prefix_icon=ft.icons.PERSON,)
@@ -197,7 +196,7 @@ class Plantilla:
         self.Password: TextField = TextField(
             width=ancho * .2,
             height=altura * .08,
-            label='Password',
+            label='Contraseña',
             border='underline',
             color='white',
             prefix_icon=ft.icons.LOCK,
@@ -205,7 +204,7 @@ class Plantilla:
 
         self.Button: ElevatedButton = ElevatedButton(
             content=Text(
-                'SIGN IN',
+                'Ingresar',
                 color='white',
                 weight='w500',
             ),
@@ -238,19 +237,19 @@ class Plantilla:
                                     text_align='center'),
 
                                 Text(
-                                    'Please login to use the plataform',
+                                    'Inicie sesión para usar el programa',
                                     width=ancho * .2,
                                     text_align='center',
                                     size=10
 
                                 ),
                                 Container(self.User, padding=ft.padding.symmetric(horizontal=ancho * .03)
-                                            ),
+                                          ),
                                 Container(self.Password, padding=ft.padding.symmetric(horizontal=ancho * .03)
-                                            ),
+                                          ),
                                 Container(self.Button, padding=ft.padding.symmetric(horizontal=ancho * .03), margin=ft.margin.only(top=altura * .02)
 
-                                            )
+                                          )
                             ])
                         ),
                         padding=ft.padding.only(25, 25, 25, 0),
@@ -293,7 +292,7 @@ class Plantilla:
             costo += hres[i][4]
         totalH = len(hres)
         self.contador.value = (
-            "Habitaciones: ", totalH, "total de espacios: ", totalesp, "costo total: ", costo)
+            "Habitaciones: ", totalH, "Total de espacios: ", totalesp, "Costo total: ", costo)
         self.contador.update()
         self.disponibles()
 
@@ -414,7 +413,6 @@ class Plantilla:
 
 # Reservar habitacion
 
-
     def Menu1(self):
 
         cod_cliente = create_text_field(
@@ -522,7 +520,7 @@ class Plantilla:
             Egreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.ConsultaCoch_aux(
                 Ingreso_Res.value, Egreso_Res.value, num), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
-            reservarboton = ft.TextButton(text="el otro boton", on_click=lambda _: self.resCoch_final(
+            reservarboton = ft.TextButton(text="El otro boton", on_click=lambda _: self.resCoch_final(
                 cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value, num
             ), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
             self.Departamentos = ft.Container(
@@ -579,7 +577,7 @@ class Plantilla:
             Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
                 Ingreso_Res.value, Egreso_Res.value, num))
-            reservarboton = ft.TextButton(text="el otro boton", on_click=lambda _: self.res_final(
+            reservarboton = ft.TextButton(text="El otro boton", on_click=lambda _: self.res_final(
                 cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value, num
             ))
             self.Departamentos = ft.Container(
@@ -615,10 +613,10 @@ class Plantilla:
         )
 
         for i in range(len(info)):
-            self.text = ft.Text(value="codigo de reserva:"+str(info[i][0])+"   codigo del empleado: "+str(
-                info[i][2])+"   fecha de reserva: "+str(info[i][3]),)
+            self.text = ft.Text(value="Codigo de reserva:"+str(info[i][0])+"   Codigo del empleado: "+str(
+                info[i][2])+"   Fecha de reserva: "+str(info[i][3]),)
             registro.controls.append(ft.Row(controls=[self.text]))
-        codigo = ft.TextField(label="codigo de reserva a modificar")
+        codigo = ft.TextField(label="Codigo de reserva a modificar")
         registro.controls.append(
             ft.Row(
                 controls=[codigo,
@@ -668,10 +666,10 @@ class Plantilla:
         )
 
         for i in range(len(info)):
-            self.text = ft.Text(value="codigo de reserva:"+str(info[i][0])+"   codigo del empleado: "+str(
-                info[i][2])+"   fecha de reserva: "+str(info[i][3]),)
+            self.text = ft.Text(value="Codigo de reserva:"+str(info[i][0])+"   Codigo del empleado: "+str(
+                info[i][2])+"   Fecha de reserva: "+str(info[i][3]),)
             registro.controls.append(ft.Row(controls=[self.text]))
-        codigo = ft.TextField(label="codigo de reserva a modificar")
+        codigo = ft.TextField(label="Codigo de reserva a modificar")
         registro.controls.append(
             ft.Row(
                 controls=[codigo,
@@ -900,6 +898,7 @@ class Plantilla:
 
 # Gestor de elementos
 
+
     def Menu6(self):
         fecha_sys = datetime.now().date()
         fecha_sys = fecha_sys.strftime("%x")
@@ -960,7 +959,7 @@ class Plantilla:
 
             for j in range(len(matris[1])):
                 dias = [ft.Text(bgcolor=colores[4],
-                                value="hab:"+str(matris[1][j][0])),]
+                                value="Hab:"+str(matris[1][j][0])),]
                 for o in range(Meses[mes]):
                     bandera = 0
                     for i in range(len(verificador)):
@@ -1127,7 +1126,6 @@ class Plantilla:
 
 # ...................calendario.......................
 
-
     def HighLight(self, e):
         if e.data == "true":
             e.control.bgcolor = "white10"
@@ -1226,13 +1224,15 @@ class Plantilla:
 
 
 # ................Selector de menus...........
+
     def Menu(self):
         global Container_menus
         self.raiz.clean()
         self.raiz.appbar = ft.AppBar(
 
-            title=ft.Container(ft.Image(src="logo.png", width=25),
-                               width=120,
+            title=ft.Container(ft.Image(src="logo.svg", width=100),
+                               width=125,
+                               height=55,
                                padding=ft.padding.symmetric(horizontal=25)),
             center_title=True,
             bgcolor=colores[8],
@@ -1246,8 +1246,8 @@ class Plantilla:
                 icon_content=ft.Icon(
                     ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
                 selected_icon_content=ft.Icon(
-                        ft.icons.BOOKMARK, color=ft.colors.BLACK),
-                    label_content=ft.Text("1", color=ft.colors.BLACK)
+                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                label_content=ft.Text("1", color=ft.colors.BLACK)
             ),
             ft.NavigationRailDestination(
                 icon_content=ft.Icon(
@@ -1298,13 +1298,13 @@ class Plantilla:
                     ft.icons.BOOKMARK, color=ft.colors.BLACK),
                 label_content=ft.Text("8", color=ft.colors.BLACK)
             )]
-        
-        men=[
+
+        men = [
             self.ContainerIcon(ft.icons.SEARCH, "Reservar Habitacion"),
             self.ContainerIcon(
                 ft.icons.DASHBOARD_ROUNDED, "Reservar Cochera"),
             self.ContainerIcon(ft.icons.BAR_CHART,
-                                "Gestor de reserva"),
+                               "Gestor de reserva"),
             self.ContainerIcon(
                 ft.icons.NOTIFICATIONS, "Añadir Cliente"),
             self.ContainerIcon(ft.icons.PIE_CHART, "Añadir elementos"),
@@ -1316,21 +1316,21 @@ class Plantilla:
                 ft.icons.PIE_CHART_OUTLINE, "Añadir Empleado")]
 
         columna_lateral = Column(alignment=ft.alignment.center,
-            horizontal_alignment="center",
-            controls=[
-                self.UserData(laburo),
-                ft.Divider(height=2, color='white54'),
-            ])
+                                 horizontal_alignment="center",
+                                 controls=[
+                                     self.UserData(laburo),
+                                     ft.Divider(height=2, color='white54'),
+                                 ])
         for i in range(Nivel):
             print("a")
             formatsubmenus.append(formatsubmenusAux[i])
             columna_lateral.controls.append(men[i])
-            
+
         Left_bar = ft.Container(
             width=200,
             height=580,
             content=columna_lateral
-            )
+        )
 
         penas = Container(
             width=200,
