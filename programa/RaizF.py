@@ -349,7 +349,18 @@ class Plantilla:
         global hres
         hres = []
         self.variable2 = Consulta(Ingreso_Res, Egreso_Res, num)
-        self.disponibles()
+        if self.variable2 == 2:
+            dlg = ft.AlertDialog(
+                title=ft.Text("Cliente no encontrado")
+            )
+
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
+        else:
+            self.disponibles()
 
     def res_final(self, cli, emp, fecha, desc, hres, Ing, Eng, num):
         if num != 0:
@@ -822,6 +833,7 @@ class Plantilla:
     def cochera(self):
         piso_coch = create_text_field("Piso")
         cantidad = create_text_field("cantidad")
+        cantidad.value = 1
         subir_coch = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
@@ -871,6 +883,7 @@ class Plantilla:
         camaind = create_text_field("Camas individuales")
         costo = create_text_field("Costo")
         cantidad = create_text_field("cantidad")
+        cantidad.value = 1
         subir_cli = ft.CupertinoButton(
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],

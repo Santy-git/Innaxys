@@ -1,6 +1,18 @@
 import sqlite3 as s
 # una funcion que me crea la base de datos
 
+Meses = {'01': 31,
+         '02': 29,
+         '03': 31,
+         '04': 30,
+         '05': 31,
+         '06': 30,
+         '07': 31,
+         '08': 31,
+         '09': 30,
+         '10': 31,
+         '11': 30,
+         '12': 31}
 
 def creardb():
     tablas = [
@@ -143,21 +155,42 @@ def Reservar(dni_cli,dni_emp,fecha,desc):
 
 
 
-def Consulta(ing,eng,num):
-    if num == 0:
-        con = s.connect("GestionHotel.sqlite3")
-        cur = con.cursor()
-        cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
-        z = cur.fetchall()
-        con.close()
-        return z
+def Consulta(ing,eng,num):   
+    lista = []
+    bandera = 0
+    comprobante = ing.replace("-","")
+    comprobante2 = eng.replace("-","")
+    if len(comprobante) == 8:
+        if len(comprobante2) == 8:
+            
+            if int(comprobante) < int(comprobante2):
+                lista.append(eng[0:4])
+                lista.append(eng[5:7])
+                lista.append(eng[8:10])
+                lista.append(ing[0:4])
+                lista.append(ing[5:7])
+                lista.append(ing[8:10])
+                print(Meses[lista[1]], lista[2])
+                if Meses[lista[1]] >= int(lista[2]):
+                    if Meses[lista[4]] >= int(lista[5]):
+                        bandera = 1
+    if bandera == 1:
+        if num == 0:
+            con = s.connect("GestionHotel.sqlite3")
+            cur = con.cursor()
+            cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+            z = cur.fetchall()
+            con.close()
+            return z
+        else:
+            con = s.connect("GestionHotel.sqlite3")
+            cur = con.cursor()
+            cur.execute("SELECT * FROM habitacion WHERE codHab in (SELECT codHab FROM resHab WHERE codReserva = "+num+") or codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+            z = cur.fetchall()
+            con.close()
+            return z
     else:
-        con = s.connect("GestionHotel.sqlite3")
-        cur = con.cursor()
-        cur.execute("SELECT * FROM habitacion WHERE codHab in (SELECT codHab FROM resHab WHERE codReserva = "+num+") or codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
-        z = cur.fetchall()
-        con.close()
-        return z
+        return 2
 
 
 def completar(cli,emp,fecha,desc,hres,ing,eng):
