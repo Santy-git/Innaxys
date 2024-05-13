@@ -375,20 +375,21 @@ class Plantilla:
         d = 0
         e = 0
         for i in range(len(hres)):
-            a += hres[i][0]
+            a += 1
             c += hres[i][2]
             d += hres[i][3]
             e += hres[i][4]
 
-        hab = ft.Text(value=f"Habitaciones: {a}")
-        matr = ft.Text(value=f"Matrimoniales: {c}")
-        indiv = ft.Text(value=f"Individuales: {d}")
-        total = ft.Text(value=f"Costo total: {e}")
+        hab = ft.Text(value=f"Habitaciones: {a}", color='black', size=17)
+        matr = ft.Text(value=f"Matrimoniales: {c}", color='black', size=17)
+        indiv = ft.Text(value=f"Individuales: {d}", color='black', size=17)
+        total = ft.Text(value=f"Costo total: ${e}", color='black', size=17)
 
         info = ft.Column(controls=[hab, matr, indiv, total, confirmar])
         Container_menus.content = ft.Container(
-            content=info, bgcolor=colores[4], width=250, height=250, alignment=ft.alignment.center, border_radius=5, padding=ft.padding.symmetric(vertical=50))
+            content=info, bgcolor=colores[4], width=300, height=300, alignment=ft.alignment.center, border_radius=5, padding=ft.padding.symmetric(vertical=60))
         Container_menus.alignment = ft.alignment.center
+        Container_menus.clean()
         Container_menus.update()
 
     def Reservar_Aux(self, cli, emp, fecha, desc, num):
@@ -427,6 +428,7 @@ class Plantilla:
 
 
 # Reservar habitacion
+
 
     def Menu1(self):
         titulo = ft.Text(value='Reserva de Habitaciones',
@@ -523,17 +525,17 @@ class Plantilla:
             confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completarCoch(
                 cli, emp, fecha, desc, hres, Ing, Eng), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
         Container_menus.clean()
-        a = []
+        a = 0
+
         for i in range(len(hres)):
-            a.append(hres[i][0])
+            a += 1
 
-        texto = "Numeros de cocheras: "+str(a)
-        Container_menus.content = ft.Container(content=ft.Row([ft.Text(
-            value=texto), confirmar]), bgcolor='#3B6639', width=ancho*0.56, height=altura*0.1, border_radius=ft.border_radius.all(3))
-        Container_menus.update()
+        coch = ft.Text(value=f"Cocheras: {a}", color='black', size=17)
+        info = ft.Column(controls=[coch, confirmar])
 
-        confirmar = ft.TextButton(text="Confirmar", on_click=lambda _: completarCoch(
-            cli, emp, fecha, desc, hres, Ing, Eng), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
+        Container_menus.content = ft.Container(
+            content=info, bgcolor=colores[4], width=250, height=250, alignment=ft.alignment.center, border_radius=5, padding=ft.padding.symmetric(vertical=90))
+        Container_menus.alignment = ft.alignment.center
         Container_menus.clean()
         Container_menus.update()
 
@@ -875,7 +877,6 @@ class Plantilla:
                 dlg.open = True
                 self.raiz.update()
             open_dlg(self)
-        
 
     def habitacion(self):
         piso = create_text_field("Piso")
@@ -988,13 +989,14 @@ class Plantilla:
         fecha_sys = datetime.now().date()
         fecha_sys = fecha_sys.strftime("%x")
         fecha_sys = str(fecha_sys)
-  
-        lista = gest_elementos_consulta(fecha_sys, cod_cliente,radio)
+
+        lista = gest_elementos_consulta(fecha_sys, cod_cliente, radio)
 
         if lista == []:
             dlg = ft.AlertDialog(
                 title=ft.Text("Elemento no encontrado")
             )
+
             def open_dlg(self):
                 self.raiz.dialog = dlg
                 dlg.open = True
@@ -1026,7 +1028,6 @@ class Plantilla:
 
 
 # Gestor de elementos
-
 
     def Menu6(self):
         titulo = ft.Text(value='Gestor de elementos',
@@ -1279,6 +1280,7 @@ class Plantilla:
 
 # ...................calendario.......................
 
+
     def HighLight(self, e):
 
         if e.data == "true":
@@ -1378,6 +1380,7 @@ class Plantilla:
 
 
 # ................Selector de menus...........
+
 
     def Menu(self):
         global formatsubmenus
