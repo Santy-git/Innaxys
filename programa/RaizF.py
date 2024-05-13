@@ -412,7 +412,6 @@ class Plantilla:
 
 # Reservar habitacion
 
-
     def Menu1(self):
         titulo = ft.Text(value='Reserva de Habitaciones',
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
@@ -812,9 +811,9 @@ class Plantilla:
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _: self.crear_coch(piso_coch.value,cantidad.value))
+            on_click=lambda _: self.crear_coch(piso_coch.value, cantidad.value))
         inputs = ft.Column(
-            controls=[piso_coch,cantidad])
+            controls=[piso_coch, cantidad])
         botones = ft.Row(controls=[subir_coch])
         Container_menus.content = ft.Column(
             [inputs, botones
@@ -850,9 +849,9 @@ class Plantilla:
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _: self.crear_habitacion(piso.value, camamatr.value, camaind.value, costo.value,cantidad.value))
+            on_click=lambda _: self.crear_habitacion(piso.value, camamatr.value, camaind.value, costo.value, cantidad.value))
         inputs = ft.Column(
-            controls=[piso, camamatr, camaind, costo,cantidad])
+            controls=[piso, camamatr, camaind, costo, cantidad])
         botones = ft.Row(controls=[subir_cli])
         Container_menus.content = ft.Column(
             [inputs, botones
@@ -989,6 +988,7 @@ class Plantilla:
 
 # Gestor de elementos
 
+
     def Menu6(self):
         titulo = ft.Text(value='Gestor de elementos',
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
@@ -1098,7 +1098,7 @@ class Plantilla:
 
 # Añadir empleado
     def Menu8(self):
-        
+
         # --------------Funciones--------------
         def actualizar_emp(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel):
             valor = actualizar_emp_final(
@@ -1175,10 +1175,9 @@ class Plantilla:
                 Container_menus.clean()
                 self.Menu8()
 
-
         # --------------Elementos-------------
         titulo = ft.Text(value='Añadir empleado',
-                         width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
+                         width=350, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         dni_emp = create_text_field("Dni del empleado")
         nombre_emp = create_text_field("Nombre")
         email = create_text_field("Email")
@@ -1226,20 +1225,20 @@ class Plantilla:
                       contraseña,
                       nivel])
         botones = ft.Column(controls=[registrar, actualizar, eliminar])
+        botones.margin = ft.margin.only(top=100)
         Container_menus.content = ft.Row(
             [inputs,
              botones],
             expand=True,
         )
         Container_menus.padding = ft.padding.symmetric(
-            horizontal=ancho * 0.15, vertical=altura * 0.05)
+            horizontal=ancho * 0.13, vertical=altura * 0.05)
         Container_menus.update()
 
 
 # ....................empleado.........................
 
 # ...................calendario.......................
-
 
     def HighLight(self, e):
 
@@ -1340,7 +1339,6 @@ class Plantilla:
 
 
 # ................Selector de menus...........
-
 
     def Menu(self):
         global formatsubmenus
