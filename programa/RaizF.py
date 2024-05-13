@@ -42,8 +42,8 @@ ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "A
           10: "Add client",
           11: "Add element",
           12: "Add employee",
-          13: "calendar",
-          14: "client id",
+          13: "Calendar",
+          14: "Client id",
           15: "Description",
           16: "Query",
           17: "Check in",
@@ -56,8 +56,8 @@ ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "A
           24: "Parking",
           25: "Room",
           26: "Floor",
-          27: "boked parking",
-          28: "Queen size bed",
+          27: "Booked parking",
+          28: "Queen size bed",  # double bed
           29: "Bed",
           30: "Price",
           31: "Employee id",
@@ -428,7 +428,6 @@ class Plantilla:
 
 
 # Reservar habitacion
-
 
     def Menu1(self):
         titulo = ft.Text(value='Reserva de Habitaciones',
@@ -1040,6 +1039,7 @@ class Plantilla:
 
 # Gestor de elementos
 
+
     def Menu6(self):
         titulo = ft.Text(value='Gestor de elementos',
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
@@ -1291,7 +1291,6 @@ class Plantilla:
 
 # ...................calendario.......................
 
-
     def HighLight(self, e):
 
         if e.data == "true":
@@ -1391,7 +1390,6 @@ class Plantilla:
 
 
 # ................Selector de menus...........
-
 
     def Menu(self):
         global formatsubmenus
