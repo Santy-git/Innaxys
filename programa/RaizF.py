@@ -740,7 +740,7 @@ class Plantilla:
         Verificar = Cli_add(a, b, c, d)
         if Verificar:
             dlg = ft.AlertDialog(
-                title=ft.Text("Datos Ingresados")
+                title=ft.Text("Cliente Ingresado")
             )
 
             def open_dlg(self):
@@ -750,6 +750,16 @@ class Plantilla:
             open_dlg(self)
             Container_menus.clean()
             self.Menu4()
+        else:
+            dlg = ft.AlertDialog(
+                title=ft.Text("Datos Incorrectos")
+            )
+
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
 # Añadir cliente
 
     def Menu4(self):
@@ -843,6 +853,17 @@ class Plantilla:
             open_dlg(self)
             Container_menus.clean()
             self.Menu5()
+        else:
+            dlg = ft.AlertDialog(
+                title=ft.Text("Valores no validos")
+            )
+
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
+        
 
     def habitacion(self):
         piso = create_text_field("Piso")
@@ -867,9 +888,6 @@ class Plantilla:
             horizontal=ancho * 0.17, vertical=altura * 0.10)
         Container_menus.update()
 # ....................elementos........................
-
-    def gest_elementos_result(cod_cliente, piso, camamatr, camaind, costo):
-        pass
 
     def salida(self, codigo, a, b, c, d):
         gest_modf_up(codigo, a, b, c, d)
@@ -957,17 +975,19 @@ class Plantilla:
         fecha_sys = datetime.now().date()
         fecha_sys = fecha_sys.strftime("%x")
         fecha_sys = str(fecha_sys)
-        lista = gest_elementos_consulta(fecha_sys, radio)
+  
+        lista = gest_elementos_consulta(fecha_sys, cod_cliente,radio)
+
         if lista == []:
             dlg = ft.AlertDialog(
                 title=ft.Text("Elemento no encontrado")
             )
-
             def open_dlg(self):
                 self.raiz.dialog = dlg
                 dlg.open = True
                 self.raiz.update()
             open_dlg(self)
+
         else:
             vuelta = gest_elementos_eliminar(lista, cod_cliente, radio)
             if vuelta:
@@ -1071,10 +1091,10 @@ class Plantilla:
                             bandera = 1
                     if bandera == 1:
 
-                        dias.append(ft.Container(width=20, height=20, bgcolor='red', content=ft.Text(
+                        dias.append(ft.Container(width=20, height=20, bgcolor=ft.colors.RED_300, content=ft.Text(
                             value=o+1), alignment=ft.alignment.center))
                     else:
-                        dias.append(ft.Container(width=20, height=20, bgcolor='green', content=ft.Text(
+                        dias.append(ft.Container(width=20, height=20, bgcolor=colores[7], content=ft.Text(
                             value=o+1), alignment=ft.alignment.center))
                 cl.controls.append(ft.Row(controls=dias))
 
@@ -1099,7 +1119,7 @@ class Plantilla:
         elementos = ft.Column([titulo, input_fecha])
         Container_menus.content = elementos
         Container_menus.padding = ft.padding.symmetric(
-            horizontal=ancho * 0.025, vertical=altura * 0.10)
+            horizontal=ancho * 0.015, vertical=altura * 0.10)
         Container_menus.update()
 
 # Añadir empleado

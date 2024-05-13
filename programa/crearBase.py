@@ -122,19 +122,25 @@ def login(usuario, contraseña):
     return result,result2
 #..........................menu 0.................................
 def Reservar(dni_cli,dni_emp,fecha,desc):
-    val = 0
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("SELECT dni_cli from cliente")
-    z = cur.fetchall()
+    
+    try:
+        comprobante = int(dni_cli)
+        val = 0
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("SELECT dni_cli from cliente")
+        z = cur.fetchall()
 
-    for i in range(len(z)):
-        if int(dni_cli) == z[i][0]:
-            val = 1
-    if val == 1:
-        return 1
-    else:
+        for i in range(len(z)):
+            if int(dni_cli) == z[i][0]:
+                val = 1
+        if val == 1:
+            return 1
+        else:
+            return 2
+    except ValueError:
         return 2
+
 
 
 def Consulta(ing,eng,num):
@@ -222,18 +228,22 @@ def eliminar_reserva(numero):
 
 #..........................menu 1..............................
 def ReservarCoch(dni_cli,dni_emp,fecha,desc):
-    val = 0
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("SELECT dni_cli from cliente")
-    z = cur.fetchall()
+    try:
+        comprobante = int(dni_cli)
+        val = 0
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("SELECT dni_cli from cliente")
+        z = cur.fetchall()
 
-    for i in range(len(z)):
-        if int(dni_cli) == z[i][0]:
-            val = 1
-    if val == 1:
-        return 1
-    else:
+        for i in range(len(z)):
+            if int(dni_cli) == z[i][0]:
+                val = 1
+        if val == 1:
+            return 1
+        else:
+            return 2
+    except ValueError:
         return 2
 
 def ConsultaCoch(ing,eng,num):
@@ -273,23 +283,35 @@ def completarCoch(cli,emp,fecha,desc,hres,ing,eng):
 
 
 def Cli_add(a,b,c,d):
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("INSERT INTO cliente (dni_cli, nombre, email, descr) VALUES (?,?,?,?)",(a,b,c,d))
-    con.commit()
-    con.close()
-    return True
+    try:
+        comprobador = int(a)
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("INSERT INTO cliente (dni_cli, nombre, email, descr) VALUES (?,?,?,?)",(a,b,c,d))
+        con.commit()
+        con.close()
+        return True
+    except ValueError:
+        return False
 
 
 def crear_hab(piso,camamatr,camaind,costo,cantidad):
+    try:
+        comprobador = int(piso)
+        comprobador = int(camamatr)
+        comprobador = int(camaind)
+        comprobador = int(costo)
+        comprobador = int(cantidad)
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        for i in range(int(cantidad)):
+            cur.execute("INSERT INTO habitacion (piso,camaMatr,camaInd,costo) VALUES (?,?,?,?)",(piso,camamatr,camaind,costo))
+            con.commit()
+        con.close()
+        return True
+    except ValueError:
+        return False
     
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    for i in range(int(cantidad)):
-        cur.execute("INSERT INTO habitacion (piso,camaMatr,camaInd,costo) VALUES (?,?,?,?)",(piso,camamatr,camaind,costo))
-        con.commit()
-    con.close()
-    return True
 
 def crear_coch(piso,cantidad):
     con = s.connect("GestionHotel.sqlite3")
@@ -321,16 +343,20 @@ def calendario(ing,eng):
 
 #gestor de elementos
 
-def gest_elementos_consulta(date,radio):
+def gest_elementos_consulta(date,cod,radio):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor() 
+
     if radio == '1':
-        cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab from reshab where fechaEgreso > '"+date+"' )")
+        cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab from reshab where fechaEgreso > '"+date+"' ) and codHab = '"+cod+"'")
         matris = cur.fetchall()
+
     else:
-        cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera from resCoch where fechaEgreso > '"+date+"' )")
+        cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera from resCoch where fechaEgreso > '"+date+"' ) and codCochera = '"+cod+"'")
         matris = cur.fetchall()
+
     con.close()
+
     return matris
 
 def gest_elementos_eliminar(lista,cod_cliente,radio):
