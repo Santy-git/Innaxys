@@ -838,6 +838,17 @@ class Plantilla:
             open_dlg(self)
             Container_menus.clean()
             self.Menu5()
+        else:
+            dlg = ft.AlertDialog(
+                title=ft.Text("Valores no validos")
+            )
+
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
+        
 
     def habitacion(self):
         piso = create_text_field("Piso")
