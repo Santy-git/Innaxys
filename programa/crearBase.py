@@ -321,16 +321,20 @@ def calendario(ing,eng):
 
 #gestor de elementos
 
-def gest_elementos_consulta(date,radio):
+def gest_elementos_consulta(date,cod,radio):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor() 
+    print(radio)
     if radio == '1':
-        cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab from reshab where fechaEgreso > '"+date+"' )")
+        cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab from reshab where fechaEgreso > '"+date+"' ) and codHab = '"+cod+"'")
         matris = cur.fetchall()
+        print("2")
     else:
-        cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera from resCoch where fechaEgreso > '"+date+"' )")
+        cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera from resCoch where fechaEgreso > '"+date+"' ) and codCochera = '"+cod+"'")
         matris = cur.fetchall()
+        print("3")
     con.close()
+    print("----------",matris)
     return matris
 
 def gest_elementos_eliminar(lista,cod_cliente,radio):

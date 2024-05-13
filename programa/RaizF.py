@@ -864,9 +864,6 @@ class Plantilla:
         Container_menus.update()
 # ....................elementos........................
 
-    def gest_elementos_result(cod_cliente, piso, camamatr, camaind, costo):
-        pass
-
     def salida(self, codigo, a, b, c, d):
         gest_modf_up(codigo, a, b, c, d)
         dlg = ft.AlertDialog(
@@ -953,17 +950,19 @@ class Plantilla:
         fecha_sys = datetime.now().date()
         fecha_sys = fecha_sys.strftime("%x")
         fecha_sys = str(fecha_sys)
-        lista = gest_elementos_consulta(fecha_sys, radio)
+  
+        lista = gest_elementos_consulta(fecha_sys, cod_cliente,radio)
+        print(lista)
         if lista == []:
             dlg = ft.AlertDialog(
                 title=ft.Text("Elemento no encontrado")
             )
-
             def open_dlg(self):
                 self.raiz.dialog = dlg
                 dlg.open = True
                 self.raiz.update()
             open_dlg(self)
+
         else:
             vuelta = gest_elementos_eliminar(lista, cod_cliente, radio)
             if vuelta:
