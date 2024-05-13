@@ -98,7 +98,7 @@ def creardb():
 
 
     # me conecto a la base de datos
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
 
     # creo el cursor
     cur = con.cursor()
@@ -124,7 +124,7 @@ def creardb():
 
 def login(usuario, contraseña):
 
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("SELECT * FROM login WHERE codLog = '"+usuario+"' and password = '"+contraseña+"'")
     result=cur.fetchall()
@@ -138,7 +138,7 @@ def Reservar(dni_cli,dni_emp,fecha,desc):
     try:
         comprobante = int(dni_cli)
         val = 0
-        con = s.connect("assets/GestionHotel.sqlite3")
+        con = s.connect("myapp/assets/GestionHotel.sqlite3")
         cur = con.cursor()
         cur.execute("SELECT dni_cli from cliente")
         z = cur.fetchall()
@@ -175,14 +175,14 @@ def Consulta(ing,eng,num):
                         bandera = 1
     if bandera == 1:
         if num == 0:
-            con = s.connect("assets/GestionHotel.sqlite3")
+            con = s.connect("myapp/assets/GestionHotel.sqlite3")
             cur = con.cursor()
             cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
             z = cur.fetchall()
             con.close()
             return z
         else:
-            con = s.connect("assets/GestionHotel.sqlite3")
+            con = s.connect("myapp/assets/GestionHotel.sqlite3")
             cur = con.cursor()
             cur.execute("SELECT * FROM habitacion WHERE codHab in (SELECT codHab FROM resHab WHERE codReserva = "+num+") or codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
             z = cur.fetchall()
@@ -193,7 +193,7 @@ def Consulta(ing,eng,num):
 
 
 def completar(cli,emp,fecha,desc,hres,ing,eng):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
     con.commit() 
@@ -205,7 +205,7 @@ def completar(cli,emp,fecha,desc,hres,ing,eng):
     con.close()
 
 def completar_cochera_actualizar(cli,emp,fecha,desc,hres,ing,eng,num):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("DELETE FROM resCoch where codReserva = '"+str(num)+"'")
     cur.execute("DELETE FROM reserva where codReserva = '"+str(num)+"'")
@@ -220,7 +220,7 @@ def completar_cochera_actualizar(cli,emp,fecha,desc,hres,ing,eng,num):
     con.close()  
 
 def completar_actualizar(cli,emp,fecha,desc,hres,ing,eng,num):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("DELETE FROM resHab where codReserva = '"+str(num)+"'")
     cur.execute("DELETE FROM reserva where codReserva = '"+str(num)+"'")
@@ -236,21 +236,21 @@ def completar_actualizar(cli,emp,fecha,desc,hres,ing,eng,num):
 #eliminar reservas
 
 def consulta_eliminar(dni):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("SELECT * from reserva where codCliente = '"+str(dni)+"'")
     cons = cur.fetchall()
     return cons 
 
 def consulta_tipo(cod):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("SELECT codReshab from resHab where codReserva = '"+str(cod)+"'")
     cons = cur.fetchall()
     return cons 
 
 def eliminar_reserva(numero):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("DELETE FROM resHab where codReserva = '"+str(numero)+"'")
     cur.execute("DELETE FROM resCoch where codReserva = '"+str(numero)+"'")
@@ -263,7 +263,7 @@ def ReservarCoch(dni_cli,dni_emp,fecha,desc):
     try:
         comprobante = int(dni_cli)
         val = 0
-        con = s.connect("assets/GestionHotel.sqlite3")
+        con = s.connect("myapp/assets/GestionHotel.sqlite3")
         cur = con.cursor()
         cur.execute("SELECT dni_cli from cliente")
         z = cur.fetchall()
@@ -298,14 +298,14 @@ def ConsultaCoch(ing,eng,num):
                         bandera = 1
     if bandera == 1:
         if num == 0:
-            con = s.connect("assets/GestionHotel.sqlite3")
+            con = s.connect("myapp/assets/GestionHotel.sqlite3")
             cur = con.cursor()
             cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera FROM resCoch) OR codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
             z = cur.fetchall()
             con.close()
             return z
         else:
-            con = s.connect("assets/GestionHotel.sqlite3")
+            con = s.connect("myapp/assets/GestionHotel.sqlite3")
             cur = con.cursor()
             cur.execute("SELECT * FROM cochera WHERE codCochera in (SELECT codCochera FROM resCoch WHERE codReserva = "+num+") or codCochera not in (SELECT codCochera FROM resCoch) or codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
             z = cur.fetchall()
@@ -316,7 +316,7 @@ def ConsultaCoch(ing,eng,num):
 
 
 def completarCoch(cli,emp,fecha,desc,hres,ing,eng):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
     con.commit()
@@ -336,7 +336,7 @@ def completarCoch(cli,emp,fecha,desc,hres,ing,eng):
 def Cli_add(a,b,c,d):
     try:
         comprobador = int(a)
-        con = s.connect("assets/GestionHotel.sqlite3")
+        con = s.connect("myapp/assets/GestionHotel.sqlite3")
         cur = con.cursor()
         cur.execute("SELECT dni_cli FROM cliente WHERE dni_cli = "+(a)+"")
         var = cur.fetchall()
@@ -358,7 +358,7 @@ def crear_hab(piso,camamatr,camaind,costo,cantidad):
         comprobador = int(camaind)
         comprobador = int(costo)
         comprobador = int(cantidad)
-        con = s.connect("assets/GestionHotel.sqlite3")
+        con = s.connect("myapp/assets/GestionHotel.sqlite3")
         cur = con.cursor()
         for i in range(int(cantidad)):
             cur.execute("INSERT INTO habitacion (piso,camaMatr,camaInd,costo) VALUES (?,?,?,?)",(piso,camamatr,camaind,costo))
@@ -370,7 +370,7 @@ def crear_hab(piso,camamatr,camaind,costo,cantidad):
     
 
 def crear_coch(piso,cantidad):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     for i in range(int(cantidad)):
         cur.execute("INSERT INTO cochera (piso) VALUES (?)",(piso))
@@ -386,7 +386,7 @@ def crear_coch(piso,cantidad):
     
 #.................calendario.................
 def calendario(ing,eng):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("SELECT codHab,fechaIngreso,fechaEgreso FROM resHab WHERE fechaIngreso >= '"+ing+"' AND fechaEgreso <= '"+eng+"' ORDER BY codHab")
     matris2 = cur.fetchall()
@@ -400,7 +400,7 @@ def calendario(ing,eng):
 #gestor de elementos
 
 def gest_elementos_consulta(date,cod,radio):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor() 
 
     if radio == '1':
@@ -422,7 +422,7 @@ def gest_elementos_eliminar(lista,cod_cliente,radio):
             if int(lista[i][0])==int(cod_cliente):
                 bandera = 1
         if bandera == 1:
-            con = s.connect("assets/GestionHotel.sqlite3")
+            con = s.connect("myapp/assets/GestionHotel.sqlite3")
             cur = con.cursor()
             cur.execute("DELETE FROM habitacion WHERE codHab = "+cod_cliente+"")
             con.commit()
@@ -433,7 +433,7 @@ def gest_elementos_eliminar(lista,cod_cliente,radio):
             if int(lista[i][0])==int(cod_cliente):
                 bandera = 1
         if bandera == 1:
-            con = s.connect("assets/GestionHotel.sqlite3")
+            con = s.connect("myapp/assets/GestionHotel.sqlite3")
             cur = con.cursor()
             cur.execute("DELETE FROM cochera WHERE codCochera = "+cod_cliente+"")
             con.commit()
@@ -441,7 +441,7 @@ def gest_elementos_eliminar(lista,cod_cliente,radio):
             return False
         
 def gest_modificiar(codigo,radio):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     if radio == '1':
         cur.execute("SELECT codHab FROM habitacion WHERE codHab = '"+codigo+"'")
@@ -453,7 +453,7 @@ def gest_modificiar(codigo,radio):
     return matris
 
 def gest_modf_up(codigo,a,b,c,d):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("UPDATE habitacion SET codHab = ?,piso = ?, camaMatr = ?,camaInd = ?,costo = ? WHERE codHab = ?",(codigo,a,b,c,d,codigo))
     con.commit()
@@ -461,7 +461,7 @@ def gest_modf_up(codigo,a,b,c,d):
    
 
 def gest_modfCoch_up(cod_cliente,piso_coch):
-    con = s.connect("assets/GestionHotel.sqlite3")
+    con = s.connect("myapp/assets/GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("UPDATE cochera SET codCochera = ?,piso = ? WHERE codCochera = ?",(cod_cliente,piso_coch,cod_cliente))
     con.commit()
@@ -476,7 +476,7 @@ def actualizar_emp_final(id,nombre_emp,email,telefono,puesto,usuario,contraseña
     try:
         comprobador = int(id)
         if nivel == '7' or nivel == '8':
-            con = s.connect("assets/GestionHotel.sqlite3")
+            con = s.connect("myapp/assets/GestionHotel.sqlite3")
             cur = con.cursor()
             cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
             matris2 = cur.fetchall()
@@ -500,7 +500,7 @@ def actualizar_emp_final(id,nombre_emp,email,telefono,puesto,usuario,contraseña
 def eliminar_emp_final(id):
     try:
         comprobador = int(id)
-        con = s.connect("assets/GestionHotel.sqlite3")
+        con = s.connect("myapp/assets/GestionHotel.sqlite3")
         cur = con.cursor()
         cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
         matris2 = cur.fetchall()
@@ -523,7 +523,7 @@ def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
         comprobador = int(dni_emp)
         if nivel == '7' or nivel == '8':
             i = 0
-            con = s.connect("assets/GestionHotel.sqlite3")
+            con = s.connect("myapp/assets/GestionHotel.sqlite3")
             cur = con.cursor()
 
             cur.execute("SELECT codLog FROM login")
