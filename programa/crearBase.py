@@ -122,19 +122,25 @@ def login(usuario, contraseña):
     return result,result2
 #..........................menu 0.................................
 def Reservar(dni_cli,dni_emp,fecha,desc):
-    val = 0
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("SELECT dni_cli from cliente")
-    z = cur.fetchall()
+    
+    try:
+        comprobante = int(dni_cli)
+        val = 0
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("SELECT dni_cli from cliente")
+        z = cur.fetchall()
 
-    for i in range(len(z)):
-        if int(dni_cli) == z[i][0]:
-            val = 1
-    if val == 1:
-        return 1
-    else:
+        for i in range(len(z)):
+            if int(dni_cli) == z[i][0]:
+                val = 1
+        if val == 1:
+            return 1
+        else:
+            return 2
+    except ValueError:
         return 2
+
 
 
 def Consulta(ing,eng,num):
@@ -222,18 +228,22 @@ def eliminar_reserva(numero):
 
 #..........................menu 1..............................
 def ReservarCoch(dni_cli,dni_emp,fecha,desc):
-    val = 0
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("SELECT dni_cli from cliente")
-    z = cur.fetchall()
+    try:
+        comprobante = int(dni_cli)
+        val = 0
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("SELECT dni_cli from cliente")
+        z = cur.fetchall()
 
-    for i in range(len(z)):
-        if int(dni_cli) == z[i][0]:
-            val = 1
-    if val == 1:
-        return 1
-    else:
+        for i in range(len(z)):
+            if int(dni_cli) == z[i][0]:
+                val = 1
+        if val == 1:
+            return 1
+        else:
+            return 2
+    except ValueError:
         return 2
 
 def ConsultaCoch(ing,eng,num):
