@@ -560,7 +560,7 @@ class Plantilla:
         if Verificar == 1:
             Container_menus.clean()
             Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
-            Egreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
+            Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.ConsultaCoch_aux(
                 Ingreso_Res.value, Egreso_Res.value, num), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
             reservarboton = ft.TextButton(text="Reservar", on_click=lambda _: self.resCoch_final(
