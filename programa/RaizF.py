@@ -353,10 +353,10 @@ class Plantilla:
 
     def res_final(self, cli, emp, fecha, desc, hres, Ing, Eng, num):
         if num != 0:
-            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar_actualizar(
+            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", style=ft.ButtonStyle(color='black', overlay_color=colores[5]), on_click=lambda _: completar_actualizar(
                 cli, emp, fecha, desc, hres, Ing, Eng, num))
         else:
-            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar(
+            confirmar = ft.TextButton(text="Confirmar", style=ft.ButtonStyle(color='black', overlay_color=colores[5]), icon_color="#659863", on_click=lambda _: completar(
                 cli, emp, fecha, desc, hres, Ing, Eng))
         Container_menus.clean()
         a = 0
@@ -368,11 +368,16 @@ class Plantilla:
             c += hres[i][2]
             d += hres[i][3]
             e += hres[i][4]
-        texto = "Numero de habitacion: " + \
-            str(a)+" Camas matrimoniales:"+str(c) + \
-            " Camas individuales:"+str(d)+" Costo:"+str(e)
-        Container_menus.content = ft.Container(content=ft.Row([ft.Text(
-            value=texto), confirmar]), bgcolor='#3B6639', width=ancho*0.56, height=altura*0.1, border_radius=ft.border_radius.all(3))
+
+        hab = ft.Text(value=f"Habitaciones: {a}")
+        matr = ft.Text(value=f"Matrimoniales: {c}")
+        indiv = ft.Text(value=f"Individuales: {d}")
+        total = ft.Text(value=f"Costo total: {e}")
+
+        info = ft.Column(controls=[hab, matr, indiv, total, confirmar])
+        Container_menus.content = ft.Container(
+            content=info, bgcolor=colores[4], width=250, height=250, alignment=ft.alignment.center, border_radius=5, padding=ft.padding.symmetric(vertical=50))
+        Container_menus.alignment = ft.alignment.center
         Container_menus.update()
 
     def Reservar_Aux(self, cli, emp, fecha, desc, num):
@@ -502,10 +507,10 @@ class Plantilla:
     def resCoch_final(self, cli, emp, fecha, desc, hres, Ing, Eng, num):
         if num != 0:
             confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar_cochera_actualizar(
-                cli, emp, fecha, desc, hres, Ing, Eng, num))
+                cli, emp, fecha, desc, hres, Ing, Eng, num), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
         else:
             confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completarCoch(
-                cli, emp, fecha, desc, hres, Ing, Eng))
+                cli, emp, fecha, desc, hres, Ing, Eng), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
         Container_menus.clean()
         a = []
         for i in range(len(hres)):
@@ -517,7 +522,7 @@ class Plantilla:
         Container_menus.update()
 
         confirmar = ft.TextButton(text="Confirmar", on_click=lambda _: completarCoch(
-            cli, emp, fecha, desc, hres, Ing, Eng))
+            cli, emp, fecha, desc, hres, Ing, Eng), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
         Container_menus.clean()
         Container_menus.update()
 
@@ -531,7 +536,7 @@ class Plantilla:
             Egreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
             consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.ConsultaCoch_aux(
                 Ingreso_Res.value, Egreso_Res.value, num), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
-            reservarboton = ft.TextButton(text="El otro boton", on_click=lambda _: self.resCoch_final(
+            reservarboton = ft.TextButton(text="Reservar", on_click=lambda _: self.resCoch_final(
                 cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value, num
             ), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
             self.Departamentos = ft.Container(
@@ -1030,11 +1035,11 @@ class Plantilla:
 
     def Menu7(self):
         def Calendario_menu(mes, año):
-            
+
             if len(elementos.controls) > 2:
                 elementos.controls.pop()
                 elementos.update()
-                    
+
             cl = ft.Column(
                 width=Container_menus.width,
                 height=Container_menus.height-450,
