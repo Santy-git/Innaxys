@@ -287,10 +287,16 @@ def Cli_add(a,b,c,d):
         comprobador = int(a)
         con = s.connect("GestionHotel.sqlite3")
         cur = con.cursor()
-        cur.execute("INSERT INTO cliente (dni_cli, nombre, email, descr) VALUES (?,?,?,?)",(a,b,c,d))
-        con.commit()
-        con.close()
-        return True
+        cur.execute("SELECT dni_cli FROM cliente WHERE dni_cli = ?",(a))
+        var = cur.fetchall()
+        print(var)
+        if var == []:
+            cur.execute("INSERT INTO cliente (dni_cli, nombre, email, descr) VALUES (?,?,?,?)",(a,b,c,d))
+            con.commit()
+            con.close()
+            return True
+        else:
+            return False
     except ValueError:
         return False
 
