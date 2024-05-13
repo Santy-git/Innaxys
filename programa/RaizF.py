@@ -348,10 +348,10 @@ class Plantilla:
     def Consulta_aux(self, Ingreso_Res, Egreso_Res, num):
         global hres
         hres = []
-        self.variable2 = ConsultaCoch(Ingreso_Res, Egreso_Res, num)
+        self.variable2 = Consulta(Ingreso_Res, Egreso_Res, num)
         if self.variable2 == 2:
             dlg = ft.AlertDialog(
-                title=ft.Text("Cliente no encontrado")
+                title=ft.Text("Fecha incorrecta")
             )
 
             def open_dlg(self):
@@ -517,7 +517,7 @@ class Plantilla:
         self.variable2 = ConsultaCoch(Ingreso_Res, Egreso_Res, num)
         if self.variable2 == 2:
             dlg = ft.AlertDialog(
-                title=ft.Text("Cliente no encontrado")
+                title=ft.Text("Fecha incorrecta")
             )
 
             def open_dlg(self):
