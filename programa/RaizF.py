@@ -951,7 +951,7 @@ class Plantilla:
         fecha_sys = str(fecha_sys)
   
         lista = gest_elementos_consulta(fecha_sys, cod_cliente,radio)
-        print(lista)
+
         if lista == []:
             dlg = ft.AlertDialog(
                 title=ft.Text("Elemento no encontrado")
