@@ -367,11 +367,11 @@ class Plantilla:
 
     def res_final(self, cli, emp, fecha, desc, hres, Ing, Eng, num):
         if num != 0:
-            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", style=ft.ButtonStyle(color='black', overlay_color=colores[5]), on_click=lambda _: completar_actualizar(
-                cli, emp, fecha, desc, hres, Ing, Eng, num))
+            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", style=ft.ButtonStyle(color='black', overlay_color=colores[5]), on_click=lambda _: (completar_actualizar(
+                cli, emp, fecha, desc, hres, Ing, Eng, num), self.Menu1()))
         else:
-            confirmar = ft.TextButton(text="Confirmar", style=ft.ButtonStyle(color='black', overlay_color=colores[5]), icon_color="#659863", on_click=lambda _: completar(
-                cli, emp, fecha, desc, hres, Ing, Eng))
+            confirmar = ft.TextButton(text="Confirmar", style=ft.ButtonStyle(color='black', overlay_color=colores[5]), icon_color="#659863", on_click=lambda _: (completar(
+                cli, emp, fecha, desc, hres, Ing, Eng), self.Menu1()))
         Container_menus.clean()
         a = 0
         c = 0
@@ -533,11 +533,11 @@ class Plantilla:
 
     def resCoch_final(self, cli, emp, fecha, desc, hres, Ing, Eng, num):
         if num != 0:
-            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completar_cochera_actualizar(
-                cli, emp, fecha, desc, hres, Ing, Eng, num), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
+            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: (completar_cochera_actualizar(
+                cli, emp, fecha, desc, hres, Ing, Eng, num), self.Menu2()), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
         else:
-            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: completarCoch(
-                cli, emp, fecha, desc, hres, Ing, Eng), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
+            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: (completarCoch(
+                cli, emp, fecha, desc, hres, Ing, Eng), self.Menu2()), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
         Container_menus.clean()
         a = 0
 
