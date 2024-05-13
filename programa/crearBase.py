@@ -170,7 +170,6 @@ def Consulta(ing,eng,num):
                 lista.append(ing[0:4])
                 lista.append(ing[5:7])
                 lista.append(ing[8:10])
-                print(Meses[lista[1]], lista[2])
                 if Meses[lista[1]] >= int(lista[2]):
                     if Meses[lista[4]] >= int(lista[5]):
                         bandera = 1
@@ -294,7 +293,6 @@ def ConsultaCoch(ing,eng,num):
                 lista.append(ing[0:4])
                 lista.append(ing[5:7])
                 lista.append(ing[8:10])
-                print(Meses[lista[1]], lista[2])
                 if Meses[lista[1]] >= int(lista[2]):
                     if Meses[lista[4]] >= int(lista[5]):
                         bandera = 1
@@ -342,7 +340,6 @@ def Cli_add(a,b,c,d):
         cur = con.cursor()
         cur.execute("SELECT dni_cli FROM cliente WHERE dni_cli = ?",(a))
         var = cur.fetchall()
-        print(var)
         if var == []:
             cur.execute("INSERT INTO cliente (dni_cli, nombre, email, descr) VALUES (?,?,?,?)",(a,b,c,d))
             con.commit()
@@ -507,7 +504,6 @@ def eliminar_emp_final(id):
         cur = con.cursor()
         cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
         matris2 = cur.fetchall()
-        print(matris2)
         if matris2 != []:
             cur.execute("DELETE FROM login WHERE codLog = '"+matris2[0][0]+"'")
             cur.execute("DELETE FROM empleado WHERE dni_emp = ?",(id))
