@@ -1086,10 +1086,10 @@ class Plantilla:
                             bandera = 1
                     if bandera == 1:
 
-                        dias.append(ft.Container(width=20, height=20, bgcolor='red', content=ft.Text(
+                        dias.append(ft.Container(width=20, height=20, bgcolor=ft.colors.RED_300, content=ft.Text(
                             value=o+1), alignment=ft.alignment.center))
                     else:
-                        dias.append(ft.Container(width=20, height=20, bgcolor='green', content=ft.Text(
+                        dias.append(ft.Container(width=20, height=20, bgcolor=colores[7], content=ft.Text(
                             value=o+1), alignment=ft.alignment.center))
                 cl.controls.append(ft.Row(controls=dias))
 
@@ -1114,7 +1114,7 @@ class Plantilla:
         elementos = ft.Column([titulo, input_fecha])
         Container_menus.content = elementos
         Container_menus.padding = ft.padding.symmetric(
-            horizontal=ancho * 0.025, vertical=altura * 0.10)
+            horizontal=ancho * 0.015, vertical=altura * 0.10)
         Container_menus.update()
 
 # Añadir empleado
