@@ -348,7 +348,7 @@ class Plantilla:
     def Consulta_aux(self, Ingreso_Res, Egreso_Res, num):
         global hres
         hres = []
-        self.variable2 = Consulta(Ingreso_Res, Egreso_Res, num)
+        self.variable2 = ConsultaCoch(Ingreso_Res, Egreso_Res, num)
         if self.variable2 == 2:
             dlg = ft.AlertDialog(
                 title=ft.Text("Cliente no encontrado")
@@ -515,7 +515,18 @@ class Plantilla:
         global hres
         hres = []
         self.variable2 = ConsultaCoch(Ingreso_Res, Egreso_Res, num)
-        self.disponiblesCoch()
+        if self.variable2 == 2:
+            dlg = ft.AlertDialog(
+                title=ft.Text("Cliente no encontrado")
+            )
+
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
+        else:
+            self.disponiblesCoch()
 
     def resCoch_final(self, cli, emp, fecha, desc, hres, Ing, Eng, num):
         if num != 0:

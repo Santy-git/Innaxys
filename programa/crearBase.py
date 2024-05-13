@@ -280,21 +280,41 @@ def ReservarCoch(dni_cli,dni_emp,fecha,desc):
         return 2
 
 def ConsultaCoch(ing,eng,num):
-    if num == 0:
-        con = s.connect("GestionHotel.sqlite3")
-        cur = con.cursor()
-        cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera FROM resCoch) OR codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
-        z = cur.fetchall()
-        con.close()
-        return z
+    lista = []
+    bandera = 0
+    comprobante = ing.replace("-","")
+    comprobante2 = eng.replace("-","")
+    if len(comprobante) == 8:
+        if len(comprobante2) == 8:
+            
+            if int(comprobante) < int(comprobante2):
+                lista.append(eng[0:4])
+                lista.append(eng[5:7])
+                lista.append(eng[8:10])
+                lista.append(ing[0:4])
+                lista.append(ing[5:7])
+                lista.append(ing[8:10])
+                print(Meses[lista[1]], lista[2])
+                if Meses[lista[1]] >= int(lista[2]):
+                    if Meses[lista[4]] >= int(lista[5]):
+                        bandera = 1
+    if bandera == 1:
+        if num == 0:
+            con = s.connect("GestionHotel.sqlite3")
+            cur = con.cursor()
+            cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera FROM resCoch) OR codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+            z = cur.fetchall()
+            con.close()
+            return z
+        else:
+            con = s.connect("GestionHotel.sqlite3")
+            cur = con.cursor()
+            cur.execute("SELECT * FROM cochera WHERE codCochera in (SELECT codCochera FROM resCoch WHERE codReserva = "+num+") or codCochera not in (SELECT codCochera FROM resCoch) or codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+            z = cur.fetchall()
+            con.close()
+            return z
     else:
-        con = s.connect("GestionHotel.sqlite3")
-        cur = con.cursor()
-        cur.execute("SELECT * FROM cochera WHERE codCochera in (SELECT codCochera FROM resCoch WHERE codReserva = "+num+") or codCochera not in (SELECT codCochera FROM resCoch) or codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
-        z = cur.fetchall()
-        con.close()
-        return z
-    
+        return 2        
 
 
 def completarCoch(cli,emp,fecha,desc,hres,ing,eng):
