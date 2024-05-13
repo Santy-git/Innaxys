@@ -131,6 +131,9 @@ class Plantilla:
         global z
         global laburo
         z = login(self.User.value, self.Password.value)
+        if z[1] == []:
+            z[1].append(('Admin','0'))
+
         if z[0] != []:
             if z[1] == []:
                 Nivel = int(z[0][0][2])
@@ -429,6 +432,7 @@ class Plantilla:
 
 # Reservar habitacion
 
+
     def Menu1(self):
         titulo = ft.Text(value='Reserva de Habitaciones',
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
@@ -448,7 +452,7 @@ class Plantilla:
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.Reservar_Aux(
-                cod_cliente.value, z[0][0][0], fecha_res, desc.value, 0))
+                cod_cliente.value, z[1][0][1], fecha_res, desc.value, 0))
         inputs = ft.Column(
             controls=[titulo, cod_cliente, desc])
         botones = ft.Row(controls=[subir])
@@ -595,7 +599,7 @@ class Plantilla:
             content=ft.Text("Subir", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
-            on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[0][0][0], fecha_res, desc.value, 0))
+            on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[1][0][1], fecha_res, desc.value, 0))
 
         inputs = ft.Column(
             controls=[titulo, cod_cliente, desc])
@@ -1039,7 +1043,6 @@ class Plantilla:
 
 # Gestor de elementos
 
-
     def Menu6(self):
         titulo = ft.Text(value='Gestor de elementos',
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
@@ -1276,11 +1279,9 @@ class Plantilla:
                       contraseña,
                       nivel])
         botones = ft.Column(controls=[registrar, actualizar, eliminar])
-        botones.margin = ft.margin.only(top=100)
         Container_menus.content = ft.Row(
             [inputs,
-             botones],
-            expand=True,
+             botones]
         )
         Container_menus.padding = ft.padding.symmetric(
             horizontal=ancho * 0.13, vertical=altura * 0.05)
@@ -1290,6 +1291,7 @@ class Plantilla:
 # ....................empleado.........................
 
 # ...................calendario.......................
+
 
     def HighLight(self, e):
 
@@ -1390,6 +1392,7 @@ class Plantilla:
 
 
 # ................Selector de menus...........
+
 
     def Menu(self):
         global formatsubmenus
