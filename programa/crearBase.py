@@ -273,12 +273,16 @@ def completarCoch(cli,emp,fecha,desc,hres,ing,eng):
 
 
 def Cli_add(a,b,c,d):
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("INSERT INTO cliente (dni_cli, nombre, email, descr) VALUES (?,?,?,?)",(a,b,c,d))
-    con.commit()
-    con.close()
-    return True
+    try:
+        comprobador = int(a)
+        con = s.connect("GestionHotel.sqlite3")
+        cur = con.cursor()
+        cur.execute("INSERT INTO cliente (dni_cli, nombre, email, descr) VALUES (?,?,?,?)",(a,b,c,d))
+        con.commit()
+        con.close()
+        return True
+    except ValueError:
+        return False
 
 
 def crear_hab(piso,camamatr,camaind,costo,cantidad):

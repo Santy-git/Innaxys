@@ -735,7 +735,7 @@ class Plantilla:
         Verificar = Cli_add(a, b, c, d)
         if Verificar:
             dlg = ft.AlertDialog(
-                title=ft.Text("Datos Ingresados")
+                title=ft.Text("Cliente Ingresado")
             )
 
             def open_dlg(self):
@@ -745,6 +745,16 @@ class Plantilla:
             open_dlg(self)
             Container_menus.clean()
             self.Menu4()
+        else:
+            dlg = ft.AlertDialog(
+                title=ft.Text("Datos Incorrectos")
+            )
+
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
 # Añadir cliente
 
     def Menu4(self):
