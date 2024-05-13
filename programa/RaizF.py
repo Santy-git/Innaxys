@@ -429,6 +429,7 @@ class Plantilla:
 
 # Reservar habitacion
 
+
     def Menu1(self):
         titulo = ft.Text(value='Reserva de Habitaciones',
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
@@ -1039,7 +1040,6 @@ class Plantilla:
 
 # Gestor de elementos
 
-
     def Menu6(self):
         titulo = ft.Text(value='Gestor de elementos',
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
@@ -1276,11 +1276,9 @@ class Plantilla:
                       contraseña,
                       nivel])
         botones = ft.Column(controls=[registrar, actualizar, eliminar])
-        botones.margin = ft.margin.only(top=100)
         Container_menus.content = ft.Row(
             [inputs,
-             botones],
-            expand=True,
+             botones]
         )
         Container_menus.padding = ft.padding.symmetric(
             horizontal=ancho * 0.13, vertical=altura * 0.05)
@@ -1290,6 +1288,7 @@ class Plantilla:
 # ....................empleado.........................
 
 # ...................calendario.......................
+
 
     def HighLight(self, e):
 
@@ -1390,6 +1389,7 @@ class Plantilla:
 
 
 # ................Selector de menus...........
+
 
     def Menu(self):
         global formatsubmenus
