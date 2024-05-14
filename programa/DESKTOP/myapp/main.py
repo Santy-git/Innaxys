@@ -447,12 +447,18 @@ def crear_coch(piso, cantidad):
 # ..........................Menu 4.......................
 
 
-# .................calendario.................
-def calendario(ing, eng):
+#..........................Menu 4.......................
+
+    
+#.................calendario.................
+def calendario(mes,año):
+    ing_consulta = str(año)+'-'+str(mes)+'-'+'01'
+    eng_consulta = str(año)+'-'+str(mes)+'-'+str(Meses[mes])
+    print(ing_consulta)
+    print(eng_consulta)
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("SELECT codHab,fechaIngreso,fechaEgreso FROM resHab WHERE fechaIngreso >= '" +
-                ing+"' AND fechaEgreso <= '"+eng+"' ORDER BY codHab")
+    cur.execute("SELECT codHab,fechaIngreso,fechaEgreso FROM resHab")
     matris2 = cur.fetchall()
     cur.execute("SELECT codHab FROM habitacion")
     total = cur.fetchall()
@@ -1726,34 +1732,38 @@ class Plantilla:
                 on_scroll_interval=0,
             )
 
-            mes_consulta = str(año)+'-'+str(mes)+'-'+'01'
-            año_consulta = str(año)+'-'+str(mes)+'-'+str(Meses[mes])
-            matris = calendario(mes_consulta, año_consulta)
-
+            
+            matris = calendario(mes, año)
             # listas para armar la tabla
-            verificador = [[0, 0, 0]]
+            verificador = []
             for i in range(len(matris[0])):
-                y = datetime.fromisoformat(matris[0][i][1])
-                y = y.strftime("%d")
-                x = datetime.fromisoformat(matris[0][i][2])
-                x = x.strftime("%d")
-                verificador.append([matris[0][i][0], y, x])
-
+                ing_D = datetime.fromisoformat(matris[0][i][1])
+                ing_D = ing_D.strftime("%d")
+                ing_M = datetime.fromisoformat(matris[0][i][1])
+                ing_M = ing_M.strftime("%m")
+                eng_D = datetime.fromisoformat(matris[0][i][2])
+                eng_D = eng_D.strftime("%d")
+                eng_M = datetime.fromisoformat(matris[0][i][2])
+                eng_M = eng_M.strftime("%m")
+                concat_ing = ing_M + ing_D
+                concat_eng = eng_M + eng_D
+                verificador.append([matris[0][i][0],concat_ing,concat_eng])
             for j in range(len(matris[1])):
                 dias = [ft.Text(bgcolor=colores[4],
                                 value="Hab:"+str(matris[1][j][0])),]
-                for o in range(Meses[mes]):
-                    bandera = 0
-                    for i in range(len(verificador)):
-                        if o+1 >= int(verificador[i][1]) and o+1 <= int(verificador[i][2]) and int(matris[1][j][0]) == int(verificador[i][0]):
-                            bandera = 1
-                    if bandera == 1:
-
-                        dias.append(ft.Container(width=20, height=20, bgcolor=ft.colors.RED_300, content=ft.Text(
-                            value=o+1), alignment=ft.alignment.center))
-                    else:
-                        dias.append(ft.Container(width=20, height=20, bgcolor=colores[7], content=ft.Text(
-                            value=o+1), alignment=ft.alignment.center))
+                 
+                for dia in range(Meses[mes]):
+                    nose = int(mes)*100 + int(dia)
+                    try:
+                        if  int(verificador[j][1]) <= nose and int(verificador[j][2]) >= nose:
+                            dias.append(ft.Container(width=20, height=20, bgcolor=ft.colors.RED_300, content=ft.Text(
+                                value=dia+1), alignment=ft.alignment.center))
+                        else:
+                            dias.append(ft.Container(width=20, height=20, bgcolor=ft.colors.GREEN, content=ft.Text(
+                                value=dia+1), alignment=ft.alignment.center))
+                    except IndexError:
+                        dias.append(ft.Container(width=20, height=20, bgcolor=ft.colors.GREEN, content=ft.Text(
+                                value=dia+1), alignment=ft.alignment.center))        
                 cl.controls.append(ft.Row(controls=dias))
 
             container_calendar = ft.Container(cl, border=ft.border.all(1))
