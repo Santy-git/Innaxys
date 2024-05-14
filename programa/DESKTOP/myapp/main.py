@@ -1753,7 +1753,7 @@ class Plantilla:
                                 value="Hab:"+str(matris[1][j][0])),]
                  
                 for dia in range(Meses[mes]):
-                    nose = int(mes)*100 + int(dia)
+                    nose = int(mes)*100 + int(dia)+1
                     try:
                         if  int(verificador[j][1]) <= nose and int(verificador[j][2]) >= nose:
                             dias.append(ft.Container(width=20, height=20, bgcolor=ft.colors.RED_300, content=ft.Text(
