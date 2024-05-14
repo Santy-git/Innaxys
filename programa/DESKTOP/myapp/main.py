@@ -1647,7 +1647,7 @@ class Plantilla:
                 self.raiz.update()
             open_dlg(self)
 
-        else:
+        if radio == '1' or radio == '2':
             vuelta = gest_elementos_eliminar(lista, cod_cliente, radio)
             if vuelta:
                 dlg = ft.AlertDialog(
@@ -1669,6 +1669,19 @@ class Plantilla:
                     dlg.open = True
                     self.raiz.update()
                 open_dlg(self)
+
+        elif radio == None:
+
+                dlg = ft.AlertDialog(
+                    title=ft.Text("Selecciona habitacion o cochera"))
+                Container_menus.update()
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+
 
 
 # Gestor de elementos
