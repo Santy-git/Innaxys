@@ -280,7 +280,9 @@ def consulta_eliminar(dni):
     cur = con.cursor()
     cur.execute("SELECT * from reserva where codCliente = '"+str(dni)+"'")
     cons = cur.fetchall()
-    return cons
+    cur.execute("SELECT * from resHab where codReserva = '"+str(dni)+"'")
+    cons2 = cur.fetchall()
+    return cons, cons2
 
 
 def consulta_tipo(cod):
@@ -1272,6 +1274,7 @@ class Plantilla:
 
     def res_eliminar_aux(self, dni):
         info = consulta_eliminar(dni)
+        print(info)
         registro = ft.Column(
             width=Container_menus.width - 100,
             height=Container_menus.height - 100,
@@ -1325,6 +1328,7 @@ class Plantilla:
 
     def res_actualizar(self, dni):
         info = consulta_eliminar(dni)
+        print(info)
         registro = ft.Column(
             width=Container_menus.width - 100,
             height=Container_menus.height - 100,
