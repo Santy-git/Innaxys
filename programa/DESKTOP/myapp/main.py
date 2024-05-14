@@ -1,4 +1,5 @@
 # ....................Librerias....................
+import datetime
 import flet as ft
 from flet import TextField, Checkbox, ElevatedButton, Text, Row, Column, Container, Stack
 from flet_core.control_event import ControlEvent
@@ -8,7 +9,6 @@ import time
 import threading
 import sqlite3 as s
 # ...................base de datos..............................
-
 
 
 Meses = {'01': 31,
@@ -24,6 +24,7 @@ Meses = {'01': 31,
          '11': 30,
          '12': 31}
 
+
 def creardb():
     tablas = [
         '''CREATE TABLE IF NOT EXISTS login(
@@ -31,8 +32,8 @@ def creardb():
         password varchar(30) not null,
         nivel varchar(20) not null
     );''',
-#_____________________________________________________________________
-    '''CREATE TABLE IF NOT EXISTS empleado (
+        # _____________________________________________________________________
+        '''CREATE TABLE IF NOT EXISTS empleado (
         dni_emp int primary key,
         nombre varchar(100) not null,
         email varchar(100) not null,
@@ -41,28 +42,28 @@ def creardb():
         codLog varchar(30) not null,
         foreign key (codLog) references login(codLog) 
     );''',
-#_____________________________________________________________________
-    '''CREATE TABLE IF NOT EXISTS cochera (
+        # _____________________________________________________________________
+        '''CREATE TABLE IF NOT EXISTS cochera (
         codCochera INTEGER PRIMARY KEY AUTOINCREMENT,
         piso number(10) not null
     );''',
-#_____________________________________________________________________
-    '''CREATE TABLE IF NOT EXISTS habitacion (
+        # _____________________________________________________________________
+        '''CREATE TABLE IF NOT EXISTS habitacion (
         codHab INTEGER PRIMARY KEY AUTOINCREMENT,
         piso number(10) not null,
         camaMatr number(10) not null,
         camaInd number(10) not null,
         costo number(30) not null
     );''',
-#_____________________________________________________________________
+        # _____________________________________________________________________
         '''CREATE TABLE IF NOT EXISTS cliente (
         dni_cli int primary key,
         nombre varchar(100) not null,
         email varchar(100),
         descr varchar(255)
     );''',
-#_____________________________________________________________________
-    '''CREATE TABLE IF NOT EXISTS reserva (
+        # _____________________________________________________________________
+        '''CREATE TABLE IF NOT EXISTS reserva (
         codReserva INTEGER PRIMARY KEY AUTOINCREMENT,
         codCliente int not null,
         codEmpleado int not null,
@@ -71,8 +72,8 @@ def creardb():
         foreign key (codCliente) references cliente(dni_cli) ,
         foreign key (codEmpleado) references empleado(dni_emp) 
     );''',
-#_____________________________________________________________________
-    '''CREATE TABLE IF NOT EXISTS historial (
+        # _____________________________________________________________________
+        '''CREATE TABLE IF NOT EXISTS historial (
         codHistorial INTEGER PRIMARY KEY AUTOINCREMENT,
         codReserva int not null,
         codEmpleado int not null,
@@ -80,8 +81,8 @@ def creardb():
         foreign key (codReserva) references reserva(codReserva) ,
         foreign key (codEmpleado) references empleado(dni_emp) 
     );''',
-#_____________________________________________________________________
-    '''CREATE TABLE IF NOT EXISTS resHab(
+        # _____________________________________________________________________
+        '''CREATE TABLE IF NOT EXISTS resHab(
         codReshab INTEGER PRIMARY KEY AUTOINCREMENT,
         codHab int not null,
         codReserva int not null,
@@ -93,7 +94,7 @@ def creardb():
         foreign key (codHab) references habitacion(codHab) ,
         foreign key (codReserva) references reserva(codReserva) 
     );''',
-#_____________________________________________________________________
+        # _____________________________________________________________________
         '''CREATE TABLE IF NOT EXISTS resCoch(
         codRescoch INTEGER PRIMARY KEY AUTOINCREMENT,
         codReserva int not null,
@@ -104,8 +105,7 @@ def creardb():
         foreign key (codReserva) references reserva(codReserva) 
     );'''
     ]
-#_____________________________________________________________________
-
+# _____________________________________________________________________
 
     # me conecto a la base de datos
     con = s.connect("GestionHotel.sqlite3")
@@ -119,32 +119,34 @@ def creardb():
 
     con.commit()
 
-
-
-
     try:
         sql = "INSERT INTO login (codLog, password, nivel) VALUES ('0','0',8)"
         con.execute(sql)
         con.commit()
     except s.IntegrityError:
         pass
-        
+
     con.close()
-#logear
+# logear
+
 
 def login(usuario, contraseña):
 
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("SELECT * FROM login WHERE codLog = '"+usuario+"' and password = '"+contraseña+"'")
-    result=cur.fetchall()
-    cur.execute("SELECT puesto,dni_emp FROM empleado where codLog = '"+usuario+"'")
+    cur.execute("SELECT * FROM login WHERE codLog = '" +
+                usuario+"' and password = '"+contraseña+"'")
+    result = cur.fetchall()
+    cur.execute(
+        "SELECT puesto,dni_emp FROM empleado where codLog = '"+usuario+"'")
     result2 = cur.fetchall()
 
-    return result,result2
-#..........................menu 0.................................
-def Reservar(dni_cli,dni_emp,fecha,desc):
-    
+    return result, result2
+# ..........................menu 0.................................
+
+
+def Reservar(dni_cli, dni_emp, fecha, desc):
+
     try:
         comprobante = int(dni_cli)
         val = 0
@@ -164,25 +166,40 @@ def Reservar(dni_cli,dni_emp,fecha,desc):
         return 2
 
 
-
-def Consulta(ing,eng,num):   
+def Consulta(ing, eng, num):
     lista = []
+    fecha_actual = datetime.now().date()
     bandera = 0
-    comprobante = ing.replace("-","")
-    comprobante2 = eng.replace("-","")
-    if len(comprobante) == 8:
-        if len(comprobante2) == 8:
-            
-            if int(comprobante) < int(comprobante2):
-                lista.append(eng[0:4])
-                lista.append(eng[5:7])
-                lista.append(eng[8:10])
-                lista.append(ing[0:4])
-                lista.append(ing[5:7])
-                lista.append(ing[8:10])
-                if Meses[lista[1]] >= int(lista[2]):
-                    if Meses[lista[4]] >= int(lista[5]):
-                        bandera = 1
+    comprobante = ing.replace("-", "")
+    comprobante2 = eng.replace("-", "")
+
+    # Convertir las cadenas de texto a objetos .date
+    try:
+        ing_date = datetime.strptime(ing, "%Y-%m-%d").date()
+        eng_date = datetime.strptime(eng, "%Y-%m-%d").date()
+    except ValueError:
+        return 2
+
+    if not ing or not eng:
+        return 2
+
+    if len(comprobante) == 8 and len(comprobante2) == 8:
+
+        if int(comprobante) < int(comprobante2):
+            lista.append(eng[0:4])
+            lista.append(eng[5:7])
+            lista.append(eng[8:10])
+            lista.append(ing[0:4])
+            lista.append(ing[5:7])
+            lista.append(ing[8:10])
+
+            if Meses[lista[1]] >= int(lista[2]):
+                if Meses[lista[4]] >= int(lista[5]):
+                    bandera = 1
+
+    if ing_date < fecha_actual or eng_date < fecha_actual:
+        return 2
+
     if bandera == 1:
         if num == 0:
             con = s.connect("GestionHotel.sqlite3")
@@ -194,7 +211,8 @@ def Consulta(ing,eng,num):
         else:
             con = s.connect("GestionHotel.sqlite3")
             cur = con.cursor()
-            cur.execute("SELECT * FROM habitacion WHERE codHab in (SELECT codHab FROM resHab WHERE codReserva = "+num+") or codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+            cur.execute("SELECT * FROM habitacion WHERE codHab in (SELECT codHab FROM resHab WHERE codReserva = "+num +
+                        ") or codHab not in (SELECT codHab FROM resHab) or codHab in (SELECT codHab FROM resHab WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
             z = cur.fetchall()
             con.close()
             return z
@@ -202,62 +220,76 @@ def Consulta(ing,eng,num):
         return 2
 
 
-def completar(cli,emp,fecha,desc,hres,ing,eng):
+def completar(cli, emp, fecha, desc, hres, ing, eng):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
-    con.commit() 
-    cur.execute("SELECT codReserva FROM reserva where codCliente = '"+cli+"' AND codEmpleado = '"+str(emp)+"'")
+    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",
+                (cli, emp, fecha, desc))
+    con.commit()
+    cur.execute("SELECT codReserva FROM reserva where codCliente = '" +
+                cli+"' AND codEmpleado = '"+str(emp)+"'")
     info = cur.fetchall()
     for i in range(len(hres)):
-        cur.execute("INSERT INTO resHab (codHab,codReserva,camaMatr,camaInd,costoHab,fechaIngreso,fechaEgreso) VALUES (?,?,?,?,?,?,?)",(hres[i][0],info[-1][0],hres[i][2],hres[i][3],hres[i][4],ing,eng))
+        cur.execute("INSERT INTO resHab (codHab,codReserva,camaMatr,camaInd,costoHab,fechaIngreso,fechaEgreso) VALUES (?,?,?,?,?,?,?)",
+                    (hres[i][0], info[-1][0], hres[i][2], hres[i][3], hres[i][4], ing, eng))
         con.commit()
     con.close()
 
-def completar_cochera_actualizar(cli,emp,fecha,desc,hres,ing,eng,num):
+
+def completar_cochera_actualizar(cli, emp, fecha, desc, hres, ing, eng, num):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("DELETE FROM resCoch where codReserva = '"+str(num)+"'")
     cur.execute("DELETE FROM reserva where codReserva = '"+str(num)+"'")
     con.commit()
-    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
+    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",
+                (cli, emp, fecha, desc))
     con.commit()
-    cur.execute("SELECT codReserva FROM reserva where codCliente = '"+cli+"' AND codEmpleado = '"+emp+"'")
+    cur.execute("SELECT codReserva FROM reserva where codCliente = '" +
+                cli+"' AND codEmpleado = '"+emp+"'")
     info = cur.fetchall()
     for i in range(len(hres)):
-        cur.execute("INSERT INTO resCoch (codReserva,codCochera,fechaIngreso,fechaEgreso) VALUES (?,?,?,?)",(info[-1][0],hres[i][0],ing,eng))
+        cur.execute("INSERT INTO resCoch (codReserva,codCochera,fechaIngreso,fechaEgreso) VALUES (?,?,?,?)",
+                    (info[-1][0], hres[i][0], ing, eng))
         con.commit()
-    con.close()  
+    con.close()
 
-def completar_actualizar(cli,emp,fecha,desc,hres,ing,eng,num):
+
+def completar_actualizar(cli, emp, fecha, desc, hres, ing, eng, num):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("DELETE FROM resHab where codReserva = '"+str(num)+"'")
     cur.execute("DELETE FROM reserva where codReserva = '"+str(num)+"'")
     con.commit()
-    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
-    con.commit() 
-    cur.execute("SELECT codReserva FROM reserva where codCliente = '"+cli+"' AND codEmpleado = '"+emp+"'")
+    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",
+                (cli, emp, fecha, desc))
+    con.commit()
+    cur.execute("SELECT codReserva FROM reserva where codCliente = '" +
+                cli+"' AND codEmpleado = '"+emp+"'")
     info = cur.fetchall()
     for i in range(len(hres)):
-        cur.execute("INSERT INTO resHab (codHab,codReserva,camaMatr,camaInd,costoHab,fechaIngreso,fechaEgreso) VALUES (?,?,?,?,?,?,?)",(hres[i][0],info[-1][0],hres[i][2],hres[i][3],hres[i][4],ing,eng))
+        cur.execute("INSERT INTO resHab (codHab,codReserva,camaMatr,camaInd,costoHab,fechaIngreso,fechaEgreso) VALUES (?,?,?,?,?,?,?)",
+                    (hres[i][0], info[-1][0], hres[i][2], hres[i][3], hres[i][4], ing, eng))
         con.commit()
-    con.close()    
-#eliminar reservas
+    con.close()
+# eliminar reservas
+
 
 def consulta_eliminar(dni):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("SELECT * from reserva where codCliente = '"+str(dni)+"'")
     cons = cur.fetchall()
-    return cons 
+    return cons
+
 
 def consulta_tipo(cod):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("SELECT codReshab from resHab where codReserva = '"+str(cod)+"'")
     cons = cur.fetchall()
-    return cons 
+    return cons
+
 
 def eliminar_reserva(numero):
     con = s.connect("GestionHotel.sqlite3")
@@ -268,8 +300,10 @@ def eliminar_reserva(numero):
     con.commit()
     con.close()
 
-#..........................menu 1..............................
-def ReservarCoch(dni_cli,dni_emp,fecha,desc):
+# ..........................menu 1..............................
+
+
+def ReservarCoch(dni_cli, dni_emp, fecha, desc):
     try:
         comprobante = int(dni_cli)
         val = 0
@@ -288,14 +322,27 @@ def ReservarCoch(dni_cli,dni_emp,fecha,desc):
     except ValueError:
         return 2
 
-def ConsultaCoch(ing,eng,num):
+
+def ConsultaCoch(ing, eng, num):
     lista = []
+    fecha_actual = datetime.now().date()
     bandera = 0
-    comprobante = ing.replace("-","")
-    comprobante2 = eng.replace("-","")
+    comprobante = ing.replace("-", "")
+    comprobante2 = eng.replace("-", "")
+
+    # Convertir las cadenas de texto a objetos .date
+    try:
+        ing_date = datetime.strptime(ing, "%Y-%m-%d").date()
+        eng_date = datetime.strptime(eng, "%Y-%m-%d").date()
+    except ValueError:
+        return 2
+
+    if not ing or not eng:
+        return 2
+
     if len(comprobante) == 8:
         if len(comprobante2) == 8:
-            
+
             if int(comprobante) < int(comprobante2):
                 lista.append(eng[0:4])
                 lista.append(eng[5:7])
@@ -306,6 +353,10 @@ def ConsultaCoch(ing,eng,num):
                 if Meses[lista[1]] >= int(lista[2]):
                     if Meses[lista[4]] >= int(lista[5]):
                         bandera = 1
+
+    if ing_date < fecha_actual or eng_date < fecha_actual:
+        return 2
+
     if bandera == 1:
         if num == 0:
             con = s.connect("GestionHotel.sqlite3")
@@ -317,33 +368,35 @@ def ConsultaCoch(ing,eng,num):
         else:
             con = s.connect("GestionHotel.sqlite3")
             cur = con.cursor()
-            cur.execute("SELECT * FROM cochera WHERE codCochera in (SELECT codCochera FROM resCoch WHERE codReserva = "+num+") or codCochera not in (SELECT codCochera FROM resCoch) or codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
+            cur.execute("SELECT * FROM cochera WHERE codCochera in (SELECT codCochera FROM resCoch WHERE codReserva = "+num +
+                        ") or codCochera not in (SELECT codCochera FROM resCoch) or codCochera in (SELECT codCochera FROM resCoch WHERE fechaEgreso < '"+ing+"' OR fechaingreso > '"+eng+"')")
             z = cur.fetchall()
             con.close()
             return z
     else:
-        return 2        
+        return 2
 
 
-def completarCoch(cli,emp,fecha,desc,hres,ing,eng):
+def completarCoch(cli, emp, fecha, desc, hres, ing, eng):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",(cli,emp,fecha,desc))
+    cur.execute("INSERT INTO reserva (codCliente, codEmpleado, fechaReserva, descr) VALUES (?,?,?,?)",
+                (cli, emp, fecha, desc))
     con.commit()
-    cur.execute("SELECT codReserva FROM reserva where codCliente = '"+cli+"' AND codEmpleado = '"+str(emp)+"'")
+    cur.execute("SELECT codReserva FROM reserva where codCliente = '" +
+                cli+"' AND codEmpleado = '"+str(emp)+"'")
     info = cur.fetchall()
     for i in range(len(hres)):
-        cur.execute("INSERT INTO resCoch (codReserva,codCochera,fechaIngreso,fechaEgreso) VALUES (?,?,?,?)",(info[-1][0],hres[i][0],ing,eng))
+        cur.execute("INSERT INTO resCoch (codReserva,codCochera,fechaIngreso,fechaEgreso) VALUES (?,?,?,?)",
+                    (info[-1][0], hres[i][0], ing, eng))
         con.commit()
     con.close()
 
 
-
-#..................................................................
-
+# ..................................................................
 
 
-def Cli_add(a,b,c,d):
+def Cli_add(a, b, c, d):
     try:
         comprobador = int(a)
         con = s.connect("GestionHotel.sqlite3")
@@ -351,7 +404,8 @@ def Cli_add(a,b,c,d):
         cur.execute("SELECT dni_cli FROM cliente WHERE dni_cli = "+(a)+"")
         var = cur.fetchall()
         if var == []:
-            cur.execute("INSERT INTO cliente (dni_cli, nombre, email, descr) VALUES (?,?,?,?)",(a,b,c,d))
+            cur.execute(
+                "INSERT INTO cliente (dni_cli, nombre, email, descr) VALUES (?,?,?,?)", (a, b, c, d))
             con.commit()
             con.close()
             return True
@@ -361,7 +415,7 @@ def Cli_add(a,b,c,d):
         return False
 
 
-def crear_hab(piso,camamatr,camaind,costo,cantidad):
+def crear_hab(piso, camamatr, camaind, costo, cantidad):
     try:
         comprobador = int(piso)
         comprobador = int(camamatr)
@@ -371,34 +425,34 @@ def crear_hab(piso,camamatr,camaind,costo,cantidad):
         con = s.connect("GestionHotel.sqlite3")
         cur = con.cursor()
         for i in range(int(cantidad)):
-            cur.execute("INSERT INTO habitacion (piso,camaMatr,camaInd,costo) VALUES (?,?,?,?)",(piso,camamatr,camaind,costo))
+            cur.execute("INSERT INTO habitacion (piso,camaMatr,camaInd,costo) VALUES (?,?,?,?)",
+                        (piso, camamatr, camaind, costo))
             con.commit()
         con.close()
         return True
     except ValueError:
         return False
-    
 
-def crear_coch(piso,cantidad):
+
+def crear_coch(piso, cantidad):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     for i in range(int(cantidad)):
-        cur.execute("INSERT INTO cochera (piso) VALUES (?)",(piso))
+        cur.execute("INSERT INTO cochera (piso) VALUES (?)", (piso))
         con.commit()
     con.close()
     return True
 
 
+# ..........................Menu 4.......................
 
 
-#..........................Menu 4.......................
-
-    
-#.................calendario.................
-def calendario(ing,eng):
+# .................calendario.................
+def calendario(ing, eng):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("SELECT codHab,fechaIngreso,fechaEgreso FROM resHab WHERE fechaIngreso >= '"+ing+"' AND fechaEgreso <= '"+eng+"' ORDER BY codHab")
+    cur.execute("SELECT codHab,fechaIngreso,fechaEgreso FROM resHab WHERE fechaIngreso >= '" +
+                ing+"' AND fechaEgreso <= '"+eng+"' ORDER BY codHab")
     matris2 = cur.fetchall()
     cur.execute("SELECT codHab FROM habitacion")
     total = cur.fetchall()
@@ -406,96 +460,106 @@ def calendario(ing,eng):
     return matris2, total
 
 
+# gestor de elementos
 
-#gestor de elementos
-
-def gest_elementos_consulta(date,cod,radio):
+def gest_elementos_consulta(date, cod, radio):
     con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor() 
+    cur = con.cursor()
 
     if radio == '1':
-        cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab from reshab where fechaEgreso > '"+date+"' ) and codHab = '"+cod+"'")
+        cur.execute("SELECT * FROM habitacion WHERE codHab not in (SELECT codHab from reshab where fechaEgreso > '" +
+                    date+"' ) and codHab = '"+cod+"'")
         matris = cur.fetchall()
 
     else:
-        cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera from resCoch where fechaEgreso > '"+date+"' ) and codCochera = '"+cod+"'")
+        cur.execute("SELECT * FROM cochera WHERE codCochera not in (SELECT codCochera from resCoch where fechaEgreso > '" +
+                    date+"' ) and codCochera = '"+cod+"'")
         matris = cur.fetchall()
 
     con.close()
 
     return matris
 
-def gest_elementos_eliminar(lista,cod_cliente,radio):
+
+def gest_elementos_eliminar(lista, cod_cliente, radio):
     bandera = 0
     if radio == '1':
         for i in range(len(lista)):
-            if int(lista[i][0])==int(cod_cliente):
+            if int(lista[i][0]) == int(cod_cliente):
                 bandera = 1
         if bandera == 1:
             con = s.connect("GestionHotel.sqlite3")
             cur = con.cursor()
-            cur.execute("DELETE FROM habitacion WHERE codHab = "+cod_cliente+"")
+            cur.execute(
+                "DELETE FROM habitacion WHERE codHab = "+cod_cliente+"")
             con.commit()
             con.close()
             return True
     else:
         for i in range(len(lista)):
-            if int(lista[i][0])==int(cod_cliente):
+            if int(lista[i][0]) == int(cod_cliente):
                 bandera = 1
         if bandera == 1:
             con = s.connect("GestionHotel.sqlite3")
             cur = con.cursor()
-            cur.execute("DELETE FROM cochera WHERE codCochera = "+cod_cliente+"")
+            cur.execute(
+                "DELETE FROM cochera WHERE codCochera = "+cod_cliente+"")
             con.commit()
             con.close()
             return False
-        
-def gest_modificiar(codigo,radio):
+
+
+def gest_modificiar(codigo, radio):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     if radio == '1':
         cur.execute("SELECT codHab FROM habitacion WHERE codHab = '"+codigo+"'")
         matris = cur.fetchall()
     else:
-        cur.execute("SELECT codCochera FROM cochera WHERE codCochera = '"+codigo+"'")
+        cur.execute(
+            "SELECT codCochera FROM cochera WHERE codCochera = '"+codigo+"'")
         matris = cur.fetchall()
     con.close()
     return matris
 
-def gest_modf_up(codigo,a,b,c,d):
-    con = s.connect("GestionHotel.sqlite3")
-    cur = con.cursor()
-    cur.execute("UPDATE habitacion SET codHab = ?,piso = ?, camaMatr = ?,camaInd = ?,costo = ? WHERE codHab = ?",(codigo,a,b,c,d,codigo))
-    con.commit()
-    con.close()
-   
 
-def gest_modfCoch_up(cod_cliente,piso_coch):
+def gest_modf_up(codigo, a, b, c, d):
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("UPDATE cochera SET codCochera = ?,piso = ? WHERE codCochera = ?",(cod_cliente,piso_coch,cod_cliente))
+    cur.execute("UPDATE habitacion SET codHab = ?,piso = ?, camaMatr = ?,camaInd = ?,costo = ? WHERE codHab = ?",
+                (codigo, a, b, c, d, codigo))
     con.commit()
     con.close()
-    
+
+
+def gest_modfCoch_up(cod_cliente, piso_coch):
+    con = s.connect("GestionHotel.sqlite3")
+    cur = con.cursor()
+    cur.execute("UPDATE cochera SET codCochera = ?,piso = ? WHERE codCochera = ?",
+                (cod_cliente, piso_coch, cod_cliente))
+    con.commit()
+    con.close()
 
 
 # Añadir empleado
 
-#actualizar empleado
-def actualizar_emp_final(id,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
+# actualizar empleado
+def actualizar_emp_final(id, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel):
     try:
         comprobador = int(id)
         if nivel == '7' or nivel == '8':
             con = s.connect("GestionHotel.sqlite3")
             cur = con.cursor()
-            cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
+            cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?", (id))
             matris2 = cur.fetchall()
             cur.execute("DELETE FROM login WHERE codLog = '"+matris2[0][0]+"'")
-            cur.execute("DELETE FROM empleado WHERE dni_emp = ?",(id))
+            cur.execute("DELETE FROM empleado WHERE dni_emp = ?", (id))
 
-            cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
+            cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",
+                        (usuario, contraseña, nivel))
             con.commit()
-            cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,codLog) VALUES (?,?,?,?,?,?)",(id,nombre_emp,email,telefono,puesto,usuario))
+            cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,codLog) VALUES (?,?,?,?,?,?)",
+                        (id, nombre_emp, email, telefono, puesto, usuario))
             con.commit()
             con.close()
             return matris2
@@ -506,17 +570,19 @@ def actualizar_emp_final(id,nombre_emp,email,telefono,puesto,usuario,contraseña
         matris2 = []
         return matris2
 
-#eliminar empleado
+# eliminar empleado
+
+
 def eliminar_emp_final(id):
     try:
         comprobador = int(id)
         con = s.connect("GestionHotel.sqlite3")
         cur = con.cursor()
-        cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?",(id))
+        cur.execute("SELECT codLog FROM empleado WHERE dni_emp = ?", (id))
         matris2 = cur.fetchall()
         if matris2 != []:
             cur.execute("DELETE FROM login WHERE codLog = '"+matris2[0][0]+"'")
-            cur.execute("DELETE FROM empleado WHERE dni_emp = ?",(id))
+            cur.execute("DELETE FROM empleado WHERE dni_emp = ?", (id))
             con.commit()
             con.close()
             return matris2
@@ -527,8 +593,10 @@ def eliminar_emp_final(id):
         matris2 = []
         return matris2
 
-#registrar empleado
-def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
+# registrar empleado
+
+
+def reg_emp(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel):
     try:
         comprobador = int(dni_emp)
         if nivel == '7' or nivel == '8':
@@ -542,23 +610,22 @@ def reg_emp(dni_emp,nombre_emp,email,telefono,puesto,usuario,contraseña,nivel):
                 if var[i][0] == usuario:
                     i = 1
             if i == 0:
-                cur.execute("INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)",(usuario,contraseña,nivel))
+                cur.execute(
+                    "INSERT INTO login (codLog,password,nivel) VALUES (?,?,?)", (usuario, contraseña, nivel))
                 con.commit()
-                cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,codLog) VALUES (?,?,?,?,?,?)",(dni_emp,nombre_emp,email,telefono,puesto,usuario))
+                cur.execute("INSERT INTO empleado (dni_emp,nombre,email,telefono,puesto,codLog) VALUES (?,?,?,?,?,?)",
+                            (dni_emp, nombre_emp, email, telefono, puesto, usuario))
                 con.commit()
                 con.close()
                 return True
             else:
                 con.close()
-                return False        
+                return False
     except ValueError:
         return False
 
-    
 
-
-
-#....................................................
+# ....................................................
 colores = [
     '#f3f6f4',
     '#e1eae1',
@@ -682,7 +749,7 @@ class Plantilla:
         global laburo
         z = login(self.User.value, self.Password.value)
         if z[1] == []:
-            z[1].append(('Admin','0'))
+            z[1].append(('Admin', '0'))
 
         if z[0] != []:
             if z[1] == []:
