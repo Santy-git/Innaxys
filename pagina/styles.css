@@ -387,11 +387,19 @@ nav {
 }
 
 .contenedorItems img {
-  max-width: 50%;
+  max-width: 90%;
   height: auto;
   border-radius: 0.3rem;
 }
 
+.img1 {
+  max-width: 50%;
+}
+
+.img2 {
+  max-width: 100%;
+  width: 32rem;
+}
 /* beneficios */
 .containerTercerItem {
   display: flex;
