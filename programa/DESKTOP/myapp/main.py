@@ -1579,7 +1579,7 @@ class Plantilla:
                 self.raiz.update()
             open_dlg(self)
         else:
-            if radio == '1':
+            if radio == '2':
                 piso = create_text_field("Piso")
                 camamatr = create_text_field("Camas matrimoniales")
                 camaind = create_text_field("Camas individuales")
@@ -1600,7 +1600,7 @@ class Plantilla:
                 Container_menus.padding = ft.padding.symmetric(
                     horizontal=ancho * 0.19, vertical=altura * 0.10)
                 Container_menus.update()
-            else:
+            elif radio == '1':
                 piso_coch = create_text_field("Piso")
                 subir_coch = ft.CupertinoButton(
                     content=ft.Text("Subir", color=ft.colors.BLACK),
@@ -1615,6 +1615,19 @@ class Plantilla:
                 Container_menus.padding = ft.padding.symmetric(
                     horizontal=ancho * 0.19, vertical=altura * 0.10)
                 Container_menus.update()
+
+            elif radio == None:
+
+                dlg = ft.AlertDialog(
+                    title=ft.Text("Selecciona habitacion o cochera"))
+                Container_menus.update()
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+
 
     def gest_elementos_eliminar_aux(self, cod_cliente, radio):
         fecha_sys = datetime.now().date()
