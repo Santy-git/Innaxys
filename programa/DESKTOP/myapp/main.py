@@ -1336,9 +1336,9 @@ class Plantilla:
         )
 
         for i in range(len(info)):
-            self.text = ft.Text(value="Codigo de reserva:"+str(info[i][0])+"   Codigo del empleado: "+str(
-                info[i][2])+"   Fecha de reserva: "+str(info[i][3]),)
-            registro.controls.append(ft.Row(controls=[self.text]))
+            self.espacio = ft.Container(width=600,height=30,border_radius=ft.border_radius.all(10),bgcolor=colores[4],content= ft.Text(value=" Codigo de reserva:"+str(info[i][0])+"   Codigo del empleado: "+str(
+                info[i][2])+"   Fecha de reserva: "+str(info[i][3]),))
+            registro.controls.append(ft.Row(controls=[self.espacio]))
         codigo = ft.TextField(label="Codigo de reserva a modificar")
         registro.controls.append(
             ft.Row(
@@ -1751,24 +1751,35 @@ class Plantilla:
             matris = calendario(mes, año)
             # listas para armar la tabla
             verificador = []
-            for i in range(len(matris[0])):
-                ing_D = datetime.fromisoformat(matris[0][i][1])
-                ing_D = ing_D.strftime("%d")
-                ing_M = datetime.fromisoformat(matris[0][i][1])
-                ing_M = ing_M.strftime("%m")
-                eng_D = datetime.fromisoformat(matris[0][i][2])
-                eng_D = eng_D.strftime("%d")
-                eng_M = datetime.fromisoformat(matris[0][i][2])
-                eng_M = eng_M.strftime("%m")
-                concat_ing = ing_M + ing_D
-                concat_eng = eng_M + eng_D
-                verificador.append([matris[0][i][0],concat_ing,concat_eng])
+            for i in range(len(matris[1])):
+
+                bandera = 0
+                for z in range(len(matris[0])):
+                    if (i+1) == matris[0][z][0]:
+                        bandera = 1
+                        numero = z
+                
+                if bandera == 1:
+                    ing_D = datetime.fromisoformat(matris[0][numero][1])
+                    ing_D = ing_D.strftime("%d")
+                    ing_M = datetime.fromisoformat(matris[0][numero][1])
+                    ing_M = ing_M.strftime("%m")
+                    eng_D = datetime.fromisoformat(matris[0][numero][2])
+                    eng_D = eng_D.strftime("%d")
+                    eng_M = datetime.fromisoformat(matris[0][numero][2])
+                    eng_M = eng_M.strftime("%m")
+                    concat_ing = ing_M + ing_D
+                    concat_eng = eng_M + eng_D
+                    verificador.append([matris[1][i][0],concat_ing,concat_eng])
+                else:
+                    verificador.append([matris[1][i][0],0,0])
             for j in range(len(matris[1])):
                 dias = [ft.Text(bgcolor=colores[4],
                                 value="Hab:"+str(matris[1][j][0])),]
-                 
+                
                 for dia in range(Meses[mes]):
                     nose = int(mes)*100 + int(dia)+1
+                    
                     try:
                         if  int(verificador[j][1]) <= nose and int(verificador[j][2]) >= nose:
                             dias.append(ft.Container(width=20, height=20, bgcolor=ft.colors.RED_300, content=ft.Text(
