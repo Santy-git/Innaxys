@@ -280,9 +280,7 @@ def consulta_eliminar(dni):
     cur = con.cursor()
     cur.execute("SELECT * from reserva where codCliente = '"+str(dni)+"'")
     cons = cur.fetchall()
-    cur.execute("SELECT * from resHab where codReserva = '"+str(dni)+"'")
-    cons2 = cur.fetchall()
-    return cons, cons2
+    return cons
 
 
 def consulta_tipo(cod):
@@ -614,8 +612,9 @@ def reg_emp(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, 
 
             cur.execute("SELECT codLog FROM login")
             var = cur.fetchall()
-            for i in range(len(var)):
-                if var[i][0] == usuario:
+            for y in range(len(var)):
+                print(var[y][0] ,"==",usuario)
+                if var[y][0] == usuario:                   
                     i = 1
             if i == 0:
                 cur.execute(
@@ -630,6 +629,7 @@ def reg_emp(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, 
                 con.close()
                 return False
     except ValueError:
+        print("B2")
         return False
 
 
@@ -1274,7 +1274,6 @@ class Plantilla:
 
     def res_eliminar_aux(self, dni):
         info = consulta_eliminar(dni)
-        print(info)
         registro = ft.Column(
             width=Container_menus.width - 100,
             height=Container_menus.height - 100,
@@ -1282,11 +1281,10 @@ class Plantilla:
             scroll=ft.ScrollMode.ALWAYS,
             on_scroll_interval=0,
         )
-
         for i in range(len(info)):
-            self.text = ft.Text(value="Codigo de reserva:"+str(info[i][0])+"   Codigo del empleado: "+str(
-                info[i][2])+"   Fecha de reserva: "+str(info[i][3]),)
-            registro.controls.append(ft.Row(controls=[self.text]))
+            self.espacio = ft.Container(width=600,height=30,border_radius=ft.border_radius.all(10),bgcolor=colores[4],content= ft.Text(value=" Codigo de reserva:"+str(info[i][0])+"   Codigo del empleado: "+str(
+                info[i][2])+"   Fecha de reserva: "+str(info[i][3]),))
+            registro.controls.append(ft.Row(controls=[self.espacio]))
         codigo = ft.TextField(label="Codigo de reserva a modificar")
         registro.controls.append(
             ft.Row(
