@@ -129,8 +129,9 @@ def login(usuario, contraseña):
     cur.execute("SELECT * FROM login")
     result = cur.fetchall()
     if result == []:
-        result = [(usuario, contraseña, '8')]
-        result2 = [('Administrador')]
+        result = [(usuario, contraseña, '1')]
+        result2 = [('Ingrese 1 empleado con nivel de acceso 8')]
+        estado = 0
     else:
         cur.execute("SELECT * FROM login WHERE codLog = '" +
                     usuario+"' and password = '"+contraseña+"'")
@@ -138,7 +139,8 @@ def login(usuario, contraseña):
         cur.execute(
             "SELECT puesto,dni_emp FROM empleado where codLog = '"+usuario+"'")
         result2 = cur.fetchall()   
-    return result, result2
+        estado = 1
+    return result, result2,estado
 
 # ..........................menu 0.................................
 
@@ -726,6 +728,7 @@ class Plantilla:
         self.idioma = idioma
         self.español = español
         self.ingles = ingles
+        self.estado2 = 0
 # ..................................................
 
     def ej(self):
@@ -753,31 +756,28 @@ class Plantilla:
         global laburo
         z = login(self.User.value, self.Password.value)
 
-        if z[1] == []:
-            z[1].append(('Admin', '0'))
-
-        if z[0] != []:
-            if z[1] == []:
-                Nivel = int(z[0][0][2])
-                laburo = "Administrador"
-                self.Menu()
-                self.Menu1()
-            else:
+        if z[2] == 0:
+            Nivel = int(z[0][0][2])
+            laburo = z[1][0]
+            self.Menu()
+            self.Menu8()     
+        else:
+            if z[0] != []:
                 Nivel = int(z[0][0][2])
                 laburo = z[1][0][0]
                 self.Menu()
                 self.Menu1()
+            else:
+                dlg = ft.AlertDialog(
+                    title=ft.Text("Usuario Incorrecto")
+                )
 
-        else:
-            dlg = ft.AlertDialog(
-                title=ft.Text("Usuario Incorrecto")
-            )
-
-            def open_dlg(e):
-                self.raiz.dialog = dlg
-                dlg.open = True
-                self.raiz.update()
-            open_dlg(e)
+                def open_dlg(e):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(e)
+        
 
     def appbar(self):
         self.nombre = ft.Container(content=Text(
@@ -802,11 +802,6 @@ class Plantilla:
     def login_menu(self):
         global Nivel
         global z
-        # z = (True, '5', '0')
-        # Nivel = 5
-        # self.Menu()
-        # esto es lo que saca el login sacar lo de arriba y eliminar el if
-        # if z[2] == 3:
 
         self.User: TextField = TextField(
             width=ancho * .2,
@@ -1812,7 +1807,6 @@ class Plantilla:
 
 # Añadir empleado
     def Menu8(self):
-
         # --------------Funciones--------------
         def actualizar_emp(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel):
             valor = actualizar_emp_final(
@@ -1865,6 +1859,8 @@ class Plantilla:
             validacion = reg_emp(dni_emp, nombre_emp, email,
                                  telefono, puesto, usuario, contraseña, nivel)
             if validacion:
+                if z[2] == 0:
+                    self.OFF(0)
                 dlg = ft.AlertDialog(
                     title=ft.Text("Registro completo")
                 )
@@ -2009,10 +2005,10 @@ class Plantilla:
                                 value=name,
                                 size=11,
                                 weight='bold',
-
+                                max_lines=2
 
                             )
-                        ]
+                        ],width=130
                     )
                 ]
             )
@@ -2070,81 +2066,94 @@ class Plantilla:
                 ft.IconButton(ft.icons.EXIT_TO_APP_ROUNDED,
                               on_click=self.OFF, icon_size=35,),
             ])
-        formatsubmenus = []
-        formatsubmenusAux = [
-            ft.NavigationRailDestination(
-                icon_content=ft.Icon(
-                    ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
-                selected_icon_content=ft.Icon(
-                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
-                label_content=ft.Text("1", color=ft.colors.BLACK),
-            ),
-            ft.NavigationRailDestination(
-                icon_content=ft.Icon(
-                    ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
-                selected_icon_content=ft.Icon(
-                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
-                label_content=ft.Text("2", color=ft.colors.BLACK)
-            ),
-            ft.NavigationRailDestination(
-                icon_content=ft.Icon(
-                    ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
-                selected_icon_content=ft.Icon(
-                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
-                label_content=ft.Text("3", color=ft.colors.BLACK),
-            ),
-            ft.NavigationRailDestination(
-                icon_content=ft.Icon(
-                    ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
-                selected_icon_content=ft.Icon(
-                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
-                label_content=ft.Text("4", color=ft.colors.BLACK),
-            ),
-            ft.NavigationRailDestination(
-                icon_content=ft.Icon(
-                    ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
-                selected_icon_content=ft.Icon(
-                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
-                label_content=ft.Text("5", color=ft.colors.BLACK),
-            ),
-            ft.NavigationRailDestination(
-                icon_content=ft.Icon(
-                    ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
-                selected_icon_content=ft.Icon(
-                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
-                label_content=ft.Text("6", color=ft.colors.BLACK)
-            ),
-            ft.NavigationRailDestination(
-                icon_content=ft.Icon(
-                    ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
-                selected_icon_content=ft.Icon(
-                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
-                label_content=ft.Text("7", color=ft.colors.BLACK)
-            ),
-            ft.NavigationRailDestination(
-                icon_content=ft.Icon(
-                    ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
-                selected_icon_content=ft.Icon(
-                    ft.icons.BOOKMARK, color=ft.colors.BLACK),
-                label_content=ft.Text("8", color=ft.colors.BLACK)
-            )]
+        if z[2] == 0:
+            formatsubmenus = []
+            formatsubmenusAux = [
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(
+                        ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(
+                        ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                    label_content=ft.Text("1", color=ft.colors.BLACK),
+                )]
+            men = [self.ContainerIcon(
+                    ft.icons.PERSON_ADD_ALT, "Añadir Empleado")]
+        else:
+            formatsubmenus = []
+            formatsubmenusAux = [
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(
+                        ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(
+                        ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                    label_content=ft.Text("1", color=ft.colors.BLACK),
+                ),
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(
+                        ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(
+                        ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                    label_content=ft.Text("2", color=ft.colors.BLACK)
+                ),
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(
+                        ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(
+                        ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                    label_content=ft.Text("3", color=ft.colors.BLACK),
+                ),
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(
+                        ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(
+                        ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                    label_content=ft.Text("4", color=ft.colors.BLACK),
+                ),
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(
+                        ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(
+                        ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                    label_content=ft.Text("5", color=ft.colors.BLACK),
+                ),
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(
+                        ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(
+                        ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                    label_content=ft.Text("6", color=ft.colors.BLACK)
+                ),
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(
+                        ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(
+                        ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                    label_content=ft.Text("7", color=ft.colors.BLACK)
+                ),
+                ft.NavigationRailDestination(
+                    icon_content=ft.Icon(
+                        ft.icons.BOOKMARK_BORDER, color=ft.colors.BLACK),
+                    selected_icon_content=ft.Icon(
+                        ft.icons.BOOKMARK, color=ft.colors.BLACK),
+                    label_content=ft.Text("8", color=ft.colors.BLACK)
+                )]
 
-        men = [
-            self.ContainerIcon(ft.icons.BED, "Reservar Habitacion"),
-            self.ContainerIcon(
-                ft.icons.DIRECTIONS_CAR, "Reservar Cochera"),
-            self.ContainerIcon(ft.icons.MANAGE_SEARCH,
-                               "Gestor de reserva"),
-            self.ContainerIcon(
-                ft.icons.PERSON_ADD, "Añadir Cliente"),
-            self.ContainerIcon(ft.icons.DASHBOARD_CUSTOMIZE,
-                               "Añadir elementos"),
-            self.ContainerIcon(
-                ft.icons.DASHBOARD, "Gestor de elementos"),
-            self.ContainerIcon(
-                ft.icons.CALENDAR_MONTH_OUTLINED, "Calendario"),
-            self.ContainerIcon(
-                ft.icons.PERSON_ADD_ALT, "Añadir Empleado")]
+            men = [
+                self.ContainerIcon(ft.icons.BED, "Reservar Habitacion"),
+                self.ContainerIcon(
+                    ft.icons.DIRECTIONS_CAR, "Reservar Cochera"),
+                self.ContainerIcon(ft.icons.MANAGE_SEARCH,
+                                "Gestor de reserva"),
+                self.ContainerIcon(
+                    ft.icons.PERSON_ADD, "Añadir Cliente"),
+                self.ContainerIcon(ft.icons.DASHBOARD_CUSTOMIZE,
+                                "Añadir elementos"),
+                self.ContainerIcon(
+                    ft.icons.DASHBOARD, "Gestor de elementos"),
+                self.ContainerIcon(
+                    ft.icons.CALENDAR_MONTH_OUTLINED, "Calendario"),
+                self.ContainerIcon(
+                    ft.icons.PERSON_ADD_ALT, "Añadir Empleado")]
 
         columna_lateral = Column(alignment=ft.alignment.center,
                                  horizontal_alignment="center",
