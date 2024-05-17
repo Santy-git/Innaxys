@@ -118,30 +118,28 @@ def creardb():
         cur.execute(query)
 
     con.commit()
-
-    try:
-        sql = "INSERT INTO login (codLog, password, nivel) VALUES ('0','0',8)"
-        con.execute(sql)
-        con.commit()
-    except s.IntegrityError:
-        pass
-
     con.close()
-# logear
+#logear
 
 
 def login(usuario, contraseña):
 
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
-    cur.execute("SELECT * FROM login WHERE codLog = '" +
-                usuario+"' and password = '"+contraseña+"'")
+    cur.execute("SELECT * FROM login")
     result = cur.fetchall()
-    cur.execute(
-        "SELECT puesto,dni_emp FROM empleado where codLog = '"+usuario+"'")
-    result2 = cur.fetchall()
-
+    if result == []:
+        result = [(usuario, contraseña, '8')]
+        result2 = [('Administrador')]
+    else:
+        cur.execute("SELECT * FROM login WHERE codLog = '" +
+                    usuario+"' and password = '"+contraseña+"'")
+        result = cur.fetchall()
+        cur.execute(
+            "SELECT puesto,dni_emp FROM empleado where codLog = '"+usuario+"'")
+        result2 = cur.fetchall()   
     return result, result2
+
 # ..........................menu 0.................................
 
 
@@ -454,8 +452,6 @@ def crear_coch(piso, cantidad):
 def calendario(mes,año):
     ing_consulta = str(año)+'-'+str(mes)+'-'+'01'
     eng_consulta = str(año)+'-'+str(mes)+'-'+str(Meses[mes])
-    print(ing_consulta)
-    print(eng_consulta)
     con = s.connect("GestionHotel.sqlite3")
     cur = con.cursor()
     cur.execute("SELECT codHab,fechaIngreso,fechaEgreso FROM resHab")
@@ -613,7 +609,6 @@ def reg_emp(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, 
             cur.execute("SELECT codLog FROM login")
             var = cur.fetchall()
             for y in range(len(var)):
-                print(var[y][0] ,"==",usuario)
                 if var[y][0] == usuario:                   
                     i = 1
             if i == 0:
@@ -629,7 +624,6 @@ def reg_emp(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, 
                 con.close()
                 return False
     except ValueError:
-        print("B2")
         return False
 
 
@@ -690,7 +684,7 @@ ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "A
           33: "Job",
           34: "Access level",
           }
-codigo = 0
+
 
 Meses = {'01': 31,
          '02': 29,
@@ -722,7 +716,9 @@ def create_text_field(label_text, **kwargs):
 niveles = {8: "Administrador", 7: "Empleado"}
 creardb()
 # ....................................
+codigo = 0
 
+#....variables...
 
 class Plantilla:
     def __init__(self, raiz, idioma, español, ingles):
@@ -756,6 +752,7 @@ class Plantilla:
         global z
         global laburo
         z = login(self.User.value, self.Password.value)
+
         if z[1] == []:
             z[1].append(('Admin', '0'))
 
@@ -773,7 +770,7 @@ class Plantilla:
 
         else:
             dlg = ft.AlertDialog(
-                title=ft.Text("Usuario Incorrecto"), on_dismiss=lambda e: print("Dialog dismissed!")
+                title=ft.Text("Usuario Incorrecto")
             )
 
             def open_dlg(e):
@@ -1101,7 +1098,6 @@ class Plantilla:
     def disponiblesCoch(self):
         global images
 
-        print(self.variable2)
 
         def valor(a):
             indice = a
@@ -1326,7 +1322,6 @@ class Plantilla:
 
     def res_actualizar(self, dni):
         info = consulta_eliminar(dni)
-        print(info)
         registro = ft.Column(
             width=Container_menus.width - 100,
             height=Container_menus.height - 100,
@@ -1575,7 +1570,6 @@ class Plantilla:
         fecha_sys = fecha_sys.strftime("%x")
         fecha_sys = str(fecha_sys)
         lista = gest_modificiar(cod_cliente, radio)
-        print(lista)
         if lista == []:
             dlg = ft.AlertDialog(
                 title=ft.Text("Elemento no encontrado")
