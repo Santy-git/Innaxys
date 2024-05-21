@@ -498,8 +498,8 @@ def gest_elementos_eliminar(lista, cod_cliente, radio):
                 "DELETE FROM habitacion WHERE codHab = "+cod_cliente+"")
             con.commit()
             con.close()
-            return True
-    else:
+            return 1
+    if radio == '0':
         for i in range(len(lista)):
             if int(lista[i][0]) == int(cod_cliente):
                 bandera = 1
@@ -510,7 +510,9 @@ def gest_elementos_eliminar(lista, cod_cliente, radio):
                 "DELETE FROM cochera WHERE codCochera = "+cod_cliente+"")
             con.commit()
             con.close()
-            return False
+            return 0
+    if radio != '0' and radio != '1':
+        return 2
 
 
 def gest_modificiar(codigo, radio):
@@ -1576,7 +1578,7 @@ class Plantilla:
                 self.raiz.update()
             open_dlg(self)
         else:
-            if radio == '2':
+            if radio == '1':
                 piso = create_text_field("Piso")
                 camamatr = create_text_field("Camas matrimoniales")
                 camaind = create_text_field("Camas individuales")
@@ -1597,7 +1599,7 @@ class Plantilla:
                 Container_menus.padding = ft.padding.symmetric(
                     horizontal=ancho * 0.19, vertical=altura * 0.10)
                 Container_menus.update()
-            elif radio == '1':
+            elif radio == '0':
                 piso_coch = create_text_field("Piso")
                 subir_coch = ft.CupertinoButton(
                     content=ft.Text("Subir", color=ft.colors.BLACK),
@@ -1644,9 +1646,9 @@ class Plantilla:
                 self.raiz.update()
             open_dlg(self)
 
-        if radio == '1' or radio == '2':
+        if radio == '1' or radio == '0':
             vuelta = gest_elementos_eliminar(lista, cod_cliente, radio)
-            if vuelta:
+            if vuelta == 1:
                 dlg = ft.AlertDialog(
                     title=ft.Text("Habitacion Eliminada")
                 )
@@ -1656,9 +1658,19 @@ class Plantilla:
                     dlg.open = True
                     self.raiz.update()
                 open_dlg(self)
-            else:
+            if vuelta == 0:
                 dlg = ft.AlertDialog(
                     title=ft.Text("Cochera Eliminada")
+                )
+
+                def open_dlg(self):
+                    self.raiz.dialog = dlg
+                    dlg.open = True
+                    self.raiz.update()
+                open_dlg(self)
+            if vuelta == 2:
+                dlg = ft.AlertDialog(
+                    title=ft.Text("No se encontro el elemento")
                 )
 
                 def open_dlg(self):
@@ -1669,15 +1681,15 @@ class Plantilla:
 
         elif radio == None:
 
-                dlg = ft.AlertDialog(
-                    title=ft.Text("Selecciona habitacion o cochera"))
-                Container_menus.update()
+            dlg = ft.AlertDialog(
+                title=ft.Text("Selecciona habitacion o cochera"))
+            Container_menus.update()
 
-                def open_dlg(self):
-                    self.raiz.dialog = dlg
-                    dlg.open = True
-                    self.raiz.update()
-                open_dlg(self)
+            def open_dlg(self):
+                self.raiz.dialog = dlg
+                dlg.open = True
+                self.raiz.update()
+            open_dlg(self)
 
 
 
@@ -1693,9 +1705,10 @@ class Plantilla:
             content=ft.Row(
                 [
                     ft.Radio(value=1, label="Habitación"),
-                    ft.Radio(value=0, label="Cochera"),
+                    ft.Radio(value=0, label="Cochera")
                 ]
             )
+            
         )
 
         eliminar = ft.CupertinoButton(
