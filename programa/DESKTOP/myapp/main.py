@@ -658,8 +658,33 @@ global idioma
 global español
 global ingles
 global codigo
-español = {1: "Axys", 2: "Ingresar",
-           }
+español = {1: "Axys", 2: "Logear", 3: "Usuario", 4: "Contrasena", 5: "Logear", 6: "Admin", 7: "Empleado", 8: "Reserva", 9: "Reserva de cochera",
+          10: "Agregar Client",
+          11: "Agregar Elemento",
+          12: "Agregar Empleado",
+          13: "Calendario",
+          14: "Identificacion Cliente",
+          15: "Descripcion",
+          16: "Consulta",
+          17: "Ingreso",
+          18: "Salida",
+          19: "Consulta",
+          20: "Confirmar",
+          21: "Nombre",
+          22: "Correo",
+          23: "Cargar",
+          24: "Estacionamiento",
+          25: "Habitacion",
+          26: "Piso",
+          27: "Reserva Estacionamiento ",
+          28: "Cama de doble plaza",  # double bed
+          29: "Cama",
+          30: "Precio",
+          31: "Identificacion del empleado",
+          32: "Telefono",
+          33: "Trabajo",
+          34: "Nivel de acceso",
+          }
 idioma = español
 ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "Admin", 7: "Employees", 8: "Room booking", 9: "Park booking",
           10: "Add client",
