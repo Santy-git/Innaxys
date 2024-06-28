@@ -130,7 +130,7 @@ def login(usuario, contraseña):
     result = cur.fetchall()
     if result == []:
         result = [(usuario, contraseña, '1')]
-        result2 = [('Ingrese 1 empleado con nivel de acceso 8')]
+        result2 = [(idioma[36])]
         estado = 0
     else:
         cur.execute("SELECT * FROM login WHERE codLog = '" +
@@ -684,6 +684,10 @@ español = {1: "Axys", 2: "Logear", 3: "Usuario", 4: "Contrasena", 5: "Logear", 
           32: "Telefono",
           33: "Trabajo",
           34: "Nivel de acceso",
+          35: "Usuario incorrecto",
+          36: "ingrese un empleado con nivel de acceso 8",
+          37: 'Inicie sesión para usar el programa',
+
           }
 idioma = español
 ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "Admin", 7: "Employees", 8: "Room booking", 9: "Park booking",
@@ -713,7 +717,9 @@ ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "A
           33: "Job",
           34: "Access level",
           35: "Incorrect User",
-          36: "Insert an employee with level eight access"
+          36: "Insert an employee with level eight access",
+          37: "login for use the program",
+          
           }
 
 
@@ -835,7 +841,7 @@ class Plantilla:
         self.User: TextField = TextField(
             width=ancho * .2,
             height=altura * .08,
-            label='Usuario',
+            label=self.idioma[3],
             border='underline',
             color='white',
             prefix_icon=ft.icons.PERSON,)
@@ -843,7 +849,7 @@ class Plantilla:
         self.Password: TextField = TextField(
             width=ancho * .2,
             height=altura * .08,
-            label='Contraseña',
+            label=idioma[4],
             border='underline',
             color='white',
             prefix_icon=ft.icons.LOCK,
@@ -851,7 +857,7 @@ class Plantilla:
 
         self.Button: ElevatedButton = ElevatedButton(
             content=Text(
-                'Ingresar',
+                self.idioma[5],
                 color='white',
                 weight='w500',
             ),
@@ -878,13 +884,13 @@ class Plantilla:
                                     height=altura * .1/1.2,
                                 ),
                                 Text(
-                                    'Sign in',
+                                    self.idioma[5],
                                     width=ancho * .2,
                                     size=altura * .03,
                                     text_align='center'),
 
                                 Text(
-                                    'Inicie sesión para usar el programa',
+                                    self.idioma[37],
                                     width=ancho * .2,
                                     text_align='center',
                                     size=10
