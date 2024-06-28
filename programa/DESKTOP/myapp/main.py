@@ -712,6 +712,8 @@ ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "A
           32: "Phone",
           33: "Job",
           34: "Access level",
+          35: "Incorrect User",
+          36: "Insert an employee with level eight access"
           }
 
 
@@ -796,7 +798,7 @@ class Plantilla:
                 self.Menu1()
             else:
                 dlg = ft.AlertDialog(
-                    title=ft.Text("Usuario Incorrecto")
+                    title=ft.Text(self.idioma[35])
                 )
 
                 def open_dlg(e):
