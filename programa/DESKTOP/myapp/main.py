@@ -719,7 +719,46 @@ ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "A
           35: "Incorrect User",
           36: "Insert an employee with level eight access",
           37: "login for use the program",
+          38: "rooms",
+          39: "Free rooms",
+          40: "Total cost",
+          41: "cost",
+          42: "Invalid date",
+          43: "date in (yyyy-mm-dd)",
+          44: "date out (yyyy-mm-dd)",
+          45: "Query",
+          46: "Reservation",
+          47: "customer not found",
+          48: "room reservation",
+          49: "element managment",
+          50: "Add element",
+          51: "Reservation managment",
+          52: "update",
+          53: "delete",
+          54: "invalid data",
+          55: "login sucesfull",
+          56: "employee delete",
+          57: "employee not found",
+          58: "employee update",
+          59: "month (mm)",
+          60: "year (yyyy)",
+          61: "Delete",
+          62: "edit",
+          63: "park",
+          64: "number",
+          65: "select room or park",
+          66: "element not found",
+          67: "park delete",
+          68: "room delete",
+          69: "park update",
+          70: "room update",
+          71: "quantity",
+          72: "invalid value",
+          73: "incorrect data"
           
+
+
+
           }
 
 
@@ -945,7 +984,7 @@ class Plantilla:
             costo += hres[i][4]
         totalH = len(hres)
         self.contador.value = (
-            "Habitaciones: ", totalH, "Total de espacios: ", totalesp, "Costo total: ", costo)
+            idioma[38], totalH, idioma[39], totalesp, idioma[40], costo)
         self.contador.update()
         self.disponibles()
 
@@ -960,21 +999,21 @@ class Plantilla:
                              margin=ft.margin.all(10),
                              alignment=ft.alignment.center,
                              content=ft.Text(value=self.variable2[a][0], color='#000000')),
-                ft.Text(value="Piso: "+str(self.variable2[a][1]))
+                ft.Text(value=idioma[26]+str(self.variable2[a][1]))
             ])
             infoH2 = ft.Row([
-                ft.Text(value="Camas Individuales: " +
+                ft.Text(value=idioma[29] +
                         str(self.variable2[a][2])),
 
             ])
             infoH4 = ft.Row([
-                ft.Text(value="Camas Matrimoniales: " +
+                ft.Text(value=idioma[28]+
                         str(self.variable2[a][3])),
 
             ])
 
             infoH3 = ft.Row([
-                ft.Text(value="Costo: "+str(self.variable2[a][4])),
+                ft.Text(value=idioma[41]+str(self.variable2[a][4])),
                 ft.IconButton(icon=ft.icons.ADD, icon_size=20,
                               icon_color='#000000', on_click=lambda _: self.pedidos(indice))
             ])
@@ -1006,7 +1045,7 @@ class Plantilla:
         self.variable2 = Consulta(Ingreso_Res, Egreso_Res, num)
         if self.variable2 == 2:
             dlg = ft.AlertDialog(
-                title=ft.Text("Fecha incorrecta")
+                title=ft.Text(idioma[42])
             )
 
             def open_dlg(self):
@@ -1019,10 +1058,10 @@ class Plantilla:
 
     def res_final(self, cli, emp, fecha, desc, hres, Ing, Eng, num):
         if num != 0:
-            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", style=ft.ButtonStyle(color='black', overlay_color=colores[5]), on_click=lambda _: (completar_actualizar(
+            confirmar = ft.TextButton(text=idioma[20], icon_color="#659863", style=ft.ButtonStyle(color='black', overlay_color=colores[5]), on_click=lambda _: (completar_actualizar(
                 cli, emp, fecha, desc, hres, Ing, Eng, num), self.Menu1()))
         else:
-            confirmar = ft.TextButton(text="Confirmar", style=ft.ButtonStyle(color='black', overlay_color=colores[5]), icon_color="#659863", on_click=lambda _: (completar(
+            confirmar = ft.TextButton(text=idioma[20], style=ft.ButtonStyle(color='black', overlay_color=colores[5]), icon_color="#659863", on_click=lambda _: (completar(
                 cli, emp, fecha, desc, hres, Ing, Eng), self.Menu1()))
         Container_menus.clean()
         a = 0
@@ -1035,10 +1074,10 @@ class Plantilla:
             d += hres[i][3]
             e += hres[i][4]
 
-        hab = ft.Text(value=f"Habitaciones: {a}", color='black', size=17)
-        matr = ft.Text(value=f"Matrimoniales: {c}", color='black', size=17)
-        indiv = ft.Text(value=f"Individuales: {d}", color='black', size=17)
-        total = ft.Text(value=f"Costo total: ${e}", color='black', size=17)
+        hab = ft.Text(value=f"{idioma[29]} {a}", color='black', size=17)
+        matr = ft.Text(value=f"{idioma[28]} {c}", color='black', size=17)
+        indiv = ft.Text(value=f"{idioma[29]} {d}", color='black', size=17)
+        total = ft.Text(value=f"{idioma[40]} ${e}", color='black', size=17)
 
         info = ft.Column(controls=[hab, matr, indiv, total, confirmar])
         Container_menus.content = ft.Container(
@@ -1052,11 +1091,11 @@ class Plantilla:
         Verificar = Reservar(cli, emp, fecha, desc)
         if Verificar == 1:
             Container_menus.clean()
-            Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
-            Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
-            consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
+            Ingreso_Res = create_text_field(idioma[17])
+            Egreso_Res = create_text_field(idioma[18])
+            consultar = ft.TextButton(text=idioma[45], on_click=lambda _: self.Consulta_aux(
                 Ingreso_Res.value, Egreso_Res.value, num), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
-            reservarboton = ft.TextButton(text="Reservar", on_click=lambda _: self.res_final(
+            reservarboton = ft.TextButton(text=idioma[46], on_click=lambda _: self.res_final(
                 cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value, num
             ), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
             self.Departamentos = ft.Container(
@@ -1071,7 +1110,7 @@ class Plantilla:
             Container_menus.update()
         if Verificar == 2:
             dlg = ft.AlertDialog(
-                title=ft.Text("Cliente no encontrado")
+                title=ft.Text(idioma[47])
             )
 
             def open_dlg(self):
@@ -1086,21 +1125,21 @@ class Plantilla:
 
 
     def Menu1(self):
-        titulo = ft.Text(value='Reserva de Habitaciones',
+        titulo = ft.Text(value=idioma[48],
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
 
         cod_cliente = create_text_field(
-            "Dni del cliente")
+            idioma[14])
 
         fecha_res = datetime.now().date()
         desc = create_text_field(
-            "Descripción",
+            idioma[15],
             multiline=True,
             max_length=200,
             max_lines=3)
 
         subir = ft.CupertinoButton(
-            content=ft.Text("Subir", color=ft.colors.BLACK),
+            content=ft.Text(idioma[23], color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.Reservar_Aux(
@@ -1140,7 +1179,7 @@ class Plantilla:
                              margin=ft.margin.all(10),
                              alignment=ft.alignment.center,
                              content=ft.Text(value=self.variable2[a][0], color='#000000')),
-                ft.Text(value="Piso: "+str(self.variable2[a][1]))
+                ft.Text(value=idioma[26]+str(self.variable2[a][1]))
             ])
             # ---------------------------------------------
 
@@ -1171,7 +1210,7 @@ class Plantilla:
         self.variable2 = ConsultaCoch(Ingreso_Res, Egreso_Res, num)
         if self.variable2 == 2:
             dlg = ft.AlertDialog(
-                title=ft.Text("Fecha incorrecta")
+                title=ft.Text("incorrect date")
             )
 
             def open_dlg(self):
@@ -1184,10 +1223,10 @@ class Plantilla:
 
     def resCoch_final(self, cli, emp, fecha, desc, hres, Ing, Eng, num):
         if num != 0:
-            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: (completar_cochera_actualizar(
+            confirmar = ft.TextButton(text="Confirm", icon_color="#659863", on_click=lambda _: (completar_cochera_actualizar(
                 cli, emp, fecha, desc, hres, Ing, Eng, num), self.Menu2()), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
         else:
-            confirmar = ft.TextButton(text="Confirmar", icon_color="#659863", on_click=lambda _: (completarCoch(
+            confirmar = ft.TextButton(text="Confirm", icon_color="#659863", on_click=lambda _: (completarCoch(
                 cli, emp, fecha, desc, hres, Ing, Eng), self.Menu2()), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
         Container_menus.clean()
         a = 0
@@ -1195,7 +1234,7 @@ class Plantilla:
         for i in range(len(hres)):
             a += 1
 
-        coch = ft.Text(value=f"Cocheras: {a}", color='black', size=17)
+        coch = ft.Text(value=f"parks: {a}", color='black', size=17)
         info = ft.Column(controls=[coch, confirmar])
 
         Container_menus.content = ft.Container(
@@ -1210,11 +1249,11 @@ class Plantilla:
 
         if Verificar == 1:
             Container_menus.clean()
-            Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
-            Egreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
-            consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.ConsultaCoch_aux(
+            Ingreso_Res = create_text_field(idioma[43])
+            Egreso_Res = create_text_field(idioma[44])
+            consultar = ft.TextButton(text="Consult", on_click=lambda _: self.ConsultaCoch_aux(
                 Ingreso_Res.value, Egreso_Res.value, num), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
-            reservarboton = ft.TextButton(text="Reservar", on_click=lambda _: self.resCoch_final(
+            reservarboton = ft.TextButton(text="Reservation", on_click=lambda _: self.resCoch_final(
                 cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value, num
             ), style=ft.ButtonStyle(color='black', overlay_color=colores[5]))
             self.Departamentos = ft.Container(
@@ -1229,7 +1268,7 @@ class Plantilla:
             Container_menus.update()
         if Verificar == 2:
             dlg = ft.AlertDialog(
-                title=ft.Text("Cliente no encontrado")
+                title=ft.Text(idioma[47])
             )
 
             def open_dlg(self):
@@ -1240,14 +1279,14 @@ class Plantilla:
 # Reservar cochera
 
     def Menu2(self):
-        titulo = ft.Text(value='Reserva de Cocheras',
+        titulo = ft.Text(value=idioma[9],
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
-        cod_cliente = create_text_field("Dni del cliente")
+        cod_cliente = create_text_field("customer id")
         fecha_res = datetime.now().date()
         desc = create_text_field(
-            "Descripción", multiline=True, max_length=200, max_lines=3)
+            "Descriprion", multiline=True, max_length=200, max_lines=3)
         subir = ft.CupertinoButton(
-            content=ft.Text("Subir", color=ft.colors.BLACK),
+            content=ft.Text(idioma[23], color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.ReservarCoch_Aux(cod_cliente.value, z[1][0][1], fecha_res, desc.value, 0))
@@ -1269,11 +1308,11 @@ class Plantilla:
         Verificar = Reservar(cli, emp, fecha, desc)
         if Verificar == 1:
             Container_menus.clean()
-            Ingreso_Res = create_text_field("Ingreso (aaaa-mm-dd)")
-            Egreso_Res = create_text_field("Egreso (aaaa-mm-dd)")
-            consultar = ft.TextButton(text="Consultar", on_click=lambda _: self.Consulta_aux(
+            Ingreso_Res = create_text_field(idioma[43])
+            Egreso_Res = create_text_field(idioma[44])
+            consultar = ft.TextButton(text="Query", on_click=lambda _: self.Consulta_aux(
                 Ingreso_Res.value, Egreso_Res.value, num))
-            reservarboton = ft.TextButton(text="El otro boton", on_click=lambda _: self.res_final(
+            reservarboton = ft.TextButton(text="confirm", on_click=lambda _: self.res_final(
                 cli, emp, fecha, desc, hres, Ingreso_Res.value, Egreso_Res.value, num
             ))
             self.Departamentos = ft.Container(
@@ -1289,7 +1328,7 @@ class Plantilla:
             Container_menus.update()
         if Verificar == 2:
             dlg = ft.AlertDialog(
-                title=ft.Text("Cliente no encontrado")
+                title=ft.Text(idioma[47])
             )
 
             def open_dlg(self):
@@ -1309,9 +1348,9 @@ class Plantilla:
         )
         for i in range(len(info)):
             self.espacio = ft.Container(width=600,height=30,border_radius=ft.border_radius.all(10),bgcolor=colores[4],content= ft.Text(value=" Codigo de reserva:"+str(info[i][0])+"   Codigo del empleado: "+str(
-                info[i][2])+"   Fecha de reserva: "+str(info[i][3]),))
+                info[i][2])+"   reservation date: "+str(info[i][3]),))
             registro.controls.append(ft.Row(controls=[self.espacio]))
-        codigo = ft.TextField(label="Codigo de reserva a modificar")
+        codigo = ft.TextField(label="code of reservation to modify")
         registro.controls.append(
             ft.Row(
                 controls=[codigo,
@@ -1361,10 +1400,10 @@ class Plantilla:
         )
 
         for i in range(len(info)):
-            self.espacio = ft.Container(width=600,height=30,border_radius=ft.border_radius.all(10),bgcolor=colores[4],content= ft.Text(value=" Codigo de reserva:"+str(info[i][0])+"   Codigo del empleado: "+str(
-                info[i][2])+"   Fecha de reserva: "+str(info[i][3]),))
+            self.espacio = ft.Container(width=600,height=30,border_radius=ft.border_radius.all(10),bgcolor=colores[4],content= ft.Text(value=" reservation code:"+str(info[i][0])+"   employee code: "+str(
+                info[i][2])+"   reservation date: "+str(info[i][3]),))
             registro.controls.append(ft.Row(controls=[self.espacio]))
-        codigo = ft.TextField(label="Codigo de reserva a modificar")
+        codigo = ft.TextField(label="code of reservation to modify")
         registro.controls.append(
             ft.Row(
                 controls=[codigo,
@@ -1384,18 +1423,18 @@ class Plantilla:
 
 # Gestor de reserva
     def Menu3(self):
-        titulo = ft.Text(value='Gestor de reserva',
+        titulo = ft.Text(value=idioma[51],
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         cod_cliente = create_text_field(
-            "Dni del cliente")
+            idioma[14])
         eliminar = ft.CupertinoButton(
-            content=ft.Text("Eliminar", color=ft.colors.BLACK),
+            content=ft.Text("Delete", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.res_eliminar_aux(cod_cliente.value))
 
         modificar = ft.CupertinoButton(
-            content=ft.Text("Modificar", color=ft.colors.BLACK),
+            content=ft.Text("Modify", color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.res_actualizar(cod_cliente.value))
@@ -1417,7 +1456,7 @@ class Plantilla:
         Verificar = Cli_add(a, b, c, d)
         if Verificar:
             dlg = ft.AlertDialog(
-                title=ft.Text("Cliente Ingresado")
+                title=ft.Text(idioma[10])
             )
 
             def open_dlg(self):
@@ -1429,7 +1468,7 @@ class Plantilla:
             self.Menu4()
         else:
             dlg = ft.AlertDialog(
-                title=ft.Text("Datos Incorrectos")
+                title=ft.Text(idioma[73])
             )
 
             def open_dlg(self):
@@ -1440,15 +1479,15 @@ class Plantilla:
 # Añadir cliente
 
     def Menu4(self):
-        titulo = ft.Text(value='Añadir cliente',
+        titulo = ft.Text(value=idioma[10],
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
-        cod_cliente = create_text_field("Dni del cliente")
-        nom_cli = create_text_field("Nombre")
-        email_cli = create_text_field("Email")
+        cod_cliente = create_text_field(idioma[14])
+        nom_cli = create_text_field(idioma[21])
+        email_cli = create_text_field(idioma[22])
         desc_cli = create_text_field(
-            "Descripción", multiline=True, max_length=200, max_lines=3)
+            idioma[15], multiline=True, max_length=200, max_lines=3)
         subir_cli = ft.CupertinoButton(
-            content=ft.Text("Subir", color=ft.colors.BLACK),
+            content=ft.Text(idioma[23], color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.Cli_Aux(cod_cliente.value, nom_cli.value, email_cli.value, desc_cli.value))
@@ -1468,12 +1507,12 @@ class Plantilla:
 # Añadir elemento
 
     def Menu5(self):
-        titulo = ft.Text(value='Añadir elementos',
+        titulo = ft.Text(value=idioma[50],
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         cocherav = ft.CupertinoButton(
-            text="Cochera", on_click=lambda _: self.cochera(), bgcolor=colores[5])
+            text=idioma[63], on_click=lambda _: self.cochera(), bgcolor=colores[5])
         habitacionv = ft.CupertinoButton(
-            text="Habitacion", on_click=lambda _: self.habitacion(), bgcolor=colores[5])
+            text=idioma[29], on_click=lambda _: self.habitacion(), bgcolor=colores[5])
 
         botones = ft.Row(controls=[cocherav, habitacionv], spacing=40)
         Container_menus.content = ft.Column([titulo, botones])
@@ -1485,7 +1524,7 @@ class Plantilla:
         validacion = crear_coch(a, b)
         if validacion:
             dlg = ft.AlertDialog(
-                title=ft.Text("Cochera registrada")
+                title=ft.Text(idioma[9])
             )
 
             def open_dlg(self):
@@ -1497,11 +1536,11 @@ class Plantilla:
             self.Menu5()
 
     def cochera(self):
-        piso_coch = create_text_field("Piso")
-        cantidad = create_text_field("cantidad")
+        piso_coch = create_text_field(idioma[26])
+        cantidad = create_text_field(idioma[71])
         cantidad.value = 1
         subir_coch = ft.CupertinoButton(
-            content=ft.Text("Subir", color=ft.colors.BLACK),
+            content=ft.Text(idioma[23], color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.crear_coch(piso_coch.value, cantidad.value))
@@ -1521,7 +1560,7 @@ class Plantilla:
         validacion = crear_hab(a, b, c, d, e)
         if validacion:
             dlg = ft.AlertDialog(
-                title=ft.Text("Habitacion registrada")
+                title=ft.Text(idioma[8])
             )
 
             def open_dlg(self):
@@ -1533,7 +1572,7 @@ class Plantilla:
             self.Menu5()
         else:
             dlg = ft.AlertDialog(
-                title=ft.Text("Valores no validos")
+                title=ft.Text(idioma[72])
             )
 
             def open_dlg(self):
@@ -1543,14 +1582,14 @@ class Plantilla:
             open_dlg(self)
 
     def habitacion(self):
-        piso = create_text_field("Piso")
-        camamatr = create_text_field("Camas matrimoniales")
-        camaind = create_text_field("Camas individuales")
-        costo = create_text_field("Costo")
-        cantidad = create_text_field("cantidad")
+        piso = create_text_field(idioma[26])
+        camamatr = create_text_field(idioma[28])
+        camaind = create_text_field(idioma[29])
+        costo = create_text_field(idioma[41])
+        cantidad = create_text_field(idioma[71])
         cantidad.value = 1
         subir_cli = ft.CupertinoButton(
-            content=ft.Text("Subir", color=ft.colors.BLACK),
+            content=ft.Text(idioma[23], color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(15),
             on_click=lambda _: self.crear_habitacion(piso.value, camamatr.value, camaind.value, costo.value, cantidad.value))
@@ -1570,7 +1609,7 @@ class Plantilla:
     def salida(self, codigo, a, b, c, d):
         gest_modf_up(codigo, a, b, c, d)
         dlg = ft.AlertDialog(
-            title=ft.Text("Habitacion actualizada")
+            title=ft.Text(idioma[70])
         )
 
         def open_dlg(self):
@@ -1584,7 +1623,7 @@ class Plantilla:
     def salidaCoch(self, cod_cliente, piso_coch):
         gest_modfCoch_up(cod_cliente, piso_coch)
         dlg = ft.AlertDialog(
-            title=ft.Text("Cochera actualizada")
+            title=ft.Text(idioma[69])
         )
 
         def open_dlg(self):
@@ -1602,7 +1641,7 @@ class Plantilla:
         lista = gest_modificiar(cod_cliente, radio)
         if lista == []:
             dlg = ft.AlertDialog(
-                title=ft.Text("Elemento no encontrado")
+                title=ft.Text(idioma[66])
             )
 
             def open_dlg(self):
@@ -1612,12 +1651,12 @@ class Plantilla:
             open_dlg(self)
         else:
             if radio == '1':
-                piso = create_text_field("Piso")
-                camamatr = create_text_field("Camas matrimoniales")
-                camaind = create_text_field("Camas individuales")
-                costo = create_text_field("Costo")
+                piso = create_text_field(idioma[26])
+                camamatr = create_text_field(idioma[28])
+                camaind = create_text_field(idioma[29])
+                costo = create_text_field(idioma[41])
                 subir_cli = ft.CupertinoButton(
-                    content=ft.Text("Subir", color=ft.colors.BLACK),
+                    content=ft.Text(idioma[23], color=ft.colors.BLACK),
                     bgcolor=colores[1],
                     border_radius=ft.border_radius.all(15),
                     on_click=lambda _: self.salida(cod_cliente, piso.value, camamatr.value, camaind.value, costo.value))
@@ -1633,9 +1672,9 @@ class Plantilla:
                     horizontal=ancho * 0.19, vertical=altura * 0.10)
                 Container_menus.update()
             elif radio == '0':
-                piso_coch = create_text_field("Piso")
+                piso_coch = create_text_field(idioma[26])
                 subir_coch = ft.CupertinoButton(
-                    content=ft.Text("Subir", color=ft.colors.BLACK),
+                    content=ft.Text(idioma[23], color=ft.colors.BLACK),
                     bgcolor=colores[1],
                     border_radius=ft.border_radius.all(15),
                     on_click=lambda _: self.salidaCoch(cod_cliente, piso_coch.value))
@@ -1651,7 +1690,7 @@ class Plantilla:
             elif radio == None:
 
                 dlg = ft.AlertDialog(
-                    title=ft.Text("Selecciona habitacion o cochera"))
+                    title=ft.Text(idioma[65]))
                 Container_menus.update()
 
                 def open_dlg(self):
@@ -1670,7 +1709,7 @@ class Plantilla:
 
         if lista == []:
             dlg = ft.AlertDialog(
-                title=ft.Text("Elemento no encontrado")
+                title=ft.Text(idioma[66])
             )
 
             def open_dlg(self):
@@ -1683,7 +1722,7 @@ class Plantilla:
             vuelta = gest_elementos_eliminar(lista, cod_cliente, radio)
             if vuelta == 1:
                 dlg = ft.AlertDialog(
-                    title=ft.Text("Habitacion Eliminada")
+                    title=ft.Text(idioma[68])
                 )
 
                 def open_dlg(self):
@@ -1693,7 +1732,7 @@ class Plantilla:
                 open_dlg(self)
             if vuelta == 0:
                 dlg = ft.AlertDialog(
-                    title=ft.Text("Cochera Eliminada")
+                    title=ft.Text(idioma[67])
                 )
 
                 def open_dlg(self):
@@ -1703,7 +1742,7 @@ class Plantilla:
                 open_dlg(self)
             if vuelta == 2:
                 dlg = ft.AlertDialog(
-                    title=ft.Text("No se encontro el elemento")
+                    title=ft.Text(idioma[66])
                 )
 
                 def open_dlg(self):
@@ -1715,7 +1754,7 @@ class Plantilla:
         elif radio == None:
 
             dlg = ft.AlertDialog(
-                title=ft.Text("Selecciona habitacion o cochera"))
+                title=ft.Text(idioma[65]))
             Container_menus.update()
 
             def open_dlg(self):
@@ -1729,28 +1768,28 @@ class Plantilla:
 # Gestor de elementos
 
     def Menu6(self):
-        titulo = ft.Text(value='Gestor de elementos',
+        titulo = ft.Text(value=idioma[49],
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
         cod_cliente = create_text_field(
-            "Numero")
+            idioma[64])
 
         radio = ft.RadioGroup(
             content=ft.Row(
                 [
-                    ft.Radio(value=1, label="Habitación"),
-                    ft.Radio(value=0, label="Cochera")
+                    ft.Radio(value=1, label=idioma[25]),
+                    ft.Radio(value=0, label=idioma[63])
                 ]
             )
             
         )
 
         eliminar = ft.CupertinoButton(
-            content=ft.Text("Eliminar", color=ft.colors.BLACK),
+            content=ft.Text(idioma[61], color=ft.colors.BLACK),
             bgcolor=colores[1],
             on_click=lambda _: self.gest_elementos_eliminar_aux(cod_cliente.value, radio.value))
 
         modificar = ft.CupertinoButton(
-            content=ft.Text("Modificar", color=ft.colors.BLACK),
+            content=ft.Text(idioma[62], color=ft.colors.BLACK),
             bgcolor=colores[1],
             on_click=lambda _: self.gest_elementos_modificar(cod_cliente.value, radio.value))
 
@@ -1810,7 +1849,7 @@ class Plantilla:
                     verificador.append([matris[1][i][0],0,0])
             for j in range(len(matris[1])):
                 dias = [ft.Text(bgcolor=colores[4],
-                                value="Hab:"+str(matris[1][j][0])),]
+                                value=idioma[25]+str(matris[1][j][0])),]
                 
                 for dia in range(Meses[mes]):
                     nose = int(mes)*100 + int(dia)+1
@@ -1831,12 +1870,12 @@ class Plantilla:
             elementos.controls.append(container_calendar)
             Container_menus.update()
 
-        titulo = ft.Text(value='Calendario',
+        titulo = ft.Text(value=idioma[13],
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
-        self.Ingreso_Res = create_text_field("Mes (mm)")
-        self.Egreso_Res = create_text_field("Año (aaaa)")
+        self.Ingreso_Res = create_text_field(idioma[59])
+        self.Egreso_Res = create_text_field(idioma[60])
         consultar = ft.TextButton(
-            text='Consultar',
+            text=idioma[45],
             style=ft.ButtonStyle(color='black', overlay_color=colores[5]),
             on_click=lambda _: Calendario_menu(
                 self.Ingreso_Res.value,
@@ -1859,7 +1898,7 @@ class Plantilla:
                 dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, nivel)
             if valor == []:
                 dlg = ft.AlertDialog(
-                    title=ft.Text("Empleado no encontrado")
+                    title=ft.Text(idioma[57])
                 )
 
                 def open_dlg(self):
@@ -1869,7 +1908,7 @@ class Plantilla:
                 open_dlg(self)
             else:
                 dlg = ft.AlertDialog(
-                    title=ft.Text("Empleado actualizado")
+                    title=ft.Text(idioma[58])
                 )
 
                 def open_dlg(self):
@@ -1882,7 +1921,7 @@ class Plantilla:
             valor = eliminar_emp_final(eliminar)
             if valor == []:
                 dlg = ft.AlertDialog(
-                    title=ft.Text("Empleado no encontrado")
+                    title=ft.Text(idioma[57])
                 )
 
                 def open_dlg(self):
@@ -1892,7 +1931,7 @@ class Plantilla:
                 open_dlg(self)
             else:
                 dlg = ft.AlertDialog(
-                    title=ft.Text("Empleado eliminado")
+                    title=ft.Text(idioma[56])
                 )
 
                 def open_dlg(self):
@@ -1908,7 +1947,7 @@ class Plantilla:
                 if z[2] == 0:
                     self.OFF(0)
                 dlg = ft.AlertDialog(
-                    title=ft.Text("Registro completo")
+                    title=ft.Text(idioma[55])
                 )
 
                 def open_dlg(self):
@@ -1920,7 +1959,7 @@ class Plantilla:
                 self.Menu8()
             else:
                 dlg = ft.AlertDialog(
-                    title=ft.Text("Valores no validos")
+                    title=ft.Text(idioma[54])
                 )
 
                 def open_dlg(self):
@@ -1932,20 +1971,20 @@ class Plantilla:
                 self.Menu8()
 
         # --------------Elementos-------------
-        titulo = ft.Text(value='Añadir empleado',
+        titulo = ft.Text(value=idioma[12],
                          width=350, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
-        dni_emp = create_text_field("Dni del empleado")
-        nombre_emp = create_text_field("Nombre")
-        email = create_text_field("Email")
-        telefono = create_text_field("Telefono")
-        puesto = create_text_field("Puesto")
-        usuario = create_text_field("Usuario")
-        contraseña = create_text_field("Contraseña")
-        nivel = create_text_field("Nivel de acceso")
+        dni_emp = create_text_field(idioma[31])
+        nombre_emp = create_text_field(idioma[21])
+        email = create_text_field(idioma[22])
+        telefono = create_text_field(idioma[32])
+        puesto = create_text_field(idioma[33])
+        usuario = create_text_field(idioma[3])
+        contraseña = create_text_field(idioma[4])
+        nivel = create_text_field(idioma[34])
 
         # botones
         registrar = ft.CupertinoButton(
-            content=ft.Text("Registrar ", color=ft.colors.BLACK),
+            content=ft.Text(idioma[20], color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(25),
             on_click=lambda _: reg_emp_aux(dni_emp.value, nombre_emp.value, email.value,
@@ -1953,14 +1992,14 @@ class Plantilla:
             padding=ft.padding.symmetric(horizontal=120, vertical=0)
         )
         eliminar = ft.CupertinoButton(
-            content=ft.Text("Eliminar   ", color=ft.colors.BLACK),
+            content=ft.Text(idioma[53], color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(25),
             on_click=lambda _: eliminar_emp(dni_emp.value),
             padding=ft.padding.symmetric(horizontal=120, vertical=0)
         )
         actualizar = ft.CupertinoButton(
-            content=ft.Text("Actualizar", color=ft.colors.BLACK),
+            content=ft.Text(idioma[52], color=ft.colors.BLACK),
             bgcolor=colores[1],
             border_radius=ft.border_radius.all(25),
             on_click=lambda _: actualizar_emp(dni_emp.value, nombre_emp.value, email.value,
@@ -2020,8 +2059,8 @@ class Plantilla:
             e.control.content.update()
 
     def Selector(self, a):
-        diccionario = {"Reservar Habitacion": 1, "Reservar Cochera": 2, "Gestor de reserva": 3,
-                       "Añadir Cliente": 4, "Añadir elementos": 5, "Gestor de elementos": 6, "Calendario": 7, "Añadir Empleado": 8}
+        diccionario = {idioma[8]: 1, idioma[9]: 2, idioma[51]: 3,
+                       idioma[10]: 4, idioma[50]: 5, idioma[49]: 6, idioma[13]: 7, idioma[12]: 8}
         Indices_menus = {1: self.Menu1, 2: self.Menu2, 3: self.Menu3,
                          4: self.Menu4, 5: self.Menu5, 6: self.Menu6, 7: self.Menu7, 8: self.Menu8}
         Indices_menus[diccionario[a]]()
@@ -2123,7 +2162,7 @@ class Plantilla:
                     label_content=ft.Text("1", color=ft.colors.BLACK),
                 )]
             men = [self.ContainerIcon(
-                    ft.icons.PERSON_ADD_ALT, "Añadir Empleado")]
+                    ft.icons.PERSON_ADD_ALT, idioma[12])]
         else:
             formatsubmenus = []
             formatsubmenusAux = [
@@ -2185,21 +2224,21 @@ class Plantilla:
                 )]
 
             men = [
-                self.ContainerIcon(ft.icons.BED, "Reservar Habitacion"),
+                self.ContainerIcon(ft.icons.BED, idioma[8]),
                 self.ContainerIcon(
-                    ft.icons.DIRECTIONS_CAR, "Reservar Cochera"),
+                    ft.icons.DIRECTIONS_CAR, idioma[9]),
                 self.ContainerIcon(ft.icons.MANAGE_SEARCH,
-                                "Gestor de reserva"),
+                                idioma[51]),
                 self.ContainerIcon(
-                    ft.icons.PERSON_ADD, "Añadir Cliente"),
+                    ft.icons.PERSON_ADD, idioma[10]),
                 self.ContainerIcon(ft.icons.DASHBOARD_CUSTOMIZE,
-                                "Añadir elementos"),
+                                idioma[50]),
                 self.ContainerIcon(
-                    ft.icons.DASHBOARD, "Gestor de elementos"),
+                    ft.icons.DASHBOARD, idioma[49]),
                 self.ContainerIcon(
-                    ft.icons.CALENDAR_MONTH_OUTLINED, "Calendario"),
+                    ft.icons.CALENDAR_MONTH_OUTLINED, idioma[13]),
                 self.ContainerIcon(
-                    ft.icons.PERSON_ADD_ALT, "Añadir Empleado")]
+                    ft.icons.PERSON_ADD_ALT, idioma[10])]
 
         columna_lateral = Column(alignment=ft.alignment.center,
                                  horizontal_alignment="center",
