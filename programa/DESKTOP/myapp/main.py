@@ -688,6 +688,42 @@ español = {1: "Axys", 2: "Logear", 3: "Usuario", 4: "Contrasena", 5: "Logear", 
            36: "ingrese un empleado con nivel de acceso 8",
            37: 'Inicie sesión para usar el programa',
 
+           38: "Habitaciones",
+           39: "Habitaciones libres",
+           40: "Costo total",
+           41: "Costo",
+           42: "Fecha inválida",
+           43: "Fecha de ingreso (yyyy-mm-dd)",
+           44: "Fecha de salida (yyyy-mm-dd)",
+           45: "Consultar",
+           46: "Reservar",
+           47: "Cliente no encontrado",
+           48: "Reservar habitación",
+           49: "Gestion de elementos",
+           50: "Agregar elementos",
+           51: "Gestión de reservas",
+           52: "Actualizar",
+           53: "Eliminar",
+           54: "Datos inválidos",
+           55: "Ingreso correctamente",
+           56: "Borrar empleado",
+           57: "Empleado no encontrado",
+           58: "Actualizar empleado",
+           59: "Mes (mm)",
+           60: "Año (yyyy)",
+           61: "Eliminar",
+           62: "Editar",
+           63: "Cochera",
+           64: "Numero",
+           65: "Seleccionar habitación o cochera",
+           66: "Elemento no encontrado",
+           67: "Borrar cochera",
+           68: "Borrar habitación",
+           69: "Actualizar cochera",
+           70: "Actualizar habitación",
+           71: "Cantidad",
+           72: "Valor inválido",
+           73: "Datos incorrectos"
            }
 idioma = español
 ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "Admin", 7: "Employees", 8: "Room booking", 9: "Park booking",
@@ -724,8 +760,8 @@ ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "A
           40: "Total cost",
           41: "Cost",
           42: "Invalid date",
-          43: "Date in (yyyy-mm-dd)",
-          44: "Date out (yyyy-mm-dd)",
+          43: "Check in (yyyy-mm-dd)",
+          44: "Check out (yyyy-mm-dd)",
           45: "Query",
           46: "Reservation",
           47: "Customer not found",
@@ -1122,6 +1158,7 @@ class Plantilla:
 
 
 # Reservar habitacion
+
 
     def Menu1(self):
         titulo = ft.Text(value=idioma[48],
@@ -1763,7 +1800,6 @@ class Plantilla:
 
 # Gestor de elementos
 
-
     def Menu6(self):
         titulo = ft.Text(value=idioma[49],
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
@@ -2030,6 +2066,7 @@ class Plantilla:
 
 # ...................calendario.......................
 
+
     def HighLight(self, e):
 
         if e.data == "true":
@@ -2129,6 +2166,7 @@ class Plantilla:
 
 
 # ................Selector de menus...........
+
 
     def Menu(self):
         global formatsubmenus
