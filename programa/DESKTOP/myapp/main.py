@@ -119,7 +119,7 @@ def creardb():
 
     con.commit()
     con.close()
-#logear
+# logear
 
 
 def login(usuario, contraseña):
@@ -138,9 +138,9 @@ def login(usuario, contraseña):
         result = cur.fetchall()
         cur.execute(
             "SELECT puesto,dni_emp FROM empleado where codLog = '"+usuario+"'")
-        result2 = cur.fetchall()   
+        result2 = cur.fetchall()
         estado = 1
-    return result, result2,estado
+    return result, result2, estado
 
 # ..........................menu 0.................................
 
@@ -447,11 +447,11 @@ def crear_coch(piso, cantidad):
 # ..........................Menu 4.......................
 
 
-#..........................Menu 4.......................
+# ..........................Menu 4.......................
 
-    
-#.................calendario.................
-def calendario(mes,año):
+
+# .................calendario.................
+def calendario(mes, año):
     ing_consulta = str(año)+'-'+str(mes)+'-'+'01'
     eng_consulta = str(año)+'-'+str(mes)+'-'+str(Meses[mes])
     con = s.connect("GestionHotel.sqlite3")
@@ -613,7 +613,7 @@ def reg_emp(dni_emp, nombre_emp, email, telefono, puesto, usuario, contraseña, 
             cur.execute("SELECT codLog FROM login")
             var = cur.fetchall()
             for y in range(len(var)):
-                if var[y][0] == usuario:                   
+                if var[y][0] == usuario:
                     i = 1
             if i == 0:
                 cur.execute(
@@ -659,36 +659,36 @@ global español
 global ingles
 global codigo
 español = {1: "Axys", 2: "Logear", 3: "Usuario", 4: "Contrasena", 5: "Logear", 6: "Admin", 7: "Empleado", 8: "Reserva", 9: "Reserva de cochera",
-          10: "Agregar Client",
-          11: "Agregar Elemento",
-          12: "Agregar Empleado",
-          13: "Calendario",
-          14: "Identificacion Cliente",
-          15: "Descripcion",
-          16: "Consulta",
-          17: "Ingreso",
-          18: "Salida",
-          19: "Consulta",
-          20: "Confirmar",
-          21: "Nombre",
-          22: "Correo",
-          23: "Cargar",
-          24: "Estacionamiento",
-          25: "Habitacion",
-          26: "Piso",
-          27: "Reserva Estacionamiento ",
-          28: "Cama de doble plaza",  # double bed
-          29: "Cama",
-          30: "Precio",
-          31: "Identificacion del empleado",
-          32: "Telefono",
-          33: "Trabajo",
-          34: "Nivel de acceso",
-          35: "Usuario incorrecto",
-          36: "ingrese un empleado con nivel de acceso 8",
-          37: 'Inicie sesión para usar el programa',
+           10: "Agregar Client",
+           11: "Agregar Elemento",
+           12: "Agregar Empleado",
+           13: "Calendario",
+           14: "Identificacion Cliente",
+           15: "Descripcion",
+           16: "Consulta",
+           17: "Ingreso",
+           18: "Salida",
+           19: "Consulta",
+           20: "Confirmar",
+           21: "Nombre",
+           22: "Correo",
+           23: "Cargar",
+           24: "Estacionamiento",
+           25: "Habitacion",
+           26: "Piso",
+           27: "Reserva Estacionamiento ",
+           28: "Cama de doble plaza",  # double bed
+           29: "Cama",
+           30: "Precio",
+           31: "Identificacion del empleado",
+           32: "Telefono",
+           33: "Trabajo",
+           34: "Nivel de acceso",
+           35: "Usuario incorrecto",
+           36: "ingrese un empleado con nivel de acceso 8",
+           37: 'Inicie sesión para usar el programa',
 
-          }
+           }
 idioma = español
 ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "Admin", 7: "Employees", 8: "Room booking", 9: "Park booking",
           10: "Add client",
@@ -718,7 +718,7 @@ ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "A
           34: "Access level",
           35: "Incorrect User",
           36: "Insert an employee with level eight access",
-          37: "login for use the program",
+          37: "Login for use the program",
           38: "rooms",
           39: "Free rooms",
           40: "Total cost",
@@ -728,7 +728,7 @@ ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "A
           44: "date out (yyyy-mm-dd)",
           45: "Query",
           46: "Reservation",
-          47: "customer not found",
+          47: "Customer not found",
           48: "room reservation",
           49: "element managment",
           50: "Add element",
@@ -736,7 +736,7 @@ ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "A
           52: "update",
           53: "delete",
           54: "invalid data",
-          55: "login sucesfull",
+          55: "login succesfull",
           56: "employee delete",
           57: "employee not found",
           58: "employee update",
@@ -755,7 +755,7 @@ ingles = {1: "Axys", 2: "Sing in", 3: "User", 4: "Password", 5: "SIGN IN", 6: "A
           71: "quantity",
           72: "invalid value",
           73: "incorrect data"
-          
+
 
 
 
@@ -794,7 +794,8 @@ creardb()
 # ....................................
 codigo = 0
 
-#....variables...
+# ....variables...
+
 
 class Plantilla:
     def __init__(self, raiz, idioma, español, ingles):
@@ -834,7 +835,7 @@ class Plantilla:
             Nivel = int(z[0][0][2])
             laburo = z[1][0]
             self.Menu()
-            self.Menu8()     
+            self.Menu8()
         else:
             if z[0] != []:
                 Nivel = int(z[0][0][2])
@@ -851,7 +852,6 @@ class Plantilla:
                     dlg.open = True
                     self.raiz.update()
                 open_dlg(e)
-        
 
     def appbar(self):
         self.nombre = ft.Container(content=Text(
@@ -1007,7 +1007,7 @@ class Plantilla:
 
             ])
             infoH4 = ft.Row([
-                ft.Text(value=idioma[28]+
+                ft.Text(value=idioma[28] +
                         str(self.variable2[a][3])),
 
             ])
@@ -1123,7 +1123,6 @@ class Plantilla:
 
 # Reservar habitacion
 
-
     def Menu1(self):
         titulo = ft.Text(value=idioma[48],
                          width=500, height=50, weight=ft.FontWeight.W_500, color='black', size=33.5)
@@ -1166,7 +1165,6 @@ class Plantilla:
 
     def disponiblesCoch(self):
         global images
-
 
         def valor(a):
             indice = a
@@ -1347,7 +1345,7 @@ class Plantilla:
             on_scroll_interval=0,
         )
         for i in range(len(info)):
-            self.espacio = ft.Container(width=600,height=30,border_radius=ft.border_radius.all(10),bgcolor=colores[4],content= ft.Text(value=" Codigo de reserva:"+str(info[i][0])+"   Codigo del empleado: "+str(
+            self.espacio = ft.Container(width=600, height=30, border_radius=ft.border_radius.all(10), bgcolor=colores[4], content=ft.Text(value=" Codigo de reserva:"+str(info[i][0])+"   Codigo del empleado: "+str(
                 info[i][2])+"   reservation date: "+str(info[i][3]),))
             registro.controls.append(ft.Row(controls=[self.espacio]))
         codigo = ft.TextField(label="code of reservation to modify")
@@ -1400,7 +1398,7 @@ class Plantilla:
         )
 
         for i in range(len(info)):
-            self.espacio = ft.Container(width=600,height=30,border_radius=ft.border_radius.all(10),bgcolor=colores[4],content= ft.Text(value=" reservation code:"+str(info[i][0])+"   employee code: "+str(
+            self.espacio = ft.Container(width=600, height=30, border_radius=ft.border_radius.all(10), bgcolor=colores[4], content=ft.Text(value=" reservation code:"+str(info[i][0])+"   employee code: "+str(
                 info[i][2])+"   reservation date: "+str(info[i][3]),))
             registro.controls.append(ft.Row(controls=[self.espacio]))
         codigo = ft.TextField(label="code of reservation to modify")
@@ -1699,7 +1697,6 @@ class Plantilla:
                     self.raiz.update()
                 open_dlg(self)
 
-
     def gest_elementos_eliminar_aux(self, cod_cliente, radio):
         fecha_sys = datetime.now().date()
         fecha_sys = fecha_sys.strftime("%x")
@@ -1764,8 +1761,8 @@ class Plantilla:
             open_dlg(self)
 
 
-
 # Gestor de elementos
+
 
     def Menu6(self):
         titulo = ft.Text(value=idioma[49],
@@ -1780,7 +1777,7 @@ class Plantilla:
                     ft.Radio(value=0, label=idioma[63])
                 ]
             )
-            
+
         )
 
         eliminar = ft.CupertinoButton(
@@ -1821,7 +1818,6 @@ class Plantilla:
                 on_scroll_interval=0,
             )
 
-            
             matris = calendario(mes, año)
             # listas para armar la tabla
             verificador = []
@@ -1832,7 +1828,7 @@ class Plantilla:
                     if (i+1) == matris[0][z][0]:
                         bandera = 1
                         numero = z
-                
+
                 if bandera == 1:
                     ing_D = datetime.fromisoformat(matris[0][numero][1])
                     ing_D = ing_D.strftime("%d")
@@ -1844,18 +1840,19 @@ class Plantilla:
                     eng_M = eng_M.strftime("%m")
                     concat_ing = ing_M + ing_D
                     concat_eng = eng_M + eng_D
-                    verificador.append([matris[1][i][0],concat_ing,concat_eng])
+                    verificador.append(
+                        [matris[1][i][0], concat_ing, concat_eng])
                 else:
-                    verificador.append([matris[1][i][0],0,0])
+                    verificador.append([matris[1][i][0], 0, 0])
             for j in range(len(matris[1])):
                 dias = [ft.Text(bgcolor=colores[4],
                                 value=idioma[25]+str(matris[1][j][0])),]
-                
+
                 for dia in range(Meses[mes]):
                     nose = int(mes)*100 + int(dia)+1
-                    
+
                     try:
-                        if  int(verificador[j][1]) <= nose and int(verificador[j][2]) >= nose:
+                        if int(verificador[j][1]) <= nose and int(verificador[j][2]) >= nose:
                             dias.append(ft.Container(width=20, height=20, bgcolor=ft.colors.RED_300, content=ft.Text(
                                 value=dia+1), alignment=ft.alignment.center))
                         else:
@@ -1863,7 +1860,7 @@ class Plantilla:
                                 value=dia+1), alignment=ft.alignment.center))
                     except IndexError:
                         dias.append(ft.Container(width=20, height=20, bgcolor=ft.colors.GREEN, content=ft.Text(
-                                value=dia+1), alignment=ft.alignment.center))        
+                            value=dia+1), alignment=ft.alignment.center))
                 cl.controls.append(ft.Row(controls=dias))
 
             container_calendar = ft.Container(cl, border=ft.border.all(1))
@@ -2033,7 +2030,6 @@ class Plantilla:
 
 # ...................calendario.......................
 
-
     def HighLight(self, e):
 
         if e.data == "true":
@@ -2093,7 +2089,7 @@ class Plantilla:
                                 max_lines=2
 
                             )
-                        ],width=130
+                        ], width=130
                     )
                 ]
             )
@@ -2134,7 +2130,6 @@ class Plantilla:
 
 # ................Selector de menus...........
 
-
     def Menu(self):
         global formatsubmenus
         global Container_menus
@@ -2162,7 +2157,7 @@ class Plantilla:
                     label_content=ft.Text("1", color=ft.colors.BLACK),
                 )]
             men = [self.ContainerIcon(
-                    ft.icons.PERSON_ADD_ALT, idioma[12])]
+                ft.icons.PERSON_ADD_ALT, idioma[12])]
         else:
             formatsubmenus = []
             formatsubmenusAux = [
@@ -2228,11 +2223,11 @@ class Plantilla:
                 self.ContainerIcon(
                     ft.icons.DIRECTIONS_CAR, idioma[9]),
                 self.ContainerIcon(ft.icons.MANAGE_SEARCH,
-                                idioma[51]),
+                                   idioma[51]),
                 self.ContainerIcon(
                     ft.icons.PERSON_ADD, idioma[10]),
                 self.ContainerIcon(ft.icons.DASHBOARD_CUSTOMIZE,
-                                idioma[50]),
+                                   idioma[50]),
                 self.ContainerIcon(
                     ft.icons.DASHBOARD, idioma[49]),
                 self.ContainerIcon(
